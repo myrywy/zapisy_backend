@@ -86,8 +86,19 @@
 		<xs:complexType name="prowadzacy">
 			<xs:all>
 				<xs:element name="email" type="xs:string"/>
+				<xs:element name="imie" type="xs:string"/>
+				<xs:element name="nazwisko" type="xs:string"/>
 				<xs:element name="haslo" type="xs:string"/>
+				<xs:element name="admin" type="xs:boolean"/>
 			</xs:all>
+		</xs:complexType>
+		<xs:complexType name="importowanyPrzedmiot">
+			<xs:sequence>
+				<xs:element name="emailProwadzacego" type="xs:string" minOccurs="1"/>
+				<xs:element name="listaStudentow" type="tns:csv" minOccurs="0"/>
+				<xs:element name="terminyLaboratoriow" type="tns:csv" minOccurs="0"/>
+				<xs:element name="tematyProjektow" type="tns:csv" minOccurs="0"/>
+			</xs:sequence>
 		</xs:complexType>
 	</xs:schema>
 </wsdl:types>
@@ -95,6 +106,10 @@
 <wsdl:message name="zapisProjekt">
 	<wsdl:part name="projektID" type="tns:id"/>
 	<wsdl:part name="zapisywanyID" type="tns:id"/>
+</wsdl:message>
+
+<wsdl:message name="aktualizacjaProwadzacego">
+	<wsdl:part name="daneProwadzacego" type="tns:prowadzacy"/>
 </wsdl:message>
 
 <wsdl:message name="idMessage">
@@ -114,6 +129,29 @@
 
 <wsdl:message name="nowyProjekt">
 	<wsdl:part name="przedmiotID" type="tns:id"/>
+	<wsdl:part name="projekt" type="tns:temat"/>
+</wsdl:message>
+
+<wsdl:message name="aktualizacjaTermin">
+	<wsdl:part name="przedmiotID" type="tns:id"/>
+	<wsdl:part name="terminID" type="tns:id"/>
+	<wsdl:part name="salaID" type="tns:id"/>
+	<wsdl:part name="termin" type="tns:termin"/>
+</wsdl:message>
+
+<wsdl:message name="aktualizacjaProjekt">
+	<wsdl:part name="przedmiotID" type="tns:id"/>
+	<wsdl:part name="projektID" type="tns:id"/>
+	<wsdl:part name="projekt" type="tns:temat"/>
+</wsdl:message>
+
+<wsdl:message name="nowyStudent">
+	<wsdl:part name="przedmiotID" type="tns:id"/>
+	<wsdl:part name="student" type="tns:student"/>
+</wsdl:message>
+
+<wsdl:message name="nowyPrzedmiot">
+	<wsdl:part name="importowanyPrzedmiot" type="tns:id"/>
 	<wsdl:part name="projekt" type="tns:temat"/>
 </wsdl:message>
 
@@ -139,6 +177,18 @@
 		<wsdl:input message="tns:nowyProjekt"/>
 		<wsdl:output message="tns:infoZwrotne"/>
 	</wsdl:operation>
+	<wsdl:operation name="dodajPrzedmiot">
+		<wsdl:input message="tns:nowyPrzedmiot"/>
+		<wsdl:output message="tns:infoZwrotne"/>
+	</wsdl:operation>
+	<wsdl:operation name="edytujProjekt">
+		<wsdl:input message="tns:aktualizacjaProjekt"/>
+		<wsdl:output message="tns:infoZwrotne"/>
+	</wsdl:operation>
+	<wsdl:operation name="edytujTermin">
+		<wsdl:input message="tns:aktualizacjaTermin"/>
+		<wsdl:output message="tns:infoZwrotne"/>
+	</wsdl:operation>
 	<wsdl:operation name="dodajTermin">
 		<wsdl:input message="tns:nowyTermin"/>
 		<wsdl:output message="tns:infoZwrotne"/>
@@ -154,6 +204,34 @@
 	<wsdl:operation name="eksportujPrzedmiot">
 		<wsdl:input message="tns:idMessage"/>
 		<wsdl:output message="tns:plikCsv"/>
+	</wsdl:operation>
+	<wsdl:operation name="dodajProwadzacego">
+		<wsdl:input message="tns:aktualizacjaProwadzacego"/>
+		<wsdl:output message="tns:infoZwrotne"/>
+	</wsdl:operation>
+	<wsdl:operation name="zmienDaneProwadzacego">
+		<wsdl:input message="tns:aktualizacjaProwadzacego"/>
+		<wsdl:output message="tns:infoZwrotne"/>
+	</wsdl:operation>
+	<wsdl:operation name="usunProwadzacego">
+		<wsdl:input message="tns:idMessage"/>
+		<wsdl:output message="tns:infoZwrotne"/>
+	</wsdl:operation>
+	<wsdl:operation name="dodajStudenta">
+		<wsdl:input message="tns:nowyStudent"/>
+		<wsdl:output message="tns:infoZwrotne"/>
+	</wsdl:operation>
+	<wsdl:operation name="usunStudentaZPrzedmiotu">
+		<wsdl:input message="tns:nowyStudent"/>
+		<wsdl:output message="tns:infoZwrotne"/>
+	</wsdl:operation>
+	<wsdl:operation name="usunWszystkichZPrzedmiotu">
+		<wsdl:input message="tns:idMessage"/>
+		<wsdl:output message="tns:infoZwrotne"/>
+	</wsdl:operation>
+	<wsdl:operation name="usunPrzedmiot">
+		<wsdl:input message="tns:idMessage"/>
+		<wsdl:output message="tns:infoZwrotne"/>
 	</wsdl:operation>
 </wsdl:portType>
 
@@ -214,6 +292,96 @@
 		</wsdl:output>
 	</wsdl:operation>
 	<wsdl:operation name="eksportujPrzedmiot">
+		<soap:operation style="rpc" soapAction=""/>
+		<wsdl:input>
+			<soap:body use="encoded" namespace="localhost/zapisy.wsdl" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+		</wsdl:input>
+		<wsdl:output>
+			<soap:body use="encoded" namespace="localhost/zapisy.wsdl" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+		</wsdl:output>
+	</wsdl:operation>
+	<wsdl:operation name="dodajPrzedmiot">
+		<soap:operation style="rpc" soapAction=""/>
+		<wsdl:input>
+			<soap:body use="encoded" namespace="localhost/zapisy.wsdl" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+		</wsdl:input>
+		<wsdl:output>
+			<soap:body use="encoded" namespace="localhost/zapisy.wsdl" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+		</wsdl:output>
+	</wsdl:operation>
+	<wsdl:operation name="dodajProwadzacego">
+		<soap:operation style="rpc" soapAction=""/>
+		<wsdl:input>
+			<soap:body use="encoded" namespace="localhost/zapisy.wsdl" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+		</wsdl:input>
+		<wsdl:output>
+			<soap:body use="encoded" namespace="localhost/zapisy.wsdl" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+		</wsdl:output>
+	</wsdl:operation>
+	<wsdl:operation name="zmienDaneProwadzacego">
+		<soap:operation style="rpc" soapAction=""/>
+		<wsdl:input>
+			<soap:body use="encoded" namespace="localhost/zapisy.wsdl" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+		</wsdl:input>
+		<wsdl:output>
+			<soap:body use="encoded" namespace="localhost/zapisy.wsdl" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+		</wsdl:output>
+	</wsdl:operation>
+	<wsdl:operation name="usunProwadzacego">
+		<soap:operation style="rpc" soapAction=""/>
+		<wsdl:input>
+			<soap:body use="encoded" namespace="localhost/zapisy.wsdl" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+		</wsdl:input>
+		<wsdl:output>
+			<soap:body use="encoded" namespace="localhost/zapisy.wsdl" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+		</wsdl:output>
+	</wsdl:operation>
+	<wsdl:operation name="dodajStudenta">
+		<soap:operation style="rpc" soapAction=""/>
+		<wsdl:input>
+			<soap:body use="encoded" namespace="localhost/zapisy.wsdl" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+		</wsdl:input>
+		<wsdl:output>
+			<soap:body use="encoded" namespace="localhost/zapisy.wsdl" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+		</wsdl:output>
+	</wsdl:operation>
+	<wsdl:operation name="usunStudentaZPrzedmiotu">
+		<soap:operation style="rpc" soapAction=""/>
+		<wsdl:input>
+			<soap:body use="encoded" namespace="localhost/zapisy.wsdl" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+		</wsdl:input>
+		<wsdl:output>
+			<soap:body use="encoded" namespace="localhost/zapisy.wsdl" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+		</wsdl:output>
+	</wsdl:operation>
+	<wsdl:operation name="usunWszystkichZPrzedmiotu">
+		<soap:operation style="rpc" soapAction=""/>
+		<wsdl:input>
+			<soap:body use="encoded" namespace="localhost/zapisy.wsdl" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+		</wsdl:input>
+		<wsdl:output>
+			<soap:body use="encoded" namespace="localhost/zapisy.wsdl" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+		</wsdl:output>
+	</wsdl:operation>
+	<wsdl:operation name="usunPrzedmiot">
+		<soap:operation style="rpc" soapAction=""/>
+		<wsdl:input>
+			<soap:body use="encoded" namespace="localhost/zapisy.wsdl" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+		</wsdl:input>
+		<wsdl:output>
+			<soap:body use="encoded" namespace="localhost/zapisy.wsdl" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+		</wsdl:output>
+	</wsdl:operation>
+	<wsdl:operation name="edytujProjekt">
+		<soap:operation style="rpc" soapAction=""/>
+		<wsdl:input>
+			<soap:body use="encoded" namespace="localhost/zapisy.wsdl" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+		</wsdl:input>
+		<wsdl:output>
+			<soap:body use="encoded" namespace="localhost/zapisy.wsdl" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+		</wsdl:output>
+	</wsdl:operation>
+	<wsdl:operation name="edytujTermin">
 		<soap:operation style="rpc" soapAction=""/>
 		<wsdl:input>
 			<soap:body use="encoded" namespace="localhost/zapisy.wsdl" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>

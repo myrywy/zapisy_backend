@@ -106,5 +106,25 @@ A commercial use license is available from Genivia Inc., contact@genivia.com
         virtual int eksportujTermin(std::string ID, struct z1__eksportujTerminResponse &_param_6) SOAP_PURE_VIRTUAL;
         /// Web service operation 'eksportujPrzedmiot' (returns SOAP_OK or error code)
         virtual int eksportujPrzedmiot(std::string ID, struct z1__eksportujPrzedmiotResponse &_param_7) SOAP_PURE_VIRTUAL;
+        /// Web service operation 'dodajPrzedmiot' (returns SOAP_OK or error code)
+        virtual int dodajPrzedmiot(std::string importowanyPrzedmiot, z1__temat *projekt, struct z1__dodajPrzedmiotResponse &_param_8) SOAP_PURE_VIRTUAL;
+        /// Web service operation 'dodajProwadzacego' (returns SOAP_OK or error code)
+        virtual int dodajProwadzacego(z1__prowadzacy *daneProwadzacego, struct z1__dodajProwadzacegoResponse &_param_9) SOAP_PURE_VIRTUAL;
+        /// Web service operation 'zmienDaneProwadzacego' (returns SOAP_OK or error code)
+        virtual int zmienDaneProwadzacego(z1__prowadzacy *daneProwadzacego, struct z1__zmienDaneProwadzacegoResponse &_param_10) SOAP_PURE_VIRTUAL;
+        /// Web service operation 'usunProwadzacego' (returns SOAP_OK or error code)
+        virtual int usunProwadzacego(std::string ID, struct z1__usunProwadzacegoResponse &_param_11) SOAP_PURE_VIRTUAL;
+        /// Web service operation 'dodajStudenta' (returns SOAP_OK or error code)
+        virtual int dodajStudenta(std::string przedmiotID, z1__student *student, struct z1__dodajStudentaResponse &_param_12) SOAP_PURE_VIRTUAL;
+        /// Web service operation 'usunStudentaZPrzedmiotu' (returns SOAP_OK or error code)
+        virtual int usunStudentaZPrzedmiotu(std::string przedmiotID, z1__student *student, struct z1__usunStudentaZPrzedmiotuResponse &_param_13) SOAP_PURE_VIRTUAL;
+        /// Web service operation 'usunWszystkichZPrzedmiotu' (returns SOAP_OK or error code)
+        virtual int usunWszystkichZPrzedmiotu(std::string ID, struct z1__usunWszystkichZPrzedmiotuResponse &_param_14) SOAP_PURE_VIRTUAL;
+        /// Web service operation 'usunPrzedmiot' (returns SOAP_OK or error code)
+        virtual int usunPrzedmiot(std::string ID, struct z1__usunPrzedmiotResponse &_param_15) SOAP_PURE_VIRTUAL;
+        /// Web service operation 'edytujProjekt' (returns SOAP_OK or error code)
+        virtual int edytujProjekt(std::string przedmiotID, std::string projektID, z1__temat *projekt, struct z1__edytujProjektResponse &_param_16) SOAP_PURE_VIRTUAL;
+        /// Web service operation 'edytujTermin' (returns SOAP_OK or error code)
+        virtual int edytujTermin(std::string przedmiotID, std::string terminID, std::string salaID, z1__termin *termin, struct z1__edytujTerminResponse &_param_17) SOAP_PURE_VIRTUAL;
     };
 #endif

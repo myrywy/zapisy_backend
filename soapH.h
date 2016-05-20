@@ -97,6 +97,38 @@ inline int soap_read_int(struct soap *soap, int *p)
 }
 #endif
 
+#ifndef SOAP_TYPE_bool_DEFINED
+#define SOAP_TYPE_bool_DEFINED
+SOAP_FMAC3 void SOAP_FMAC4 soap_default_bool(struct soap*, bool *);
+SOAP_FMAC3 int SOAP_FMAC4 soap_out_bool(struct soap*, const char*, int, const bool *, const char*);
+SOAP_FMAC3S const char* SOAP_FMAC4S soap_bool2s(struct soap*, bool);
+SOAP_FMAC3 bool * SOAP_FMAC4 soap_in_bool(struct soap*, const char*, bool *, const char*);
+SOAP_FMAC3S int SOAP_FMAC4S soap_s2bool(struct soap*, const char*, bool *);
+
+inline bool * soap_new_bool(struct soap *soap, int n = -1)
+{	return static_cast<bool *>(soap_malloc(soap, (n < 0 ? 1 : n) * sizeof(bool)));
+}
+SOAP_FMAC3 int SOAP_FMAC4 soap_put_bool(struct soap*, const bool *, const char*, const char*);
+
+inline int soap_write_bool(struct soap *soap, bool const *p)
+{	soap_free_temp(soap);
+	if (p)
+	{	if (soap_begin_send(soap) || soap_put_bool(soap, p, "boolean", NULL) || soap_end_send(soap))
+			return soap->error;
+	}
+	return SOAP_OK;
+}
+SOAP_FMAC3 bool * SOAP_FMAC4 soap_get_bool(struct soap*, bool *, const char*, const char*);
+
+inline int soap_read_bool(struct soap *soap, bool *p)
+{	if (p)
+	{	if (soap_begin_recv(soap) || soap_get_bool(soap, p, NULL, NULL) == NULL || soap_end_recv(soap))
+			return soap->error;
+	}
+	return SOAP_OK;
+}
+#endif
+
 #ifndef SOAP_TYPE_z1__wynik_DEFINED
 #define SOAP_TYPE_z1__wynik_DEFINED
 SOAP_FMAC3 void SOAP_FMAC4 soap_default_z1__wynik(struct soap*, std::string *);
@@ -337,6 +369,64 @@ inline int soap_read_z1__godzina(struct soap *soap, std::string *p)
 }
 #endif
 
+#ifndef SOAP_TYPE_z1__importowanyPrzedmiot_DEFINED
+#define SOAP_TYPE_z1__importowanyPrzedmiot_DEFINED
+SOAP_FMAC3 int SOAP_FMAC4 soap_out_z1__importowanyPrzedmiot(struct soap*, const char*, int, const z1__importowanyPrzedmiot *, const char*);
+SOAP_FMAC3 z1__importowanyPrzedmiot * SOAP_FMAC4 soap_in_z1__importowanyPrzedmiot(struct soap*, const char*, z1__importowanyPrzedmiot *, const char*);
+SOAP_FMAC1 z1__importowanyPrzedmiot * SOAP_FMAC2 soap_instantiate_z1__importowanyPrzedmiot(struct soap*, int, const char*, const char*, size_t*);
+
+inline z1__importowanyPrzedmiot * soap_new_z1__importowanyPrzedmiot(struct soap *soap, int n = -1)
+{	return soap_instantiate_z1__importowanyPrzedmiot(soap, n, NULL, NULL, NULL);
+}
+
+inline z1__importowanyPrzedmiot * soap_new_req_z1__importowanyPrzedmiot(
+	struct soap *soap,
+	const std::string& emailProwadzacego)
+{	z1__importowanyPrzedmiot *_p = soap_new_z1__importowanyPrzedmiot(soap);
+	if (_p)
+	{	_p->soap_default(soap);
+		_p->z1__importowanyPrzedmiot::emailProwadzacego = emailProwadzacego;
+	}
+	return _p;
+}
+
+inline z1__importowanyPrzedmiot * soap_new_set_z1__importowanyPrzedmiot(
+	struct soap *soap,
+	const std::string& emailProwadzacego,
+	std::string *listaStudentow,
+	std::string *terminyLaboratoriow,
+	std::string *tematyProjektow)
+{	z1__importowanyPrzedmiot *_p = soap_new_z1__importowanyPrzedmiot(soap);
+	if (_p)
+	{	_p->soap_default(soap);
+		_p->z1__importowanyPrzedmiot::emailProwadzacego = emailProwadzacego;
+		_p->z1__importowanyPrzedmiot::listaStudentow = listaStudentow;
+		_p->z1__importowanyPrzedmiot::terminyLaboratoriow = terminyLaboratoriow;
+		_p->z1__importowanyPrzedmiot::tematyProjektow = tematyProjektow;
+	}
+	return _p;
+}
+
+inline int soap_write_z1__importowanyPrzedmiot(struct soap *soap, z1__importowanyPrzedmiot const *p)
+{	soap_free_temp(soap);
+	if (p)
+	{	if (soap_begin_send(soap) || (p->soap_serialize(soap), 0) || p->soap_put(soap, "z1:importowanyPrzedmiot", NULL) || soap_end_send(soap))
+			return soap->error;
+	}
+	return SOAP_OK;
+}
+SOAP_FMAC3 z1__importowanyPrzedmiot * SOAP_FMAC4 soap_get_z1__importowanyPrzedmiot(struct soap*, z1__importowanyPrzedmiot *, const char*, const char*);
+
+inline int soap_read_z1__importowanyPrzedmiot(struct soap *soap, z1__importowanyPrzedmiot *p)
+{	if (p)
+	{	p->soap_default(soap);
+		if (soap_begin_recv(soap) || soap_get_z1__importowanyPrzedmiot(soap, p, NULL, NULL) == NULL || soap_end_recv(soap))
+			return soap->error;
+	}
+	return SOAP_OK;
+}
+#endif
+
 #ifndef SOAP_TYPE_z1__prowadzacy_DEFINED
 #define SOAP_TYPE_z1__prowadzacy_DEFINED
 SOAP_FMAC3 int SOAP_FMAC4 soap_out_z1__prowadzacy(struct soap*, const char*, int, const z1__prowadzacy *, const char*);
@@ -350,12 +440,18 @@ inline z1__prowadzacy * soap_new_z1__prowadzacy(struct soap *soap, int n = -1)
 inline z1__prowadzacy * soap_new_req_z1__prowadzacy(
 	struct soap *soap,
 	const std::string& email,
-	const std::string& haslo)
+	const std::string& imie,
+	const std::string& nazwisko,
+	const std::string& haslo,
+	bool admin)
 {	z1__prowadzacy *_p = soap_new_z1__prowadzacy(soap);
 	if (_p)
 	{	_p->soap_default(soap);
 		_p->z1__prowadzacy::email = email;
+		_p->z1__prowadzacy::imie = imie;
+		_p->z1__prowadzacy::nazwisko = nazwisko;
 		_p->z1__prowadzacy::haslo = haslo;
+		_p->z1__prowadzacy::admin = admin;
 	}
 	return _p;
 }
@@ -363,12 +459,18 @@ inline z1__prowadzacy * soap_new_req_z1__prowadzacy(
 inline z1__prowadzacy * soap_new_set_z1__prowadzacy(
 	struct soap *soap,
 	const std::string& email,
-	const std::string& haslo)
+	const std::string& imie,
+	const std::string& nazwisko,
+	const std::string& haslo,
+	bool admin)
 {	z1__prowadzacy *_p = soap_new_z1__prowadzacy(soap);
 	if (_p)
 	{	_p->soap_default(soap);
 		_p->z1__prowadzacy::email = email;
+		_p->z1__prowadzacy::imie = imie;
+		_p->z1__prowadzacy::nazwisko = nazwisko;
 		_p->z1__prowadzacy::haslo = haslo;
+		_p->z1__prowadzacy::admin = admin;
 	}
 	return _p;
 }
@@ -1184,6 +1286,1124 @@ inline int soap_read_SOAP_ENV__Header(struct soap *soap, struct SOAP_ENV__Header
 }
 #endif
 
+#endif
+
+#ifndef SOAP_TYPE_z1__edytujTermin_DEFINED
+#define SOAP_TYPE_z1__edytujTermin_DEFINED
+SOAP_FMAC3 void SOAP_FMAC4 soap_default_z1__edytujTermin(struct soap*, struct z1__edytujTermin *);
+SOAP_FMAC3 void SOAP_FMAC4 soap_serialize_z1__edytujTermin(struct soap*, const struct z1__edytujTermin *);
+SOAP_FMAC3 int SOAP_FMAC4 soap_out_z1__edytujTermin(struct soap*, const char*, int, const struct z1__edytujTermin *, const char*);
+SOAP_FMAC3 struct z1__edytujTermin * SOAP_FMAC4 soap_in_z1__edytujTermin(struct soap*, const char*, struct z1__edytujTermin *, const char*);
+SOAP_FMAC1 struct z1__edytujTermin * SOAP_FMAC2 soap_instantiate_z1__edytujTermin(struct soap*, int, const char*, const char*, size_t*);
+
+inline struct z1__edytujTermin * soap_new_z1__edytujTermin(struct soap *soap, int n = -1)
+{	return soap_instantiate_z1__edytujTermin(soap, n, NULL, NULL, NULL);
+}
+
+inline struct z1__edytujTermin * soap_new_req_z1__edytujTermin(
+	struct soap *soap,
+	const std::string& przedmiotID,
+	const std::string& terminID,
+	const std::string& salaID)
+{	struct z1__edytujTermin *_p = soap_new_z1__edytujTermin(soap);
+	if (_p)
+	{	soap_default_z1__edytujTermin(soap, _p);
+		_p->przedmiotID = przedmiotID;
+		_p->terminID = terminID;
+		_p->salaID = salaID;
+	}
+	return _p;
+}
+
+inline struct z1__edytujTermin * soap_new_set_z1__edytujTermin(
+	struct soap *soap,
+	const std::string& przedmiotID,
+	const std::string& terminID,
+	const std::string& salaID,
+	z1__termin *termin)
+{	struct z1__edytujTermin *_p = soap_new_z1__edytujTermin(soap);
+	if (_p)
+	{	soap_default_z1__edytujTermin(soap, _p);
+		_p->przedmiotID = przedmiotID;
+		_p->terminID = terminID;
+		_p->salaID = salaID;
+		_p->termin = termin;
+	}
+	return _p;
+}
+SOAP_FMAC3 int SOAP_FMAC4 soap_put_z1__edytujTermin(struct soap*, const struct z1__edytujTermin *, const char*, const char*);
+
+inline int soap_write_z1__edytujTermin(struct soap *soap, struct z1__edytujTermin const *p)
+{	soap_free_temp(soap);
+	if (p)
+	{	if (soap_begin_send(soap) || (soap_serialize_z1__edytujTermin(soap, p), 0) || soap_put_z1__edytujTermin(soap, p, "z1:edytujTermin", NULL) || soap_end_send(soap))
+			return soap->error;
+	}
+	return SOAP_OK;
+}
+SOAP_FMAC3 struct z1__edytujTermin * SOAP_FMAC4 soap_get_z1__edytujTermin(struct soap*, struct z1__edytujTermin *, const char*, const char*);
+
+inline int soap_read_z1__edytujTermin(struct soap *soap, struct z1__edytujTermin *p)
+{	if (p)
+	{	soap_default_z1__edytujTermin(soap, p);
+		if (soap_begin_recv(soap) || soap_get_z1__edytujTermin(soap, p, NULL, NULL) == NULL || soap_end_recv(soap))
+			return soap->error;
+	}
+	return SOAP_OK;
+}
+#endif
+
+#ifndef SOAP_TYPE_z1__edytujTerminResponse_DEFINED
+#define SOAP_TYPE_z1__edytujTerminResponse_DEFINED
+SOAP_FMAC3 void SOAP_FMAC4 soap_default_z1__edytujTerminResponse(struct soap*, struct z1__edytujTerminResponse *);
+SOAP_FMAC3 void SOAP_FMAC4 soap_serialize_z1__edytujTerminResponse(struct soap*, const struct z1__edytujTerminResponse *);
+SOAP_FMAC3 int SOAP_FMAC4 soap_out_z1__edytujTerminResponse(struct soap*, const char*, int, const struct z1__edytujTerminResponse *, const char*);
+SOAP_FMAC3 struct z1__edytujTerminResponse * SOAP_FMAC4 soap_in_z1__edytujTerminResponse(struct soap*, const char*, struct z1__edytujTerminResponse *, const char*);
+SOAP_FMAC1 struct z1__edytujTerminResponse * SOAP_FMAC2 soap_instantiate_z1__edytujTerminResponse(struct soap*, int, const char*, const char*, size_t*);
+
+inline struct z1__edytujTerminResponse * soap_new_z1__edytujTerminResponse(struct soap *soap, int n = -1)
+{	return soap_instantiate_z1__edytujTerminResponse(soap, n, NULL, NULL, NULL);
+}
+
+inline struct z1__edytujTerminResponse * soap_new_req_z1__edytujTerminResponse(
+	struct soap *soap,
+	const std::string& rezultat)
+{	struct z1__edytujTerminResponse *_p = soap_new_z1__edytujTerminResponse(soap);
+	if (_p)
+	{	soap_default_z1__edytujTerminResponse(soap, _p);
+		_p->rezultat = rezultat;
+	}
+	return _p;
+}
+
+inline struct z1__edytujTerminResponse * soap_new_set_z1__edytujTerminResponse(
+	struct soap *soap,
+	const std::string& rezultat)
+{	struct z1__edytujTerminResponse *_p = soap_new_z1__edytujTerminResponse(soap);
+	if (_p)
+	{	soap_default_z1__edytujTerminResponse(soap, _p);
+		_p->rezultat = rezultat;
+	}
+	return _p;
+}
+SOAP_FMAC3 int SOAP_FMAC4 soap_put_z1__edytujTerminResponse(struct soap*, const struct z1__edytujTerminResponse *, const char*, const char*);
+
+inline int soap_write_z1__edytujTerminResponse(struct soap *soap, struct z1__edytujTerminResponse const *p)
+{	soap_free_temp(soap);
+	if (p)
+	{	if (soap_begin_send(soap) || (soap_serialize_z1__edytujTerminResponse(soap, p), 0) || soap_put_z1__edytujTerminResponse(soap, p, "z1:edytujTerminResponse", NULL) || soap_end_send(soap))
+			return soap->error;
+	}
+	return SOAP_OK;
+}
+SOAP_FMAC3 struct z1__edytujTerminResponse * SOAP_FMAC4 soap_get_z1__edytujTerminResponse(struct soap*, struct z1__edytujTerminResponse *, const char*, const char*);
+
+inline int soap_read_z1__edytujTerminResponse(struct soap *soap, struct z1__edytujTerminResponse *p)
+{	if (p)
+	{	soap_default_z1__edytujTerminResponse(soap, p);
+		if (soap_begin_recv(soap) || soap_get_z1__edytujTerminResponse(soap, p, NULL, NULL) == NULL || soap_end_recv(soap))
+			return soap->error;
+	}
+	return SOAP_OK;
+}
+#endif
+
+#ifndef SOAP_TYPE_z1__edytujProjekt_DEFINED
+#define SOAP_TYPE_z1__edytujProjekt_DEFINED
+SOAP_FMAC3 void SOAP_FMAC4 soap_default_z1__edytujProjekt(struct soap*, struct z1__edytujProjekt *);
+SOAP_FMAC3 void SOAP_FMAC4 soap_serialize_z1__edytujProjekt(struct soap*, const struct z1__edytujProjekt *);
+SOAP_FMAC3 int SOAP_FMAC4 soap_out_z1__edytujProjekt(struct soap*, const char*, int, const struct z1__edytujProjekt *, const char*);
+SOAP_FMAC3 struct z1__edytujProjekt * SOAP_FMAC4 soap_in_z1__edytujProjekt(struct soap*, const char*, struct z1__edytujProjekt *, const char*);
+SOAP_FMAC1 struct z1__edytujProjekt * SOAP_FMAC2 soap_instantiate_z1__edytujProjekt(struct soap*, int, const char*, const char*, size_t*);
+
+inline struct z1__edytujProjekt * soap_new_z1__edytujProjekt(struct soap *soap, int n = -1)
+{	return soap_instantiate_z1__edytujProjekt(soap, n, NULL, NULL, NULL);
+}
+
+inline struct z1__edytujProjekt * soap_new_req_z1__edytujProjekt(
+	struct soap *soap,
+	const std::string& przedmiotID,
+	const std::string& projektID)
+{	struct z1__edytujProjekt *_p = soap_new_z1__edytujProjekt(soap);
+	if (_p)
+	{	soap_default_z1__edytujProjekt(soap, _p);
+		_p->przedmiotID = przedmiotID;
+		_p->projektID = projektID;
+	}
+	return _p;
+}
+
+inline struct z1__edytujProjekt * soap_new_set_z1__edytujProjekt(
+	struct soap *soap,
+	const std::string& przedmiotID,
+	const std::string& projektID,
+	z1__temat *projekt)
+{	struct z1__edytujProjekt *_p = soap_new_z1__edytujProjekt(soap);
+	if (_p)
+	{	soap_default_z1__edytujProjekt(soap, _p);
+		_p->przedmiotID = przedmiotID;
+		_p->projektID = projektID;
+		_p->projekt = projekt;
+	}
+	return _p;
+}
+SOAP_FMAC3 int SOAP_FMAC4 soap_put_z1__edytujProjekt(struct soap*, const struct z1__edytujProjekt *, const char*, const char*);
+
+inline int soap_write_z1__edytujProjekt(struct soap *soap, struct z1__edytujProjekt const *p)
+{	soap_free_temp(soap);
+	if (p)
+	{	if (soap_begin_send(soap) || (soap_serialize_z1__edytujProjekt(soap, p), 0) || soap_put_z1__edytujProjekt(soap, p, "z1:edytujProjekt", NULL) || soap_end_send(soap))
+			return soap->error;
+	}
+	return SOAP_OK;
+}
+SOAP_FMAC3 struct z1__edytujProjekt * SOAP_FMAC4 soap_get_z1__edytujProjekt(struct soap*, struct z1__edytujProjekt *, const char*, const char*);
+
+inline int soap_read_z1__edytujProjekt(struct soap *soap, struct z1__edytujProjekt *p)
+{	if (p)
+	{	soap_default_z1__edytujProjekt(soap, p);
+		if (soap_begin_recv(soap) || soap_get_z1__edytujProjekt(soap, p, NULL, NULL) == NULL || soap_end_recv(soap))
+			return soap->error;
+	}
+	return SOAP_OK;
+}
+#endif
+
+#ifndef SOAP_TYPE_z1__edytujProjektResponse_DEFINED
+#define SOAP_TYPE_z1__edytujProjektResponse_DEFINED
+SOAP_FMAC3 void SOAP_FMAC4 soap_default_z1__edytujProjektResponse(struct soap*, struct z1__edytujProjektResponse *);
+SOAP_FMAC3 void SOAP_FMAC4 soap_serialize_z1__edytujProjektResponse(struct soap*, const struct z1__edytujProjektResponse *);
+SOAP_FMAC3 int SOAP_FMAC4 soap_out_z1__edytujProjektResponse(struct soap*, const char*, int, const struct z1__edytujProjektResponse *, const char*);
+SOAP_FMAC3 struct z1__edytujProjektResponse * SOAP_FMAC4 soap_in_z1__edytujProjektResponse(struct soap*, const char*, struct z1__edytujProjektResponse *, const char*);
+SOAP_FMAC1 struct z1__edytujProjektResponse * SOAP_FMAC2 soap_instantiate_z1__edytujProjektResponse(struct soap*, int, const char*, const char*, size_t*);
+
+inline struct z1__edytujProjektResponse * soap_new_z1__edytujProjektResponse(struct soap *soap, int n = -1)
+{	return soap_instantiate_z1__edytujProjektResponse(soap, n, NULL, NULL, NULL);
+}
+
+inline struct z1__edytujProjektResponse * soap_new_req_z1__edytujProjektResponse(
+	struct soap *soap,
+	const std::string& rezultat)
+{	struct z1__edytujProjektResponse *_p = soap_new_z1__edytujProjektResponse(soap);
+	if (_p)
+	{	soap_default_z1__edytujProjektResponse(soap, _p);
+		_p->rezultat = rezultat;
+	}
+	return _p;
+}
+
+inline struct z1__edytujProjektResponse * soap_new_set_z1__edytujProjektResponse(
+	struct soap *soap,
+	const std::string& rezultat)
+{	struct z1__edytujProjektResponse *_p = soap_new_z1__edytujProjektResponse(soap);
+	if (_p)
+	{	soap_default_z1__edytujProjektResponse(soap, _p);
+		_p->rezultat = rezultat;
+	}
+	return _p;
+}
+SOAP_FMAC3 int SOAP_FMAC4 soap_put_z1__edytujProjektResponse(struct soap*, const struct z1__edytujProjektResponse *, const char*, const char*);
+
+inline int soap_write_z1__edytujProjektResponse(struct soap *soap, struct z1__edytujProjektResponse const *p)
+{	soap_free_temp(soap);
+	if (p)
+	{	if (soap_begin_send(soap) || (soap_serialize_z1__edytujProjektResponse(soap, p), 0) || soap_put_z1__edytujProjektResponse(soap, p, "z1:edytujProjektResponse", NULL) || soap_end_send(soap))
+			return soap->error;
+	}
+	return SOAP_OK;
+}
+SOAP_FMAC3 struct z1__edytujProjektResponse * SOAP_FMAC4 soap_get_z1__edytujProjektResponse(struct soap*, struct z1__edytujProjektResponse *, const char*, const char*);
+
+inline int soap_read_z1__edytujProjektResponse(struct soap *soap, struct z1__edytujProjektResponse *p)
+{	if (p)
+	{	soap_default_z1__edytujProjektResponse(soap, p);
+		if (soap_begin_recv(soap) || soap_get_z1__edytujProjektResponse(soap, p, NULL, NULL) == NULL || soap_end_recv(soap))
+			return soap->error;
+	}
+	return SOAP_OK;
+}
+#endif
+
+#ifndef SOAP_TYPE_z1__usunPrzedmiot_DEFINED
+#define SOAP_TYPE_z1__usunPrzedmiot_DEFINED
+SOAP_FMAC3 void SOAP_FMAC4 soap_default_z1__usunPrzedmiot(struct soap*, struct z1__usunPrzedmiot *);
+SOAP_FMAC3 void SOAP_FMAC4 soap_serialize_z1__usunPrzedmiot(struct soap*, const struct z1__usunPrzedmiot *);
+SOAP_FMAC3 int SOAP_FMAC4 soap_out_z1__usunPrzedmiot(struct soap*, const char*, int, const struct z1__usunPrzedmiot *, const char*);
+SOAP_FMAC3 struct z1__usunPrzedmiot * SOAP_FMAC4 soap_in_z1__usunPrzedmiot(struct soap*, const char*, struct z1__usunPrzedmiot *, const char*);
+SOAP_FMAC1 struct z1__usunPrzedmiot * SOAP_FMAC2 soap_instantiate_z1__usunPrzedmiot(struct soap*, int, const char*, const char*, size_t*);
+
+inline struct z1__usunPrzedmiot * soap_new_z1__usunPrzedmiot(struct soap *soap, int n = -1)
+{	return soap_instantiate_z1__usunPrzedmiot(soap, n, NULL, NULL, NULL);
+}
+
+inline struct z1__usunPrzedmiot * soap_new_req_z1__usunPrzedmiot(
+	struct soap *soap,
+	const std::string& ID)
+{	struct z1__usunPrzedmiot *_p = soap_new_z1__usunPrzedmiot(soap);
+	if (_p)
+	{	soap_default_z1__usunPrzedmiot(soap, _p);
+		_p->ID = ID;
+	}
+	return _p;
+}
+
+inline struct z1__usunPrzedmiot * soap_new_set_z1__usunPrzedmiot(
+	struct soap *soap,
+	const std::string& ID)
+{	struct z1__usunPrzedmiot *_p = soap_new_z1__usunPrzedmiot(soap);
+	if (_p)
+	{	soap_default_z1__usunPrzedmiot(soap, _p);
+		_p->ID = ID;
+	}
+	return _p;
+}
+SOAP_FMAC3 int SOAP_FMAC4 soap_put_z1__usunPrzedmiot(struct soap*, const struct z1__usunPrzedmiot *, const char*, const char*);
+
+inline int soap_write_z1__usunPrzedmiot(struct soap *soap, struct z1__usunPrzedmiot const *p)
+{	soap_free_temp(soap);
+	if (p)
+	{	if (soap_begin_send(soap) || (soap_serialize_z1__usunPrzedmiot(soap, p), 0) || soap_put_z1__usunPrzedmiot(soap, p, "z1:usunPrzedmiot", NULL) || soap_end_send(soap))
+			return soap->error;
+	}
+	return SOAP_OK;
+}
+SOAP_FMAC3 struct z1__usunPrzedmiot * SOAP_FMAC4 soap_get_z1__usunPrzedmiot(struct soap*, struct z1__usunPrzedmiot *, const char*, const char*);
+
+inline int soap_read_z1__usunPrzedmiot(struct soap *soap, struct z1__usunPrzedmiot *p)
+{	if (p)
+	{	soap_default_z1__usunPrzedmiot(soap, p);
+		if (soap_begin_recv(soap) || soap_get_z1__usunPrzedmiot(soap, p, NULL, NULL) == NULL || soap_end_recv(soap))
+			return soap->error;
+	}
+	return SOAP_OK;
+}
+#endif
+
+#ifndef SOAP_TYPE_z1__usunPrzedmiotResponse_DEFINED
+#define SOAP_TYPE_z1__usunPrzedmiotResponse_DEFINED
+SOAP_FMAC3 void SOAP_FMAC4 soap_default_z1__usunPrzedmiotResponse(struct soap*, struct z1__usunPrzedmiotResponse *);
+SOAP_FMAC3 void SOAP_FMAC4 soap_serialize_z1__usunPrzedmiotResponse(struct soap*, const struct z1__usunPrzedmiotResponse *);
+SOAP_FMAC3 int SOAP_FMAC4 soap_out_z1__usunPrzedmiotResponse(struct soap*, const char*, int, const struct z1__usunPrzedmiotResponse *, const char*);
+SOAP_FMAC3 struct z1__usunPrzedmiotResponse * SOAP_FMAC4 soap_in_z1__usunPrzedmiotResponse(struct soap*, const char*, struct z1__usunPrzedmiotResponse *, const char*);
+SOAP_FMAC1 struct z1__usunPrzedmiotResponse * SOAP_FMAC2 soap_instantiate_z1__usunPrzedmiotResponse(struct soap*, int, const char*, const char*, size_t*);
+
+inline struct z1__usunPrzedmiotResponse * soap_new_z1__usunPrzedmiotResponse(struct soap *soap, int n = -1)
+{	return soap_instantiate_z1__usunPrzedmiotResponse(soap, n, NULL, NULL, NULL);
+}
+
+inline struct z1__usunPrzedmiotResponse * soap_new_req_z1__usunPrzedmiotResponse(
+	struct soap *soap,
+	const std::string& rezultat)
+{	struct z1__usunPrzedmiotResponse *_p = soap_new_z1__usunPrzedmiotResponse(soap);
+	if (_p)
+	{	soap_default_z1__usunPrzedmiotResponse(soap, _p);
+		_p->rezultat = rezultat;
+	}
+	return _p;
+}
+
+inline struct z1__usunPrzedmiotResponse * soap_new_set_z1__usunPrzedmiotResponse(
+	struct soap *soap,
+	const std::string& rezultat)
+{	struct z1__usunPrzedmiotResponse *_p = soap_new_z1__usunPrzedmiotResponse(soap);
+	if (_p)
+	{	soap_default_z1__usunPrzedmiotResponse(soap, _p);
+		_p->rezultat = rezultat;
+	}
+	return _p;
+}
+SOAP_FMAC3 int SOAP_FMAC4 soap_put_z1__usunPrzedmiotResponse(struct soap*, const struct z1__usunPrzedmiotResponse *, const char*, const char*);
+
+inline int soap_write_z1__usunPrzedmiotResponse(struct soap *soap, struct z1__usunPrzedmiotResponse const *p)
+{	soap_free_temp(soap);
+	if (p)
+	{	if (soap_begin_send(soap) || (soap_serialize_z1__usunPrzedmiotResponse(soap, p), 0) || soap_put_z1__usunPrzedmiotResponse(soap, p, "z1:usunPrzedmiotResponse", NULL) || soap_end_send(soap))
+			return soap->error;
+	}
+	return SOAP_OK;
+}
+SOAP_FMAC3 struct z1__usunPrzedmiotResponse * SOAP_FMAC4 soap_get_z1__usunPrzedmiotResponse(struct soap*, struct z1__usunPrzedmiotResponse *, const char*, const char*);
+
+inline int soap_read_z1__usunPrzedmiotResponse(struct soap *soap, struct z1__usunPrzedmiotResponse *p)
+{	if (p)
+	{	soap_default_z1__usunPrzedmiotResponse(soap, p);
+		if (soap_begin_recv(soap) || soap_get_z1__usunPrzedmiotResponse(soap, p, NULL, NULL) == NULL || soap_end_recv(soap))
+			return soap->error;
+	}
+	return SOAP_OK;
+}
+#endif
+
+#ifndef SOAP_TYPE_z1__usunWszystkichZPrzedmiotu_DEFINED
+#define SOAP_TYPE_z1__usunWszystkichZPrzedmiotu_DEFINED
+SOAP_FMAC3 void SOAP_FMAC4 soap_default_z1__usunWszystkichZPrzedmiotu(struct soap*, struct z1__usunWszystkichZPrzedmiotu *);
+SOAP_FMAC3 void SOAP_FMAC4 soap_serialize_z1__usunWszystkichZPrzedmiotu(struct soap*, const struct z1__usunWszystkichZPrzedmiotu *);
+SOAP_FMAC3 int SOAP_FMAC4 soap_out_z1__usunWszystkichZPrzedmiotu(struct soap*, const char*, int, const struct z1__usunWszystkichZPrzedmiotu *, const char*);
+SOAP_FMAC3 struct z1__usunWszystkichZPrzedmiotu * SOAP_FMAC4 soap_in_z1__usunWszystkichZPrzedmiotu(struct soap*, const char*, struct z1__usunWszystkichZPrzedmiotu *, const char*);
+SOAP_FMAC1 struct z1__usunWszystkichZPrzedmiotu * SOAP_FMAC2 soap_instantiate_z1__usunWszystkichZPrzedmiotu(struct soap*, int, const char*, const char*, size_t*);
+
+inline struct z1__usunWszystkichZPrzedmiotu * soap_new_z1__usunWszystkichZPrzedmiotu(struct soap *soap, int n = -1)
+{	return soap_instantiate_z1__usunWszystkichZPrzedmiotu(soap, n, NULL, NULL, NULL);
+}
+
+inline struct z1__usunWszystkichZPrzedmiotu * soap_new_req_z1__usunWszystkichZPrzedmiotu(
+	struct soap *soap,
+	const std::string& ID)
+{	struct z1__usunWszystkichZPrzedmiotu *_p = soap_new_z1__usunWszystkichZPrzedmiotu(soap);
+	if (_p)
+	{	soap_default_z1__usunWszystkichZPrzedmiotu(soap, _p);
+		_p->ID = ID;
+	}
+	return _p;
+}
+
+inline struct z1__usunWszystkichZPrzedmiotu * soap_new_set_z1__usunWszystkichZPrzedmiotu(
+	struct soap *soap,
+	const std::string& ID)
+{	struct z1__usunWszystkichZPrzedmiotu *_p = soap_new_z1__usunWszystkichZPrzedmiotu(soap);
+	if (_p)
+	{	soap_default_z1__usunWszystkichZPrzedmiotu(soap, _p);
+		_p->ID = ID;
+	}
+	return _p;
+}
+SOAP_FMAC3 int SOAP_FMAC4 soap_put_z1__usunWszystkichZPrzedmiotu(struct soap*, const struct z1__usunWszystkichZPrzedmiotu *, const char*, const char*);
+
+inline int soap_write_z1__usunWszystkichZPrzedmiotu(struct soap *soap, struct z1__usunWszystkichZPrzedmiotu const *p)
+{	soap_free_temp(soap);
+	if (p)
+	{	if (soap_begin_send(soap) || (soap_serialize_z1__usunWszystkichZPrzedmiotu(soap, p), 0) || soap_put_z1__usunWszystkichZPrzedmiotu(soap, p, "z1:usunWszystkichZPrzedmiotu", NULL) || soap_end_send(soap))
+			return soap->error;
+	}
+	return SOAP_OK;
+}
+SOAP_FMAC3 struct z1__usunWszystkichZPrzedmiotu * SOAP_FMAC4 soap_get_z1__usunWszystkichZPrzedmiotu(struct soap*, struct z1__usunWszystkichZPrzedmiotu *, const char*, const char*);
+
+inline int soap_read_z1__usunWszystkichZPrzedmiotu(struct soap *soap, struct z1__usunWszystkichZPrzedmiotu *p)
+{	if (p)
+	{	soap_default_z1__usunWszystkichZPrzedmiotu(soap, p);
+		if (soap_begin_recv(soap) || soap_get_z1__usunWszystkichZPrzedmiotu(soap, p, NULL, NULL) == NULL || soap_end_recv(soap))
+			return soap->error;
+	}
+	return SOAP_OK;
+}
+#endif
+
+#ifndef SOAP_TYPE_z1__usunWszystkichZPrzedmiotuResponse_DEFINED
+#define SOAP_TYPE_z1__usunWszystkichZPrzedmiotuResponse_DEFINED
+SOAP_FMAC3 void SOAP_FMAC4 soap_default_z1__usunWszystkichZPrzedmiotuResponse(struct soap*, struct z1__usunWszystkichZPrzedmiotuResponse *);
+SOAP_FMAC3 void SOAP_FMAC4 soap_serialize_z1__usunWszystkichZPrzedmiotuResponse(struct soap*, const struct z1__usunWszystkichZPrzedmiotuResponse *);
+SOAP_FMAC3 int SOAP_FMAC4 soap_out_z1__usunWszystkichZPrzedmiotuResponse(struct soap*, const char*, int, const struct z1__usunWszystkichZPrzedmiotuResponse *, const char*);
+SOAP_FMAC3 struct z1__usunWszystkichZPrzedmiotuResponse * SOAP_FMAC4 soap_in_z1__usunWszystkichZPrzedmiotuResponse(struct soap*, const char*, struct z1__usunWszystkichZPrzedmiotuResponse *, const char*);
+SOAP_FMAC1 struct z1__usunWszystkichZPrzedmiotuResponse * SOAP_FMAC2 soap_instantiate_z1__usunWszystkichZPrzedmiotuResponse(struct soap*, int, const char*, const char*, size_t*);
+
+inline struct z1__usunWszystkichZPrzedmiotuResponse * soap_new_z1__usunWszystkichZPrzedmiotuResponse(struct soap *soap, int n = -1)
+{	return soap_instantiate_z1__usunWszystkichZPrzedmiotuResponse(soap, n, NULL, NULL, NULL);
+}
+
+inline struct z1__usunWszystkichZPrzedmiotuResponse * soap_new_req_z1__usunWszystkichZPrzedmiotuResponse(
+	struct soap *soap,
+	const std::string& rezultat)
+{	struct z1__usunWszystkichZPrzedmiotuResponse *_p = soap_new_z1__usunWszystkichZPrzedmiotuResponse(soap);
+	if (_p)
+	{	soap_default_z1__usunWszystkichZPrzedmiotuResponse(soap, _p);
+		_p->rezultat = rezultat;
+	}
+	return _p;
+}
+
+inline struct z1__usunWszystkichZPrzedmiotuResponse * soap_new_set_z1__usunWszystkichZPrzedmiotuResponse(
+	struct soap *soap,
+	const std::string& rezultat)
+{	struct z1__usunWszystkichZPrzedmiotuResponse *_p = soap_new_z1__usunWszystkichZPrzedmiotuResponse(soap);
+	if (_p)
+	{	soap_default_z1__usunWszystkichZPrzedmiotuResponse(soap, _p);
+		_p->rezultat = rezultat;
+	}
+	return _p;
+}
+SOAP_FMAC3 int SOAP_FMAC4 soap_put_z1__usunWszystkichZPrzedmiotuResponse(struct soap*, const struct z1__usunWszystkichZPrzedmiotuResponse *, const char*, const char*);
+
+inline int soap_write_z1__usunWszystkichZPrzedmiotuResponse(struct soap *soap, struct z1__usunWszystkichZPrzedmiotuResponse const *p)
+{	soap_free_temp(soap);
+	if (p)
+	{	if (soap_begin_send(soap) || (soap_serialize_z1__usunWszystkichZPrzedmiotuResponse(soap, p), 0) || soap_put_z1__usunWszystkichZPrzedmiotuResponse(soap, p, "z1:usunWszystkichZPrzedmiotuResponse", NULL) || soap_end_send(soap))
+			return soap->error;
+	}
+	return SOAP_OK;
+}
+SOAP_FMAC3 struct z1__usunWszystkichZPrzedmiotuResponse * SOAP_FMAC4 soap_get_z1__usunWszystkichZPrzedmiotuResponse(struct soap*, struct z1__usunWszystkichZPrzedmiotuResponse *, const char*, const char*);
+
+inline int soap_read_z1__usunWszystkichZPrzedmiotuResponse(struct soap *soap, struct z1__usunWszystkichZPrzedmiotuResponse *p)
+{	if (p)
+	{	soap_default_z1__usunWszystkichZPrzedmiotuResponse(soap, p);
+		if (soap_begin_recv(soap) || soap_get_z1__usunWszystkichZPrzedmiotuResponse(soap, p, NULL, NULL) == NULL || soap_end_recv(soap))
+			return soap->error;
+	}
+	return SOAP_OK;
+}
+#endif
+
+#ifndef SOAP_TYPE_z1__usunStudentaZPrzedmiotu_DEFINED
+#define SOAP_TYPE_z1__usunStudentaZPrzedmiotu_DEFINED
+SOAP_FMAC3 void SOAP_FMAC4 soap_default_z1__usunStudentaZPrzedmiotu(struct soap*, struct z1__usunStudentaZPrzedmiotu *);
+SOAP_FMAC3 void SOAP_FMAC4 soap_serialize_z1__usunStudentaZPrzedmiotu(struct soap*, const struct z1__usunStudentaZPrzedmiotu *);
+SOAP_FMAC3 int SOAP_FMAC4 soap_out_z1__usunStudentaZPrzedmiotu(struct soap*, const char*, int, const struct z1__usunStudentaZPrzedmiotu *, const char*);
+SOAP_FMAC3 struct z1__usunStudentaZPrzedmiotu * SOAP_FMAC4 soap_in_z1__usunStudentaZPrzedmiotu(struct soap*, const char*, struct z1__usunStudentaZPrzedmiotu *, const char*);
+SOAP_FMAC1 struct z1__usunStudentaZPrzedmiotu * SOAP_FMAC2 soap_instantiate_z1__usunStudentaZPrzedmiotu(struct soap*, int, const char*, const char*, size_t*);
+
+inline struct z1__usunStudentaZPrzedmiotu * soap_new_z1__usunStudentaZPrzedmiotu(struct soap *soap, int n = -1)
+{	return soap_instantiate_z1__usunStudentaZPrzedmiotu(soap, n, NULL, NULL, NULL);
+}
+
+inline struct z1__usunStudentaZPrzedmiotu * soap_new_req_z1__usunStudentaZPrzedmiotu(
+	struct soap *soap,
+	const std::string& przedmiotID)
+{	struct z1__usunStudentaZPrzedmiotu *_p = soap_new_z1__usunStudentaZPrzedmiotu(soap);
+	if (_p)
+	{	soap_default_z1__usunStudentaZPrzedmiotu(soap, _p);
+		_p->przedmiotID = przedmiotID;
+	}
+	return _p;
+}
+
+inline struct z1__usunStudentaZPrzedmiotu * soap_new_set_z1__usunStudentaZPrzedmiotu(
+	struct soap *soap,
+	const std::string& przedmiotID,
+	z1__student *student)
+{	struct z1__usunStudentaZPrzedmiotu *_p = soap_new_z1__usunStudentaZPrzedmiotu(soap);
+	if (_p)
+	{	soap_default_z1__usunStudentaZPrzedmiotu(soap, _p);
+		_p->przedmiotID = przedmiotID;
+		_p->student = student;
+	}
+	return _p;
+}
+SOAP_FMAC3 int SOAP_FMAC4 soap_put_z1__usunStudentaZPrzedmiotu(struct soap*, const struct z1__usunStudentaZPrzedmiotu *, const char*, const char*);
+
+inline int soap_write_z1__usunStudentaZPrzedmiotu(struct soap *soap, struct z1__usunStudentaZPrzedmiotu const *p)
+{	soap_free_temp(soap);
+	if (p)
+	{	if (soap_begin_send(soap) || (soap_serialize_z1__usunStudentaZPrzedmiotu(soap, p), 0) || soap_put_z1__usunStudentaZPrzedmiotu(soap, p, "z1:usunStudentaZPrzedmiotu", NULL) || soap_end_send(soap))
+			return soap->error;
+	}
+	return SOAP_OK;
+}
+SOAP_FMAC3 struct z1__usunStudentaZPrzedmiotu * SOAP_FMAC4 soap_get_z1__usunStudentaZPrzedmiotu(struct soap*, struct z1__usunStudentaZPrzedmiotu *, const char*, const char*);
+
+inline int soap_read_z1__usunStudentaZPrzedmiotu(struct soap *soap, struct z1__usunStudentaZPrzedmiotu *p)
+{	if (p)
+	{	soap_default_z1__usunStudentaZPrzedmiotu(soap, p);
+		if (soap_begin_recv(soap) || soap_get_z1__usunStudentaZPrzedmiotu(soap, p, NULL, NULL) == NULL || soap_end_recv(soap))
+			return soap->error;
+	}
+	return SOAP_OK;
+}
+#endif
+
+#ifndef SOAP_TYPE_z1__usunStudentaZPrzedmiotuResponse_DEFINED
+#define SOAP_TYPE_z1__usunStudentaZPrzedmiotuResponse_DEFINED
+SOAP_FMAC3 void SOAP_FMAC4 soap_default_z1__usunStudentaZPrzedmiotuResponse(struct soap*, struct z1__usunStudentaZPrzedmiotuResponse *);
+SOAP_FMAC3 void SOAP_FMAC4 soap_serialize_z1__usunStudentaZPrzedmiotuResponse(struct soap*, const struct z1__usunStudentaZPrzedmiotuResponse *);
+SOAP_FMAC3 int SOAP_FMAC4 soap_out_z1__usunStudentaZPrzedmiotuResponse(struct soap*, const char*, int, const struct z1__usunStudentaZPrzedmiotuResponse *, const char*);
+SOAP_FMAC3 struct z1__usunStudentaZPrzedmiotuResponse * SOAP_FMAC4 soap_in_z1__usunStudentaZPrzedmiotuResponse(struct soap*, const char*, struct z1__usunStudentaZPrzedmiotuResponse *, const char*);
+SOAP_FMAC1 struct z1__usunStudentaZPrzedmiotuResponse * SOAP_FMAC2 soap_instantiate_z1__usunStudentaZPrzedmiotuResponse(struct soap*, int, const char*, const char*, size_t*);
+
+inline struct z1__usunStudentaZPrzedmiotuResponse * soap_new_z1__usunStudentaZPrzedmiotuResponse(struct soap *soap, int n = -1)
+{	return soap_instantiate_z1__usunStudentaZPrzedmiotuResponse(soap, n, NULL, NULL, NULL);
+}
+
+inline struct z1__usunStudentaZPrzedmiotuResponse * soap_new_req_z1__usunStudentaZPrzedmiotuResponse(
+	struct soap *soap,
+	const std::string& rezultat)
+{	struct z1__usunStudentaZPrzedmiotuResponse *_p = soap_new_z1__usunStudentaZPrzedmiotuResponse(soap);
+	if (_p)
+	{	soap_default_z1__usunStudentaZPrzedmiotuResponse(soap, _p);
+		_p->rezultat = rezultat;
+	}
+	return _p;
+}
+
+inline struct z1__usunStudentaZPrzedmiotuResponse * soap_new_set_z1__usunStudentaZPrzedmiotuResponse(
+	struct soap *soap,
+	const std::string& rezultat)
+{	struct z1__usunStudentaZPrzedmiotuResponse *_p = soap_new_z1__usunStudentaZPrzedmiotuResponse(soap);
+	if (_p)
+	{	soap_default_z1__usunStudentaZPrzedmiotuResponse(soap, _p);
+		_p->rezultat = rezultat;
+	}
+	return _p;
+}
+SOAP_FMAC3 int SOAP_FMAC4 soap_put_z1__usunStudentaZPrzedmiotuResponse(struct soap*, const struct z1__usunStudentaZPrzedmiotuResponse *, const char*, const char*);
+
+inline int soap_write_z1__usunStudentaZPrzedmiotuResponse(struct soap *soap, struct z1__usunStudentaZPrzedmiotuResponse const *p)
+{	soap_free_temp(soap);
+	if (p)
+	{	if (soap_begin_send(soap) || (soap_serialize_z1__usunStudentaZPrzedmiotuResponse(soap, p), 0) || soap_put_z1__usunStudentaZPrzedmiotuResponse(soap, p, "z1:usunStudentaZPrzedmiotuResponse", NULL) || soap_end_send(soap))
+			return soap->error;
+	}
+	return SOAP_OK;
+}
+SOAP_FMAC3 struct z1__usunStudentaZPrzedmiotuResponse * SOAP_FMAC4 soap_get_z1__usunStudentaZPrzedmiotuResponse(struct soap*, struct z1__usunStudentaZPrzedmiotuResponse *, const char*, const char*);
+
+inline int soap_read_z1__usunStudentaZPrzedmiotuResponse(struct soap *soap, struct z1__usunStudentaZPrzedmiotuResponse *p)
+{	if (p)
+	{	soap_default_z1__usunStudentaZPrzedmiotuResponse(soap, p);
+		if (soap_begin_recv(soap) || soap_get_z1__usunStudentaZPrzedmiotuResponse(soap, p, NULL, NULL) == NULL || soap_end_recv(soap))
+			return soap->error;
+	}
+	return SOAP_OK;
+}
+#endif
+
+#ifndef SOAP_TYPE_z1__dodajStudenta_DEFINED
+#define SOAP_TYPE_z1__dodajStudenta_DEFINED
+SOAP_FMAC3 void SOAP_FMAC4 soap_default_z1__dodajStudenta(struct soap*, struct z1__dodajStudenta *);
+SOAP_FMAC3 void SOAP_FMAC4 soap_serialize_z1__dodajStudenta(struct soap*, const struct z1__dodajStudenta *);
+SOAP_FMAC3 int SOAP_FMAC4 soap_out_z1__dodajStudenta(struct soap*, const char*, int, const struct z1__dodajStudenta *, const char*);
+SOAP_FMAC3 struct z1__dodajStudenta * SOAP_FMAC4 soap_in_z1__dodajStudenta(struct soap*, const char*, struct z1__dodajStudenta *, const char*);
+SOAP_FMAC1 struct z1__dodajStudenta * SOAP_FMAC2 soap_instantiate_z1__dodajStudenta(struct soap*, int, const char*, const char*, size_t*);
+
+inline struct z1__dodajStudenta * soap_new_z1__dodajStudenta(struct soap *soap, int n = -1)
+{	return soap_instantiate_z1__dodajStudenta(soap, n, NULL, NULL, NULL);
+}
+
+inline struct z1__dodajStudenta * soap_new_req_z1__dodajStudenta(
+	struct soap *soap,
+	const std::string& przedmiotID)
+{	struct z1__dodajStudenta *_p = soap_new_z1__dodajStudenta(soap);
+	if (_p)
+	{	soap_default_z1__dodajStudenta(soap, _p);
+		_p->przedmiotID = przedmiotID;
+	}
+	return _p;
+}
+
+inline struct z1__dodajStudenta * soap_new_set_z1__dodajStudenta(
+	struct soap *soap,
+	const std::string& przedmiotID,
+	z1__student *student)
+{	struct z1__dodajStudenta *_p = soap_new_z1__dodajStudenta(soap);
+	if (_p)
+	{	soap_default_z1__dodajStudenta(soap, _p);
+		_p->przedmiotID = przedmiotID;
+		_p->student = student;
+	}
+	return _p;
+}
+SOAP_FMAC3 int SOAP_FMAC4 soap_put_z1__dodajStudenta(struct soap*, const struct z1__dodajStudenta *, const char*, const char*);
+
+inline int soap_write_z1__dodajStudenta(struct soap *soap, struct z1__dodajStudenta const *p)
+{	soap_free_temp(soap);
+	if (p)
+	{	if (soap_begin_send(soap) || (soap_serialize_z1__dodajStudenta(soap, p), 0) || soap_put_z1__dodajStudenta(soap, p, "z1:dodajStudenta", NULL) || soap_end_send(soap))
+			return soap->error;
+	}
+	return SOAP_OK;
+}
+SOAP_FMAC3 struct z1__dodajStudenta * SOAP_FMAC4 soap_get_z1__dodajStudenta(struct soap*, struct z1__dodajStudenta *, const char*, const char*);
+
+inline int soap_read_z1__dodajStudenta(struct soap *soap, struct z1__dodajStudenta *p)
+{	if (p)
+	{	soap_default_z1__dodajStudenta(soap, p);
+		if (soap_begin_recv(soap) || soap_get_z1__dodajStudenta(soap, p, NULL, NULL) == NULL || soap_end_recv(soap))
+			return soap->error;
+	}
+	return SOAP_OK;
+}
+#endif
+
+#ifndef SOAP_TYPE_z1__dodajStudentaResponse_DEFINED
+#define SOAP_TYPE_z1__dodajStudentaResponse_DEFINED
+SOAP_FMAC3 void SOAP_FMAC4 soap_default_z1__dodajStudentaResponse(struct soap*, struct z1__dodajStudentaResponse *);
+SOAP_FMAC3 void SOAP_FMAC4 soap_serialize_z1__dodajStudentaResponse(struct soap*, const struct z1__dodajStudentaResponse *);
+SOAP_FMAC3 int SOAP_FMAC4 soap_out_z1__dodajStudentaResponse(struct soap*, const char*, int, const struct z1__dodajStudentaResponse *, const char*);
+SOAP_FMAC3 struct z1__dodajStudentaResponse * SOAP_FMAC4 soap_in_z1__dodajStudentaResponse(struct soap*, const char*, struct z1__dodajStudentaResponse *, const char*);
+SOAP_FMAC1 struct z1__dodajStudentaResponse * SOAP_FMAC2 soap_instantiate_z1__dodajStudentaResponse(struct soap*, int, const char*, const char*, size_t*);
+
+inline struct z1__dodajStudentaResponse * soap_new_z1__dodajStudentaResponse(struct soap *soap, int n = -1)
+{	return soap_instantiate_z1__dodajStudentaResponse(soap, n, NULL, NULL, NULL);
+}
+
+inline struct z1__dodajStudentaResponse * soap_new_req_z1__dodajStudentaResponse(
+	struct soap *soap,
+	const std::string& rezultat)
+{	struct z1__dodajStudentaResponse *_p = soap_new_z1__dodajStudentaResponse(soap);
+	if (_p)
+	{	soap_default_z1__dodajStudentaResponse(soap, _p);
+		_p->rezultat = rezultat;
+	}
+	return _p;
+}
+
+inline struct z1__dodajStudentaResponse * soap_new_set_z1__dodajStudentaResponse(
+	struct soap *soap,
+	const std::string& rezultat)
+{	struct z1__dodajStudentaResponse *_p = soap_new_z1__dodajStudentaResponse(soap);
+	if (_p)
+	{	soap_default_z1__dodajStudentaResponse(soap, _p);
+		_p->rezultat = rezultat;
+	}
+	return _p;
+}
+SOAP_FMAC3 int SOAP_FMAC4 soap_put_z1__dodajStudentaResponse(struct soap*, const struct z1__dodajStudentaResponse *, const char*, const char*);
+
+inline int soap_write_z1__dodajStudentaResponse(struct soap *soap, struct z1__dodajStudentaResponse const *p)
+{	soap_free_temp(soap);
+	if (p)
+	{	if (soap_begin_send(soap) || (soap_serialize_z1__dodajStudentaResponse(soap, p), 0) || soap_put_z1__dodajStudentaResponse(soap, p, "z1:dodajStudentaResponse", NULL) || soap_end_send(soap))
+			return soap->error;
+	}
+	return SOAP_OK;
+}
+SOAP_FMAC3 struct z1__dodajStudentaResponse * SOAP_FMAC4 soap_get_z1__dodajStudentaResponse(struct soap*, struct z1__dodajStudentaResponse *, const char*, const char*);
+
+inline int soap_read_z1__dodajStudentaResponse(struct soap *soap, struct z1__dodajStudentaResponse *p)
+{	if (p)
+	{	soap_default_z1__dodajStudentaResponse(soap, p);
+		if (soap_begin_recv(soap) || soap_get_z1__dodajStudentaResponse(soap, p, NULL, NULL) == NULL || soap_end_recv(soap))
+			return soap->error;
+	}
+	return SOAP_OK;
+}
+#endif
+
+#ifndef SOAP_TYPE_z1__usunProwadzacego_DEFINED
+#define SOAP_TYPE_z1__usunProwadzacego_DEFINED
+SOAP_FMAC3 void SOAP_FMAC4 soap_default_z1__usunProwadzacego(struct soap*, struct z1__usunProwadzacego *);
+SOAP_FMAC3 void SOAP_FMAC4 soap_serialize_z1__usunProwadzacego(struct soap*, const struct z1__usunProwadzacego *);
+SOAP_FMAC3 int SOAP_FMAC4 soap_out_z1__usunProwadzacego(struct soap*, const char*, int, const struct z1__usunProwadzacego *, const char*);
+SOAP_FMAC3 struct z1__usunProwadzacego * SOAP_FMAC4 soap_in_z1__usunProwadzacego(struct soap*, const char*, struct z1__usunProwadzacego *, const char*);
+SOAP_FMAC1 struct z1__usunProwadzacego * SOAP_FMAC2 soap_instantiate_z1__usunProwadzacego(struct soap*, int, const char*, const char*, size_t*);
+
+inline struct z1__usunProwadzacego * soap_new_z1__usunProwadzacego(struct soap *soap, int n = -1)
+{	return soap_instantiate_z1__usunProwadzacego(soap, n, NULL, NULL, NULL);
+}
+
+inline struct z1__usunProwadzacego * soap_new_req_z1__usunProwadzacego(
+	struct soap *soap,
+	const std::string& ID)
+{	struct z1__usunProwadzacego *_p = soap_new_z1__usunProwadzacego(soap);
+	if (_p)
+	{	soap_default_z1__usunProwadzacego(soap, _p);
+		_p->ID = ID;
+	}
+	return _p;
+}
+
+inline struct z1__usunProwadzacego * soap_new_set_z1__usunProwadzacego(
+	struct soap *soap,
+	const std::string& ID)
+{	struct z1__usunProwadzacego *_p = soap_new_z1__usunProwadzacego(soap);
+	if (_p)
+	{	soap_default_z1__usunProwadzacego(soap, _p);
+		_p->ID = ID;
+	}
+	return _p;
+}
+SOAP_FMAC3 int SOAP_FMAC4 soap_put_z1__usunProwadzacego(struct soap*, const struct z1__usunProwadzacego *, const char*, const char*);
+
+inline int soap_write_z1__usunProwadzacego(struct soap *soap, struct z1__usunProwadzacego const *p)
+{	soap_free_temp(soap);
+	if (p)
+	{	if (soap_begin_send(soap) || (soap_serialize_z1__usunProwadzacego(soap, p), 0) || soap_put_z1__usunProwadzacego(soap, p, "z1:usunProwadzacego", NULL) || soap_end_send(soap))
+			return soap->error;
+	}
+	return SOAP_OK;
+}
+SOAP_FMAC3 struct z1__usunProwadzacego * SOAP_FMAC4 soap_get_z1__usunProwadzacego(struct soap*, struct z1__usunProwadzacego *, const char*, const char*);
+
+inline int soap_read_z1__usunProwadzacego(struct soap *soap, struct z1__usunProwadzacego *p)
+{	if (p)
+	{	soap_default_z1__usunProwadzacego(soap, p);
+		if (soap_begin_recv(soap) || soap_get_z1__usunProwadzacego(soap, p, NULL, NULL) == NULL || soap_end_recv(soap))
+			return soap->error;
+	}
+	return SOAP_OK;
+}
+#endif
+
+#ifndef SOAP_TYPE_z1__usunProwadzacegoResponse_DEFINED
+#define SOAP_TYPE_z1__usunProwadzacegoResponse_DEFINED
+SOAP_FMAC3 void SOAP_FMAC4 soap_default_z1__usunProwadzacegoResponse(struct soap*, struct z1__usunProwadzacegoResponse *);
+SOAP_FMAC3 void SOAP_FMAC4 soap_serialize_z1__usunProwadzacegoResponse(struct soap*, const struct z1__usunProwadzacegoResponse *);
+SOAP_FMAC3 int SOAP_FMAC4 soap_out_z1__usunProwadzacegoResponse(struct soap*, const char*, int, const struct z1__usunProwadzacegoResponse *, const char*);
+SOAP_FMAC3 struct z1__usunProwadzacegoResponse * SOAP_FMAC4 soap_in_z1__usunProwadzacegoResponse(struct soap*, const char*, struct z1__usunProwadzacegoResponse *, const char*);
+SOAP_FMAC1 struct z1__usunProwadzacegoResponse * SOAP_FMAC2 soap_instantiate_z1__usunProwadzacegoResponse(struct soap*, int, const char*, const char*, size_t*);
+
+inline struct z1__usunProwadzacegoResponse * soap_new_z1__usunProwadzacegoResponse(struct soap *soap, int n = -1)
+{	return soap_instantiate_z1__usunProwadzacegoResponse(soap, n, NULL, NULL, NULL);
+}
+
+inline struct z1__usunProwadzacegoResponse * soap_new_req_z1__usunProwadzacegoResponse(
+	struct soap *soap,
+	const std::string& rezultat)
+{	struct z1__usunProwadzacegoResponse *_p = soap_new_z1__usunProwadzacegoResponse(soap);
+	if (_p)
+	{	soap_default_z1__usunProwadzacegoResponse(soap, _p);
+		_p->rezultat = rezultat;
+	}
+	return _p;
+}
+
+inline struct z1__usunProwadzacegoResponse * soap_new_set_z1__usunProwadzacegoResponse(
+	struct soap *soap,
+	const std::string& rezultat)
+{	struct z1__usunProwadzacegoResponse *_p = soap_new_z1__usunProwadzacegoResponse(soap);
+	if (_p)
+	{	soap_default_z1__usunProwadzacegoResponse(soap, _p);
+		_p->rezultat = rezultat;
+	}
+	return _p;
+}
+SOAP_FMAC3 int SOAP_FMAC4 soap_put_z1__usunProwadzacegoResponse(struct soap*, const struct z1__usunProwadzacegoResponse *, const char*, const char*);
+
+inline int soap_write_z1__usunProwadzacegoResponse(struct soap *soap, struct z1__usunProwadzacegoResponse const *p)
+{	soap_free_temp(soap);
+	if (p)
+	{	if (soap_begin_send(soap) || (soap_serialize_z1__usunProwadzacegoResponse(soap, p), 0) || soap_put_z1__usunProwadzacegoResponse(soap, p, "z1:usunProwadzacegoResponse", NULL) || soap_end_send(soap))
+			return soap->error;
+	}
+	return SOAP_OK;
+}
+SOAP_FMAC3 struct z1__usunProwadzacegoResponse * SOAP_FMAC4 soap_get_z1__usunProwadzacegoResponse(struct soap*, struct z1__usunProwadzacegoResponse *, const char*, const char*);
+
+inline int soap_read_z1__usunProwadzacegoResponse(struct soap *soap, struct z1__usunProwadzacegoResponse *p)
+{	if (p)
+	{	soap_default_z1__usunProwadzacegoResponse(soap, p);
+		if (soap_begin_recv(soap) || soap_get_z1__usunProwadzacegoResponse(soap, p, NULL, NULL) == NULL || soap_end_recv(soap))
+			return soap->error;
+	}
+	return SOAP_OK;
+}
+#endif
+
+#ifndef SOAP_TYPE_z1__zmienDaneProwadzacego_DEFINED
+#define SOAP_TYPE_z1__zmienDaneProwadzacego_DEFINED
+SOAP_FMAC3 void SOAP_FMAC4 soap_default_z1__zmienDaneProwadzacego(struct soap*, struct z1__zmienDaneProwadzacego *);
+SOAP_FMAC3 void SOAP_FMAC4 soap_serialize_z1__zmienDaneProwadzacego(struct soap*, const struct z1__zmienDaneProwadzacego *);
+SOAP_FMAC3 int SOAP_FMAC4 soap_out_z1__zmienDaneProwadzacego(struct soap*, const char*, int, const struct z1__zmienDaneProwadzacego *, const char*);
+SOAP_FMAC3 struct z1__zmienDaneProwadzacego * SOAP_FMAC4 soap_in_z1__zmienDaneProwadzacego(struct soap*, const char*, struct z1__zmienDaneProwadzacego *, const char*);
+SOAP_FMAC1 struct z1__zmienDaneProwadzacego * SOAP_FMAC2 soap_instantiate_z1__zmienDaneProwadzacego(struct soap*, int, const char*, const char*, size_t*);
+
+inline struct z1__zmienDaneProwadzacego * soap_new_z1__zmienDaneProwadzacego(struct soap *soap, int n = -1)
+{	return soap_instantiate_z1__zmienDaneProwadzacego(soap, n, NULL, NULL, NULL);
+}
+
+inline struct z1__zmienDaneProwadzacego * soap_new_req_z1__zmienDaneProwadzacego(
+	struct soap *soap)
+{	struct z1__zmienDaneProwadzacego *_p = soap_new_z1__zmienDaneProwadzacego(soap);
+	if (_p)
+	{	soap_default_z1__zmienDaneProwadzacego(soap, _p);
+	}
+	return _p;
+}
+
+inline struct z1__zmienDaneProwadzacego * soap_new_set_z1__zmienDaneProwadzacego(
+	struct soap *soap,
+	z1__prowadzacy *daneProwadzacego)
+{	struct z1__zmienDaneProwadzacego *_p = soap_new_z1__zmienDaneProwadzacego(soap);
+	if (_p)
+	{	soap_default_z1__zmienDaneProwadzacego(soap, _p);
+		_p->daneProwadzacego = daneProwadzacego;
+	}
+	return _p;
+}
+SOAP_FMAC3 int SOAP_FMAC4 soap_put_z1__zmienDaneProwadzacego(struct soap*, const struct z1__zmienDaneProwadzacego *, const char*, const char*);
+
+inline int soap_write_z1__zmienDaneProwadzacego(struct soap *soap, struct z1__zmienDaneProwadzacego const *p)
+{	soap_free_temp(soap);
+	if (p)
+	{	if (soap_begin_send(soap) || (soap_serialize_z1__zmienDaneProwadzacego(soap, p), 0) || soap_put_z1__zmienDaneProwadzacego(soap, p, "z1:zmienDaneProwadzacego", NULL) || soap_end_send(soap))
+			return soap->error;
+	}
+	return SOAP_OK;
+}
+SOAP_FMAC3 struct z1__zmienDaneProwadzacego * SOAP_FMAC4 soap_get_z1__zmienDaneProwadzacego(struct soap*, struct z1__zmienDaneProwadzacego *, const char*, const char*);
+
+inline int soap_read_z1__zmienDaneProwadzacego(struct soap *soap, struct z1__zmienDaneProwadzacego *p)
+{	if (p)
+	{	soap_default_z1__zmienDaneProwadzacego(soap, p);
+		if (soap_begin_recv(soap) || soap_get_z1__zmienDaneProwadzacego(soap, p, NULL, NULL) == NULL || soap_end_recv(soap))
+			return soap->error;
+	}
+	return SOAP_OK;
+}
+#endif
+
+#ifndef SOAP_TYPE_z1__zmienDaneProwadzacegoResponse_DEFINED
+#define SOAP_TYPE_z1__zmienDaneProwadzacegoResponse_DEFINED
+SOAP_FMAC3 void SOAP_FMAC4 soap_default_z1__zmienDaneProwadzacegoResponse(struct soap*, struct z1__zmienDaneProwadzacegoResponse *);
+SOAP_FMAC3 void SOAP_FMAC4 soap_serialize_z1__zmienDaneProwadzacegoResponse(struct soap*, const struct z1__zmienDaneProwadzacegoResponse *);
+SOAP_FMAC3 int SOAP_FMAC4 soap_out_z1__zmienDaneProwadzacegoResponse(struct soap*, const char*, int, const struct z1__zmienDaneProwadzacegoResponse *, const char*);
+SOAP_FMAC3 struct z1__zmienDaneProwadzacegoResponse * SOAP_FMAC4 soap_in_z1__zmienDaneProwadzacegoResponse(struct soap*, const char*, struct z1__zmienDaneProwadzacegoResponse *, const char*);
+SOAP_FMAC1 struct z1__zmienDaneProwadzacegoResponse * SOAP_FMAC2 soap_instantiate_z1__zmienDaneProwadzacegoResponse(struct soap*, int, const char*, const char*, size_t*);
+
+inline struct z1__zmienDaneProwadzacegoResponse * soap_new_z1__zmienDaneProwadzacegoResponse(struct soap *soap, int n = -1)
+{	return soap_instantiate_z1__zmienDaneProwadzacegoResponse(soap, n, NULL, NULL, NULL);
+}
+
+inline struct z1__zmienDaneProwadzacegoResponse * soap_new_req_z1__zmienDaneProwadzacegoResponse(
+	struct soap *soap,
+	const std::string& rezultat)
+{	struct z1__zmienDaneProwadzacegoResponse *_p = soap_new_z1__zmienDaneProwadzacegoResponse(soap);
+	if (_p)
+	{	soap_default_z1__zmienDaneProwadzacegoResponse(soap, _p);
+		_p->rezultat = rezultat;
+	}
+	return _p;
+}
+
+inline struct z1__zmienDaneProwadzacegoResponse * soap_new_set_z1__zmienDaneProwadzacegoResponse(
+	struct soap *soap,
+	const std::string& rezultat)
+{	struct z1__zmienDaneProwadzacegoResponse *_p = soap_new_z1__zmienDaneProwadzacegoResponse(soap);
+	if (_p)
+	{	soap_default_z1__zmienDaneProwadzacegoResponse(soap, _p);
+		_p->rezultat = rezultat;
+	}
+	return _p;
+}
+SOAP_FMAC3 int SOAP_FMAC4 soap_put_z1__zmienDaneProwadzacegoResponse(struct soap*, const struct z1__zmienDaneProwadzacegoResponse *, const char*, const char*);
+
+inline int soap_write_z1__zmienDaneProwadzacegoResponse(struct soap *soap, struct z1__zmienDaneProwadzacegoResponse const *p)
+{	soap_free_temp(soap);
+	if (p)
+	{	if (soap_begin_send(soap) || (soap_serialize_z1__zmienDaneProwadzacegoResponse(soap, p), 0) || soap_put_z1__zmienDaneProwadzacegoResponse(soap, p, "z1:zmienDaneProwadzacegoResponse", NULL) || soap_end_send(soap))
+			return soap->error;
+	}
+	return SOAP_OK;
+}
+SOAP_FMAC3 struct z1__zmienDaneProwadzacegoResponse * SOAP_FMAC4 soap_get_z1__zmienDaneProwadzacegoResponse(struct soap*, struct z1__zmienDaneProwadzacegoResponse *, const char*, const char*);
+
+inline int soap_read_z1__zmienDaneProwadzacegoResponse(struct soap *soap, struct z1__zmienDaneProwadzacegoResponse *p)
+{	if (p)
+	{	soap_default_z1__zmienDaneProwadzacegoResponse(soap, p);
+		if (soap_begin_recv(soap) || soap_get_z1__zmienDaneProwadzacegoResponse(soap, p, NULL, NULL) == NULL || soap_end_recv(soap))
+			return soap->error;
+	}
+	return SOAP_OK;
+}
+#endif
+
+#ifndef SOAP_TYPE_z1__dodajProwadzacego_DEFINED
+#define SOAP_TYPE_z1__dodajProwadzacego_DEFINED
+SOAP_FMAC3 void SOAP_FMAC4 soap_default_z1__dodajProwadzacego(struct soap*, struct z1__dodajProwadzacego *);
+SOAP_FMAC3 void SOAP_FMAC4 soap_serialize_z1__dodajProwadzacego(struct soap*, const struct z1__dodajProwadzacego *);
+SOAP_FMAC3 int SOAP_FMAC4 soap_out_z1__dodajProwadzacego(struct soap*, const char*, int, const struct z1__dodajProwadzacego *, const char*);
+SOAP_FMAC3 struct z1__dodajProwadzacego * SOAP_FMAC4 soap_in_z1__dodajProwadzacego(struct soap*, const char*, struct z1__dodajProwadzacego *, const char*);
+SOAP_FMAC1 struct z1__dodajProwadzacego * SOAP_FMAC2 soap_instantiate_z1__dodajProwadzacego(struct soap*, int, const char*, const char*, size_t*);
+
+inline struct z1__dodajProwadzacego * soap_new_z1__dodajProwadzacego(struct soap *soap, int n = -1)
+{	return soap_instantiate_z1__dodajProwadzacego(soap, n, NULL, NULL, NULL);
+}
+
+inline struct z1__dodajProwadzacego * soap_new_req_z1__dodajProwadzacego(
+	struct soap *soap)
+{	struct z1__dodajProwadzacego *_p = soap_new_z1__dodajProwadzacego(soap);
+	if (_p)
+	{	soap_default_z1__dodajProwadzacego(soap, _p);
+	}
+	return _p;
+}
+
+inline struct z1__dodajProwadzacego * soap_new_set_z1__dodajProwadzacego(
+	struct soap *soap,
+	z1__prowadzacy *daneProwadzacego)
+{	struct z1__dodajProwadzacego *_p = soap_new_z1__dodajProwadzacego(soap);
+	if (_p)
+	{	soap_default_z1__dodajProwadzacego(soap, _p);
+		_p->daneProwadzacego = daneProwadzacego;
+	}
+	return _p;
+}
+SOAP_FMAC3 int SOAP_FMAC4 soap_put_z1__dodajProwadzacego(struct soap*, const struct z1__dodajProwadzacego *, const char*, const char*);
+
+inline int soap_write_z1__dodajProwadzacego(struct soap *soap, struct z1__dodajProwadzacego const *p)
+{	soap_free_temp(soap);
+	if (p)
+	{	if (soap_begin_send(soap) || (soap_serialize_z1__dodajProwadzacego(soap, p), 0) || soap_put_z1__dodajProwadzacego(soap, p, "z1:dodajProwadzacego", NULL) || soap_end_send(soap))
+			return soap->error;
+	}
+	return SOAP_OK;
+}
+SOAP_FMAC3 struct z1__dodajProwadzacego * SOAP_FMAC4 soap_get_z1__dodajProwadzacego(struct soap*, struct z1__dodajProwadzacego *, const char*, const char*);
+
+inline int soap_read_z1__dodajProwadzacego(struct soap *soap, struct z1__dodajProwadzacego *p)
+{	if (p)
+	{	soap_default_z1__dodajProwadzacego(soap, p);
+		if (soap_begin_recv(soap) || soap_get_z1__dodajProwadzacego(soap, p, NULL, NULL) == NULL || soap_end_recv(soap))
+			return soap->error;
+	}
+	return SOAP_OK;
+}
+#endif
+
+#ifndef SOAP_TYPE_z1__dodajProwadzacegoResponse_DEFINED
+#define SOAP_TYPE_z1__dodajProwadzacegoResponse_DEFINED
+SOAP_FMAC3 void SOAP_FMAC4 soap_default_z1__dodajProwadzacegoResponse(struct soap*, struct z1__dodajProwadzacegoResponse *);
+SOAP_FMAC3 void SOAP_FMAC4 soap_serialize_z1__dodajProwadzacegoResponse(struct soap*, const struct z1__dodajProwadzacegoResponse *);
+SOAP_FMAC3 int SOAP_FMAC4 soap_out_z1__dodajProwadzacegoResponse(struct soap*, const char*, int, const struct z1__dodajProwadzacegoResponse *, const char*);
+SOAP_FMAC3 struct z1__dodajProwadzacegoResponse * SOAP_FMAC4 soap_in_z1__dodajProwadzacegoResponse(struct soap*, const char*, struct z1__dodajProwadzacegoResponse *, const char*);
+SOAP_FMAC1 struct z1__dodajProwadzacegoResponse * SOAP_FMAC2 soap_instantiate_z1__dodajProwadzacegoResponse(struct soap*, int, const char*, const char*, size_t*);
+
+inline struct z1__dodajProwadzacegoResponse * soap_new_z1__dodajProwadzacegoResponse(struct soap *soap, int n = -1)
+{	return soap_instantiate_z1__dodajProwadzacegoResponse(soap, n, NULL, NULL, NULL);
+}
+
+inline struct z1__dodajProwadzacegoResponse * soap_new_req_z1__dodajProwadzacegoResponse(
+	struct soap *soap,
+	const std::string& rezultat)
+{	struct z1__dodajProwadzacegoResponse *_p = soap_new_z1__dodajProwadzacegoResponse(soap);
+	if (_p)
+	{	soap_default_z1__dodajProwadzacegoResponse(soap, _p);
+		_p->rezultat = rezultat;
+	}
+	return _p;
+}
+
+inline struct z1__dodajProwadzacegoResponse * soap_new_set_z1__dodajProwadzacegoResponse(
+	struct soap *soap,
+	const std::string& rezultat)
+{	struct z1__dodajProwadzacegoResponse *_p = soap_new_z1__dodajProwadzacegoResponse(soap);
+	if (_p)
+	{	soap_default_z1__dodajProwadzacegoResponse(soap, _p);
+		_p->rezultat = rezultat;
+	}
+	return _p;
+}
+SOAP_FMAC3 int SOAP_FMAC4 soap_put_z1__dodajProwadzacegoResponse(struct soap*, const struct z1__dodajProwadzacegoResponse *, const char*, const char*);
+
+inline int soap_write_z1__dodajProwadzacegoResponse(struct soap *soap, struct z1__dodajProwadzacegoResponse const *p)
+{	soap_free_temp(soap);
+	if (p)
+	{	if (soap_begin_send(soap) || (soap_serialize_z1__dodajProwadzacegoResponse(soap, p), 0) || soap_put_z1__dodajProwadzacegoResponse(soap, p, "z1:dodajProwadzacegoResponse", NULL) || soap_end_send(soap))
+			return soap->error;
+	}
+	return SOAP_OK;
+}
+SOAP_FMAC3 struct z1__dodajProwadzacegoResponse * SOAP_FMAC4 soap_get_z1__dodajProwadzacegoResponse(struct soap*, struct z1__dodajProwadzacegoResponse *, const char*, const char*);
+
+inline int soap_read_z1__dodajProwadzacegoResponse(struct soap *soap, struct z1__dodajProwadzacegoResponse *p)
+{	if (p)
+	{	soap_default_z1__dodajProwadzacegoResponse(soap, p);
+		if (soap_begin_recv(soap) || soap_get_z1__dodajProwadzacegoResponse(soap, p, NULL, NULL) == NULL || soap_end_recv(soap))
+			return soap->error;
+	}
+	return SOAP_OK;
+}
+#endif
+
+#ifndef SOAP_TYPE_z1__dodajPrzedmiot_DEFINED
+#define SOAP_TYPE_z1__dodajPrzedmiot_DEFINED
+SOAP_FMAC3 void SOAP_FMAC4 soap_default_z1__dodajPrzedmiot(struct soap*, struct z1__dodajPrzedmiot *);
+SOAP_FMAC3 void SOAP_FMAC4 soap_serialize_z1__dodajPrzedmiot(struct soap*, const struct z1__dodajPrzedmiot *);
+SOAP_FMAC3 int SOAP_FMAC4 soap_out_z1__dodajPrzedmiot(struct soap*, const char*, int, const struct z1__dodajPrzedmiot *, const char*);
+SOAP_FMAC3 struct z1__dodajPrzedmiot * SOAP_FMAC4 soap_in_z1__dodajPrzedmiot(struct soap*, const char*, struct z1__dodajPrzedmiot *, const char*);
+SOAP_FMAC1 struct z1__dodajPrzedmiot * SOAP_FMAC2 soap_instantiate_z1__dodajPrzedmiot(struct soap*, int, const char*, const char*, size_t*);
+
+inline struct z1__dodajPrzedmiot * soap_new_z1__dodajPrzedmiot(struct soap *soap, int n = -1)
+{	return soap_instantiate_z1__dodajPrzedmiot(soap, n, NULL, NULL, NULL);
+}
+
+inline struct z1__dodajPrzedmiot * soap_new_req_z1__dodajPrzedmiot(
+	struct soap *soap,
+	const std::string& importowanyPrzedmiot)
+{	struct z1__dodajPrzedmiot *_p = soap_new_z1__dodajPrzedmiot(soap);
+	if (_p)
+	{	soap_default_z1__dodajPrzedmiot(soap, _p);
+		_p->importowanyPrzedmiot = importowanyPrzedmiot;
+	}
+	return _p;
+}
+
+inline struct z1__dodajPrzedmiot * soap_new_set_z1__dodajPrzedmiot(
+	struct soap *soap,
+	const std::string& importowanyPrzedmiot,
+	z1__temat *projekt)
+{	struct z1__dodajPrzedmiot *_p = soap_new_z1__dodajPrzedmiot(soap);
+	if (_p)
+	{	soap_default_z1__dodajPrzedmiot(soap, _p);
+		_p->importowanyPrzedmiot = importowanyPrzedmiot;
+		_p->projekt = projekt;
+	}
+	return _p;
+}
+SOAP_FMAC3 int SOAP_FMAC4 soap_put_z1__dodajPrzedmiot(struct soap*, const struct z1__dodajPrzedmiot *, const char*, const char*);
+
+inline int soap_write_z1__dodajPrzedmiot(struct soap *soap, struct z1__dodajPrzedmiot const *p)
+{	soap_free_temp(soap);
+	if (p)
+	{	if (soap_begin_send(soap) || (soap_serialize_z1__dodajPrzedmiot(soap, p), 0) || soap_put_z1__dodajPrzedmiot(soap, p, "z1:dodajPrzedmiot", NULL) || soap_end_send(soap))
+			return soap->error;
+	}
+	return SOAP_OK;
+}
+SOAP_FMAC3 struct z1__dodajPrzedmiot * SOAP_FMAC4 soap_get_z1__dodajPrzedmiot(struct soap*, struct z1__dodajPrzedmiot *, const char*, const char*);
+
+inline int soap_read_z1__dodajPrzedmiot(struct soap *soap, struct z1__dodajPrzedmiot *p)
+{	if (p)
+	{	soap_default_z1__dodajPrzedmiot(soap, p);
+		if (soap_begin_recv(soap) || soap_get_z1__dodajPrzedmiot(soap, p, NULL, NULL) == NULL || soap_end_recv(soap))
+			return soap->error;
+	}
+	return SOAP_OK;
+}
+#endif
+
+#ifndef SOAP_TYPE_z1__dodajPrzedmiotResponse_DEFINED
+#define SOAP_TYPE_z1__dodajPrzedmiotResponse_DEFINED
+SOAP_FMAC3 void SOAP_FMAC4 soap_default_z1__dodajPrzedmiotResponse(struct soap*, struct z1__dodajPrzedmiotResponse *);
+SOAP_FMAC3 void SOAP_FMAC4 soap_serialize_z1__dodajPrzedmiotResponse(struct soap*, const struct z1__dodajPrzedmiotResponse *);
+SOAP_FMAC3 int SOAP_FMAC4 soap_out_z1__dodajPrzedmiotResponse(struct soap*, const char*, int, const struct z1__dodajPrzedmiotResponse *, const char*);
+SOAP_FMAC3 struct z1__dodajPrzedmiotResponse * SOAP_FMAC4 soap_in_z1__dodajPrzedmiotResponse(struct soap*, const char*, struct z1__dodajPrzedmiotResponse *, const char*);
+SOAP_FMAC1 struct z1__dodajPrzedmiotResponse * SOAP_FMAC2 soap_instantiate_z1__dodajPrzedmiotResponse(struct soap*, int, const char*, const char*, size_t*);
+
+inline struct z1__dodajPrzedmiotResponse * soap_new_z1__dodajPrzedmiotResponse(struct soap *soap, int n = -1)
+{	return soap_instantiate_z1__dodajPrzedmiotResponse(soap, n, NULL, NULL, NULL);
+}
+
+inline struct z1__dodajPrzedmiotResponse * soap_new_req_z1__dodajPrzedmiotResponse(
+	struct soap *soap,
+	const std::string& rezultat)
+{	struct z1__dodajPrzedmiotResponse *_p = soap_new_z1__dodajPrzedmiotResponse(soap);
+	if (_p)
+	{	soap_default_z1__dodajPrzedmiotResponse(soap, _p);
+		_p->rezultat = rezultat;
+	}
+	return _p;
+}
+
+inline struct z1__dodajPrzedmiotResponse * soap_new_set_z1__dodajPrzedmiotResponse(
+	struct soap *soap,
+	const std::string& rezultat)
+{	struct z1__dodajPrzedmiotResponse *_p = soap_new_z1__dodajPrzedmiotResponse(soap);
+	if (_p)
+	{	soap_default_z1__dodajPrzedmiotResponse(soap, _p);
+		_p->rezultat = rezultat;
+	}
+	return _p;
+}
+SOAP_FMAC3 int SOAP_FMAC4 soap_put_z1__dodajPrzedmiotResponse(struct soap*, const struct z1__dodajPrzedmiotResponse *, const char*, const char*);
+
+inline int soap_write_z1__dodajPrzedmiotResponse(struct soap *soap, struct z1__dodajPrzedmiotResponse const *p)
+{	soap_free_temp(soap);
+	if (p)
+	{	if (soap_begin_send(soap) || (soap_serialize_z1__dodajPrzedmiotResponse(soap, p), 0) || soap_put_z1__dodajPrzedmiotResponse(soap, p, "z1:dodajPrzedmiotResponse", NULL) || soap_end_send(soap))
+			return soap->error;
+	}
+	return SOAP_OK;
+}
+SOAP_FMAC3 struct z1__dodajPrzedmiotResponse * SOAP_FMAC4 soap_get_z1__dodajPrzedmiotResponse(struct soap*, struct z1__dodajPrzedmiotResponse *, const char*, const char*);
+
+inline int soap_read_z1__dodajPrzedmiotResponse(struct soap *soap, struct z1__dodajPrzedmiotResponse *p)
+{	if (p)
+	{	soap_default_z1__dodajPrzedmiotResponse(soap, p);
+		if (soap_begin_recv(soap) || soap_get_z1__dodajPrzedmiotResponse(soap, p, NULL, NULL) == NULL || soap_end_recv(soap))
+			return soap->error;
+	}
+	return SOAP_OK;
+}
 #endif
 
 #ifndef SOAP_TYPE_z1__eksportujPrzedmiot_DEFINED
@@ -2023,6 +3243,24 @@ SOAP_FMAC3 struct SOAP_ENV__Code ** SOAP_FMAC4 soap_get_PointerToSOAP_ENV__Code(
 
 #endif
 
+#ifndef SOAP_TYPE_PointerToz1__student_DEFINED
+#define SOAP_TYPE_PointerToz1__student_DEFINED
+SOAP_FMAC3 void SOAP_FMAC4 soap_serialize_PointerToz1__student(struct soap*, z1__student *const*);
+SOAP_FMAC3 int SOAP_FMAC4 soap_out_PointerToz1__student(struct soap*, const char *, int, z1__student *const*, const char *);
+SOAP_FMAC3 z1__student ** SOAP_FMAC4 soap_in_PointerToz1__student(struct soap*, const char*, z1__student **, const char*);
+SOAP_FMAC3 int SOAP_FMAC4 soap_put_PointerToz1__student(struct soap*, z1__student *const*, const char*, const char*);
+SOAP_FMAC3 z1__student ** SOAP_FMAC4 soap_get_PointerToz1__student(struct soap*, z1__student **, const char*, const char*);
+#endif
+
+#ifndef SOAP_TYPE_PointerToz1__prowadzacy_DEFINED
+#define SOAP_TYPE_PointerToz1__prowadzacy_DEFINED
+SOAP_FMAC3 void SOAP_FMAC4 soap_serialize_PointerToz1__prowadzacy(struct soap*, z1__prowadzacy *const*);
+SOAP_FMAC3 int SOAP_FMAC4 soap_out_PointerToz1__prowadzacy(struct soap*, const char *, int, z1__prowadzacy *const*, const char *);
+SOAP_FMAC3 z1__prowadzacy ** SOAP_FMAC4 soap_in_PointerToz1__prowadzacy(struct soap*, const char*, z1__prowadzacy **, const char*);
+SOAP_FMAC3 int SOAP_FMAC4 soap_put_PointerToz1__prowadzacy(struct soap*, z1__prowadzacy *const*, const char*, const char*);
+SOAP_FMAC3 z1__prowadzacy ** SOAP_FMAC4 soap_get_PointerToz1__prowadzacy(struct soap*, z1__prowadzacy **, const char*, const char*);
+#endif
+
 #ifndef SOAP_TYPE_PointerToz1__termin_DEFINED
 #define SOAP_TYPE_PointerToz1__termin_DEFINED
 SOAP_FMAC3 void SOAP_FMAC4 soap_serialize_PointerToz1__termin(struct soap*, z1__termin *const*);
@@ -2039,6 +3277,15 @@ SOAP_FMAC3 int SOAP_FMAC4 soap_out_PointerToz1__temat(struct soap*, const char *
 SOAP_FMAC3 z1__temat ** SOAP_FMAC4 soap_in_PointerToz1__temat(struct soap*, const char*, z1__temat **, const char*);
 SOAP_FMAC3 int SOAP_FMAC4 soap_put_PointerToz1__temat(struct soap*, z1__temat *const*, const char*, const char*);
 SOAP_FMAC3 z1__temat ** SOAP_FMAC4 soap_get_PointerToz1__temat(struct soap*, z1__temat **, const char*, const char*);
+#endif
+
+#ifndef SOAP_TYPE_PointerToz1__csv_DEFINED
+#define SOAP_TYPE_PointerToz1__csv_DEFINED
+SOAP_FMAC3 void SOAP_FMAC4 soap_serialize_PointerToz1__csv(struct soap*, std::string *const*);
+SOAP_FMAC3 int SOAP_FMAC4 soap_out_PointerToz1__csv(struct soap*, const char *, int, std::string *const*, const char *);
+SOAP_FMAC3 std::string ** SOAP_FMAC4 soap_in_PointerToz1__csv(struct soap*, const char*, std::string **, const char*);
+SOAP_FMAC3 int SOAP_FMAC4 soap_put_PointerToz1__csv(struct soap*, std::string *const*, const char*, const char*);
+SOAP_FMAC3 std::string ** SOAP_FMAC4 soap_get_PointerToz1__csv(struct soap*, std::string **, const char*, const char*);
 #endif
 
 #ifndef SOAP_TYPE__XML_DEFINED
