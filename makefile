@@ -15,22 +15,22 @@ zapisy: $(objects)
 	g++ -lm $^ -o $@ -L$(pathGsoapLibs) -L$(pathMysqlLibs) -L$(pathMysqlCientLib) -static -lgsoap++ -lmysqlclient -lmysqlcppconn-static -lpthread -ldl
 
 zapisyServer.o: zapisyServer.cpp soapzapisyService.h
-	g++ -Wall -c $< -o $@ $(headers)
+	g++ -Wall -std=c++11 -c $< -o $@ $(headers)
 
 zapisyService.o: zapisyService.cpp soapzapisyService.h soapH.h soapStub.h
-	g++ -Wall -c $< -o $@ $(headers)
+	g++ -Wall -std=c++11 -c $< -o $@ $(headers)
 
 soapzapisyService.o: soapzapisyService.cpp  soapzapisyService.h soapH.h soapStub.h
-	g++ -Wall -c $< -o $@ $(headers)
+	g++ -Wall -std=c++11 -c $< -o $@ $(headers)
 
 soapzapisyProxy.o: soapzapisyProxy.cpp soapzapisyProxy.h soapH.h soapStub.h
-	g++ -Wall -c $< -o $@ $(headers)
+	g++ -Wall -std=c++11 -c $< -o $@ $(headers)
 
 bazadanych.o: bazadanych.cpp bazadanych.h soapzapisyService.h soapH.h soapStub.h
-	g++ -Wall -c $< -o $@ $(headers)
+	g++ -Wall -std=c++11 -c $< -o $@ $(headers)
 
 soapC.o: soapC.cpp soapH.h soapStub.h
-	g++ -Wall -c $< -o $@ $(headers)
+	g++ -Wall -std=c++11 -c $< -o $@ $(headers)
 
 .PHONY: clean
 

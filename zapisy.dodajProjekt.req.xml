@@ -7,6 +7,7 @@
   xmlns:z1="localhost/zapisy.wsdl">
  <SOAP-ENV:Body  SOAP-ENV:encodingStyle="http://schemas.xmlsoap.org/soap/encoding/">
   <z1:dodajProjekt>
+   <przedmiotID></przedmiotID>
    <projekt>
     <temat></temat>
     <opis></opis>

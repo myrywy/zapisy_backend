@@ -268,7 +268,7 @@ static int serve_z1__zapiszProjekt(struct soap *soap, zapisyService *service)
 	 || soap_envelope_end_in(soap)
 	 || soap_end_recv(soap))
 		return soap->error;
-	soap->error = service->zapiszProjekt(soap_tmp_z1__zapiszProjekt.ID, soap_tmp_z1__zapiszProjekt.zapisywany, _param_1);
+	soap->error = service->zapiszProjekt(soap_tmp_z1__zapiszProjekt.projektID, soap_tmp_z1__zapiszProjekt.zapisywanyID, _param_1);
 	if (soap->error)
 		return soap->error;
 	soap->encodingStyle = "http://schemas.xmlsoap.org/soap/encoding/";
@@ -309,7 +309,7 @@ static int serve_z1__dodajProjekt(struct soap *soap, zapisyService *service)
 	 || soap_envelope_end_in(soap)
 	 || soap_end_recv(soap))
 		return soap->error;
-	soap->error = service->dodajProjekt(soap_tmp_z1__dodajProjekt.projekt, _param_2);
+	soap->error = service->dodajProjekt(soap_tmp_z1__dodajProjekt.przedmiotID, soap_tmp_z1__dodajProjekt.projekt, _param_2);
 	if (soap->error)
 		return soap->error;
 	soap->encodingStyle = "http://schemas.xmlsoap.org/soap/encoding/";
@@ -350,7 +350,7 @@ static int serve_z1__zapiszTermin(struct soap *soap, zapisyService *service)
 	 || soap_envelope_end_in(soap)
 	 || soap_end_recv(soap))
 		return soap->error;
-	soap->error = service->zapiszTermin(soap_tmp_z1__zapiszTermin.ID, soap_tmp_z1__zapiszTermin.zapisywany, _param_3);
+	soap->error = service->zapiszTermin(soap_tmp_z1__zapiszTermin.projektID, soap_tmp_z1__zapiszTermin.zapisywanyID, _param_3);
 	if (soap->error)
 		return soap->error;
 	soap->encodingStyle = "http://schemas.xmlsoap.org/soap/encoding/";
@@ -391,7 +391,7 @@ static int serve_z1__dodajTermin(struct soap *soap, zapisyService *service)
 	 || soap_envelope_end_in(soap)
 	 || soap_end_recv(soap))
 		return soap->error;
-	soap->error = service->dodajTermin(soap_tmp_z1__dodajTermin.termin, _param_4);
+	soap->error = service->dodajTermin(soap_tmp_z1__dodajTermin.przedmiotID, soap_tmp_z1__dodajTermin.salaID, soap_tmp_z1__dodajTermin.termin, _param_4);
 	if (soap->error)
 		return soap->error;
 	soap->encodingStyle = "http://schemas.xmlsoap.org/soap/encoding/";

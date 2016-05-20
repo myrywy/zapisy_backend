@@ -24,27 +24,49 @@ BazaDanych* BazaDanych::instancja()
     return bd;
 }
 
-bool BazaDanych::dodajProjekt(z1__temat t)
+bool BazaDanych::dodajProjekt(std::string przedmiotID, z1__temat t)
 {
-    std::cout << "dodawanie in progress" << std::endl;
+    std::cerr << "dodawanie projektu do bazy" << std::endl;
     std::auto_ptr<sql::Statement> stmt(con->createStatement());
-    std::cout << "a" << std::endl;
-    stmt->execute(string("call dodajProjekt(2,'")+t.temat+string("',')")+t.opis+string("',")+string(t.miejsca)+string(",")+t.wolneMiejsca+string(")"));
-    std::cout << "b" << std::endl;
-    return false;
+    try{
+    	stmt->execute(string("call dodajProjekt("+przedmiotID+",'")+t.temat+string("','")+t.opis+string("',")+string(t.miejsca)+string(",")+t.wolneMiejsca+string(")"));
+    }catch(sql::SQLException err){
+        std::cerr << "Przechwycono wyjatek SQL\n";
+        std::cerr << err.what() << endl;
+        return false;
+    }
+    std::cerr << "Dodano" << endl;
+    return true;
 }
 
-bool BazaDanych::dodajTermin(z1__termin)
+bool BazaDanych::dodajTermin(std::string przedmiotID, std::string salaID, z1__termin t)
+{
+    std::cerr << "dodawanie terminu do bazy" << std::endl;
+    std::auto_ptr<sql::Statement> stmt(con->createStatement());
+    try{
+    	stmt->execute(
+				string("call dodajTermin("+przedmiotID+",'")
+				+t.dzien+string("','")
+				+t.godzinaOd+string("',")
+				+t.godzinaDo+string(",")
+				+std::to_string(t.miejsca)+string(",")
+				+salaID+string(")")
+			);
+    }catch(sql::SQLException err){
+        std::cerr << "Przechwycono wyjatek SQL\n";
+        std::cerr << err.what() << endl;
+        return false;
+    }
+    std::cerr << "Dodano" << endl;
+    return true;
+}
+
+bool BazaDanych::zapiszNaProjekt(int studentId, int projektId)
 {
     return false;
 }
 
-bool BazaDanych::zapiszNaProjekt(z1__student student, int projektId)
-{
-    return false;
-}
-
-bool BazaDanych::zapiszNaTermin(z1__student student, int terminId)
+bool BazaDanych::zapiszNaTermin(int studentId, int terminId)
 {
     return false;
 }

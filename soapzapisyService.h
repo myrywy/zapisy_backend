@@ -93,13 +93,13 @@ A commercial use license is available from Genivia Inc., contact@genivia.com
         /// Note: compile with -DWITH_PURE_VIRTUAL for pure virtual methods
         ///
         /// Web service operation 'zapiszProjekt' (returns SOAP_OK or error code)
-        virtual int zapiszProjekt(std::string ID, z1__student *zapisywany, struct z1__zapiszProjektResponse &_param_1) SOAP_PURE_VIRTUAL;
+        virtual int zapiszProjekt(std::string projektID, std::string zapisywanyID, struct z1__zapiszProjektResponse &_param_1) SOAP_PURE_VIRTUAL;
         /// Web service operation 'dodajProjekt' (returns SOAP_OK or error code)
-        virtual int dodajProjekt(z1__temat *projekt, struct z1__dodajProjektResponse &_param_2) SOAP_PURE_VIRTUAL;
+        virtual int dodajProjekt(std::string przedmiotID, z1__temat *projekt, struct z1__dodajProjektResponse &_param_2) SOAP_PURE_VIRTUAL;
         /// Web service operation 'zapiszTermin' (returns SOAP_OK or error code)
-        virtual int zapiszTermin(std::string ID, z1__student *zapisywany, struct z1__zapiszTerminResponse &_param_3) SOAP_PURE_VIRTUAL;
+        virtual int zapiszTermin(std::string projektID, std::string zapisywanyID, struct z1__zapiszTerminResponse &_param_3) SOAP_PURE_VIRTUAL;
         /// Web service operation 'dodajTermin' (returns SOAP_OK or error code)
-        virtual int dodajTermin(z1__termin *termin, struct z1__dodajTerminResponse &_param_4) SOAP_PURE_VIRTUAL;
+        virtual int dodajTermin(std::string przedmiotID, std::string salaID, z1__termin *termin, struct z1__dodajTerminResponse &_param_4) SOAP_PURE_VIRTUAL;
         /// Web service operation 'eksportujProjekt' (returns SOAP_OK or error code)
         virtual int eksportujProjekt(std::string ID, struct z1__eksportujProjektResponse &_param_5) SOAP_PURE_VIRTUAL;
         /// Web service operation 'eksportujTermin' (returns SOAP_OK or error code)

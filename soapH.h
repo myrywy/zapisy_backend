@@ -1541,20 +1541,28 @@ inline struct z1__dodajTermin * soap_new_z1__dodajTermin(struct soap *soap, int 
 }
 
 inline struct z1__dodajTermin * soap_new_req_z1__dodajTermin(
-	struct soap *soap)
+	struct soap *soap,
+	const std::string& przedmiotID,
+	const std::string& salaID)
 {	struct z1__dodajTermin *_p = soap_new_z1__dodajTermin(soap);
 	if (_p)
 	{	soap_default_z1__dodajTermin(soap, _p);
+		_p->przedmiotID = przedmiotID;
+		_p->salaID = salaID;
 	}
 	return _p;
 }
 
 inline struct z1__dodajTermin * soap_new_set_z1__dodajTermin(
 	struct soap *soap,
+	const std::string& przedmiotID,
+	const std::string& salaID,
 	z1__termin *termin)
 {	struct z1__dodajTermin *_p = soap_new_z1__dodajTermin(soap);
 	if (_p)
 	{	soap_default_z1__dodajTermin(soap, _p);
+		_p->przedmiotID = przedmiotID;
+		_p->salaID = salaID;
 		_p->termin = termin;
 	}
 	return _p;
@@ -1650,24 +1658,26 @@ inline struct z1__zapiszTermin * soap_new_z1__zapiszTermin(struct soap *soap, in
 
 inline struct z1__zapiszTermin * soap_new_req_z1__zapiszTermin(
 	struct soap *soap,
-	const std::string& ID)
+	const std::string& projektID,
+	const std::string& zapisywanyID)
 {	struct z1__zapiszTermin *_p = soap_new_z1__zapiszTermin(soap);
 	if (_p)
 	{	soap_default_z1__zapiszTermin(soap, _p);
-		_p->ID = ID;
+		_p->projektID = projektID;
+		_p->zapisywanyID = zapisywanyID;
 	}
 	return _p;
 }
 
 inline struct z1__zapiszTermin * soap_new_set_z1__zapiszTermin(
 	struct soap *soap,
-	const std::string& ID,
-	z1__student *zapisywany)
+	const std::string& projektID,
+	const std::string& zapisywanyID)
 {	struct z1__zapiszTermin *_p = soap_new_z1__zapiszTermin(soap);
 	if (_p)
 	{	soap_default_z1__zapiszTermin(soap, _p);
-		_p->ID = ID;
-		_p->zapisywany = zapisywany;
+		_p->projektID = projektID;
+		_p->zapisywanyID = zapisywanyID;
 	}
 	return _p;
 }
@@ -1761,20 +1771,24 @@ inline struct z1__dodajProjekt * soap_new_z1__dodajProjekt(struct soap *soap, in
 }
 
 inline struct z1__dodajProjekt * soap_new_req_z1__dodajProjekt(
-	struct soap *soap)
+	struct soap *soap,
+	const std::string& przedmiotID)
 {	struct z1__dodajProjekt *_p = soap_new_z1__dodajProjekt(soap);
 	if (_p)
 	{	soap_default_z1__dodajProjekt(soap, _p);
+		_p->przedmiotID = przedmiotID;
 	}
 	return _p;
 }
 
 inline struct z1__dodajProjekt * soap_new_set_z1__dodajProjekt(
 	struct soap *soap,
+	const std::string& przedmiotID,
 	z1__temat *projekt)
 {	struct z1__dodajProjekt *_p = soap_new_z1__dodajProjekt(soap);
 	if (_p)
 	{	soap_default_z1__dodajProjekt(soap, _p);
+		_p->przedmiotID = przedmiotID;
 		_p->projekt = projekt;
 	}
 	return _p;
@@ -1870,24 +1884,26 @@ inline struct z1__zapiszProjekt * soap_new_z1__zapiszProjekt(struct soap *soap, 
 
 inline struct z1__zapiszProjekt * soap_new_req_z1__zapiszProjekt(
 	struct soap *soap,
-	const std::string& ID)
+	const std::string& projektID,
+	const std::string& zapisywanyID)
 {	struct z1__zapiszProjekt *_p = soap_new_z1__zapiszProjekt(soap);
 	if (_p)
 	{	soap_default_z1__zapiszProjekt(soap, _p);
-		_p->ID = ID;
+		_p->projektID = projektID;
+		_p->zapisywanyID = zapisywanyID;
 	}
 	return _p;
 }
 
 inline struct z1__zapiszProjekt * soap_new_set_z1__zapiszProjekt(
 	struct soap *soap,
-	const std::string& ID,
-	z1__student *zapisywany)
+	const std::string& projektID,
+	const std::string& zapisywanyID)
 {	struct z1__zapiszProjekt *_p = soap_new_z1__zapiszProjekt(soap);
 	if (_p)
 	{	soap_default_z1__zapiszProjekt(soap, _p);
-		_p->ID = ID;
-		_p->zapisywany = zapisywany;
+		_p->projektID = projektID;
+		_p->zapisywanyID = zapisywanyID;
 	}
 	return _p;
 }
@@ -2023,15 +2039,6 @@ SOAP_FMAC3 int SOAP_FMAC4 soap_out_PointerToz1__temat(struct soap*, const char *
 SOAP_FMAC3 z1__temat ** SOAP_FMAC4 soap_in_PointerToz1__temat(struct soap*, const char*, z1__temat **, const char*);
 SOAP_FMAC3 int SOAP_FMAC4 soap_put_PointerToz1__temat(struct soap*, z1__temat *const*, const char*, const char*);
 SOAP_FMAC3 z1__temat ** SOAP_FMAC4 soap_get_PointerToz1__temat(struct soap*, z1__temat **, const char*, const char*);
-#endif
-
-#ifndef SOAP_TYPE_PointerToz1__student_DEFINED
-#define SOAP_TYPE_PointerToz1__student_DEFINED
-SOAP_FMAC3 void SOAP_FMAC4 soap_serialize_PointerToz1__student(struct soap*, z1__student *const*);
-SOAP_FMAC3 int SOAP_FMAC4 soap_out_PointerToz1__student(struct soap*, const char *, int, z1__student *const*, const char *);
-SOAP_FMAC3 z1__student ** SOAP_FMAC4 soap_in_PointerToz1__student(struct soap*, const char*, z1__student **, const char*);
-SOAP_FMAC3 int SOAP_FMAC4 soap_put_PointerToz1__student(struct soap*, z1__student *const*, const char*, const char*);
-SOAP_FMAC3 z1__student ** SOAP_FMAC4 soap_get_PointerToz1__student(struct soap*, z1__student **, const char*, const char*);
 #endif
 
 #ifndef SOAP_TYPE__XML_DEFINED

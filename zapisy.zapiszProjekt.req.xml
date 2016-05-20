@@ -7,12 +7,8 @@
   xmlns:z1="localhost/zapisy.wsdl">
  <SOAP-ENV:Body  SOAP-ENV:encodingStyle="http://schemas.xmlsoap.org/soap/encoding/">
   <z1:zapiszProjekt>
-   <ID></ID>
-   <zapisywany>
-    <imie></imie>
-    <nazwisko></nazwisko>
-    <index></index>
-   </zapisywany>
+   <projektID></projektID>
+   <zapisywanyID></zapisywanyID>
   </z1:zapiszProjekt>
  </SOAP-ENV:Body>
 </SOAP-ENV:Envelope>

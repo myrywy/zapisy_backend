@@ -17,10 +17,10 @@ class BazaDanych
 public:
     BazaDanych();
     static BazaDanych* instancja();
-    bool dodajProjekt(z1__temat);
-    bool dodajTermin(z1__termin);
-    bool zapiszNaProjekt(z1__student student, int projektId);
-    bool zapiszNaTermin(z1__student student, int terminId);
+    bool dodajProjekt(std::string przedmiotID, z1__temat t);
+    bool dodajTermin(std::string przedmiotID, std::string salaID, z1__termin t);
+    bool zapiszNaProjekt(int studentId, int projektId);
+    bool zapiszNaTermin(int studentId, int terminId);
     //Pobiera z bazy informacje o zapisanych na projekt studentach i zwraca ich listę w formacie csv
     string pobierzProjekt(int id);
     //Pobiera z bazy informacje o zapisanych na termin studentach i zwraca ich listę w formacie csv
@@ -36,6 +36,7 @@ public:
 private:
     sql::Driver *driver;
     sql::Connection *con;
+	 sql::ResultSet  *res;
     static BazaDanych* bd;
 };
 

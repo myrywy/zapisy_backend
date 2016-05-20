@@ -151,7 +151,7 @@ char *zapisyProxy::soap_sprint_fault(char *buf, size_t len)
 }
 #endif
 
-int zapisyProxy::zapiszProjekt(const char *endpoint, const char *soap_action, std::string ID, z1__student *zapisywany, struct z1__zapiszProjektResponse &_param_1)
+int zapisyProxy::zapiszProjekt(const char *endpoint, const char *soap_action, std::string projektID, std::string zapisywanyID, struct z1__zapiszProjektResponse &_param_1)
 {	struct soap *soap = this->soap;
 	struct z1__zapiszProjekt soap_tmp_z1__zapiszProjekt;
 	if (endpoint)
@@ -160,8 +160,8 @@ int zapisyProxy::zapiszProjekt(const char *endpoint, const char *soap_action, st
 		soap_endpoint = "http://127.0.0.1/";
 	if (soap_action == NULL)
 		soap_action = "";
-	soap_tmp_z1__zapiszProjekt.ID = ID;
-	soap_tmp_z1__zapiszProjekt.zapisywany = zapisywany;
+	soap_tmp_z1__zapiszProjekt.projektID = projektID;
+	soap_tmp_z1__zapiszProjekt.zapisywanyID = zapisywanyID;
 	soap_begin(soap);
 	soap->encodingStyle = "http://schemas.xmlsoap.org/soap/encoding/";
 	soap_serializeheader(soap);
@@ -208,7 +208,7 @@ int zapisyProxy::zapiszProjekt(const char *endpoint, const char *soap_action, st
 	return soap_closesock(soap);
 }
 
-int zapisyProxy::dodajProjekt(const char *endpoint, const char *soap_action, z1__temat *projekt, struct z1__dodajProjektResponse &_param_2)
+int zapisyProxy::dodajProjekt(const char *endpoint, const char *soap_action, std::string przedmiotID, z1__temat *projekt, struct z1__dodajProjektResponse &_param_2)
 {	struct soap *soap = this->soap;
 	struct z1__dodajProjekt soap_tmp_z1__dodajProjekt;
 	if (endpoint)
@@ -217,6 +217,7 @@ int zapisyProxy::dodajProjekt(const char *endpoint, const char *soap_action, z1_
 		soap_endpoint = "http://127.0.0.1/";
 	if (soap_action == NULL)
 		soap_action = "";
+	soap_tmp_z1__dodajProjekt.przedmiotID = przedmiotID;
 	soap_tmp_z1__dodajProjekt.projekt = projekt;
 	soap_begin(soap);
 	soap->encodingStyle = "http://schemas.xmlsoap.org/soap/encoding/";
@@ -264,7 +265,7 @@ int zapisyProxy::dodajProjekt(const char *endpoint, const char *soap_action, z1_
 	return soap_closesock(soap);
 }
 
-int zapisyProxy::zapiszTermin(const char *endpoint, const char *soap_action, std::string ID, z1__student *zapisywany, struct z1__zapiszTerminResponse &_param_3)
+int zapisyProxy::zapiszTermin(const char *endpoint, const char *soap_action, std::string projektID, std::string zapisywanyID, struct z1__zapiszTerminResponse &_param_3)
 {	struct soap *soap = this->soap;
 	struct z1__zapiszTermin soap_tmp_z1__zapiszTermin;
 	if (endpoint)
@@ -273,8 +274,8 @@ int zapisyProxy::zapiszTermin(const char *endpoint, const char *soap_action, std
 		soap_endpoint = "http://127.0.0.1/";
 	if (soap_action == NULL)
 		soap_action = "";
-	soap_tmp_z1__zapiszTermin.ID = ID;
-	soap_tmp_z1__zapiszTermin.zapisywany = zapisywany;
+	soap_tmp_z1__zapiszTermin.projektID = projektID;
+	soap_tmp_z1__zapiszTermin.zapisywanyID = zapisywanyID;
 	soap_begin(soap);
 	soap->encodingStyle = "http://schemas.xmlsoap.org/soap/encoding/";
 	soap_serializeheader(soap);
@@ -321,7 +322,7 @@ int zapisyProxy::zapiszTermin(const char *endpoint, const char *soap_action, std
 	return soap_closesock(soap);
 }
 
-int zapisyProxy::dodajTermin(const char *endpoint, const char *soap_action, z1__termin *termin, struct z1__dodajTerminResponse &_param_4)
+int zapisyProxy::dodajTermin(const char *endpoint, const char *soap_action, std::string przedmiotID, std::string salaID, z1__termin *termin, struct z1__dodajTerminResponse &_param_4)
 {	struct soap *soap = this->soap;
 	struct z1__dodajTermin soap_tmp_z1__dodajTermin;
 	if (endpoint)
@@ -330,6 +331,8 @@ int zapisyProxy::dodajTermin(const char *endpoint, const char *soap_action, z1__
 		soap_endpoint = "http://127.0.0.1/";
 	if (soap_action == NULL)
 		soap_action = "";
+	soap_tmp_z1__dodajTermin.przedmiotID = przedmiotID;
+	soap_tmp_z1__dodajTermin.salaID = salaID;
 	soap_tmp_z1__dodajTermin.termin = termin;
 	soap_begin(soap);
 	soap->encodingStyle = "http://schemas.xmlsoap.org/soap/encoding/";

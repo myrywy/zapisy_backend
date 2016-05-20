@@ -93,8 +93,8 @@
 </wsdl:types>
 
 <wsdl:message name="zapisProjekt">
-	<wsdl:part name="ID" type="tns:id"/>
-	<wsdl:part name="zapisywany" type="tns:student"/>
+	<wsdl:part name="projektID" type="tns:id"/>
+	<wsdl:part name="zapisywanyID" type="tns:id"/>
 </wsdl:message>
 
 <wsdl:message name="idMessage">
@@ -102,15 +102,18 @@
 </wsdl:message>
 
 <wsdl:message name="zapisTermin">
-	<wsdl:part name="ID" type="id"/>
-	<wsdl:part name="zapisywany" type="tns:student"/>
+	<wsdl:part name="terminID" type="id"/>
+	<wsdl:part name="zapisywanyID" type="tns:id"/>
 </wsdl:message>
 
 <wsdl:message name="nowyTermin">
+	<wsdl:part name="przedmiotID" type="tns:id"/>
+	<wsdl:part name="salaID" type="tns:id"/>
 	<wsdl:part name="termin" type="tns:termin"/>
 </wsdl:message>
 
 <wsdl:message name="nowyProjekt">
+	<wsdl:part name="przedmiotID" type="tns:id"/>
 	<wsdl:part name="projekt" type="tns:temat"/>
 </wsdl:message>
 

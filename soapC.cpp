@@ -18,7 +18,7 @@ A commercial use license is available from Genivia Inc., contact@genivia.com
 
 #include "soapH.h"
 
-SOAP_SOURCE_STAMP("@(#) soapC.cpp ver 2.8.30 2016-04-09 15:47:37 GMT")
+SOAP_SOURCE_STAMP("@(#) soapC.cpp ver 2.8.30 2016-05-19 17:24:28 GMT")
 
 
 #ifndef WITH_NOGLOBAL
@@ -259,8 +259,6 @@ SOAP_FMAC3 void * SOAP_FMAC4 soap_getelement(struct soap *soap, int *type)
 		return soap_in_PointerToz1__termin(soap, NULL, NULL, "z1:termin");
 	case SOAP_TYPE_PointerToz1__temat:
 		return soap_in_PointerToz1__temat(soap, NULL, NULL, "z1:temat");
-	case SOAP_TYPE_PointerToz1__student:
-		return soap_in_PointerToz1__student(soap, NULL, NULL, "z1:student");
 	case SOAP_TYPE__QName:
 	{	char **s;
 		s = soap_in__QName(soap, NULL, NULL, "xsd:QName");
@@ -549,8 +547,6 @@ SOAP_FMAC3 int SOAP_FMAC4 soap_putelement(struct soap *soap, const void *ptr, co
 		return soap_out_PointerToz1__termin(soap, tag, id, (z1__termin *const*)ptr, "z1:termin");
 	case SOAP_TYPE_PointerToz1__temat:
 		return soap_out_PointerToz1__temat(soap, tag, id, (z1__temat *const*)ptr, "z1:temat");
-	case SOAP_TYPE_PointerToz1__student:
-		return soap_out_PointerToz1__student(soap, tag, id, (z1__student *const*)ptr, "z1:student");
 	case SOAP_TYPE__QName:
 		return soap_out_string(soap, tag, id, (char*const*)(void*)&ptr, "xsd:QName");
 	case SOAP_TYPE_string:
@@ -667,9 +663,6 @@ SOAP_FMAC3 void SOAP_FMAC4 soap_markelement(struct soap *soap, const void *ptr, 
 		break;
 	case SOAP_TYPE_PointerToz1__temat:
 		soap_serialize_PointerToz1__temat(soap, (z1__temat *const*)ptr);
-		break;
-	case SOAP_TYPE_PointerToz1__student:
-		soap_serialize_PointerToz1__student(soap, (z1__student *const*)ptr);
 		break;
 	case SOAP_TYPE__QName:
 		soap_serialize_string(soap, (char*const*)(void*)&ptr);
@@ -3876,6 +3869,8 @@ SOAP_FMAC3 struct z1__eksportujProjektResponse * SOAP_FMAC4 soap_get_z1__eksport
 SOAP_FMAC3 void SOAP_FMAC4 soap_default_z1__dodajTermin(struct soap *soap, struct z1__dodajTermin *a)
 {
 	(void)soap; (void)a; /* appease -Wall -Werror */
+	soap_default_z1__id(soap, &a->przedmiotID);
+	soap_default_z1__id(soap, &a->salaID);
 	a->termin = NULL;
 }
 
@@ -3883,6 +3878,8 @@ SOAP_FMAC3 void SOAP_FMAC4 soap_serialize_z1__dodajTermin(struct soap *soap, con
 {
 	(void)soap; (void)a; /* appease -Wall -Werror */
 #ifndef WITH_NOIDREF
+	soap_serialize_z1__id(soap, &a->przedmiotID);
+	soap_serialize_z1__id(soap, &a->salaID);
 	soap_serialize_PointerToz1__termin(soap, &a->termin);
 #endif
 }
@@ -3892,6 +3889,10 @@ SOAP_FMAC3 int SOAP_FMAC4 soap_out_z1__dodajTermin(struct soap *soap, const char
 	(void)soap; (void)tag; (void)id; (void)a; (void)type; /* appease -Wall -Werror */
 	if (soap_element_begin_out(soap, tag, soap_embedded_id(soap, id, a, SOAP_TYPE_z1__dodajTermin), type))
 		return soap->error;
+	if (soap_out_z1__id(soap, "przedmiotID", -1, &a->przedmiotID, ""))
+		return soap->error;
+	if (soap_out_z1__id(soap, "salaID", -1, &a->salaID, ""))
+		return soap->error;
 	if (soap_out_PointerToz1__termin(soap, "termin", -1, &a->termin, ""))
 		return soap->error;
 	return soap_element_end_out(soap, tag);
@@ -3899,10 +3900,12 @@ SOAP_FMAC3 int SOAP_FMAC4 soap_out_z1__dodajTermin(struct soap *soap, const char
 
 SOAP_FMAC3 struct z1__dodajTermin * SOAP_FMAC4 soap_in_z1__dodajTermin(struct soap *soap, const char *tag, struct z1__dodajTermin *a, const char *type)
 {
+	size_t soap_flag_przedmiotID = 1;
+	size_t soap_flag_salaID = 1;
 	size_t soap_flag_termin = 1;
 	if (soap_element_begin_in(soap, tag, 0, type))
 		return NULL;
-	a = (struct z1__dodajTermin *)soap_id_enter(soap, soap->id, a, SOAP_TYPE_z1__dodajTermin, sizeof(struct z1__dodajTermin), NULL, NULL, NULL, NULL);
+	a = (struct z1__dodajTermin *)soap_id_enter(soap, soap->id, a, SOAP_TYPE_z1__dodajTermin, sizeof(struct z1__dodajTermin), soap->type, soap->arrayType, soap_instantiate, soap_fbase);
 	if (!a)
 		return NULL;
 	soap_default_z1__dodajTermin(soap, a);
@@ -3910,6 +3913,16 @@ SOAP_FMAC3 struct z1__dodajTermin * SOAP_FMAC4 soap_in_z1__dodajTermin(struct so
 	{
 		for (;;)
 		{	soap->error = SOAP_TAG_MISMATCH;
+			if (soap_flag_przedmiotID && (soap->error == SOAP_TAG_MISMATCH || soap->error == SOAP_NO_TAG))
+				if (soap_in_z1__id(soap, "przedmiotID", &a->przedmiotID, "z1:id"))
+				{	soap_flag_przedmiotID--;
+					continue;
+				}
+			if (soap_flag_salaID && (soap->error == SOAP_TAG_MISMATCH || soap->error == SOAP_NO_TAG))
+				if (soap_in_z1__id(soap, "salaID", &a->salaID, "z1:id"))
+				{	soap_flag_salaID--;
+					continue;
+				}
 			if (soap_flag_termin && soap->error == SOAP_TAG_MISMATCH)
 				if (soap_in_PointerToz1__termin(soap, "termin", &a->termin, "z1:termin"))
 				{	soap_flag_termin--;
@@ -3924,6 +3937,14 @@ SOAP_FMAC3 struct z1__dodajTermin * SOAP_FMAC4 soap_in_z1__dodajTermin(struct so
 		}
 		if (soap_element_end_in(soap, tag))
 			return NULL;
+		if ((soap->mode & SOAP_XML_STRICT) && (soap_flag_przedmiotID > 0 || soap_flag_salaID > 0))
+		{	soap->error = SOAP_OCCURS;
+			return NULL;
+		}
+	}
+	else if ((soap->mode & SOAP_XML_STRICT) && !*soap->href)
+	{	soap->error = SOAP_OCCURS;
+		return NULL;
 	}
 	else
 	{	a = (struct z1__dodajTermin *)soap_id_forward(soap, soap->href, (void*)a, 0, SOAP_TYPE_z1__dodajTermin, SOAP_TYPE_z1__dodajTermin, sizeof(struct z1__dodajTermin), 0, soap_finsert, NULL);
@@ -4074,16 +4095,16 @@ SOAP_FMAC3 struct z1__dodajTerminResponse * SOAP_FMAC4 soap_get_z1__dodajTerminR
 SOAP_FMAC3 void SOAP_FMAC4 soap_default_z1__zapiszTermin(struct soap *soap, struct z1__zapiszTermin *a)
 {
 	(void)soap; (void)a; /* appease -Wall -Werror */
-	soap_default_z1__id(soap, &a->ID);
-	a->zapisywany = NULL;
+	soap_default_z1__id(soap, &a->projektID);
+	soap_default_z1__id(soap, &a->zapisywanyID);
 }
 
 SOAP_FMAC3 void SOAP_FMAC4 soap_serialize_z1__zapiszTermin(struct soap *soap, const struct z1__zapiszTermin *a)
 {
 	(void)soap; (void)a; /* appease -Wall -Werror */
 #ifndef WITH_NOIDREF
-	soap_serialize_z1__id(soap, &a->ID);
-	soap_serialize_PointerToz1__student(soap, &a->zapisywany);
+	soap_serialize_z1__id(soap, &a->projektID);
+	soap_serialize_z1__id(soap, &a->zapisywanyID);
 #endif
 }
 
@@ -4092,17 +4113,17 @@ SOAP_FMAC3 int SOAP_FMAC4 soap_out_z1__zapiszTermin(struct soap *soap, const cha
 	(void)soap; (void)tag; (void)id; (void)a; (void)type; /* appease -Wall -Werror */
 	if (soap_element_begin_out(soap, tag, soap_embedded_id(soap, id, a, SOAP_TYPE_z1__zapiszTermin), type))
 		return soap->error;
-	if (soap_out_z1__id(soap, "ID", -1, &a->ID, ""))
+	if (soap_out_z1__id(soap, "projektID", -1, &a->projektID, ""))
 		return soap->error;
-	if (soap_out_PointerToz1__student(soap, "zapisywany", -1, &a->zapisywany, ""))
+	if (soap_out_z1__id(soap, "zapisywanyID", -1, &a->zapisywanyID, ""))
 		return soap->error;
 	return soap_element_end_out(soap, tag);
 }
 
 SOAP_FMAC3 struct z1__zapiszTermin * SOAP_FMAC4 soap_in_z1__zapiszTermin(struct soap *soap, const char *tag, struct z1__zapiszTermin *a, const char *type)
 {
-	size_t soap_flag_ID = 1;
-	size_t soap_flag_zapisywany = 1;
+	size_t soap_flag_projektID = 1;
+	size_t soap_flag_zapisywanyID = 1;
 	if (soap_element_begin_in(soap, tag, 0, type))
 		return NULL;
 	a = (struct z1__zapiszTermin *)soap_id_enter(soap, soap->id, a, SOAP_TYPE_z1__zapiszTermin, sizeof(struct z1__zapiszTermin), soap->type, soap->arrayType, soap_instantiate, soap_fbase);
@@ -4113,14 +4134,14 @@ SOAP_FMAC3 struct z1__zapiszTermin * SOAP_FMAC4 soap_in_z1__zapiszTermin(struct 
 	{
 		for (;;)
 		{	soap->error = SOAP_TAG_MISMATCH;
-			if (soap_flag_ID && (soap->error == SOAP_TAG_MISMATCH || soap->error == SOAP_NO_TAG))
-				if (soap_in_z1__id(soap, "ID", &a->ID, "z1:id"))
-				{	soap_flag_ID--;
+			if (soap_flag_projektID && (soap->error == SOAP_TAG_MISMATCH || soap->error == SOAP_NO_TAG))
+				if (soap_in_z1__id(soap, "projektID", &a->projektID, "z1:id"))
+				{	soap_flag_projektID--;
 					continue;
 				}
-			if (soap_flag_zapisywany && soap->error == SOAP_TAG_MISMATCH)
-				if (soap_in_PointerToz1__student(soap, "zapisywany", &a->zapisywany, "z1:student"))
-				{	soap_flag_zapisywany--;
+			if (soap_flag_zapisywanyID && (soap->error == SOAP_TAG_MISMATCH || soap->error == SOAP_NO_TAG))
+				if (soap_in_z1__id(soap, "zapisywanyID", &a->zapisywanyID, "z1:id"))
+				{	soap_flag_zapisywanyID--;
 					continue;
 				}
 			if (soap->error == SOAP_TAG_MISMATCH)
@@ -4132,7 +4153,7 @@ SOAP_FMAC3 struct z1__zapiszTermin * SOAP_FMAC4 soap_in_z1__zapiszTermin(struct 
 		}
 		if (soap_element_end_in(soap, tag))
 			return NULL;
-		if ((soap->mode & SOAP_XML_STRICT) && (soap_flag_ID > 0))
+		if ((soap->mode & SOAP_XML_STRICT) && (soap_flag_projektID > 0 || soap_flag_zapisywanyID > 0))
 		{	soap->error = SOAP_OCCURS;
 			return NULL;
 		}
@@ -4290,6 +4311,7 @@ SOAP_FMAC3 struct z1__zapiszTerminResponse * SOAP_FMAC4 soap_get_z1__zapiszTermi
 SOAP_FMAC3 void SOAP_FMAC4 soap_default_z1__dodajProjekt(struct soap *soap, struct z1__dodajProjekt *a)
 {
 	(void)soap; (void)a; /* appease -Wall -Werror */
+	soap_default_z1__id(soap, &a->przedmiotID);
 	a->projekt = NULL;
 }
 
@@ -4297,6 +4319,7 @@ SOAP_FMAC3 void SOAP_FMAC4 soap_serialize_z1__dodajProjekt(struct soap *soap, co
 {
 	(void)soap; (void)a; /* appease -Wall -Werror */
 #ifndef WITH_NOIDREF
+	soap_serialize_z1__id(soap, &a->przedmiotID);
 	soap_serialize_PointerToz1__temat(soap, &a->projekt);
 #endif
 }
@@ -4306,6 +4329,8 @@ SOAP_FMAC3 int SOAP_FMAC4 soap_out_z1__dodajProjekt(struct soap *soap, const cha
 	(void)soap; (void)tag; (void)id; (void)a; (void)type; /* appease -Wall -Werror */
 	if (soap_element_begin_out(soap, tag, soap_embedded_id(soap, id, a, SOAP_TYPE_z1__dodajProjekt), type))
 		return soap->error;
+	if (soap_out_z1__id(soap, "przedmiotID", -1, &a->przedmiotID, ""))
+		return soap->error;
 	if (soap_out_PointerToz1__temat(soap, "projekt", -1, &a->projekt, ""))
 		return soap->error;
 	return soap_element_end_out(soap, tag);
@@ -4313,10 +4338,11 @@ SOAP_FMAC3 int SOAP_FMAC4 soap_out_z1__dodajProjekt(struct soap *soap, const cha
 
 SOAP_FMAC3 struct z1__dodajProjekt * SOAP_FMAC4 soap_in_z1__dodajProjekt(struct soap *soap, const char *tag, struct z1__dodajProjekt *a, const char *type)
 {
+	size_t soap_flag_przedmiotID = 1;
 	size_t soap_flag_projekt = 1;
 	if (soap_element_begin_in(soap, tag, 0, type))
 		return NULL;
-	a = (struct z1__dodajProjekt *)soap_id_enter(soap, soap->id, a, SOAP_TYPE_z1__dodajProjekt, sizeof(struct z1__dodajProjekt), NULL, NULL, NULL, NULL);
+	a = (struct z1__dodajProjekt *)soap_id_enter(soap, soap->id, a, SOAP_TYPE_z1__dodajProjekt, sizeof(struct z1__dodajProjekt), soap->type, soap->arrayType, soap_instantiate, soap_fbase);
 	if (!a)
 		return NULL;
 	soap_default_z1__dodajProjekt(soap, a);
@@ -4324,6 +4350,11 @@ SOAP_FMAC3 struct z1__dodajProjekt * SOAP_FMAC4 soap_in_z1__dodajProjekt(struct 
 	{
 		for (;;)
 		{	soap->error = SOAP_TAG_MISMATCH;
+			if (soap_flag_przedmiotID && (soap->error == SOAP_TAG_MISMATCH || soap->error == SOAP_NO_TAG))
+				if (soap_in_z1__id(soap, "przedmiotID", &a->przedmiotID, "z1:id"))
+				{	soap_flag_przedmiotID--;
+					continue;
+				}
 			if (soap_flag_projekt && soap->error == SOAP_TAG_MISMATCH)
 				if (soap_in_PointerToz1__temat(soap, "projekt", &a->projekt, "z1:temat"))
 				{	soap_flag_projekt--;
@@ -4338,6 +4369,14 @@ SOAP_FMAC3 struct z1__dodajProjekt * SOAP_FMAC4 soap_in_z1__dodajProjekt(struct 
 		}
 		if (soap_element_end_in(soap, tag))
 			return NULL;
+		if ((soap->mode & SOAP_XML_STRICT) && (soap_flag_przedmiotID > 0))
+		{	soap->error = SOAP_OCCURS;
+			return NULL;
+		}
+	}
+	else if ((soap->mode & SOAP_XML_STRICT) && !*soap->href)
+	{	soap->error = SOAP_OCCURS;
+		return NULL;
 	}
 	else
 	{	a = (struct z1__dodajProjekt *)soap_id_forward(soap, soap->href, (void*)a, 0, SOAP_TYPE_z1__dodajProjekt, SOAP_TYPE_z1__dodajProjekt, sizeof(struct z1__dodajProjekt), 0, soap_finsert, NULL);
@@ -4488,16 +4527,16 @@ SOAP_FMAC3 struct z1__dodajProjektResponse * SOAP_FMAC4 soap_get_z1__dodajProjek
 SOAP_FMAC3 void SOAP_FMAC4 soap_default_z1__zapiszProjekt(struct soap *soap, struct z1__zapiszProjekt *a)
 {
 	(void)soap; (void)a; /* appease -Wall -Werror */
-	soap_default_z1__id(soap, &a->ID);
-	a->zapisywany = NULL;
+	soap_default_z1__id(soap, &a->projektID);
+	soap_default_z1__id(soap, &a->zapisywanyID);
 }
 
 SOAP_FMAC3 void SOAP_FMAC4 soap_serialize_z1__zapiszProjekt(struct soap *soap, const struct z1__zapiszProjekt *a)
 {
 	(void)soap; (void)a; /* appease -Wall -Werror */
 #ifndef WITH_NOIDREF
-	soap_serialize_z1__id(soap, &a->ID);
-	soap_serialize_PointerToz1__student(soap, &a->zapisywany);
+	soap_serialize_z1__id(soap, &a->projektID);
+	soap_serialize_z1__id(soap, &a->zapisywanyID);
 #endif
 }
 
@@ -4506,17 +4545,17 @@ SOAP_FMAC3 int SOAP_FMAC4 soap_out_z1__zapiszProjekt(struct soap *soap, const ch
 	(void)soap; (void)tag; (void)id; (void)a; (void)type; /* appease -Wall -Werror */
 	if (soap_element_begin_out(soap, tag, soap_embedded_id(soap, id, a, SOAP_TYPE_z1__zapiszProjekt), type))
 		return soap->error;
-	if (soap_out_z1__id(soap, "ID", -1, &a->ID, ""))
+	if (soap_out_z1__id(soap, "projektID", -1, &a->projektID, ""))
 		return soap->error;
-	if (soap_out_PointerToz1__student(soap, "zapisywany", -1, &a->zapisywany, ""))
+	if (soap_out_z1__id(soap, "zapisywanyID", -1, &a->zapisywanyID, ""))
 		return soap->error;
 	return soap_element_end_out(soap, tag);
 }
 
 SOAP_FMAC3 struct z1__zapiszProjekt * SOAP_FMAC4 soap_in_z1__zapiszProjekt(struct soap *soap, const char *tag, struct z1__zapiszProjekt *a, const char *type)
 {
-	size_t soap_flag_ID = 1;
-	size_t soap_flag_zapisywany = 1;
+	size_t soap_flag_projektID = 1;
+	size_t soap_flag_zapisywanyID = 1;
 	if (soap_element_begin_in(soap, tag, 0, type))
 		return NULL;
 	a = (struct z1__zapiszProjekt *)soap_id_enter(soap, soap->id, a, SOAP_TYPE_z1__zapiszProjekt, sizeof(struct z1__zapiszProjekt), soap->type, soap->arrayType, soap_instantiate, soap_fbase);
@@ -4527,14 +4566,14 @@ SOAP_FMAC3 struct z1__zapiszProjekt * SOAP_FMAC4 soap_in_z1__zapiszProjekt(struc
 	{
 		for (;;)
 		{	soap->error = SOAP_TAG_MISMATCH;
-			if (soap_flag_ID && (soap->error == SOAP_TAG_MISMATCH || soap->error == SOAP_NO_TAG))
-				if (soap_in_z1__id(soap, "ID", &a->ID, "z1:id"))
-				{	soap_flag_ID--;
+			if (soap_flag_projektID && (soap->error == SOAP_TAG_MISMATCH || soap->error == SOAP_NO_TAG))
+				if (soap_in_z1__id(soap, "projektID", &a->projektID, "z1:id"))
+				{	soap_flag_projektID--;
 					continue;
 				}
-			if (soap_flag_zapisywany && soap->error == SOAP_TAG_MISMATCH)
-				if (soap_in_PointerToz1__student(soap, "zapisywany", &a->zapisywany, "z1:student"))
-				{	soap_flag_zapisywany--;
+			if (soap_flag_zapisywanyID && (soap->error == SOAP_TAG_MISMATCH || soap->error == SOAP_NO_TAG))
+				if (soap_in_z1__id(soap, "zapisywanyID", &a->zapisywanyID, "z1:id"))
+				{	soap_flag_zapisywanyID--;
 					continue;
 				}
 			if (soap->error == SOAP_TAG_MISMATCH)
@@ -4546,7 +4585,7 @@ SOAP_FMAC3 struct z1__zapiszProjekt * SOAP_FMAC4 soap_in_z1__zapiszProjekt(struc
 		}
 		if (soap_element_end_in(soap, tag))
 			return NULL;
-		if ((soap->mode & SOAP_XML_STRICT) && (soap_flag_ID > 0))
+		if ((soap->mode & SOAP_XML_STRICT) && (soap_flag_projektID > 0 || soap_flag_zapisywanyID > 0))
 		{	soap->error = SOAP_OCCURS;
 			return NULL;
 		}
@@ -4991,65 +5030,6 @@ SOAP_FMAC3 int SOAP_FMAC4 soap_put_PointerToz1__temat(struct soap *soap, z1__tem
 SOAP_FMAC3 z1__temat ** SOAP_FMAC4 soap_get_PointerToz1__temat(struct soap *soap, z1__temat **p, const char *tag, const char *type)
 {
 	if ((p = soap_in_PointerToz1__temat(soap, tag, p, type)))
-		if (soap_getindependent(soap))
-			return NULL;
-	return p;
-}
-
-SOAP_FMAC3 void SOAP_FMAC4 soap_serialize_PointerToz1__student(struct soap *soap, z1__student *const*a)
-{
-	(void)soap; (void)a; /* appease -Wall -Werror */
-#ifndef WITH_NOIDREF
-	if (!soap_reference(soap, *a, SOAP_TYPE_z1__student))
-		(*a)->soap_serialize(soap);
-#endif
-}
-
-SOAP_FMAC3 int SOAP_FMAC4 soap_out_PointerToz1__student(struct soap *soap, const char *tag, int id, z1__student *const*a, const char *type)
-{
-	id = soap_element_id(soap, tag, id, *a, NULL, 0, type, SOAP_TYPE_z1__student, NULL);
-	if (id < 0)
-		return soap->error;
-	return (*a)->soap_out(soap, tag, id, type);
-}
-
-SOAP_FMAC3 z1__student ** SOAP_FMAC4 soap_in_PointerToz1__student(struct soap *soap, const char *tag, z1__student **a, const char *type)
-{
-	(void)type; /* appease -Wall -Werror */
-	if (soap_element_begin_in(soap, tag, 1, NULL))
-		return NULL;
-	if (!a)
-		if (!(a = (z1__student **)soap_malloc(soap, sizeof(z1__student *))))
-			return NULL;
-	*a = NULL;
-	if (!soap->null && *soap->href != '#')
-	{	soap_revert(soap);
-		if (!(*a = (z1__student *)soap_instantiate_z1__student(soap, -1, soap->type, soap->arrayType, NULL)))
-			return NULL;
-		(*a)->soap_default(soap);
-		if (!(*a)->soap_in(soap, tag, NULL))
-		{	*a = NULL;
-			return NULL;
-		}
-	}
-	else
-	{	a = (z1__student **)soap_id_lookup(soap, soap->href, (void**)a, SOAP_TYPE_z1__student, sizeof(z1__student), 0, soap_fbase);
-		if (soap->body && soap_element_end_in(soap, tag))
-			return NULL;
-	}
-	return a;
-}
-
-SOAP_FMAC3 int SOAP_FMAC4 soap_put_PointerToz1__student(struct soap *soap, z1__student *const*a, const char *tag, const char *type)
-{
-	if (soap_out_PointerToz1__student(soap, tag?tag:"z1:student", -2, a, type))
-		return soap->error;
-	return soap_putindependent(soap);
-}
-
-SOAP_FMAC3 z1__student ** SOAP_FMAC4 soap_get_PointerToz1__student(struct soap *soap, z1__student **p, const char *tag, const char *type)
-{
-	if ((p = soap_in_PointerToz1__student(soap, tag, p, type)))
 		if (soap_getindependent(soap))
 			return NULL;
 	return p;

@@ -74,21 +74,21 @@ A commercial use license is available from Genivia Inc., contact@genivia.com
         virtual char *soap_sprint_fault(char *buf, size_t len);
     #endif
         /// Web service operation 'zapiszProjekt' (returns SOAP_OK or error code)
-        virtual int zapiszProjekt(std::string ID, z1__student *zapisywany, struct z1__zapiszProjektResponse &_param_1)
-        { return this->zapiszProjekt(NULL, NULL, ID, zapisywany, _param_1); }
-        virtual int zapiszProjekt(const char *soap_endpoint, const char *soap_action, std::string ID, z1__student *zapisywany, struct z1__zapiszProjektResponse &_param_1);
+        virtual int zapiszProjekt(std::string projektID, std::string zapisywanyID, struct z1__zapiszProjektResponse &_param_1)
+        { return this->zapiszProjekt(NULL, NULL, projektID, zapisywanyID, _param_1); }
+        virtual int zapiszProjekt(const char *soap_endpoint, const char *soap_action, std::string projektID, std::string zapisywanyID, struct z1__zapiszProjektResponse &_param_1);
         /// Web service operation 'dodajProjekt' (returns SOAP_OK or error code)
-        virtual int dodajProjekt(z1__temat *projekt, struct z1__dodajProjektResponse &_param_2)
-        { return this->dodajProjekt(NULL, NULL, projekt, _param_2); }
-        virtual int dodajProjekt(const char *soap_endpoint, const char *soap_action, z1__temat *projekt, struct z1__dodajProjektResponse &_param_2);
+        virtual int dodajProjekt(std::string przedmiotID, z1__temat *projekt, struct z1__dodajProjektResponse &_param_2)
+        { return this->dodajProjekt(NULL, NULL, przedmiotID, projekt, _param_2); }
+        virtual int dodajProjekt(const char *soap_endpoint, const char *soap_action, std::string przedmiotID, z1__temat *projekt, struct z1__dodajProjektResponse &_param_2);
         /// Web service operation 'zapiszTermin' (returns SOAP_OK or error code)
-        virtual int zapiszTermin(std::string ID, z1__student *zapisywany, struct z1__zapiszTerminResponse &_param_3)
-        { return this->zapiszTermin(NULL, NULL, ID, zapisywany, _param_3); }
-        virtual int zapiszTermin(const char *soap_endpoint, const char *soap_action, std::string ID, z1__student *zapisywany, struct z1__zapiszTerminResponse &_param_3);
+        virtual int zapiszTermin(std::string projektID, std::string zapisywanyID, struct z1__zapiszTerminResponse &_param_3)
+        { return this->zapiszTermin(NULL, NULL, projektID, zapisywanyID, _param_3); }
+        virtual int zapiszTermin(const char *soap_endpoint, const char *soap_action, std::string projektID, std::string zapisywanyID, struct z1__zapiszTerminResponse &_param_3);
         /// Web service operation 'dodajTermin' (returns SOAP_OK or error code)
-        virtual int dodajTermin(z1__termin *termin, struct z1__dodajTerminResponse &_param_4)
-        { return this->dodajTermin(NULL, NULL, termin, _param_4); }
-        virtual int dodajTermin(const char *soap_endpoint, const char *soap_action, z1__termin *termin, struct z1__dodajTerminResponse &_param_4);
+        virtual int dodajTermin(std::string przedmiotID, std::string salaID, z1__termin *termin, struct z1__dodajTerminResponse &_param_4)
+        { return this->dodajTermin(NULL, NULL, przedmiotID, salaID, termin, _param_4); }
+        virtual int dodajTermin(const char *soap_endpoint, const char *soap_action, std::string przedmiotID, std::string salaID, z1__termin *termin, struct z1__dodajTerminResponse &_param_4);
         /// Web service operation 'eksportujProjekt' (returns SOAP_OK or error code)
         virtual int eksportujProjekt(std::string ID, struct z1__eksportujProjektResponse &_param_5)
         { return this->eksportujProjekt(NULL, NULL, ID, _param_5); }
