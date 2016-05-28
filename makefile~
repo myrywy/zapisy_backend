@@ -1,4 +1,4 @@
-sources=zapisyServer.cpp soapC.cpp zapisyService.cpp soapzapisyService.cpp soapzapisyProxy.cpp bazadanych.cpp
+sources=zapisyServer.cpp soapC.cpp zapisyService.cpp soapzapisyService.cpp soapzapisyProxy.cpp bazadanych.cpp tabela.cpp
 objects=$(sources:.cpp=.o)
 pathGsoapHeaders=libs/gsoap/import
 pathGsoapLibs=libs/gsoap
@@ -21,16 +21,19 @@ zapisyService.o: zapisyService.cpp soapzapisyService.h soapH.h soapStub.h
 	g++ -Wall -std=c++11 -c $< -o $@ $(headers)
 
 soapzapisyService.o: soapzapisyService.cpp  soapzapisyService.h soapH.h soapStub.h
-	g++ -Wall -c $< -o $@ $(headers)
+	g++ -Wall -std=c++11 -c $< -o $@ $(headers)
 
 soapzapisyProxy.o: soapzapisyProxy.cpp soapzapisyProxy.h soapH.h soapStub.h
-	g++ -Wall -c $< -o $@ $(headers)
+	g++ -Wall -std=c++11 -c $< -o $@ $(headers)
 
-bazadanych.o: bazadanych.cpp bazadanych.h soapzapisyService.h soapH.h soapStub.h
+bazadanych.o: bazadanych.cpp bazadanych.h soapzapisyService.h soapH.h soapStub.h tabela.h zapytanie.h
+	g++ -Wall -std=c++11 -c $< -o $@ $(headers)
+
+tabela.o: tabela.cpp tabela.h zapytanie.h
 	g++ -Wall -std=c++11 -c $< -o $@ $(headers)
 
 soapC.o: soapC.cpp soapH.h soapStub.h
-	g++ -Wall -c $< -o $@ $(headers)
+	g++ -Wall -std=c++11 -c $< -o $@ $(headers)
 
 .PHONY: clean
 

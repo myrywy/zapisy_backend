@@ -1,4 +1,4 @@
-sources=zapisyServer.cpp soapC.cpp zapisyService.cpp soapzapisyService.cpp soapzapisyProxy.cpp bazadanych.cpp
+sources=zapisyServer.cpp soapC.cpp zapisyService.cpp soapzapisyService.cpp soapzapisyProxy.cpp bazadanych.cpp tabela.cpp zapytanie.cpp
 objects=$(sources:.cpp=.o)
 pathGsoapHeaders=libs/gsoap/import
 pathGsoapLibs=libs/gsoap
@@ -26,7 +26,13 @@ soapzapisyService.o: soapzapisyService.cpp  soapzapisyService.h soapH.h soapStub
 soapzapisyProxy.o: soapzapisyProxy.cpp soapzapisyProxy.h soapH.h soapStub.h
 	g++ -Wall -std=c++11 -c $< -o $@ $(headers)
 
-bazadanych.o: bazadanych.cpp bazadanych.h soapzapisyService.h soapH.h soapStub.h
+zapytanie.o: zapytanie.cpp bazadanych.h tabela.h zapytanie.h
+	g++ -Wall -std=c++11 -c $< -o $@ $(headers)
+
+bazadanych.o: bazadanych.cpp bazadanych.h soapzapisyService.h soapH.h soapStub.h tabela.h zapytanie.h
+	g++ -Wall -std=c++11 -c $< -o $@ $(headers)
+
+tabela.o: tabela.cpp tabela.h zapytanie.h
 	g++ -Wall -std=c++11 -c $< -o $@ $(headers)
 
 soapC.o: soapC.cpp soapH.h soapStub.h
