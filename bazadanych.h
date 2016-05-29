@@ -59,6 +59,8 @@ public:
     template<typename T, typename... Args> std::string argumentyProcedury(T firstArg, Args... rest){
         return "\""+string(firstArg)+"\","+argumentyProcedury(rest...);
     }
+    //usuwa z "tabela" wiersz, w ktorym "kolumna" ma "wartowsc"
+    StatementPtr usun(string tabela, string kolumna, string wartosc);
     StatementPtr wykonaj(string polecenieSql);
 private:
     sql::Driver *driver;

@@ -76,11 +76,30 @@ int zapisyService::zapiszTermin(std::string projektID, std::string zapisywanyID,
 
  int zapisyService::zmienDaneProwadzacego(z1__prowadzacy *daneProwadzacego, struct z1__zmienDaneProwadzacegoResponse &_param_10) {return 0;}
 
- int zapisyService::usunProwadzacego(std::string ID, struct z1__usunProwadzacegoResponse &_param_11) {return 0;}
+ int zapisyService::usunProwadzacego(std::string ID, struct z1__usunProwadzacegoResponse &_param_11) {
+     try{
+         BazaDanych::instancja()->usun("prowadzacy","id",ID);
+     }catch(...){
+         _param_11.rezultat="error";
+     }
+     _param_11.rezultat="ok";
+    return SOAP_OK;
+ }
 
  int zapisyService::dodajStudenta(std::string przedmiotID, z1__student *student, struct z1__dodajStudentaResponse &_param_12) {return 0;}
 
- int zapisyService::usunStudentaZPrzedmiotu(std::string przedmiotID, z1__student *student, struct z1__usunStudentaZPrzedmiotuResponse &_param_13) {return 0;}
+ int zapisyService::usunStudentaZPrzedmiotu(std::string przedmiotID, z1__student *student, struct z1__usunStudentaZPrzedmiotuResponse &_param_13) {
+     BazaDanych* baza=BazaDanych::instancja();
+     try{
+         string id=Tabela("student").select("id").whereEqual("`index`",student->index);
+         baza->usun("student_przedmiot","student_id",id);
+     }catch(...){
+         _param_13.rezultat="error";
+         return SOAP_OK;
+     }
+     _param_13.rezultat="ok";
+    return SOAP_OK;
+ }
 
  int zapisyService::usunWszystkichZPrzedmiotu(std::string ID, struct z1__usunWszystkichZPrzedmiotuResponse &_param_14) {return 0;}
 

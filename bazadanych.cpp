@@ -165,9 +165,17 @@ int BazaDanych::wolneMiejscaTermin(int terminId)
     return 0;
 }
 
+StatementPtr BazaDanych::usun(string tabela, string kolumna, string wartosc)
+{
+    return wykonaj(
+                "DELETE FROM `zapisy`.`"+tabela+"` WHERE `"+kolumna+"`='"+wartosc+"';"
+                );
+}
+
 StatementPtr BazaDanych::wykonaj(string polecenieSql)
 {
     StatementPtr stmt=StatementPtr(con->createStatement());
+    cerr << " Wykonywanie polecenia \n" << polecenieSql << endl;
     stmt->execute(polecenieSql);
     return stmt;
 }
