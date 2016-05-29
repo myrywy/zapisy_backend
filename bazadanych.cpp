@@ -82,12 +82,38 @@ bool BazaDanych::dodajTermin(std::string przedmiotID, std::string salaID, z1__te
 
 bool BazaDanych::zapiszNaProjekt(Id studentId, Id projektId)
 {
-    return false;
+    try{
+        procedura("zapiszProjekt",studentId, projektId);
+    }catch(sql::SQLException err){
+        std::cerr << "Przechwycono wyjatek SQL\n";
+        std::cerr << err.what() << endl;
+        return false;
+    }
+    return true;
 }
 
 bool BazaDanych::zapiszNaTermin(Id studentId, Id terminId)
 {
-    return false;
+    try{
+        procedura("zapiszTermin",studentId, terminId);
+    }catch(sql::SQLException err){
+        std::cerr << "Przechwycono wyjatek SQL\n";
+        std::cerr << err.what() << endl;
+        return false;
+    }
+    return true;
+}
+
+bool BazaDanych::dodajProwadzacego(z1__prowadzacy *p)
+{
+    try{
+        procedura("dodajProwadzacego",p->email, p->haslo,p->imie,p->nazwisko);
+    }catch(sql::SQLException err){
+        std::cerr << "Przechwycono wyjatek SQL\n";
+        std::cerr << err.what() << endl;
+        return false;
+    }
+    return true;
 }
 
 string BazaDanych::pobierzProjekt(int id)
@@ -104,17 +130,6 @@ string BazaDanych::pobierzPrzedmiot(int id)
 {
     return "";
 }
-/*
-z1__temat BazaDanych::infoProjekt(int projektId)
-{
-
-}
-
-z1__termin BazaDanych::infoTermin(int terminId)
-{
-
-}
-*/
 int BazaDanych::szukajProjekt(z1__temat projekt)
 {
     return 0;
@@ -127,10 +142,10 @@ int BazaDanych::szukajTermin(z1__termin termin)
 
 bool BazaDanych::szukajProjektStudenta(std::string idStudenta, std::string idPrzedmiotu, std::string *idProjektu)
 {
-    std::cerr << "Sprawdzanie czy student nie ma tematu. " << std::endl;
+    std::cerr << "Sprawdzanie czy student " << idStudenta << " nie ma tematu na przedmiocie " << idPrzedmiotu << ". " << std::endl;
     string tmpIdProjektu=Tabela("student_temat").join("temat","id_temat","id").select("id_temat").whereEqual("id_student",idStudenta).whereEqual("przedmiot_id",idPrzedmiotu);
     std::cerr << "tmpIdProjektu: " << tmpIdProjektu << endl;
-    if(tmpIdProjektu.size()==0){
+    if(tmpIdProjektu.size()==0 || tmpIdProjektu==" "){
         return false;
     }else{
         if(idProjektu){
@@ -138,37 +153,6 @@ bool BazaDanych::szukajProjektStudenta(std::string idStudenta, std::string idPrz
         }
         return true;
     }
-    /*StatementPtr stmt;
-    try{
-        //stmt=procedura("szukajProjektuStudenta",idStudenta,idPrzedmiotu);
-
-        stmt=StatementPtr(con->createStatement());
-        stmt->execute("SELECT id_temat "
-                       "FROM zapisy.student_temat "
-                       "INNER JOIN zapisy.temat "
-                       "ON zapisy.student_temat.id_temat=zapisy.temat.id "
-                       "WHERE id_student = 1 and przedmiot_id = 3;");
-    }catch(sql::SQLException err){
-        std::cerr << "Przechwycono wyjatek SQL\n";
-        std::cerr << err.what() << endl;
-        return false;
-    }
-    std::cerr << "a\n"<< endl;
-    ResultsPtr res(stmt->getResultSet());
-    std::cerr << "b\n"<< endl;
-    while (res->next()) {
-        std::cerr << "c\n";
-        cout << "res id = " << res->getInt(1) + 1 << endl; // getInt(1) returns the first column
-        cout << "res id = " << res->getDouble(1) + 0.1 << endl; // getInt(1) returns the first column
-        cout << "res id = " << res->getString(1) + "1" << endl; // getInt(1) returns the first column
-      // ... or column names for accessing results.
-      // The latter is recommended.
-      //cout << ", label = '" << res->getString("label") << "'" << endl;
-    }
-    //std::cerr << "Res: " << res->rowsCount() << std::endl;
-    //stmt->
-    //std::cerr << "Id projektu: " << tmpIdProjektu << endl;
-    return true;*/
 }
 
 int BazaDanych::wolneMiejscaProjekt(int projektId)

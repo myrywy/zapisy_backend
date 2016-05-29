@@ -79,6 +79,13 @@ Zapytanie::operator string()
     if(!aktualne){
         wykonaj();
     }
+    cout << "wyniki" << endl;
+    for(vector<string> v : wyniki){
+        for(string s : v){
+            cout << s << endl;
+        }
+    }
+    cout << "~wyniki" << endl;
     string tmp;
     if(wyniki.empty()){
         return "";

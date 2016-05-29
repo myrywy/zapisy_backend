@@ -29,6 +29,7 @@ public:
     bool dodajTermin(std::string przedmiotID, std::string salaID, z1__termin t);
     bool zapiszNaProjekt(Id studentId, Id projektId);
     bool zapiszNaTermin(Id studentId, Id terminId);
+    bool dodajProwadzacego(z1__prowadzacy *p);
     //Pobiera z bazy informacje o zapisanych na projekt studentach i zwraca ich listę w formacie csv
     string pobierzProjekt(int id);
     //Pobiera z bazy informacje o zapisanych na termin studentach i zwraca ich listę w formacie csv
@@ -53,10 +54,10 @@ public:
         return "call "+nazwaProcedury+"("+argumentyProcedury(argumenty...)+")";
     }
     template<typename T> std::string argumentyProcedury(T latter){
-        return std::string(latter);
+        return "\""+std::string(latter)+"\"";
     }
     template<typename T, typename... Args> std::string argumentyProcedury(T firstArg, Args... rest){
-        return string(firstArg)+","+argumentyProcedury(rest...);
+        return "\""+string(firstArg)+"\","+argumentyProcedury(rest...);
     }
     StatementPtr wykonaj(string polecenieSql);
 private:
