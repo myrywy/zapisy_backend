@@ -30,6 +30,7 @@ public:
     bool zapiszNaProjekt(Id studentId, Id projektId);
     bool zapiszNaTermin(Id studentId, Id terminId);
     bool dodajProwadzacego(z1__prowadzacy *p);
+    bool dodajStudenta(string przedmiotId, z1__student *s);
     //Pobiera z bazy informacje o zapisanych na projekt studentach i zwraca ich listę w formacie csv
     string pobierzProjekt(int id);
     //Pobiera z bazy informacje o zapisanych na termin studentach i zwraca ich listę w formacie csv

@@ -13,7 +13,8 @@ BazaDanych::BazaDanych()
 
     try{
     driver = get_driver_instance();
-    con = driver->connect("tcp://127.0.0.1:3306", "root", "admin");
+    //con = driver->connect("tcp://127.0.0.1:3306", "root", "admin");
+    con = driver->connect("tcp://192.168.0.13:3306", "root", "admin");
     }catch(...){
         std::cout << "Blad\n" << con << std::endl;
     }
@@ -32,7 +33,7 @@ BazaDanych::BazaDanych()
     z.whereEqual("cla","dla");
     std::cout << "e2" <<endl;
     std::cout << z.stworzSql() << endl;
-    cerr<<Tabela("t1").join("t2","id_z_t2_w_t1","id").select("k1").whereEqual("k3","g4").stworzSql()<<endl;
+    //cerr<<Tabela("t1").join("t2","id_z_t2_w_t1","id").select("k1").whereEqual("k3","g4")<<endl;
 }
 
 BazaDanych* BazaDanych::instancja()
@@ -112,6 +113,27 @@ bool BazaDanych::dodajProwadzacego(z1__prowadzacy *p)
         std::cerr << "Przechwycono wyjatek SQL\n";
         std::cerr << err.what() << endl;
         return false;
+    }catch(...){
+        cerr << "Nierozpoznany wyjatek. " << endl;
+    }
+
+    return true;
+}
+
+bool BazaDanych::dodajStudenta(string przedmiotId, z1__student *s)
+{
+    try{
+        procedura("dodajStudenta",s->imie,s->nazwisko,s->index);
+    }catch(sql::SQLException err){
+        std::cerr << "Przechwycono wyjatek SQL\n";
+        std::cerr << err.what() << endl;
+    }
+    try{
+        string studentId=Tabela("student").select("id").whereEqual("`index`",s->index);
+        procedura("dodajStudentaDoPrzedmiotu",studentId,przedmiotId);
+    }catch(sql::SQLException err){
+        std::cerr << "Przechwycono wyjatek SQL\n";
+        std::cerr << err.what() << endl;
     }
     return true;
 }

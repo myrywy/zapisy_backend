@@ -86,7 +86,15 @@ int zapisyService::zapiszTermin(std::string projektID, std::string zapisywanyID,
     return SOAP_OK;
  }
 
- int zapisyService::dodajStudenta(std::string przedmiotID, z1__student *student, struct z1__dodajStudentaResponse &_param_12) {return 0;}
+ int zapisyService::dodajStudenta(std::string przedmiotID, z1__student *student, struct z1__dodajStudentaResponse &_param_12) {
+     BazaDanych* baza=BazaDanych::instancja();
+     if( baza->dodajStudenta(przedmiotID, student) ){
+         _param_12.rezultat="ok";
+     }else{
+         _param_12.rezultat="error";
+     }
+     return SOAP_OK;
+ }
 
  int zapisyService::usunStudentaZPrzedmiotu(std::string przedmiotID, z1__student *student, struct z1__usunStudentaZPrzedmiotuResponse &_param_13) {
      BazaDanych* baza=BazaDanych::instancja();
@@ -101,9 +109,28 @@ int zapisyService::zapiszTermin(std::string projektID, std::string zapisywanyID,
     return SOAP_OK;
  }
 
- int zapisyService::usunWszystkichZPrzedmiotu(std::string ID, struct z1__usunWszystkichZPrzedmiotuResponse &_param_14) {return 0;}
+ int zapisyService::usunWszystkichZPrzedmiotu(std::string ID, struct z1__usunWszystkichZPrzedmiotuResponse &_param_14) {
+     BazaDanych* baza=BazaDanych::instancja();
+     try{
+         baza->usun("student_przedmiot","przedmiot_id",ID);
+     }catch(...){
+         _param_14.rezultat="error";
+         return SOAP_OK;
+     }
+     _param_14.rezultat="ok";
+    return SOAP_OK;
+ }
 
- int zapisyService::usunPrzedmiot(std::string ID, struct z1__usunPrzedmiotResponse &_param_15) {return 0;}
+ int zapisyService::usunPrzedmiot(std::string ID, struct z1__usunPrzedmiotResponse &_param_15) {
+     BazaDanych* baza=BazaDanych::instancja();
+     try{
+         baza->usun("przedmiot","id",ID);
+     }catch(...){
+         _param_15.rezultat="error";
+         return SOAP_OK;
+     }
+     _param_15.rezultat="ok";
+    return SOAP_OK;}
 
  int zapisyService::edytujProjekt(std::string przedmiotID, std::string projektID, z1__temat *projekt, struct z1__edytujProjektResponse &_param_16) {return 0;}
 

@@ -90,3 +90,21 @@ END$$
 
 DELIMITER ;
 
+
+USE `zapisy`;
+DROP procedure IF EXISTS `dodajProwadzacego`;
+
+DELIMITER $$
+USE `zapisy`$$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `dodajProwadzacego`(
+	IN Email varchar(45),
+	IN Haslo varchar(45),
+	IN Imie varchar(45),
+	IN Nazwisko varchar(45)
+	)
+BEGIN
+INSERT INTO `zapisy`.`prowadzacy` (`email`, `haslo`,`imie`,`nazwisko`) VALUES (Email, Haslo, Imie, Nazwisko);
+END$$
+
+DELIMITER ;
+
