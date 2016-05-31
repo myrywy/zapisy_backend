@@ -18,7 +18,7 @@ A commercial use license is available from Genivia Inc., contact@genivia.com
 
 #include "soapH.h"
 
-SOAP_SOURCE_STAMP("@(#) soapC.cpp ver 2.8.30 2016-05-30 21:18:19 GMT")
+SOAP_SOURCE_STAMP("@(#) soapC.cpp ver 2.8.30 2016-05-31 18:32:20 GMT")
 
 
 #ifndef WITH_NOGLOBAL
@@ -5512,6 +5512,7 @@ SOAP_FMAC3 struct z1__usunProwadzacegoResponse * SOAP_FMAC4 soap_get_z1__usunPro
 SOAP_FMAC3 void SOAP_FMAC4 soap_default_z1__zmienDaneProwadzacego(struct soap *soap, struct z1__zmienDaneProwadzacego *a)
 {
 	(void)soap; (void)a; /* appease -Wall -Werror */
+	soap_default_z1__id(soap, &a->idProwadzacego);
 	a->daneProwadzacego = NULL;
 }
 
@@ -5519,6 +5520,7 @@ SOAP_FMAC3 void SOAP_FMAC4 soap_serialize_z1__zmienDaneProwadzacego(struct soap 
 {
 	(void)soap; (void)a; /* appease -Wall -Werror */
 #ifndef WITH_NOIDREF
+	soap_serialize_z1__id(soap, &a->idProwadzacego);
 	soap_serialize_PointerToz1__prowadzacy(soap, &a->daneProwadzacego);
 #endif
 }
@@ -5528,6 +5530,8 @@ SOAP_FMAC3 int SOAP_FMAC4 soap_out_z1__zmienDaneProwadzacego(struct soap *soap, 
 	(void)soap; (void)tag; (void)id; (void)a; (void)type; /* appease -Wall -Werror */
 	if (soap_element_begin_out(soap, tag, soap_embedded_id(soap, id, a, SOAP_TYPE_z1__zmienDaneProwadzacego), type))
 		return soap->error;
+	if (soap_out_z1__id(soap, "idProwadzacego", -1, &a->idProwadzacego, ""))
+		return soap->error;
 	if (soap_out_PointerToz1__prowadzacy(soap, "daneProwadzacego", -1, &a->daneProwadzacego, ""))
 		return soap->error;
 	return soap_element_end_out(soap, tag);
@@ -5535,10 +5539,11 @@ SOAP_FMAC3 int SOAP_FMAC4 soap_out_z1__zmienDaneProwadzacego(struct soap *soap, 
 
 SOAP_FMAC3 struct z1__zmienDaneProwadzacego * SOAP_FMAC4 soap_in_z1__zmienDaneProwadzacego(struct soap *soap, const char *tag, struct z1__zmienDaneProwadzacego *a, const char *type)
 {
+	size_t soap_flag_idProwadzacego = 1;
 	size_t soap_flag_daneProwadzacego = 1;
 	if (soap_element_begin_in(soap, tag, 0, type))
 		return NULL;
-	a = (struct z1__zmienDaneProwadzacego *)soap_id_enter(soap, soap->id, a, SOAP_TYPE_z1__zmienDaneProwadzacego, sizeof(struct z1__zmienDaneProwadzacego), NULL, NULL, NULL, NULL);
+	a = (struct z1__zmienDaneProwadzacego *)soap_id_enter(soap, soap->id, a, SOAP_TYPE_z1__zmienDaneProwadzacego, sizeof(struct z1__zmienDaneProwadzacego), soap->type, soap->arrayType, soap_instantiate, soap_fbase);
 	if (!a)
 		return NULL;
 	soap_default_z1__zmienDaneProwadzacego(soap, a);
@@ -5546,6 +5551,11 @@ SOAP_FMAC3 struct z1__zmienDaneProwadzacego * SOAP_FMAC4 soap_in_z1__zmienDanePr
 	{
 		for (;;)
 		{	soap->error = SOAP_TAG_MISMATCH;
+			if (soap_flag_idProwadzacego && (soap->error == SOAP_TAG_MISMATCH || soap->error == SOAP_NO_TAG))
+				if (soap_in_z1__id(soap, "idProwadzacego", &a->idProwadzacego, "z1:id"))
+				{	soap_flag_idProwadzacego--;
+					continue;
+				}
 			if (soap_flag_daneProwadzacego && soap->error == SOAP_TAG_MISMATCH)
 				if (soap_in_PointerToz1__prowadzacy(soap, "daneProwadzacego", &a->daneProwadzacego, "z1:prowadzacy"))
 				{	soap_flag_daneProwadzacego--;
@@ -5560,6 +5570,14 @@ SOAP_FMAC3 struct z1__zmienDaneProwadzacego * SOAP_FMAC4 soap_in_z1__zmienDanePr
 		}
 		if (soap_element_end_in(soap, tag))
 			return NULL;
+		if ((soap->mode & SOAP_XML_STRICT) && (soap_flag_idProwadzacego > 0))
+		{	soap->error = SOAP_OCCURS;
+			return NULL;
+		}
+	}
+	else if ((soap->mode & SOAP_XML_STRICT) && !*soap->href)
+	{	soap->error = SOAP_OCCURS;
+		return NULL;
 	}
 	else
 	{	a = (struct z1__zmienDaneProwadzacego *)soap_id_forward(soap, soap->href, (void*)a, 0, SOAP_TYPE_z1__zmienDaneProwadzacego, SOAP_TYPE_z1__zmienDaneProwadzacego, sizeof(struct z1__zmienDaneProwadzacego), 0, soap_finsert, NULL);

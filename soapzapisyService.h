@@ -111,7 +111,7 @@ A commercial use license is available from Genivia Inc., contact@genivia.com
         /// Web service operation 'dodajProwadzacego' (returns SOAP_OK or error code)
         virtual int dodajProwadzacego(z1__prowadzacy *daneProwadzacego, struct z1__dodajProwadzacegoResponse &_param_9) SOAP_PURE_VIRTUAL;
         /// Web service operation 'zmienDaneProwadzacego' (returns SOAP_OK or error code)
-        virtual int zmienDaneProwadzacego(z1__prowadzacy *daneProwadzacego, struct z1__zmienDaneProwadzacegoResponse &_param_10) SOAP_PURE_VIRTUAL;
+        virtual int zmienDaneProwadzacego(std::string idProwadzacego, z1__prowadzacy *daneProwadzacego, struct z1__zmienDaneProwadzacegoResponse &_param_10) SOAP_PURE_VIRTUAL;
         /// Web service operation 'usunProwadzacego' (returns SOAP_OK or error code)
         virtual int usunProwadzacego(std::string ID, struct z1__usunProwadzacegoResponse &_param_11) SOAP_PURE_VIRTUAL;
         /// Web service operation 'dodajStudenta' (returns SOAP_OK or error code)

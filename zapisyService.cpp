@@ -78,7 +78,9 @@ int zapisyService::zapiszTermin(std::string projektID, std::string zapisywanyID,
      return SOAP_OK;
  }
 
- int zapisyService::zmienDaneProwadzacego(z1__prowadzacy *daneProwadzacego, struct z1__zmienDaneProwadzacegoResponse &_param_10) {return 0;}
+ int zapisyService::zmienDaneProwadzacego(std::string idProwadzacego, z1__prowadzacy *daneProwadzacego, struct z1__zmienDaneProwadzacegoResponse &_param_10) {
+     return 0;
+ }
 
  int zapisyService::usunProwadzacego(std::string ID, struct z1__usunProwadzacegoResponse &_param_11) {
      try{

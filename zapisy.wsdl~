@@ -109,6 +109,7 @@
 </wsdl:message>
 
 <wsdl:message name="aktualizacjaProwadzacego">
+	<wsdl:part name="idProwadzacego" type="tns:id"/>
 	<wsdl:part name="daneProwadzacego" type="tns:prowadzacy"/>
 </wsdl:message>
 
@@ -396,7 +397,7 @@
 <wsdl:service name="zapisy">
  <wsdl:documentation>gSOAP 2.7.9k generated service definition</wsdl:documentation>
  <wsdl:port name="zapisy" binding="tns:zapisy">
-	<soap:address location="http://127.0.0.1/"/>
+	<soap:address location="http://192.168.0.13:8090/"/>
  </wsdl:port>
 </wsdl:service>
 

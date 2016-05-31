@@ -65,21 +65,21 @@ struct z1__dodajPrzedmiot;	/* zapisy.h:1098 */
 struct z1__dodajProwadzacegoResponse;	/* zapisy.h:1109 */
 struct z1__dodajProwadzacego;	/* zapisy.h:1167 */
 struct z1__zmienDaneProwadzacegoResponse;	/* zapisy.h:1178 */
-struct z1__zmienDaneProwadzacego;	/* zapisy.h:1236 */
-struct z1__usunProwadzacegoResponse;	/* zapisy.h:1247 */
-struct z1__usunProwadzacego;	/* zapisy.h:1305 */
-struct z1__dodajStudentaResponse;	/* zapisy.h:1316 */
-struct z1__dodajStudenta;	/* zapisy.h:1377 */
-struct z1__usunStudentaZPrzedmiotuResponse;	/* zapisy.h:1388 */
-struct z1__usunStudentaZPrzedmiotu;	/* zapisy.h:1449 */
-struct z1__usunWszystkichZPrzedmiotuResponse;	/* zapisy.h:1460 */
-struct z1__usunWszystkichZPrzedmiotu;	/* zapisy.h:1518 */
-struct z1__usunPrzedmiotResponse;	/* zapisy.h:1529 */
-struct z1__usunPrzedmiot;	/* zapisy.h:1587 */
-struct z1__edytujProjektResponse;	/* zapisy.h:1598 */
-struct z1__edytujProjekt;	/* zapisy.h:1662 */
-struct z1__edytujTerminResponse;	/* zapisy.h:1673 */
-struct z1__edytujTermin;	/* zapisy.h:1740 */
+struct z1__zmienDaneProwadzacego;	/* zapisy.h:1239 */
+struct z1__usunProwadzacegoResponse;	/* zapisy.h:1250 */
+struct z1__usunProwadzacego;	/* zapisy.h:1308 */
+struct z1__dodajStudentaResponse;	/* zapisy.h:1319 */
+struct z1__dodajStudenta;	/* zapisy.h:1380 */
+struct z1__usunStudentaZPrzedmiotuResponse;	/* zapisy.h:1391 */
+struct z1__usunStudentaZPrzedmiotu;	/* zapisy.h:1452 */
+struct z1__usunWszystkichZPrzedmiotuResponse;	/* zapisy.h:1463 */
+struct z1__usunWszystkichZPrzedmiotu;	/* zapisy.h:1521 */
+struct z1__usunPrzedmiotResponse;	/* zapisy.h:1532 */
+struct z1__usunPrzedmiot;	/* zapisy.h:1590 */
+struct z1__edytujProjektResponse;	/* zapisy.h:1601 */
+struct z1__edytujProjekt;	/* zapisy.h:1665 */
+struct z1__edytujTerminResponse;	/* zapisy.h:1676 */
+struct z1__edytujTermin;	/* zapisy.h:1743 */
 
 /* zapisy.h:154 */
 #ifndef SOAP_TYPE_z1__student
@@ -836,12 +836,14 @@ struct z1__zmienDaneProwadzacegoResponse {
 };
 #endif
 
-/* zapisy.h:1236 */
+/* zapisy.h:1239 */
 #ifndef SOAP_TYPE_z1__zmienDaneProwadzacego
 #define SOAP_TYPE_z1__zmienDaneProwadzacego (73)
 /* complex XSD type 'z1:zmienDaneProwadzacego': */
 struct z1__zmienDaneProwadzacego {
       public:
+        /** Required element 'idProwadzacego' of XSD type 'z1:id' */
+        std::string idProwadzacego;
         /** Optional element 'daneProwadzacego' of XSD type 'z1:prowadzacy' */
         z1__prowadzacy *daneProwadzacego;
       public:
@@ -857,7 +859,7 @@ struct z1__zmienDaneProwadzacego {
 };
 #endif
 
-/* zapisy.h:1247 */
+/* zapisy.h:1250 */
 #ifndef SOAP_TYPE_z1__usunProwadzacegoResponse
 #define SOAP_TYPE_z1__usunProwadzacegoResponse (74)
 /* complex XSD type 'z1:usunProwadzacegoResponse': */
@@ -877,7 +879,7 @@ struct z1__usunProwadzacegoResponse {
 };
 #endif
 
-/* zapisy.h:1305 */
+/* zapisy.h:1308 */
 #ifndef SOAP_TYPE_z1__usunProwadzacego
 #define SOAP_TYPE_z1__usunProwadzacego (77)
 /* complex XSD type 'z1:usunProwadzacego': */
@@ -897,7 +899,7 @@ struct z1__usunProwadzacego {
 };
 #endif
 
-/* zapisy.h:1316 */
+/* zapisy.h:1319 */
 #ifndef SOAP_TYPE_z1__dodajStudentaResponse
 #define SOAP_TYPE_z1__dodajStudentaResponse (78)
 /* complex XSD type 'z1:dodajStudentaResponse': */
@@ -917,7 +919,7 @@ struct z1__dodajStudentaResponse {
 };
 #endif
 
-/* zapisy.h:1377 */
+/* zapisy.h:1380 */
 #ifndef SOAP_TYPE_z1__dodajStudenta
 #define SOAP_TYPE_z1__dodajStudenta (82)
 /* complex XSD type 'z1:dodajStudenta': */
@@ -940,7 +942,7 @@ struct z1__dodajStudenta {
 };
 #endif
 
-/* zapisy.h:1388 */
+/* zapisy.h:1391 */
 #ifndef SOAP_TYPE_z1__usunStudentaZPrzedmiotuResponse
 #define SOAP_TYPE_z1__usunStudentaZPrzedmiotuResponse (83)
 /* complex XSD type 'z1:usunStudentaZPrzedmiotuResponse': */
@@ -960,7 +962,7 @@ struct z1__usunStudentaZPrzedmiotuResponse {
 };
 #endif
 
-/* zapisy.h:1449 */
+/* zapisy.h:1452 */
 #ifndef SOAP_TYPE_z1__usunStudentaZPrzedmiotu
 #define SOAP_TYPE_z1__usunStudentaZPrzedmiotu (86)
 /* complex XSD type 'z1:usunStudentaZPrzedmiotu': */
@@ -983,7 +985,7 @@ struct z1__usunStudentaZPrzedmiotu {
 };
 #endif
 
-/* zapisy.h:1460 */
+/* zapisy.h:1463 */
 #ifndef SOAP_TYPE_z1__usunWszystkichZPrzedmiotuResponse
 #define SOAP_TYPE_z1__usunWszystkichZPrzedmiotuResponse (87)
 /* complex XSD type 'z1:usunWszystkichZPrzedmiotuResponse': */
@@ -1003,7 +1005,7 @@ struct z1__usunWszystkichZPrzedmiotuResponse {
 };
 #endif
 
-/* zapisy.h:1518 */
+/* zapisy.h:1521 */
 #ifndef SOAP_TYPE_z1__usunWszystkichZPrzedmiotu
 #define SOAP_TYPE_z1__usunWszystkichZPrzedmiotu (90)
 /* complex XSD type 'z1:usunWszystkichZPrzedmiotu': */
@@ -1023,7 +1025,7 @@ struct z1__usunWszystkichZPrzedmiotu {
 };
 #endif
 
-/* zapisy.h:1529 */
+/* zapisy.h:1532 */
 #ifndef SOAP_TYPE_z1__usunPrzedmiotResponse
 #define SOAP_TYPE_z1__usunPrzedmiotResponse (91)
 /* complex XSD type 'z1:usunPrzedmiotResponse': */
@@ -1043,7 +1045,7 @@ struct z1__usunPrzedmiotResponse {
 };
 #endif
 
-/* zapisy.h:1587 */
+/* zapisy.h:1590 */
 #ifndef SOAP_TYPE_z1__usunPrzedmiot
 #define SOAP_TYPE_z1__usunPrzedmiot (94)
 /* complex XSD type 'z1:usunPrzedmiot': */
@@ -1063,7 +1065,7 @@ struct z1__usunPrzedmiot {
 };
 #endif
 
-/* zapisy.h:1598 */
+/* zapisy.h:1601 */
 #ifndef SOAP_TYPE_z1__edytujProjektResponse
 #define SOAP_TYPE_z1__edytujProjektResponse (95)
 /* complex XSD type 'z1:edytujProjektResponse': */
@@ -1083,7 +1085,7 @@ struct z1__edytujProjektResponse {
 };
 #endif
 
-/* zapisy.h:1662 */
+/* zapisy.h:1665 */
 #ifndef SOAP_TYPE_z1__edytujProjekt
 #define SOAP_TYPE_z1__edytujProjekt (98)
 /* complex XSD type 'z1:edytujProjekt': */
@@ -1108,7 +1110,7 @@ struct z1__edytujProjekt {
 };
 #endif
 
-/* zapisy.h:1673 */
+/* zapisy.h:1676 */
 #ifndef SOAP_TYPE_z1__edytujTerminResponse
 #define SOAP_TYPE_z1__edytujTerminResponse (99)
 /* complex XSD type 'z1:edytujTerminResponse': */
@@ -1128,7 +1130,7 @@ struct z1__edytujTerminResponse {
 };
 #endif
 
-/* zapisy.h:1740 */
+/* zapisy.h:1743 */
 #ifndef SOAP_TYPE_z1__edytujTermin
 #define SOAP_TYPE_z1__edytujTermin (102)
 /* complex XSD type 'z1:edytujTermin': */
@@ -1155,7 +1157,7 @@ struct z1__edytujTermin {
 };
 #endif
 
-/* zapisy.h:1801 */
+/* zapisy.h:1804 */
 #ifndef WITH_NOGLOBAL
 #ifndef SOAP_TYPE_SOAP_ENV__Header
 #define SOAP_TYPE_SOAP_ENV__Header (103)
@@ -1174,7 +1176,7 @@ struct SOAP_ENV__Header {
 #endif
 #endif
 
-/* zapisy.h:1801 */
+/* zapisy.h:1804 */
 #ifndef WITH_NOGLOBAL
 #ifndef SOAP_TYPE_SOAP_ENV__Code
 #define SOAP_TYPE_SOAP_ENV__Code (104)
@@ -1201,7 +1203,7 @@ struct SOAP_ENV__Code {
 #endif
 #endif
 
-/* zapisy.h:1801 */
+/* zapisy.h:1804 */
 #ifndef WITH_NOGLOBAL
 #ifndef SOAP_TYPE_SOAP_ENV__Detail
 #define SOAP_TYPE_SOAP_ENV__Detail (106)
@@ -1229,7 +1231,7 @@ struct SOAP_ENV__Detail {
 #endif
 #endif
 
-/* zapisy.h:1801 */
+/* zapisy.h:1804 */
 #ifndef WITH_NOGLOBAL
 #ifndef SOAP_TYPE_SOAP_ENV__Reason
 #define SOAP_TYPE_SOAP_ENV__Reason (109)
@@ -1252,7 +1254,7 @@ struct SOAP_ENV__Reason {
 #endif
 #endif
 
-/* zapisy.h:1801 */
+/* zapisy.h:1804 */
 #ifndef WITH_NOGLOBAL
 #ifndef SOAP_TYPE_SOAP_ENV__Fault
 #define SOAP_TYPE_SOAP_ENV__Fault (110)

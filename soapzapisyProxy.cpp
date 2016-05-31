@@ -157,14 +157,14 @@ int zapisyProxy::zapiszProjekt(const char *endpoint, const char *soap_action, st
 	if (endpoint)
 		soap_endpoint = endpoint;
 	if (soap_endpoint == NULL)
-		soap_endpoint = "http://127.0.0.1/";
+		soap_endpoint = "http://192.168.0.13:8090/";
 	if (soap_action == NULL)
 		soap_action = "";
 	soap_tmp_z1__zapiszProjekt.projektID = projektID;
 	soap_tmp_z1__zapiszProjekt.zapisywanyID = zapisywanyID;
 	soap_begin(soap);
 	soap_set_version(soap, 1); /* SOAP1.1 */
-	soap->encodingStyle = "http://schemas.xmlsoap.org/soap/encoding/";
+	soap->encodingStyle = NULL;
 	soap_serializeheader(soap);
 	soap_serialize_z1__zapiszProjekt(soap, &soap_tmp_z1__zapiszProjekt);
 	if (soap_begin_count(soap))
@@ -197,9 +197,7 @@ int zapisyProxy::zapiszProjekt(const char *endpoint, const char *soap_action, st
 	 || soap_recv_header(soap)
 	 || soap_body_begin_in(soap))
 		return soap_closesock(soap);
-	if (soap_recv_fault(soap, 1))
-		return soap->error;
-	soap_get_z1__zapiszProjektResponse(soap, &_param_1, "", NULL);
+	soap_get_z1__zapiszProjektResponse(soap, &_param_1, "z1:zapiszProjektResponse", NULL);
 	if (soap->error)
 		return soap_recv_fault(soap, 0);
 	if (soap_body_end_in(soap)
@@ -215,14 +213,14 @@ int zapisyProxy::dodajProjekt(const char *endpoint, const char *soap_action, std
 	if (endpoint)
 		soap_endpoint = endpoint;
 	if (soap_endpoint == NULL)
-		soap_endpoint = "http://127.0.0.1/";
+		soap_endpoint = "http://192.168.0.13:8090/";
 	if (soap_action == NULL)
 		soap_action = "";
 	soap_tmp_z1__dodajProjekt.przedmiotID = przedmiotID;
 	soap_tmp_z1__dodajProjekt.projekt = projekt;
 	soap_begin(soap);
 	soap_set_version(soap, 1); /* SOAP1.1 */
-	soap->encodingStyle = "http://schemas.xmlsoap.org/soap/encoding/";
+	soap->encodingStyle = NULL;
 	soap_serializeheader(soap);
 	soap_serialize_z1__dodajProjekt(soap, &soap_tmp_z1__dodajProjekt);
 	if (soap_begin_count(soap))
@@ -255,9 +253,7 @@ int zapisyProxy::dodajProjekt(const char *endpoint, const char *soap_action, std
 	 || soap_recv_header(soap)
 	 || soap_body_begin_in(soap))
 		return soap_closesock(soap);
-	if (soap_recv_fault(soap, 1))
-		return soap->error;
-	soap_get_z1__dodajProjektResponse(soap, &_param_2, "", NULL);
+	soap_get_z1__dodajProjektResponse(soap, &_param_2, "z1:dodajProjektResponse", NULL);
 	if (soap->error)
 		return soap_recv_fault(soap, 0);
 	if (soap_body_end_in(soap)
@@ -273,14 +269,14 @@ int zapisyProxy::zapiszTermin(const char *endpoint, const char *soap_action, std
 	if (endpoint)
 		soap_endpoint = endpoint;
 	if (soap_endpoint == NULL)
-		soap_endpoint = "http://127.0.0.1/";
+		soap_endpoint = "http://192.168.0.13:8090/";
 	if (soap_action == NULL)
 		soap_action = "";
 	soap_tmp_z1__zapiszTermin.projektID = projektID;
 	soap_tmp_z1__zapiszTermin.zapisywanyID = zapisywanyID;
 	soap_begin(soap);
 	soap_set_version(soap, 1); /* SOAP1.1 */
-	soap->encodingStyle = "http://schemas.xmlsoap.org/soap/encoding/";
+	soap->encodingStyle = NULL;
 	soap_serializeheader(soap);
 	soap_serialize_z1__zapiszTermin(soap, &soap_tmp_z1__zapiszTermin);
 	if (soap_begin_count(soap))
@@ -313,9 +309,7 @@ int zapisyProxy::zapiszTermin(const char *endpoint, const char *soap_action, std
 	 || soap_recv_header(soap)
 	 || soap_body_begin_in(soap))
 		return soap_closesock(soap);
-	if (soap_recv_fault(soap, 1))
-		return soap->error;
-	soap_get_z1__zapiszTerminResponse(soap, &_param_3, "", NULL);
+	soap_get_z1__zapiszTerminResponse(soap, &_param_3, "z1:zapiszTerminResponse", NULL);
 	if (soap->error)
 		return soap_recv_fault(soap, 0);
 	if (soap_body_end_in(soap)
@@ -331,7 +325,7 @@ int zapisyProxy::dodajTermin(const char *endpoint, const char *soap_action, std:
 	if (endpoint)
 		soap_endpoint = endpoint;
 	if (soap_endpoint == NULL)
-		soap_endpoint = "http://127.0.0.1/";
+		soap_endpoint = "http://192.168.0.13:8090/";
 	if (soap_action == NULL)
 		soap_action = "";
 	soap_tmp_z1__dodajTermin.przedmiotID = przedmiotID;
@@ -339,7 +333,7 @@ int zapisyProxy::dodajTermin(const char *endpoint, const char *soap_action, std:
 	soap_tmp_z1__dodajTermin.termin = termin;
 	soap_begin(soap);
 	soap_set_version(soap, 1); /* SOAP1.1 */
-	soap->encodingStyle = "http://schemas.xmlsoap.org/soap/encoding/";
+	soap->encodingStyle = NULL;
 	soap_serializeheader(soap);
 	soap_serialize_z1__dodajTermin(soap, &soap_tmp_z1__dodajTermin);
 	if (soap_begin_count(soap))
@@ -372,9 +366,7 @@ int zapisyProxy::dodajTermin(const char *endpoint, const char *soap_action, std:
 	 || soap_recv_header(soap)
 	 || soap_body_begin_in(soap))
 		return soap_closesock(soap);
-	if (soap_recv_fault(soap, 1))
-		return soap->error;
-	soap_get_z1__dodajTerminResponse(soap, &_param_4, "", NULL);
+	soap_get_z1__dodajTerminResponse(soap, &_param_4, "z1:dodajTerminResponse", NULL);
 	if (soap->error)
 		return soap_recv_fault(soap, 0);
 	if (soap_body_end_in(soap)
@@ -390,13 +382,13 @@ int zapisyProxy::eksportujProjekt(const char *endpoint, const char *soap_action,
 	if (endpoint)
 		soap_endpoint = endpoint;
 	if (soap_endpoint == NULL)
-		soap_endpoint = "http://127.0.0.1/";
+		soap_endpoint = "http://192.168.0.13:8090/";
 	if (soap_action == NULL)
 		soap_action = "";
 	soap_tmp_z1__eksportujProjekt.ID = ID;
 	soap_begin(soap);
 	soap_set_version(soap, 1); /* SOAP1.1 */
-	soap->encodingStyle = "http://schemas.xmlsoap.org/soap/encoding/";
+	soap->encodingStyle = NULL;
 	soap_serializeheader(soap);
 	soap_serialize_z1__eksportujProjekt(soap, &soap_tmp_z1__eksportujProjekt);
 	if (soap_begin_count(soap))
@@ -429,9 +421,7 @@ int zapisyProxy::eksportujProjekt(const char *endpoint, const char *soap_action,
 	 || soap_recv_header(soap)
 	 || soap_body_begin_in(soap))
 		return soap_closesock(soap);
-	if (soap_recv_fault(soap, 1))
-		return soap->error;
-	soap_get_z1__eksportujProjektResponse(soap, &_param_5, "", NULL);
+	soap_get_z1__eksportujProjektResponse(soap, &_param_5, "z1:eksportujProjektResponse", NULL);
 	if (soap->error)
 		return soap_recv_fault(soap, 0);
 	if (soap_body_end_in(soap)
@@ -447,13 +437,13 @@ int zapisyProxy::eksportujTermin(const char *endpoint, const char *soap_action, 
 	if (endpoint)
 		soap_endpoint = endpoint;
 	if (soap_endpoint == NULL)
-		soap_endpoint = "http://127.0.0.1/";
+		soap_endpoint = "http://192.168.0.13:8090/";
 	if (soap_action == NULL)
 		soap_action = "";
 	soap_tmp_z1__eksportujTermin.ID = ID;
 	soap_begin(soap);
 	soap_set_version(soap, 1); /* SOAP1.1 */
-	soap->encodingStyle = "http://schemas.xmlsoap.org/soap/encoding/";
+	soap->encodingStyle = NULL;
 	soap_serializeheader(soap);
 	soap_serialize_z1__eksportujTermin(soap, &soap_tmp_z1__eksportujTermin);
 	if (soap_begin_count(soap))
@@ -486,9 +476,7 @@ int zapisyProxy::eksportujTermin(const char *endpoint, const char *soap_action, 
 	 || soap_recv_header(soap)
 	 || soap_body_begin_in(soap))
 		return soap_closesock(soap);
-	if (soap_recv_fault(soap, 1))
-		return soap->error;
-	soap_get_z1__eksportujTerminResponse(soap, &_param_6, "", NULL);
+	soap_get_z1__eksportujTerminResponse(soap, &_param_6, "z1:eksportujTerminResponse", NULL);
 	if (soap->error)
 		return soap_recv_fault(soap, 0);
 	if (soap_body_end_in(soap)
@@ -504,13 +492,13 @@ int zapisyProxy::eksportujPrzedmiot(const char *endpoint, const char *soap_actio
 	if (endpoint)
 		soap_endpoint = endpoint;
 	if (soap_endpoint == NULL)
-		soap_endpoint = "http://127.0.0.1/";
+		soap_endpoint = "http://192.168.0.13:8090/";
 	if (soap_action == NULL)
 		soap_action = "";
 	soap_tmp_z1__eksportujPrzedmiot.ID = ID;
 	soap_begin(soap);
 	soap_set_version(soap, 1); /* SOAP1.1 */
-	soap->encodingStyle = "http://schemas.xmlsoap.org/soap/encoding/";
+	soap->encodingStyle = NULL;
 	soap_serializeheader(soap);
 	soap_serialize_z1__eksportujPrzedmiot(soap, &soap_tmp_z1__eksportujPrzedmiot);
 	if (soap_begin_count(soap))
@@ -543,9 +531,7 @@ int zapisyProxy::eksportujPrzedmiot(const char *endpoint, const char *soap_actio
 	 || soap_recv_header(soap)
 	 || soap_body_begin_in(soap))
 		return soap_closesock(soap);
-	if (soap_recv_fault(soap, 1))
-		return soap->error;
-	soap_get_z1__eksportujPrzedmiotResponse(soap, &_param_7, "", NULL);
+	soap_get_z1__eksportujPrzedmiotResponse(soap, &_param_7, "z1:eksportujPrzedmiotResponse", NULL);
 	if (soap->error)
 		return soap_recv_fault(soap, 0);
 	if (soap_body_end_in(soap)
@@ -561,14 +547,14 @@ int zapisyProxy::dodajPrzedmiot(const char *endpoint, const char *soap_action, s
 	if (endpoint)
 		soap_endpoint = endpoint;
 	if (soap_endpoint == NULL)
-		soap_endpoint = "http://127.0.0.1/";
+		soap_endpoint = "http://192.168.0.13:8090/";
 	if (soap_action == NULL)
 		soap_action = "";
 	soap_tmp_z1__dodajPrzedmiot.importowanyPrzedmiot = importowanyPrzedmiot;
 	soap_tmp_z1__dodajPrzedmiot.projekt = projekt;
 	soap_begin(soap);
 	soap_set_version(soap, 1); /* SOAP1.1 */
-	soap->encodingStyle = "http://schemas.xmlsoap.org/soap/encoding/";
+	soap->encodingStyle = NULL;
 	soap_serializeheader(soap);
 	soap_serialize_z1__dodajPrzedmiot(soap, &soap_tmp_z1__dodajPrzedmiot);
 	if (soap_begin_count(soap))
@@ -601,9 +587,7 @@ int zapisyProxy::dodajPrzedmiot(const char *endpoint, const char *soap_action, s
 	 || soap_recv_header(soap)
 	 || soap_body_begin_in(soap))
 		return soap_closesock(soap);
-	if (soap_recv_fault(soap, 1))
-		return soap->error;
-	soap_get_z1__dodajPrzedmiotResponse(soap, &_param_8, "", NULL);
+	soap_get_z1__dodajPrzedmiotResponse(soap, &_param_8, "z1:dodajPrzedmiotResponse", NULL);
 	if (soap->error)
 		return soap_recv_fault(soap, 0);
 	if (soap_body_end_in(soap)
@@ -619,13 +603,13 @@ int zapisyProxy::dodajProwadzacego(const char *endpoint, const char *soap_action
 	if (endpoint)
 		soap_endpoint = endpoint;
 	if (soap_endpoint == NULL)
-		soap_endpoint = "http://127.0.0.1/";
+		soap_endpoint = "http://192.168.0.13:8090/";
 	if (soap_action == NULL)
 		soap_action = "";
 	soap_tmp_z1__dodajProwadzacego.daneProwadzacego = daneProwadzacego;
 	soap_begin(soap);
 	soap_set_version(soap, 1); /* SOAP1.1 */
-	soap->encodingStyle = "http://schemas.xmlsoap.org/soap/encoding/";
+	soap->encodingStyle = NULL;
 	soap_serializeheader(soap);
 	soap_serialize_z1__dodajProwadzacego(soap, &soap_tmp_z1__dodajProwadzacego);
 	if (soap_begin_count(soap))
@@ -658,9 +642,7 @@ int zapisyProxy::dodajProwadzacego(const char *endpoint, const char *soap_action
 	 || soap_recv_header(soap)
 	 || soap_body_begin_in(soap))
 		return soap_closesock(soap);
-	if (soap_recv_fault(soap, 1))
-		return soap->error;
-	soap_get_z1__dodajProwadzacegoResponse(soap, &_param_9, "", NULL);
+	soap_get_z1__dodajProwadzacegoResponse(soap, &_param_9, "z1:dodajProwadzacegoResponse", NULL);
 	if (soap->error)
 		return soap_recv_fault(soap, 0);
 	if (soap_body_end_in(soap)
@@ -670,19 +652,20 @@ int zapisyProxy::dodajProwadzacego(const char *endpoint, const char *soap_action
 	return soap_closesock(soap);
 }
 
-int zapisyProxy::zmienDaneProwadzacego(const char *endpoint, const char *soap_action, z1__prowadzacy *daneProwadzacego, struct z1__zmienDaneProwadzacegoResponse &_param_10)
+int zapisyProxy::zmienDaneProwadzacego(const char *endpoint, const char *soap_action, std::string idProwadzacego, z1__prowadzacy *daneProwadzacego, struct z1__zmienDaneProwadzacegoResponse &_param_10)
 {	struct soap *soap = this->soap;
 	struct z1__zmienDaneProwadzacego soap_tmp_z1__zmienDaneProwadzacego;
 	if (endpoint)
 		soap_endpoint = endpoint;
 	if (soap_endpoint == NULL)
-		soap_endpoint = "http://127.0.0.1/";
+		soap_endpoint = "http://192.168.0.13:8090/";
 	if (soap_action == NULL)
 		soap_action = "";
+	soap_tmp_z1__zmienDaneProwadzacego.idProwadzacego = idProwadzacego;
 	soap_tmp_z1__zmienDaneProwadzacego.daneProwadzacego = daneProwadzacego;
 	soap_begin(soap);
 	soap_set_version(soap, 1); /* SOAP1.1 */
-	soap->encodingStyle = "http://schemas.xmlsoap.org/soap/encoding/";
+	soap->encodingStyle = NULL;
 	soap_serializeheader(soap);
 	soap_serialize_z1__zmienDaneProwadzacego(soap, &soap_tmp_z1__zmienDaneProwadzacego);
 	if (soap_begin_count(soap))
@@ -715,9 +698,7 @@ int zapisyProxy::zmienDaneProwadzacego(const char *endpoint, const char *soap_ac
 	 || soap_recv_header(soap)
 	 || soap_body_begin_in(soap))
 		return soap_closesock(soap);
-	if (soap_recv_fault(soap, 1))
-		return soap->error;
-	soap_get_z1__zmienDaneProwadzacegoResponse(soap, &_param_10, "", NULL);
+	soap_get_z1__zmienDaneProwadzacegoResponse(soap, &_param_10, "z1:zmienDaneProwadzacegoResponse", NULL);
 	if (soap->error)
 		return soap_recv_fault(soap, 0);
 	if (soap_body_end_in(soap)
@@ -733,13 +714,13 @@ int zapisyProxy::usunProwadzacego(const char *endpoint, const char *soap_action,
 	if (endpoint)
 		soap_endpoint = endpoint;
 	if (soap_endpoint == NULL)
-		soap_endpoint = "http://127.0.0.1/";
+		soap_endpoint = "http://192.168.0.13:8090/";
 	if (soap_action == NULL)
 		soap_action = "";
 	soap_tmp_z1__usunProwadzacego.ID = ID;
 	soap_begin(soap);
 	soap_set_version(soap, 1); /* SOAP1.1 */
-	soap->encodingStyle = "http://schemas.xmlsoap.org/soap/encoding/";
+	soap->encodingStyle = NULL;
 	soap_serializeheader(soap);
 	soap_serialize_z1__usunProwadzacego(soap, &soap_tmp_z1__usunProwadzacego);
 	if (soap_begin_count(soap))
@@ -772,9 +753,7 @@ int zapisyProxy::usunProwadzacego(const char *endpoint, const char *soap_action,
 	 || soap_recv_header(soap)
 	 || soap_body_begin_in(soap))
 		return soap_closesock(soap);
-	if (soap_recv_fault(soap, 1))
-		return soap->error;
-	soap_get_z1__usunProwadzacegoResponse(soap, &_param_11, "", NULL);
+	soap_get_z1__usunProwadzacegoResponse(soap, &_param_11, "z1:usunProwadzacegoResponse", NULL);
 	if (soap->error)
 		return soap_recv_fault(soap, 0);
 	if (soap_body_end_in(soap)
@@ -790,14 +769,14 @@ int zapisyProxy::dodajStudenta(const char *endpoint, const char *soap_action, st
 	if (endpoint)
 		soap_endpoint = endpoint;
 	if (soap_endpoint == NULL)
-		soap_endpoint = "http://127.0.0.1/";
+		soap_endpoint = "http://192.168.0.13:8090/";
 	if (soap_action == NULL)
 		soap_action = "";
 	soap_tmp_z1__dodajStudenta.przedmiotID = przedmiotID;
 	soap_tmp_z1__dodajStudenta.student = student;
 	soap_begin(soap);
 	soap_set_version(soap, 1); /* SOAP1.1 */
-	soap->encodingStyle = "http://schemas.xmlsoap.org/soap/encoding/";
+	soap->encodingStyle = NULL;
 	soap_serializeheader(soap);
 	soap_serialize_z1__dodajStudenta(soap, &soap_tmp_z1__dodajStudenta);
 	if (soap_begin_count(soap))
@@ -830,9 +809,7 @@ int zapisyProxy::dodajStudenta(const char *endpoint, const char *soap_action, st
 	 || soap_recv_header(soap)
 	 || soap_body_begin_in(soap))
 		return soap_closesock(soap);
-	if (soap_recv_fault(soap, 1))
-		return soap->error;
-	soap_get_z1__dodajStudentaResponse(soap, &_param_12, "", NULL);
+	soap_get_z1__dodajStudentaResponse(soap, &_param_12, "z1:dodajStudentaResponse", NULL);
 	if (soap->error)
 		return soap_recv_fault(soap, 0);
 	if (soap_body_end_in(soap)
@@ -848,14 +825,14 @@ int zapisyProxy::usunStudentaZPrzedmiotu(const char *endpoint, const char *soap_
 	if (endpoint)
 		soap_endpoint = endpoint;
 	if (soap_endpoint == NULL)
-		soap_endpoint = "http://127.0.0.1/";
+		soap_endpoint = "http://192.168.0.13:8090/";
 	if (soap_action == NULL)
 		soap_action = "";
 	soap_tmp_z1__usunStudentaZPrzedmiotu.przedmiotID = przedmiotID;
 	soap_tmp_z1__usunStudentaZPrzedmiotu.student = student;
 	soap_begin(soap);
 	soap_set_version(soap, 1); /* SOAP1.1 */
-	soap->encodingStyle = "http://schemas.xmlsoap.org/soap/encoding/";
+	soap->encodingStyle = NULL;
 	soap_serializeheader(soap);
 	soap_serialize_z1__usunStudentaZPrzedmiotu(soap, &soap_tmp_z1__usunStudentaZPrzedmiotu);
 	if (soap_begin_count(soap))
@@ -888,9 +865,7 @@ int zapisyProxy::usunStudentaZPrzedmiotu(const char *endpoint, const char *soap_
 	 || soap_recv_header(soap)
 	 || soap_body_begin_in(soap))
 		return soap_closesock(soap);
-	if (soap_recv_fault(soap, 1))
-		return soap->error;
-	soap_get_z1__usunStudentaZPrzedmiotuResponse(soap, &_param_13, "", NULL);
+	soap_get_z1__usunStudentaZPrzedmiotuResponse(soap, &_param_13, "z1:usunStudentaZPrzedmiotuResponse", NULL);
 	if (soap->error)
 		return soap_recv_fault(soap, 0);
 	if (soap_body_end_in(soap)
@@ -906,13 +881,13 @@ int zapisyProxy::usunWszystkichZPrzedmiotu(const char *endpoint, const char *soa
 	if (endpoint)
 		soap_endpoint = endpoint;
 	if (soap_endpoint == NULL)
-		soap_endpoint = "http://127.0.0.1/";
+		soap_endpoint = "http://192.168.0.13:8090/";
 	if (soap_action == NULL)
 		soap_action = "";
 	soap_tmp_z1__usunWszystkichZPrzedmiotu.ID = ID;
 	soap_begin(soap);
 	soap_set_version(soap, 1); /* SOAP1.1 */
-	soap->encodingStyle = "http://schemas.xmlsoap.org/soap/encoding/";
+	soap->encodingStyle = NULL;
 	soap_serializeheader(soap);
 	soap_serialize_z1__usunWszystkichZPrzedmiotu(soap, &soap_tmp_z1__usunWszystkichZPrzedmiotu);
 	if (soap_begin_count(soap))
@@ -945,9 +920,7 @@ int zapisyProxy::usunWszystkichZPrzedmiotu(const char *endpoint, const char *soa
 	 || soap_recv_header(soap)
 	 || soap_body_begin_in(soap))
 		return soap_closesock(soap);
-	if (soap_recv_fault(soap, 1))
-		return soap->error;
-	soap_get_z1__usunWszystkichZPrzedmiotuResponse(soap, &_param_14, "", NULL);
+	soap_get_z1__usunWszystkichZPrzedmiotuResponse(soap, &_param_14, "z1:usunWszystkichZPrzedmiotuResponse", NULL);
 	if (soap->error)
 		return soap_recv_fault(soap, 0);
 	if (soap_body_end_in(soap)
@@ -963,13 +936,13 @@ int zapisyProxy::usunPrzedmiot(const char *endpoint, const char *soap_action, st
 	if (endpoint)
 		soap_endpoint = endpoint;
 	if (soap_endpoint == NULL)
-		soap_endpoint = "http://127.0.0.1/";
+		soap_endpoint = "http://192.168.0.13:8090/";
 	if (soap_action == NULL)
 		soap_action = "";
 	soap_tmp_z1__usunPrzedmiot.ID = ID;
 	soap_begin(soap);
 	soap_set_version(soap, 1); /* SOAP1.1 */
-	soap->encodingStyle = "http://schemas.xmlsoap.org/soap/encoding/";
+	soap->encodingStyle = NULL;
 	soap_serializeheader(soap);
 	soap_serialize_z1__usunPrzedmiot(soap, &soap_tmp_z1__usunPrzedmiot);
 	if (soap_begin_count(soap))
@@ -1002,9 +975,7 @@ int zapisyProxy::usunPrzedmiot(const char *endpoint, const char *soap_action, st
 	 || soap_recv_header(soap)
 	 || soap_body_begin_in(soap))
 		return soap_closesock(soap);
-	if (soap_recv_fault(soap, 1))
-		return soap->error;
-	soap_get_z1__usunPrzedmiotResponse(soap, &_param_15, "", NULL);
+	soap_get_z1__usunPrzedmiotResponse(soap, &_param_15, "z1:usunPrzedmiotResponse", NULL);
 	if (soap->error)
 		return soap_recv_fault(soap, 0);
 	if (soap_body_end_in(soap)
@@ -1020,7 +991,7 @@ int zapisyProxy::edytujProjekt(const char *endpoint, const char *soap_action, st
 	if (endpoint)
 		soap_endpoint = endpoint;
 	if (soap_endpoint == NULL)
-		soap_endpoint = "http://127.0.0.1/";
+		soap_endpoint = "http://192.168.0.13:8090/";
 	if (soap_action == NULL)
 		soap_action = "";
 	soap_tmp_z1__edytujProjekt.przedmiotID = przedmiotID;
@@ -1028,7 +999,7 @@ int zapisyProxy::edytujProjekt(const char *endpoint, const char *soap_action, st
 	soap_tmp_z1__edytujProjekt.projekt = projekt;
 	soap_begin(soap);
 	soap_set_version(soap, 1); /* SOAP1.1 */
-	soap->encodingStyle = "http://schemas.xmlsoap.org/soap/encoding/";
+	soap->encodingStyle = NULL;
 	soap_serializeheader(soap);
 	soap_serialize_z1__edytujProjekt(soap, &soap_tmp_z1__edytujProjekt);
 	if (soap_begin_count(soap))
@@ -1061,9 +1032,7 @@ int zapisyProxy::edytujProjekt(const char *endpoint, const char *soap_action, st
 	 || soap_recv_header(soap)
 	 || soap_body_begin_in(soap))
 		return soap_closesock(soap);
-	if (soap_recv_fault(soap, 1))
-		return soap->error;
-	soap_get_z1__edytujProjektResponse(soap, &_param_16, "", NULL);
+	soap_get_z1__edytujProjektResponse(soap, &_param_16, "z1:edytujProjektResponse", NULL);
 	if (soap->error)
 		return soap_recv_fault(soap, 0);
 	if (soap_body_end_in(soap)
@@ -1079,7 +1048,7 @@ int zapisyProxy::edytujTermin(const char *endpoint, const char *soap_action, std
 	if (endpoint)
 		soap_endpoint = endpoint;
 	if (soap_endpoint == NULL)
-		soap_endpoint = "http://127.0.0.1/";
+		soap_endpoint = "http://192.168.0.13:8090/";
 	if (soap_action == NULL)
 		soap_action = "";
 	soap_tmp_z1__edytujTermin.przedmiotID = przedmiotID;
@@ -1088,7 +1057,7 @@ int zapisyProxy::edytujTermin(const char *endpoint, const char *soap_action, std
 	soap_tmp_z1__edytujTermin.termin = termin;
 	soap_begin(soap);
 	soap_set_version(soap, 1); /* SOAP1.1 */
-	soap->encodingStyle = "http://schemas.xmlsoap.org/soap/encoding/";
+	soap->encodingStyle = NULL;
 	soap_serializeheader(soap);
 	soap_serialize_z1__edytujTermin(soap, &soap_tmp_z1__edytujTermin);
 	if (soap_begin_count(soap))
@@ -1121,9 +1090,7 @@ int zapisyProxy::edytujTermin(const char *endpoint, const char *soap_action, std
 	 || soap_recv_header(soap)
 	 || soap_body_begin_in(soap))
 		return soap_closesock(soap);
-	if (soap_recv_fault(soap, 1))
-		return soap->error;
-	soap_get_z1__edytujTerminResponse(soap, &_param_17, "", NULL);
+	soap_get_z1__edytujTerminResponse(soap, &_param_17, "z1:edytujTerminResponse", NULL);
 	if (soap->error)
 		return soap_recv_fault(soap, 0);
 	if (soap_body_end_in(soap)

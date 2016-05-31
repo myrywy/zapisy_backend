@@ -5,7 +5,7 @@
   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
   xmlns:xsd="http://www.w3.org/2001/XMLSchema"
   xmlns:z1="localhost/zapisy.wsdl">
- <SOAP-ENV:Body  SOAP-ENV:encodingStyle="http://schemas.xmlsoap.org/soap/encoding/">
+ <SOAP-ENV:Body>
   <z1:eksportujProjekt>
    <ID></ID>
   </z1:eksportujProjekt>

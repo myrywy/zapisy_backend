@@ -110,9 +110,9 @@ A commercial use license is available from Genivia Inc., contact@genivia.com
         { return this->dodajProwadzacego(NULL, NULL, daneProwadzacego, _param_9); }
         virtual int dodajProwadzacego(const char *soap_endpoint, const char *soap_action, z1__prowadzacy *daneProwadzacego, struct z1__dodajProwadzacegoResponse &_param_9);
         /// Web service operation 'zmienDaneProwadzacego' (returns SOAP_OK or error code)
-        virtual int zmienDaneProwadzacego(z1__prowadzacy *daneProwadzacego, struct z1__zmienDaneProwadzacegoResponse &_param_10)
-        { return this->zmienDaneProwadzacego(NULL, NULL, daneProwadzacego, _param_10); }
-        virtual int zmienDaneProwadzacego(const char *soap_endpoint, const char *soap_action, z1__prowadzacy *daneProwadzacego, struct z1__zmienDaneProwadzacegoResponse &_param_10);
+        virtual int zmienDaneProwadzacego(std::string idProwadzacego, z1__prowadzacy *daneProwadzacego, struct z1__zmienDaneProwadzacegoResponse &_param_10)
+        { return this->zmienDaneProwadzacego(NULL, NULL, idProwadzacego, daneProwadzacego, _param_10); }
+        virtual int zmienDaneProwadzacego(const char *soap_endpoint, const char *soap_action, std::string idProwadzacego, z1__prowadzacy *daneProwadzacego, struct z1__zmienDaneProwadzacegoResponse &_param_10);
         /// Web service operation 'usunProwadzacego' (returns SOAP_OK or error code)
         virtual int usunProwadzacego(std::string ID, struct z1__usunProwadzacegoResponse &_param_11)
         { return this->usunProwadzacego(NULL, NULL, ID, _param_11); }

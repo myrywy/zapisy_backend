@@ -2091,20 +2091,24 @@ inline struct z1__zmienDaneProwadzacego * soap_new_z1__zmienDaneProwadzacego(str
 }
 
 inline struct z1__zmienDaneProwadzacego * soap_new_req_z1__zmienDaneProwadzacego(
-	struct soap *soap)
+	struct soap *soap,
+	const std::string& idProwadzacego)
 {	struct z1__zmienDaneProwadzacego *_p = soap_new_z1__zmienDaneProwadzacego(soap);
 	if (_p)
 	{	soap_default_z1__zmienDaneProwadzacego(soap, _p);
+		_p->idProwadzacego = idProwadzacego;
 	}
 	return _p;
 }
 
 inline struct z1__zmienDaneProwadzacego * soap_new_set_z1__zmienDaneProwadzacego(
 	struct soap *soap,
+	const std::string& idProwadzacego,
 	z1__prowadzacy *daneProwadzacego)
 {	struct z1__zmienDaneProwadzacego *_p = soap_new_z1__zmienDaneProwadzacego(soap);
 	if (_p)
 	{	soap_default_z1__zmienDaneProwadzacego(soap, _p);
+		_p->idProwadzacego = idProwadzacego;
 		_p->daneProwadzacego = daneProwadzacego;
 	}
 	return _p;

@@ -301,7 +301,7 @@ static int serve_z1__zapiszProjekt(struct soap *soap, zapisyService *service)
 	soap->error = service->zapiszProjekt(soap_tmp_z1__zapiszProjekt.projektID, soap_tmp_z1__zapiszProjekt.zapisywanyID, _param_1);
 	if (soap->error)
 		return soap->error;
-	soap->encodingStyle = "http://schemas.xmlsoap.org/soap/encoding/";
+	soap->encodingStyle = NULL;
 	soap_serializeheader(soap);
 	soap_serialize_z1__zapiszProjektResponse(soap, &_param_1);
 	if (soap_begin_count(soap))
@@ -342,7 +342,7 @@ static int serve_z1__dodajProjekt(struct soap *soap, zapisyService *service)
 	soap->error = service->dodajProjekt(soap_tmp_z1__dodajProjekt.przedmiotID, soap_tmp_z1__dodajProjekt.projekt, _param_2);
 	if (soap->error)
 		return soap->error;
-	soap->encodingStyle = "http://schemas.xmlsoap.org/soap/encoding/";
+	soap->encodingStyle = NULL;
 	soap_serializeheader(soap);
 	soap_serialize_z1__dodajProjektResponse(soap, &_param_2);
 	if (soap_begin_count(soap))
@@ -383,7 +383,7 @@ static int serve_z1__zapiszTermin(struct soap *soap, zapisyService *service)
 	soap->error = service->zapiszTermin(soap_tmp_z1__zapiszTermin.projektID, soap_tmp_z1__zapiszTermin.zapisywanyID, _param_3);
 	if (soap->error)
 		return soap->error;
-	soap->encodingStyle = "http://schemas.xmlsoap.org/soap/encoding/";
+	soap->encodingStyle = NULL;
 	soap_serializeheader(soap);
 	soap_serialize_z1__zapiszTerminResponse(soap, &_param_3);
 	if (soap_begin_count(soap))
@@ -424,7 +424,7 @@ static int serve_z1__dodajTermin(struct soap *soap, zapisyService *service)
 	soap->error = service->dodajTermin(soap_tmp_z1__dodajTermin.przedmiotID, soap_tmp_z1__dodajTermin.salaID, soap_tmp_z1__dodajTermin.termin, _param_4);
 	if (soap->error)
 		return soap->error;
-	soap->encodingStyle = "http://schemas.xmlsoap.org/soap/encoding/";
+	soap->encodingStyle = NULL;
 	soap_serializeheader(soap);
 	soap_serialize_z1__dodajTerminResponse(soap, &_param_4);
 	if (soap_begin_count(soap))
@@ -465,7 +465,7 @@ static int serve_z1__eksportujProjekt(struct soap *soap, zapisyService *service)
 	soap->error = service->eksportujProjekt(soap_tmp_z1__eksportujProjekt.ID, _param_5);
 	if (soap->error)
 		return soap->error;
-	soap->encodingStyle = "http://schemas.xmlsoap.org/soap/encoding/";
+	soap->encodingStyle = NULL;
 	soap_serializeheader(soap);
 	soap_serialize_z1__eksportujProjektResponse(soap, &_param_5);
 	if (soap_begin_count(soap))
@@ -506,7 +506,7 @@ static int serve_z1__eksportujTermin(struct soap *soap, zapisyService *service)
 	soap->error = service->eksportujTermin(soap_tmp_z1__eksportujTermin.ID, _param_6);
 	if (soap->error)
 		return soap->error;
-	soap->encodingStyle = "http://schemas.xmlsoap.org/soap/encoding/";
+	soap->encodingStyle = NULL;
 	soap_serializeheader(soap);
 	soap_serialize_z1__eksportujTerminResponse(soap, &_param_6);
 	if (soap_begin_count(soap))
@@ -547,7 +547,7 @@ static int serve_z1__eksportujPrzedmiot(struct soap *soap, zapisyService *servic
 	soap->error = service->eksportujPrzedmiot(soap_tmp_z1__eksportujPrzedmiot.ID, _param_7);
 	if (soap->error)
 		return soap->error;
-	soap->encodingStyle = "http://schemas.xmlsoap.org/soap/encoding/";
+	soap->encodingStyle = NULL;
 	soap_serializeheader(soap);
 	soap_serialize_z1__eksportujPrzedmiotResponse(soap, &_param_7);
 	if (soap_begin_count(soap))
@@ -588,7 +588,7 @@ static int serve_z1__dodajPrzedmiot(struct soap *soap, zapisyService *service)
 	soap->error = service->dodajPrzedmiot(soap_tmp_z1__dodajPrzedmiot.importowanyPrzedmiot, soap_tmp_z1__dodajPrzedmiot.projekt, _param_8);
 	if (soap->error)
 		return soap->error;
-	soap->encodingStyle = "http://schemas.xmlsoap.org/soap/encoding/";
+	soap->encodingStyle = NULL;
 	soap_serializeheader(soap);
 	soap_serialize_z1__dodajPrzedmiotResponse(soap, &_param_8);
 	if (soap_begin_count(soap))
@@ -629,7 +629,7 @@ static int serve_z1__dodajProwadzacego(struct soap *soap, zapisyService *service
 	soap->error = service->dodajProwadzacego(soap_tmp_z1__dodajProwadzacego.daneProwadzacego, _param_9);
 	if (soap->error)
 		return soap->error;
-	soap->encodingStyle = "http://schemas.xmlsoap.org/soap/encoding/";
+	soap->encodingStyle = NULL;
 	soap_serializeheader(soap);
 	soap_serialize_z1__dodajProwadzacegoResponse(soap, &_param_9);
 	if (soap_begin_count(soap))
@@ -667,10 +667,10 @@ static int serve_z1__zmienDaneProwadzacego(struct soap *soap, zapisyService *ser
 	 || soap_envelope_end_in(soap)
 	 || soap_end_recv(soap))
 		return soap->error;
-	soap->error = service->zmienDaneProwadzacego(soap_tmp_z1__zmienDaneProwadzacego.daneProwadzacego, _param_10);
+	soap->error = service->zmienDaneProwadzacego(soap_tmp_z1__zmienDaneProwadzacego.idProwadzacego, soap_tmp_z1__zmienDaneProwadzacego.daneProwadzacego, _param_10);
 	if (soap->error)
 		return soap->error;
-	soap->encodingStyle = "http://schemas.xmlsoap.org/soap/encoding/";
+	soap->encodingStyle = NULL;
 	soap_serializeheader(soap);
 	soap_serialize_z1__zmienDaneProwadzacegoResponse(soap, &_param_10);
 	if (soap_begin_count(soap))
@@ -711,7 +711,7 @@ static int serve_z1__usunProwadzacego(struct soap *soap, zapisyService *service)
 	soap->error = service->usunProwadzacego(soap_tmp_z1__usunProwadzacego.ID, _param_11);
 	if (soap->error)
 		return soap->error;
-	soap->encodingStyle = "http://schemas.xmlsoap.org/soap/encoding/";
+	soap->encodingStyle = NULL;
 	soap_serializeheader(soap);
 	soap_serialize_z1__usunProwadzacegoResponse(soap, &_param_11);
 	if (soap_begin_count(soap))
@@ -752,7 +752,7 @@ static int serve_z1__dodajStudenta(struct soap *soap, zapisyService *service)
 	soap->error = service->dodajStudenta(soap_tmp_z1__dodajStudenta.przedmiotID, soap_tmp_z1__dodajStudenta.student, _param_12);
 	if (soap->error)
 		return soap->error;
-	soap->encodingStyle = "http://schemas.xmlsoap.org/soap/encoding/";
+	soap->encodingStyle = NULL;
 	soap_serializeheader(soap);
 	soap_serialize_z1__dodajStudentaResponse(soap, &_param_12);
 	if (soap_begin_count(soap))
@@ -793,7 +793,7 @@ static int serve_z1__usunStudentaZPrzedmiotu(struct soap *soap, zapisyService *s
 	soap->error = service->usunStudentaZPrzedmiotu(soap_tmp_z1__usunStudentaZPrzedmiotu.przedmiotID, soap_tmp_z1__usunStudentaZPrzedmiotu.student, _param_13);
 	if (soap->error)
 		return soap->error;
-	soap->encodingStyle = "http://schemas.xmlsoap.org/soap/encoding/";
+	soap->encodingStyle = NULL;
 	soap_serializeheader(soap);
 	soap_serialize_z1__usunStudentaZPrzedmiotuResponse(soap, &_param_13);
 	if (soap_begin_count(soap))
@@ -834,7 +834,7 @@ static int serve_z1__usunWszystkichZPrzedmiotu(struct soap *soap, zapisyService 
 	soap->error = service->usunWszystkichZPrzedmiotu(soap_tmp_z1__usunWszystkichZPrzedmiotu.ID, _param_14);
 	if (soap->error)
 		return soap->error;
-	soap->encodingStyle = "http://schemas.xmlsoap.org/soap/encoding/";
+	soap->encodingStyle = NULL;
 	soap_serializeheader(soap);
 	soap_serialize_z1__usunWszystkichZPrzedmiotuResponse(soap, &_param_14);
 	if (soap_begin_count(soap))
@@ -875,7 +875,7 @@ static int serve_z1__usunPrzedmiot(struct soap *soap, zapisyService *service)
 	soap->error = service->usunPrzedmiot(soap_tmp_z1__usunPrzedmiot.ID, _param_15);
 	if (soap->error)
 		return soap->error;
-	soap->encodingStyle = "http://schemas.xmlsoap.org/soap/encoding/";
+	soap->encodingStyle = NULL;
 	soap_serializeheader(soap);
 	soap_serialize_z1__usunPrzedmiotResponse(soap, &_param_15);
 	if (soap_begin_count(soap))
@@ -916,7 +916,7 @@ static int serve_z1__edytujProjekt(struct soap *soap, zapisyService *service)
 	soap->error = service->edytujProjekt(soap_tmp_z1__edytujProjekt.przedmiotID, soap_tmp_z1__edytujProjekt.projektID, soap_tmp_z1__edytujProjekt.projekt, _param_16);
 	if (soap->error)
 		return soap->error;
-	soap->encodingStyle = "http://schemas.xmlsoap.org/soap/encoding/";
+	soap->encodingStyle = NULL;
 	soap_serializeheader(soap);
 	soap_serialize_z1__edytujProjektResponse(soap, &_param_16);
 	if (soap_begin_count(soap))
@@ -957,7 +957,7 @@ static int serve_z1__edytujTermin(struct soap *soap, zapisyService *service)
 	soap->error = service->edytujTermin(soap_tmp_z1__edytujTermin.przedmiotID, soap_tmp_z1__edytujTermin.terminID, soap_tmp_z1__edytujTermin.salaID, soap_tmp_z1__edytujTermin.termin, _param_17);
 	if (soap->error)
 		return soap->error;
-	soap->encodingStyle = "http://schemas.xmlsoap.org/soap/encoding/";
+	soap->encodingStyle = NULL;
 	soap_serializeheader(soap);
 	soap_serialize_z1__edytujTerminResponse(soap, &_param_17);
 	if (soap_begin_count(soap))
