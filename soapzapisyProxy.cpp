@@ -1098,4 +1098,116 @@ int zapisyProxy::edytujTermin(const char *endpoint, const char *soap_action, std
 		return soap_closesock(soap);
 	return soap_closesock(soap);
 }
+
+int zapisyProxy::wypiszZProjektu(const char *endpoint, const char *soap_action, std::string projektID, std::string zapisywanyID, struct z1__wypiszZProjektuResponse &_param_18)
+{	struct soap *soap = this->soap;
+	struct z1__wypiszZProjektu soap_tmp_z1__wypiszZProjektu;
+	if (endpoint)
+		soap_endpoint = endpoint;
+	if (soap_endpoint == NULL)
+		soap_endpoint = "http://192.168.0.13:8090/";
+	if (soap_action == NULL)
+		soap_action = "";
+	soap_tmp_z1__wypiszZProjektu.projektID = projektID;
+	soap_tmp_z1__wypiszZProjektu.zapisywanyID = zapisywanyID;
+	soap_begin(soap);
+	soap_set_version(soap, 1); /* SOAP1.1 */
+	soap->encodingStyle = NULL;
+	soap_serializeheader(soap);
+	soap_serialize_z1__wypiszZProjektu(soap, &soap_tmp_z1__wypiszZProjektu);
+	if (soap_begin_count(soap))
+		return soap->error;
+	if (soap->mode & SOAP_IO_LENGTH)
+	{	if (soap_envelope_begin_out(soap)
+		 || soap_putheader(soap)
+		 || soap_body_begin_out(soap)
+		 || soap_put_z1__wypiszZProjektu(soap, &soap_tmp_z1__wypiszZProjektu, "z1:wypiszZProjektu", NULL)
+		 || soap_body_end_out(soap)
+		 || soap_envelope_end_out(soap))
+			 return soap->error;
+	}
+	if (soap_end_count(soap))
+		return soap->error;
+	if (soap_connect(soap, soap_endpoint, soap_action)
+	 || soap_envelope_begin_out(soap)
+	 || soap_putheader(soap)
+	 || soap_body_begin_out(soap)
+	 || soap_put_z1__wypiszZProjektu(soap, &soap_tmp_z1__wypiszZProjektu, "z1:wypiszZProjektu", NULL)
+	 || soap_body_end_out(soap)
+	 || soap_envelope_end_out(soap)
+	 || soap_end_send(soap))
+		return soap_closesock(soap);
+	if (!&_param_18)
+		return soap_closesock(soap);
+	soap_default_z1__wypiszZProjektuResponse(soap, &_param_18);
+	if (soap_begin_recv(soap)
+	 || soap_envelope_begin_in(soap)
+	 || soap_recv_header(soap)
+	 || soap_body_begin_in(soap))
+		return soap_closesock(soap);
+	soap_get_z1__wypiszZProjektuResponse(soap, &_param_18, "z1:wypiszZProjektuResponse", NULL);
+	if (soap->error)
+		return soap_recv_fault(soap, 0);
+	if (soap_body_end_in(soap)
+	 || soap_envelope_end_in(soap)
+	 || soap_end_recv(soap))
+		return soap_closesock(soap);
+	return soap_closesock(soap);
+}
+
+int zapisyProxy::wypiszZTerminu(const char *endpoint, const char *soap_action, std::string terminID, std::string zapisywanyID, struct z1__wypiszZTerminuResponse &_param_19)
+{	struct soap *soap = this->soap;
+	struct z1__wypiszZTerminu soap_tmp_z1__wypiszZTerminu;
+	if (endpoint)
+		soap_endpoint = endpoint;
+	if (soap_endpoint == NULL)
+		soap_endpoint = "http://192.168.0.13:8090/";
+	if (soap_action == NULL)
+		soap_action = "";
+	soap_tmp_z1__wypiszZTerminu.terminID = terminID;
+	soap_tmp_z1__wypiszZTerminu.zapisywanyID = zapisywanyID;
+	soap_begin(soap);
+	soap_set_version(soap, 1); /* SOAP1.1 */
+	soap->encodingStyle = NULL;
+	soap_serializeheader(soap);
+	soap_serialize_z1__wypiszZTerminu(soap, &soap_tmp_z1__wypiszZTerminu);
+	if (soap_begin_count(soap))
+		return soap->error;
+	if (soap->mode & SOAP_IO_LENGTH)
+	{	if (soap_envelope_begin_out(soap)
+		 || soap_putheader(soap)
+		 || soap_body_begin_out(soap)
+		 || soap_put_z1__wypiszZTerminu(soap, &soap_tmp_z1__wypiszZTerminu, "z1:wypiszZTerminu", NULL)
+		 || soap_body_end_out(soap)
+		 || soap_envelope_end_out(soap))
+			 return soap->error;
+	}
+	if (soap_end_count(soap))
+		return soap->error;
+	if (soap_connect(soap, soap_endpoint, soap_action)
+	 || soap_envelope_begin_out(soap)
+	 || soap_putheader(soap)
+	 || soap_body_begin_out(soap)
+	 || soap_put_z1__wypiszZTerminu(soap, &soap_tmp_z1__wypiszZTerminu, "z1:wypiszZTerminu", NULL)
+	 || soap_body_end_out(soap)
+	 || soap_envelope_end_out(soap)
+	 || soap_end_send(soap))
+		return soap_closesock(soap);
+	if (!&_param_19)
+		return soap_closesock(soap);
+	soap_default_z1__wypiszZTerminuResponse(soap, &_param_19);
+	if (soap_begin_recv(soap)
+	 || soap_envelope_begin_in(soap)
+	 || soap_recv_header(soap)
+	 || soap_body_begin_in(soap))
+		return soap_closesock(soap);
+	soap_get_z1__wypiszZTerminuResponse(soap, &_param_19, "z1:wypiszZTerminuResponse", NULL);
+	if (soap->error)
+		return soap_recv_fault(soap, 0);
+	if (soap_body_end_in(soap)
+	 || soap_envelope_end_in(soap)
+	 || soap_end_recv(soap))
+		return soap_closesock(soap);
+	return soap_closesock(soap);
+}
 /* End of client proxy code */

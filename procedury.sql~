@@ -108,3 +108,33 @@ END$$
 
 DELIMITER ;
 
+
+-- --------------------------------------------------------------------------------
+-- Routine DDL
+-- Note: comments before and after the routine body will not be stored by the server
+-- --------------------------------------------------------------------------------
+DELIMITER $$
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `dodajStudenta`(
+	IN `Index` varchar(45),
+	IN Imie varchar(45),
+	IN Nazwisko varchar(45)
+	)
+BEGIN
+INSERT INTO `zapisy`.`student` (`index`,`imie`,`nazwisko`) VALUES (`Index`, Imie, Nazwisko);
+END
+
+-- --------------------------------------------------------------------------------
+-- Routine DDL
+-- Note: comments before and after the routine body will not be stored by the server
+-- --------------------------------------------------------------------------------
+DELIMITER $$
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `dodajStudentaDoPrzedmiotu`(
+	IN StudentId varchar(45),
+	IN PrzedmiotId varchar(45)
+	)
+BEGIN
+INSERT INTO `zapisy`.`student` (`student_id`,`przedmiot_id`) VALUES (StudentId, PrzedmiotId);
+END
+

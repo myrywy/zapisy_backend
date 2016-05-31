@@ -1,6 +1,7 @@
 #include "soapzapisyService.h"
 #include "bazadanych.h"
 #include <iostream>
+#include <cstdio>
 #include "tabela.h"
 
 int zapisyService::zapiszProjekt(std::string projektID, std::string zapisywanyID, struct z1__zapiszProjektResponse &_param_1){
@@ -54,19 +55,49 @@ int zapisyService::zapiszTermin(std::string projektID, std::string zapisywanyID,
      return SOAP_OK;
 }
  
- int zapisyService::eksportujProjekt(std::string ID, struct z1__eksportujProjektResponse &_param_5) {return 0;}
+ int zapisyService::eksportujProjekt(std::string ID, struct z1__eksportujProjektResponse &_param_5) {
+     try{
+        _param_5.nazwa="projekty_";
+        _param_5.nazwa+=Tabela("przedmiot").select("nazwa").whereEqual("id",ID);
+     }catch(...){
+         cerr << "Nie mozna znalezc nazwy przedmiotu. Zignorowano\n";
+         _param_5.nazwa="projekty";
+     }
+
+     _param_5.plik=BazaDanych::instancja()->pobierzProjekt(ID);
+     return SOAP_OK;
+ }
  
- int zapisyService::eksportujTermin(std::string ID, struct z1__eksportujTerminResponse &_param_6) {return 0;}
+ int zapisyService::eksportujTermin(std::string ID, struct z1__eksportujTerminResponse &_param_6) {
+     try{
+        _param_6.nazwa="terminy_";
+        _param_6.nazwa+=Tabela("przedmiot").select("nazwa").whereEqual("id",ID);
+     }catch(...){
+         cerr << "Nie mozna znalezc nazwy przedmiotu. Zignorowano\n";
+         _param_6.nazwa="terminy";
+     }
+     _param_6.plik=BazaDanych::instancja()->pobierzTermin(ID);
+     return SOAP_OK;
+ }
  
- int zapisyService::eksportujPrzedmiot(std::string ID, struct z1__eksportujPrzedmiotResponse &_param_7) {return 0;}
+ int zapisyService::eksportujPrzedmiot(std::string ID, struct z1__eksportujPrzedmiotResponse &_param_7) {
+     try{
+        _param_7.nazwa="studenci_";
+        _param_7.nazwa+=Tabela("przedmiot").select("nazwa").whereEqual("id",ID);
+     }catch(...){
+         cerr << "Nie mozna znalezc nazwy przedmiotu. Zignorowano\n";
+         _param_7.nazwa="studenci";
+     }
+     _param_7.plik=BazaDanych::instancja()->pobierzPrzedmiot(ID);
+     return SOAP_OK;}
 
  int zapisyService::dodajPrzedmiot(z1__przedmiot *przedmiot, struct z1__dodajPrzedmiotResponse &_param_8) {
 
      BazaDanych* baza=BazaDanych::instancja();
      if( baza->dodajPrzedmiot(przedmiot) ){
-         _param_9.rezultat="ok";
+         _param_8.rezultat="ok";
      }else{
-         _param_9.rezultat="error";
+         _param_8.rezultat="error";
      }
      return SOAP_OK;
  }
@@ -147,3 +178,11 @@ int zapisyService::zapiszTermin(std::string projektID, std::string zapisywanyID,
  int zapisyService::edytujProjekt(std::string przedmiotID, std::string projektID, z1__temat *projekt, struct z1__edytujProjektResponse &_param_16) {return 0;}
 
  int zapisyService::edytujTermin(std::string przedmiotID, std::string terminID, std::string salaID, z1__termin *termin, struct z1__edytujTerminResponse &_param_17) {return 0;}
+
+ int zapisyService::wypiszZProjektu(std::string projektID, std::string zapisywanyID, struct z1__wypiszZProjektuResponse &_param_18){
+     return 0;
+ }
+
+ int zapisyService::wypiszZTerminu(std::string terminID, std::string zapisywanyID, struct z1__wypiszZTerminuResponse &_param_19){
+     return 0;
+ }

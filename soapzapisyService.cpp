@@ -240,6 +240,8 @@ static int serve_z1__usunWszystkichZPrzedmiotu(struct soap*, zapisyService*);
 static int serve_z1__usunPrzedmiot(struct soap*, zapisyService*);
 static int serve_z1__edytujProjekt(struct soap*, zapisyService*);
 static int serve_z1__edytujTermin(struct soap*, zapisyService*);
+static int serve_z1__wypiszZProjektu(struct soap*, zapisyService*);
+static int serve_z1__wypiszZTerminu(struct soap*, zapisyService*);
 
 int zapisyService::dispatch()
 {	return dispatch(this->soap);
@@ -284,6 +286,10 @@ int zapisyService::dispatch(struct soap* soap)
 		return serve_z1__edytujProjekt(soap, this);
 	if (!soap_match_tag(soap, soap->tag, "z1:edytujTermin"))
 		return serve_z1__edytujTermin(soap, this);
+	if (!soap_match_tag(soap, soap->tag, "z1:wypiszZProjektu"))
+		return serve_z1__wypiszZProjektu(soap, this);
+	if (!soap_match_tag(soap, soap->tag, "z1:wypiszZTerminu"))
+		return serve_z1__wypiszZTerminu(soap, this);
 	return soap->error = SOAP_NO_METHOD;
 }
 
@@ -977,6 +983,88 @@ static int serve_z1__edytujTermin(struct soap *soap, zapisyService *service)
 	 || soap_putheader(soap)
 	 || soap_body_begin_out(soap)
 	 || soap_put_z1__edytujTerminResponse(soap, &_param_17, "z1:edytujTerminResponse", NULL)
+	 || soap_body_end_out(soap)
+	 || soap_envelope_end_out(soap)
+	 || soap_end_send(soap))
+		return soap->error;
+	return soap_closesock(soap);
+}
+
+static int serve_z1__wypiszZProjektu(struct soap *soap, zapisyService *service)
+{	struct z1__wypiszZProjektu soap_tmp_z1__wypiszZProjektu;
+	struct z1__wypiszZProjektuResponse _param_18;
+	soap_default_z1__wypiszZProjektuResponse(soap, &_param_18);
+	soap_default_z1__wypiszZProjektu(soap, &soap_tmp_z1__wypiszZProjektu);
+	if (!soap_get_z1__wypiszZProjektu(soap, &soap_tmp_z1__wypiszZProjektu, "z1:wypiszZProjektu", NULL))
+		return soap->error;
+	if (soap_body_end_in(soap)
+	 || soap_envelope_end_in(soap)
+	 || soap_end_recv(soap))
+		return soap->error;
+	soap->error = service->wypiszZProjektu(soap_tmp_z1__wypiszZProjektu.projektID, soap_tmp_z1__wypiszZProjektu.zapisywanyID, _param_18);
+	if (soap->error)
+		return soap->error;
+	soap->encodingStyle = NULL;
+	soap_serializeheader(soap);
+	soap_serialize_z1__wypiszZProjektuResponse(soap, &_param_18);
+	if (soap_begin_count(soap))
+		return soap->error;
+	if (soap->mode & SOAP_IO_LENGTH)
+	{	if (soap_envelope_begin_out(soap)
+		 || soap_putheader(soap)
+		 || soap_body_begin_out(soap)
+		 || soap_put_z1__wypiszZProjektuResponse(soap, &_param_18, "z1:wypiszZProjektuResponse", NULL)
+		 || soap_body_end_out(soap)
+		 || soap_envelope_end_out(soap))
+			 return soap->error;
+	};
+	if (soap_end_count(soap)
+	 || soap_response(soap, SOAP_OK)
+	 || soap_envelope_begin_out(soap)
+	 || soap_putheader(soap)
+	 || soap_body_begin_out(soap)
+	 || soap_put_z1__wypiszZProjektuResponse(soap, &_param_18, "z1:wypiszZProjektuResponse", NULL)
+	 || soap_body_end_out(soap)
+	 || soap_envelope_end_out(soap)
+	 || soap_end_send(soap))
+		return soap->error;
+	return soap_closesock(soap);
+}
+
+static int serve_z1__wypiszZTerminu(struct soap *soap, zapisyService *service)
+{	struct z1__wypiszZTerminu soap_tmp_z1__wypiszZTerminu;
+	struct z1__wypiszZTerminuResponse _param_19;
+	soap_default_z1__wypiszZTerminuResponse(soap, &_param_19);
+	soap_default_z1__wypiszZTerminu(soap, &soap_tmp_z1__wypiszZTerminu);
+	if (!soap_get_z1__wypiszZTerminu(soap, &soap_tmp_z1__wypiszZTerminu, "z1:wypiszZTerminu", NULL))
+		return soap->error;
+	if (soap_body_end_in(soap)
+	 || soap_envelope_end_in(soap)
+	 || soap_end_recv(soap))
+		return soap->error;
+	soap->error = service->wypiszZTerminu(soap_tmp_z1__wypiszZTerminu.terminID, soap_tmp_z1__wypiszZTerminu.zapisywanyID, _param_19);
+	if (soap->error)
+		return soap->error;
+	soap->encodingStyle = NULL;
+	soap_serializeheader(soap);
+	soap_serialize_z1__wypiszZTerminuResponse(soap, &_param_19);
+	if (soap_begin_count(soap))
+		return soap->error;
+	if (soap->mode & SOAP_IO_LENGTH)
+	{	if (soap_envelope_begin_out(soap)
+		 || soap_putheader(soap)
+		 || soap_body_begin_out(soap)
+		 || soap_put_z1__wypiszZTerminuResponse(soap, &_param_19, "z1:wypiszZTerminuResponse", NULL)
+		 || soap_body_end_out(soap)
+		 || soap_envelope_end_out(soap))
+			 return soap->error;
+	};
+	if (soap_end_count(soap)
+	 || soap_response(soap, SOAP_OK)
+	 || soap_envelope_begin_out(soap)
+	 || soap_putheader(soap)
+	 || soap_body_begin_out(soap)
+	 || soap_put_z1__wypiszZTerminuResponse(soap, &_param_19, "z1:wypiszZTerminuResponse", NULL)
 	 || soap_body_end_out(soap)
 	 || soap_envelope_end_out(soap)
 	 || soap_end_send(soap))

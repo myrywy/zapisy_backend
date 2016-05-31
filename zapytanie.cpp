@@ -47,7 +47,7 @@ void Zapytanie::wykonaj()
     StatementPtr stmt;
     string tmpSql=stworzSql();
     wyniki.resize(kolumny.size());
-    std::cerr << "Zapytanie: " << tmpSql << endl;
+    std::cout << "Zapytanie: " << tmpSql << endl;
     try{
         stmt=BazaDanych::instancja()->wykonaj(tmpSql);
     }catch(sql::SQLException err){
@@ -62,10 +62,15 @@ void Zapytanie::wykonaj()
             vector<string> w(kolumny.size());
             for(unsigned i=0; i<kolumny.size(); i++){
                 try{
-                    w[i]=res->getString(kolumny[i]);
-                    cerr << "wynik " << kolumny[i] << "=" << w[i] << endl;
+                    string s=kolumny[i];
+                    size_t pos;
+                    while( (pos=s.find_first_of('`'))!=string::npos){
+                        s.erase(pos,1);
+                    }
+                    w[i]=res->getString(s);
+                    std::cout << "wynik " << kolumny[i] << "=" << w[i] << endl;
                 }catch(sql::InvalidArgumentException err){
-                    cerr<< "Blad. Nie znaleziono pozycji " << kolumny[i] << ". Liczba wynikow: " << res->getRow() <<endl;
+                    std::cout<< "Blad. Nie znaleziono pozycji " << kolumny[i] << ". Liczba wynikow: " << res->getRow() <<endl;
                 }
             }
             wyniki.push_back(w);

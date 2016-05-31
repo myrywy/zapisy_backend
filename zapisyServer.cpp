@@ -22,7 +22,7 @@ void *process_request(void *serviceCopy)
 int main()
 {
 
-    zapisyService service(SOAP_IO_KEEPALIVE);
+    zapisyService service(SOAP_IO_KEEPALIVE | SOAP_C_UTFSTRING);
 
     //soap_init2(service.soap, SOAP_IO_KEEPALIVE, SOAP_IO_KEEPALIVE | SOAP_XML_INDENT);
     service.soap->bind_flags= SO_REUSEPORT;

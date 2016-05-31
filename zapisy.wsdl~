@@ -26,10 +26,10 @@
 			<xs:restriction base="xs:integer"/>
 		</xs:simpleType>
 		<xs:simpleType name="csv">
-			<xs:restriction base="xs:integer"/>
+			<xs:restriction base="xs:string"/>
 		</xs:simpleType>
 		<xs:simpleType name="filename">
-			<xs:restriction base="xs:integer"/>
+			<xs:restriction base="xs:string"/>
 		</xs:simpleType>
 		<xs:simpleType name="nrIndex">
 			<xs:restriction base="xs:string">
@@ -156,7 +156,7 @@
 </wsdl:message>
 
 <wsdl:message name="nowyPrzedmiot">
-	<wsdl:part name="przedmiot" type="tns:id"/>
+	<wsdl:part name="przedmiot" type="tns:przedmiot"/>
 </wsdl:message>
 
 <wsdl:message name="plikCsv">
@@ -166,6 +166,11 @@
 
 <wsdl:message name="infoZwrotne">
 	<wsdl:part name="rezultat" type="tns:wynik"/>
+</wsdl:message>
+
+<wsdl:message name="zapisTermin">
+	<wsdl:part name="projektID" type="tns:id"/>
+	<wsdl:part name="zapisywanyID" type="tns:id"/>
 </wsdl:message>
 
 <wsdl:portType name="zapisy">
@@ -235,6 +240,14 @@
 	</wsdl:operation>
 	<wsdl:operation name="usunPrzedmiot">
 		<wsdl:input message="tns:idMessage"/>
+		<wsdl:output message="tns:infoZwrotne"/>
+	</wsdl:operation>
+	<wsdl:operation name="wypiszZProjektu">
+		<wsdl:input message="tns:zapisProjekt"/>
+		<wsdl:output message="tns:infoZwrotne"/>
+	</wsdl:operation>
+	<wsdl:operation name="wypiszZTerminu">
+		<wsdl:input message="tns:zapisTermin"/>
 		<wsdl:output message="tns:infoZwrotne"/>
 	</wsdl:operation>
 </wsdl:portType>
@@ -386,6 +399,24 @@
 		</wsdl:output>
 	</wsdl:operation>
 	<wsdl:operation name="edytujTermin">
+		<soap:operation style="rpc" soapAction=""/>
+		<wsdl:input>
+			<soap:body namespace="localhost/zapisy.wsdl" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+		</wsdl:input>
+		<wsdl:output>
+			<soap:body namespace="localhost/zapisy.wsdl" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+		</wsdl:output>
+	</wsdl:operation>
+	<wsdl:operation name="wypiszZProjektu">
+		<soap:operation style="rpc" soapAction=""/>
+		<wsdl:input>
+			<soap:body namespace="localhost/zapisy.wsdl" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+		</wsdl:input>
+		<wsdl:output>
+			<soap:body namespace="localhost/zapisy.wsdl" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+		</wsdl:output>
+	</wsdl:operation>
+	<wsdl:operation name="wypiszZTerminu">
 		<soap:operation style="rpc" soapAction=""/>
 		<wsdl:input>
 			<soap:body namespace="localhost/zapisy.wsdl" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>

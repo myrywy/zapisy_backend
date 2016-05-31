@@ -126,5 +126,9 @@ A commercial use license is available from Genivia Inc., contact@genivia.com
         virtual int edytujProjekt(std::string przedmiotID, std::string projektID, z1__temat *projekt, struct z1__edytujProjektResponse &_param_16) SOAP_PURE_VIRTUAL;
         /// Web service operation 'edytujTermin' (returns SOAP_OK or error code)
         virtual int edytujTermin(std::string przedmiotID, std::string terminID, std::string salaID, z1__termin *termin, struct z1__edytujTerminResponse &_param_17) SOAP_PURE_VIRTUAL;
+        /// Web service operation 'wypiszZProjektu' (returns SOAP_OK or error code)
+        virtual int wypiszZProjektu(std::string projektID, std::string zapisywanyID, struct z1__wypiszZProjektuResponse &_param_18) SOAP_PURE_VIRTUAL;
+        /// Web service operation 'wypiszZTerminu' (returns SOAP_OK or error code)
+        virtual int wypiszZTerminu(std::string terminID, std::string zapisywanyID, struct z1__wypiszZTerminuResponse &_param_19) SOAP_PURE_VIRTUAL;
     };
 #endif

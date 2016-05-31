@@ -32,11 +32,12 @@ public:
     bool dodajProwadzacego(z1__prowadzacy *p);
     bool dodajStudenta(string przedmiotId, z1__student *s);
     //Pobiera z bazy informacje o zapisanych na projekt studentach i zwraca ich listę w formacie csv
-    string pobierzProjekt(int id);
+    string pobierzProjekt(string id);
     //Pobiera z bazy informacje o zapisanych na termin studentach i zwraca ich listę w formacie csv
-    string pobierzTermin(int id);
+    string pobierzTermin(string id);
     //Pobiera z bazy informacje o zapisanych na przedmiot studentach i zwraca ich listę w formacie csv
-    string pobierzPrzedmiot(int id);
+    string pobierzPrzedmiot(string id);
+    bool dodajPrzedmiot(z1__przedmiot *przedmiot);
     //z1__temat infoProjekt(int projektId);
     //z1__termin infoTermin(int terminId);
     int szukajProjekt(z1__temat projekt);
@@ -47,7 +48,7 @@ public:
     int wolneMiejscaTermin(int terminId);
     template<typename... Args> StatementPtr procedura(std::string nazwaProcedury, Args... argumenty){
         StatementPtr stmt(con->createStatement());
-        std::cerr << stworzWywolanieProcedury(nazwaProcedury,argumenty...) << std::endl;
+        std::cout << stworzWywolanieProcedury(nazwaProcedury,argumenty...) << std::endl;
         stmt->execute(stworzWywolanieProcedury(nazwaProcedury,argumenty...));
         return stmt;
     }

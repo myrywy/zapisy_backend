@@ -206,87 +206,83 @@ inline int soap_read_z1__nrIndex(struct soap *soap, std::string *p)
 	return SOAP_OK;
 }
 #endif
-/* z1__filename is a typedef synonym for xsd__integer */
 
 #ifndef SOAP_TYPE_z1__filename_DEFINED
 #define SOAP_TYPE_z1__filename_DEFINED
+SOAP_FMAC3 void SOAP_FMAC4 soap_default_z1__filename(struct soap*, std::string *);
+SOAP_FMAC3 void SOAP_FMAC4 soap_serialize_z1__filename(struct soap*, const std::string *);
 
-#define soap_default_z1__filename(soap, a) soap_default_xsd__integer(soap, a)
+#define soap_z1__filename2s soap_std__string2s
 
+SOAP_FMAC3 int SOAP_FMAC4 soap_out_z1__filename(struct soap*, const char*, int, const std::string*, const char*);
 
-#define soap_serialize_z1__filename soap_serialize_xsd__integer
+#define soap_s2z1__filename soap_s2std__string
 
+SOAP_FMAC3 std::string * SOAP_FMAC4 soap_in_z1__filename(struct soap*, const char*, std::string*, const char*);
 
-#define soap_z1__filename2s soap_xsd__integer2s
-
-
-#define soap_out_z1__filename soap_out_xsd__integer
-
-
-#define soap_s2z1__filename soap_s2xsd__integer
+#define soap_instantiate_z1__filename soap_instantiate_std__string
 
 
-#define soap_in_z1__filename soap_in_xsd__integer
+#define soap_new_z1__filename soap_new_std__string
 
+SOAP_FMAC3 int SOAP_FMAC4 soap_put_z1__filename(struct soap*, const std::string *, const char*, const char*);
 
-#define soap_instantiate_z1__filename soap_instantiate_xsd__integer
+inline int soap_write_z1__filename(struct soap *soap, std::string const *p)
+{	soap_free_temp(soap);
+	if (p)
+	{	if (soap_begin_send(soap) || soap_put_z1__filename(soap, p, "z1:filename", NULL) || soap_end_send(soap))
+			return soap->error;
+	}
+	return SOAP_OK;
+}
+SOAP_FMAC3 std::string * SOAP_FMAC4 soap_get_z1__filename(struct soap*, std::string *, const char*, const char*);
 
-
-#define soap_new_z1__filename soap_new_xsd__integer
-
-
-#define soap_put_z1__filename soap_put_xsd__integer
-
-
-#define soap_write_z1__filename soap_write_xsd__integer
-
-
-#define soap_get_z1__filename soap_get_xsd__integer
-
-
-#define soap_read_z1__filename soap_read_xsd__integer
-
+inline int soap_read_z1__filename(struct soap *soap, std::string *p)
+{	if (p)
+	{	if (soap_begin_recv(soap) || soap_get_z1__filename(soap, p, NULL, NULL) == NULL || soap_end_recv(soap))
+			return soap->error;
+	}
+	return SOAP_OK;
+}
 #endif
-/* z1__csv is a typedef synonym for xsd__integer */
 
 #ifndef SOAP_TYPE_z1__csv_DEFINED
 #define SOAP_TYPE_z1__csv_DEFINED
+SOAP_FMAC3 void SOAP_FMAC4 soap_default_z1__csv(struct soap*, std::string *);
+SOAP_FMAC3 void SOAP_FMAC4 soap_serialize_z1__csv(struct soap*, const std::string *);
 
-#define soap_default_z1__csv(soap, a) soap_default_xsd__integer(soap, a)
+#define soap_z1__csv2s soap_std__string2s
 
+SOAP_FMAC3 int SOAP_FMAC4 soap_out_z1__csv(struct soap*, const char*, int, const std::string*, const char*);
 
-#define soap_serialize_z1__csv soap_serialize_xsd__integer
+#define soap_s2z1__csv soap_s2std__string
 
+SOAP_FMAC3 std::string * SOAP_FMAC4 soap_in_z1__csv(struct soap*, const char*, std::string*, const char*);
 
-#define soap_z1__csv2s soap_xsd__integer2s
-
-
-#define soap_out_z1__csv soap_out_xsd__integer
-
-
-#define soap_s2z1__csv soap_s2xsd__integer
+#define soap_instantiate_z1__csv soap_instantiate_std__string
 
 
-#define soap_in_z1__csv soap_in_xsd__integer
+#define soap_new_z1__csv soap_new_std__string
 
+SOAP_FMAC3 int SOAP_FMAC4 soap_put_z1__csv(struct soap*, const std::string *, const char*, const char*);
 
-#define soap_instantiate_z1__csv soap_instantiate_xsd__integer
+inline int soap_write_z1__csv(struct soap *soap, std::string const *p)
+{	soap_free_temp(soap);
+	if (p)
+	{	if (soap_begin_send(soap) || soap_put_z1__csv(soap, p, "z1:csv", NULL) || soap_end_send(soap))
+			return soap->error;
+	}
+	return SOAP_OK;
+}
+SOAP_FMAC3 std::string * SOAP_FMAC4 soap_get_z1__csv(struct soap*, std::string *, const char*, const char*);
 
-
-#define soap_new_z1__csv soap_new_xsd__integer
-
-
-#define soap_put_z1__csv soap_put_xsd__integer
-
-
-#define soap_write_z1__csv soap_write_xsd__integer
-
-
-#define soap_get_z1__csv soap_get_xsd__integer
-
-
-#define soap_read_z1__csv soap_read_xsd__integer
-
+inline int soap_read_z1__csv(struct soap *soap, std::string *p)
+{	if (p)
+	{	if (soap_begin_recv(soap) || soap_get_z1__csv(soap, p, NULL, NULL) == NULL || soap_end_recv(soap))
+			return soap->error;
+	}
+	return SOAP_OK;
+}
 #endif
 /* z1__id is a typedef synonym for xsd__integer */
 
@@ -1286,6 +1282,234 @@ inline int soap_read_SOAP_ENV__Header(struct soap *soap, struct SOAP_ENV__Header
 }
 #endif
 
+#endif
+
+#ifndef SOAP_TYPE_z1__wypiszZTerminu_DEFINED
+#define SOAP_TYPE_z1__wypiszZTerminu_DEFINED
+SOAP_FMAC3 void SOAP_FMAC4 soap_default_z1__wypiszZTerminu(struct soap*, struct z1__wypiszZTerminu *);
+SOAP_FMAC3 void SOAP_FMAC4 soap_serialize_z1__wypiszZTerminu(struct soap*, const struct z1__wypiszZTerminu *);
+SOAP_FMAC3 int SOAP_FMAC4 soap_out_z1__wypiszZTerminu(struct soap*, const char*, int, const struct z1__wypiszZTerminu *, const char*);
+SOAP_FMAC3 struct z1__wypiszZTerminu * SOAP_FMAC4 soap_in_z1__wypiszZTerminu(struct soap*, const char*, struct z1__wypiszZTerminu *, const char*);
+SOAP_FMAC1 struct z1__wypiszZTerminu * SOAP_FMAC2 soap_instantiate_z1__wypiszZTerminu(struct soap*, int, const char*, const char*, size_t*);
+
+inline struct z1__wypiszZTerminu * soap_new_z1__wypiszZTerminu(struct soap *soap, int n = -1)
+{	return soap_instantiate_z1__wypiszZTerminu(soap, n, NULL, NULL, NULL);
+}
+
+inline struct z1__wypiszZTerminu * soap_new_req_z1__wypiszZTerminu(
+	struct soap *soap,
+	const std::string& terminID,
+	const std::string& zapisywanyID)
+{	struct z1__wypiszZTerminu *_p = soap_new_z1__wypiszZTerminu(soap);
+	if (_p)
+	{	soap_default_z1__wypiszZTerminu(soap, _p);
+		_p->terminID = terminID;
+		_p->zapisywanyID = zapisywanyID;
+	}
+	return _p;
+}
+
+inline struct z1__wypiszZTerminu * soap_new_set_z1__wypiszZTerminu(
+	struct soap *soap,
+	const std::string& terminID,
+	const std::string& zapisywanyID)
+{	struct z1__wypiszZTerminu *_p = soap_new_z1__wypiszZTerminu(soap);
+	if (_p)
+	{	soap_default_z1__wypiszZTerminu(soap, _p);
+		_p->terminID = terminID;
+		_p->zapisywanyID = zapisywanyID;
+	}
+	return _p;
+}
+SOAP_FMAC3 int SOAP_FMAC4 soap_put_z1__wypiszZTerminu(struct soap*, const struct z1__wypiszZTerminu *, const char*, const char*);
+
+inline int soap_write_z1__wypiszZTerminu(struct soap *soap, struct z1__wypiszZTerminu const *p)
+{	soap_free_temp(soap);
+	if (p)
+	{	if (soap_begin_send(soap) || (soap_serialize_z1__wypiszZTerminu(soap, p), 0) || soap_put_z1__wypiszZTerminu(soap, p, "z1:wypiszZTerminu", NULL) || soap_end_send(soap))
+			return soap->error;
+	}
+	return SOAP_OK;
+}
+SOAP_FMAC3 struct z1__wypiszZTerminu * SOAP_FMAC4 soap_get_z1__wypiszZTerminu(struct soap*, struct z1__wypiszZTerminu *, const char*, const char*);
+
+inline int soap_read_z1__wypiszZTerminu(struct soap *soap, struct z1__wypiszZTerminu *p)
+{	if (p)
+	{	soap_default_z1__wypiszZTerminu(soap, p);
+		if (soap_begin_recv(soap) || soap_get_z1__wypiszZTerminu(soap, p, NULL, NULL) == NULL || soap_end_recv(soap))
+			return soap->error;
+	}
+	return SOAP_OK;
+}
+#endif
+
+#ifndef SOAP_TYPE_z1__wypiszZTerminuResponse_DEFINED
+#define SOAP_TYPE_z1__wypiszZTerminuResponse_DEFINED
+SOAP_FMAC3 void SOAP_FMAC4 soap_default_z1__wypiszZTerminuResponse(struct soap*, struct z1__wypiszZTerminuResponse *);
+SOAP_FMAC3 void SOAP_FMAC4 soap_serialize_z1__wypiszZTerminuResponse(struct soap*, const struct z1__wypiszZTerminuResponse *);
+SOAP_FMAC3 int SOAP_FMAC4 soap_out_z1__wypiszZTerminuResponse(struct soap*, const char*, int, const struct z1__wypiszZTerminuResponse *, const char*);
+SOAP_FMAC3 struct z1__wypiszZTerminuResponse * SOAP_FMAC4 soap_in_z1__wypiszZTerminuResponse(struct soap*, const char*, struct z1__wypiszZTerminuResponse *, const char*);
+SOAP_FMAC1 struct z1__wypiszZTerminuResponse * SOAP_FMAC2 soap_instantiate_z1__wypiszZTerminuResponse(struct soap*, int, const char*, const char*, size_t*);
+
+inline struct z1__wypiszZTerminuResponse * soap_new_z1__wypiszZTerminuResponse(struct soap *soap, int n = -1)
+{	return soap_instantiate_z1__wypiszZTerminuResponse(soap, n, NULL, NULL, NULL);
+}
+
+inline struct z1__wypiszZTerminuResponse * soap_new_req_z1__wypiszZTerminuResponse(
+	struct soap *soap,
+	const std::string& rezultat)
+{	struct z1__wypiszZTerminuResponse *_p = soap_new_z1__wypiszZTerminuResponse(soap);
+	if (_p)
+	{	soap_default_z1__wypiszZTerminuResponse(soap, _p);
+		_p->rezultat = rezultat;
+	}
+	return _p;
+}
+
+inline struct z1__wypiszZTerminuResponse * soap_new_set_z1__wypiszZTerminuResponse(
+	struct soap *soap,
+	const std::string& rezultat)
+{	struct z1__wypiszZTerminuResponse *_p = soap_new_z1__wypiszZTerminuResponse(soap);
+	if (_p)
+	{	soap_default_z1__wypiszZTerminuResponse(soap, _p);
+		_p->rezultat = rezultat;
+	}
+	return _p;
+}
+SOAP_FMAC3 int SOAP_FMAC4 soap_put_z1__wypiszZTerminuResponse(struct soap*, const struct z1__wypiszZTerminuResponse *, const char*, const char*);
+
+inline int soap_write_z1__wypiszZTerminuResponse(struct soap *soap, struct z1__wypiszZTerminuResponse const *p)
+{	soap_free_temp(soap);
+	if (p)
+	{	if (soap_begin_send(soap) || (soap_serialize_z1__wypiszZTerminuResponse(soap, p), 0) || soap_put_z1__wypiszZTerminuResponse(soap, p, "z1:wypiszZTerminuResponse", NULL) || soap_end_send(soap))
+			return soap->error;
+	}
+	return SOAP_OK;
+}
+SOAP_FMAC3 struct z1__wypiszZTerminuResponse * SOAP_FMAC4 soap_get_z1__wypiszZTerminuResponse(struct soap*, struct z1__wypiszZTerminuResponse *, const char*, const char*);
+
+inline int soap_read_z1__wypiszZTerminuResponse(struct soap *soap, struct z1__wypiszZTerminuResponse *p)
+{	if (p)
+	{	soap_default_z1__wypiszZTerminuResponse(soap, p);
+		if (soap_begin_recv(soap) || soap_get_z1__wypiszZTerminuResponse(soap, p, NULL, NULL) == NULL || soap_end_recv(soap))
+			return soap->error;
+	}
+	return SOAP_OK;
+}
+#endif
+
+#ifndef SOAP_TYPE_z1__wypiszZProjektu_DEFINED
+#define SOAP_TYPE_z1__wypiszZProjektu_DEFINED
+SOAP_FMAC3 void SOAP_FMAC4 soap_default_z1__wypiszZProjektu(struct soap*, struct z1__wypiszZProjektu *);
+SOAP_FMAC3 void SOAP_FMAC4 soap_serialize_z1__wypiszZProjektu(struct soap*, const struct z1__wypiszZProjektu *);
+SOAP_FMAC3 int SOAP_FMAC4 soap_out_z1__wypiszZProjektu(struct soap*, const char*, int, const struct z1__wypiszZProjektu *, const char*);
+SOAP_FMAC3 struct z1__wypiszZProjektu * SOAP_FMAC4 soap_in_z1__wypiszZProjektu(struct soap*, const char*, struct z1__wypiszZProjektu *, const char*);
+SOAP_FMAC1 struct z1__wypiszZProjektu * SOAP_FMAC2 soap_instantiate_z1__wypiszZProjektu(struct soap*, int, const char*, const char*, size_t*);
+
+inline struct z1__wypiszZProjektu * soap_new_z1__wypiszZProjektu(struct soap *soap, int n = -1)
+{	return soap_instantiate_z1__wypiszZProjektu(soap, n, NULL, NULL, NULL);
+}
+
+inline struct z1__wypiszZProjektu * soap_new_req_z1__wypiszZProjektu(
+	struct soap *soap,
+	const std::string& projektID,
+	const std::string& zapisywanyID)
+{	struct z1__wypiszZProjektu *_p = soap_new_z1__wypiszZProjektu(soap);
+	if (_p)
+	{	soap_default_z1__wypiszZProjektu(soap, _p);
+		_p->projektID = projektID;
+		_p->zapisywanyID = zapisywanyID;
+	}
+	return _p;
+}
+
+inline struct z1__wypiszZProjektu * soap_new_set_z1__wypiszZProjektu(
+	struct soap *soap,
+	const std::string& projektID,
+	const std::string& zapisywanyID)
+{	struct z1__wypiszZProjektu *_p = soap_new_z1__wypiszZProjektu(soap);
+	if (_p)
+	{	soap_default_z1__wypiszZProjektu(soap, _p);
+		_p->projektID = projektID;
+		_p->zapisywanyID = zapisywanyID;
+	}
+	return _p;
+}
+SOAP_FMAC3 int SOAP_FMAC4 soap_put_z1__wypiszZProjektu(struct soap*, const struct z1__wypiszZProjektu *, const char*, const char*);
+
+inline int soap_write_z1__wypiszZProjektu(struct soap *soap, struct z1__wypiszZProjektu const *p)
+{	soap_free_temp(soap);
+	if (p)
+	{	if (soap_begin_send(soap) || (soap_serialize_z1__wypiszZProjektu(soap, p), 0) || soap_put_z1__wypiszZProjektu(soap, p, "z1:wypiszZProjektu", NULL) || soap_end_send(soap))
+			return soap->error;
+	}
+	return SOAP_OK;
+}
+SOAP_FMAC3 struct z1__wypiszZProjektu * SOAP_FMAC4 soap_get_z1__wypiszZProjektu(struct soap*, struct z1__wypiszZProjektu *, const char*, const char*);
+
+inline int soap_read_z1__wypiszZProjektu(struct soap *soap, struct z1__wypiszZProjektu *p)
+{	if (p)
+	{	soap_default_z1__wypiszZProjektu(soap, p);
+		if (soap_begin_recv(soap) || soap_get_z1__wypiszZProjektu(soap, p, NULL, NULL) == NULL || soap_end_recv(soap))
+			return soap->error;
+	}
+	return SOAP_OK;
+}
+#endif
+
+#ifndef SOAP_TYPE_z1__wypiszZProjektuResponse_DEFINED
+#define SOAP_TYPE_z1__wypiszZProjektuResponse_DEFINED
+SOAP_FMAC3 void SOAP_FMAC4 soap_default_z1__wypiszZProjektuResponse(struct soap*, struct z1__wypiszZProjektuResponse *);
+SOAP_FMAC3 void SOAP_FMAC4 soap_serialize_z1__wypiszZProjektuResponse(struct soap*, const struct z1__wypiszZProjektuResponse *);
+SOAP_FMAC3 int SOAP_FMAC4 soap_out_z1__wypiszZProjektuResponse(struct soap*, const char*, int, const struct z1__wypiszZProjektuResponse *, const char*);
+SOAP_FMAC3 struct z1__wypiszZProjektuResponse * SOAP_FMAC4 soap_in_z1__wypiszZProjektuResponse(struct soap*, const char*, struct z1__wypiszZProjektuResponse *, const char*);
+SOAP_FMAC1 struct z1__wypiszZProjektuResponse * SOAP_FMAC2 soap_instantiate_z1__wypiszZProjektuResponse(struct soap*, int, const char*, const char*, size_t*);
+
+inline struct z1__wypiszZProjektuResponse * soap_new_z1__wypiszZProjektuResponse(struct soap *soap, int n = -1)
+{	return soap_instantiate_z1__wypiszZProjektuResponse(soap, n, NULL, NULL, NULL);
+}
+
+inline struct z1__wypiszZProjektuResponse * soap_new_req_z1__wypiszZProjektuResponse(
+	struct soap *soap,
+	const std::string& rezultat)
+{	struct z1__wypiszZProjektuResponse *_p = soap_new_z1__wypiszZProjektuResponse(soap);
+	if (_p)
+	{	soap_default_z1__wypiszZProjektuResponse(soap, _p);
+		_p->rezultat = rezultat;
+	}
+	return _p;
+}
+
+inline struct z1__wypiszZProjektuResponse * soap_new_set_z1__wypiszZProjektuResponse(
+	struct soap *soap,
+	const std::string& rezultat)
+{	struct z1__wypiszZProjektuResponse *_p = soap_new_z1__wypiszZProjektuResponse(soap);
+	if (_p)
+	{	soap_default_z1__wypiszZProjektuResponse(soap, _p);
+		_p->rezultat = rezultat;
+	}
+	return _p;
+}
+SOAP_FMAC3 int SOAP_FMAC4 soap_put_z1__wypiszZProjektuResponse(struct soap*, const struct z1__wypiszZProjektuResponse *, const char*, const char*);
+
+inline int soap_write_z1__wypiszZProjektuResponse(struct soap *soap, struct z1__wypiszZProjektuResponse const *p)
+{	soap_free_temp(soap);
+	if (p)
+	{	if (soap_begin_send(soap) || (soap_serialize_z1__wypiszZProjektuResponse(soap, p), 0) || soap_put_z1__wypiszZProjektuResponse(soap, p, "z1:wypiszZProjektuResponse", NULL) || soap_end_send(soap))
+			return soap->error;
+	}
+	return SOAP_OK;
+}
+SOAP_FMAC3 struct z1__wypiszZProjektuResponse * SOAP_FMAC4 soap_get_z1__wypiszZProjektuResponse(struct soap*, struct z1__wypiszZProjektuResponse *, const char*, const char*);
+
+inline int soap_read_z1__wypiszZProjektuResponse(struct soap *soap, struct z1__wypiszZProjektuResponse *p)
+{	if (p)
+	{	soap_default_z1__wypiszZProjektuResponse(soap, p);
+		if (soap_begin_recv(soap) || soap_get_z1__wypiszZProjektuResponse(soap, p, NULL, NULL) == NULL || soap_end_recv(soap))
+			return soap->error;
+	}
+	return SOAP_OK;
+}
 #endif
 
 #ifndef SOAP_TYPE_z1__edytujTermin_DEFINED

@@ -141,5 +141,13 @@ A commercial use license is available from Genivia Inc., contact@genivia.com
         virtual int edytujTermin(std::string przedmiotID, std::string terminID, std::string salaID, z1__termin *termin, struct z1__edytujTerminResponse &_param_17)
         { return this->edytujTermin(NULL, NULL, przedmiotID, terminID, salaID, termin, _param_17); }
         virtual int edytujTermin(const char *soap_endpoint, const char *soap_action, std::string przedmiotID, std::string terminID, std::string salaID, z1__termin *termin, struct z1__edytujTerminResponse &_param_17);
+        /// Web service operation 'wypiszZProjektu' (returns SOAP_OK or error code)
+        virtual int wypiszZProjektu(std::string projektID, std::string zapisywanyID, struct z1__wypiszZProjektuResponse &_param_18)
+        { return this->wypiszZProjektu(NULL, NULL, projektID, zapisywanyID, _param_18); }
+        virtual int wypiszZProjektu(const char *soap_endpoint, const char *soap_action, std::string projektID, std::string zapisywanyID, struct z1__wypiszZProjektuResponse &_param_18);
+        /// Web service operation 'wypiszZTerminu' (returns SOAP_OK or error code)
+        virtual int wypiszZTerminu(std::string terminID, std::string zapisywanyID, struct z1__wypiszZTerminuResponse &_param_19)
+        { return this->wypiszZTerminu(NULL, NULL, terminID, zapisywanyID, _param_19); }
+        virtual int wypiszZTerminu(const char *soap_endpoint, const char *soap_action, std::string terminID, std::string zapisywanyID, struct z1__wypiszZTerminuResponse &_param_19);
     };
 #endif

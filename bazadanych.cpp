@@ -156,19 +156,42 @@ bool BazaDanych::dodajStudenta(string przedmiotId, z1__student *s)
     return true;
 }
 
-string BazaDanych::pobierzProjekt(int id)
+string BazaDanych::pobierzProjekt(string id)
 {
-    return "";
+
+    try{
+       string s=Tabela("student_temat").join("student","id_student","id").join("temat","id_temat","id").select({"imie","nazwisko","`index`","temat"}).whereEqual("przedmiot_id",id);
+        return s;
+    }catch(sql::SQLException err){
+        std::cout << "Przechwycono wyjatek SQL\n";
+        std::cout << err.what() << endl;
+        return "";
+    }
 }
 
-string BazaDanych::pobierzTermin(int id)
+string BazaDanych::pobierzTermin(string id)
 {
-    return "";
+
+    try{
+       string s=Tabela("student_termin").join("student","id_student","id").join("termin","id_termin","id").join("sala","sala_id=sala.id").select({"imie","nazwisko","`index`","dzien","godzina_od","godzina_do","numer"}).whereEqual("przedmiot_id",id);
+        return s;
+    }catch(sql::SQLException err){
+        std::cout << "Przechwycono wyjatek SQL\n";
+        std::cout << err.what() << endl;
+        return "";
+    }
 }
 
-string BazaDanych::pobierzPrzedmiot(int id)
+string BazaDanych::pobierzPrzedmiot(string id)
 {
-    return "";
+    try{
+       string s=Tabela("student_przedmiot").join("student","student_id","id").select({"imie","nazwisko","`index`"}).whereEqual("przedmiot_id",id);
+        return s;
+    }catch(sql::SQLException err){
+        std::cout << "Przechwycono wyjatek SQL\n";
+        std::cout << err.what() << endl;
+        return "";
+    }
 }
 int BazaDanych::szukajProjekt(z1__temat projekt)
 {
@@ -220,3 +243,16 @@ StatementPtr BazaDanych::wykonaj(string polecenieSql)
     return stmt;
 }
 
+
+
+bool BazaDanych::dodajPrzedmiot(z1__przedmiot *przedmiot)
+{
+    try{
+        procedura("dodajPrzedmiot",przedmiot->nazwa,przedmiot->typ);
+    }catch(sql::SQLException err){
+        std::cout << "Przechwycono wyjatek SQL\n";
+        std::cout << err.what() << endl;
+        return false;
+    }
+    return true;
+}
