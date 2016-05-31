@@ -67,8 +67,8 @@ void zapisyProxy::zapisyProxy_init(soap_mode imode, soap_mode omode)
 	soap_omode(this->soap, omode);
 	soap_endpoint = NULL;
 	static const struct Namespace namespaces[] = {
-        {"SOAP-ENV", "http://www.w3.org/2003/05/soap-envelope", "http://schemas.xmlsoap.org/soap/envelope/", NULL},
-        {"SOAP-ENC", "http://www.w3.org/2003/05/soap-encoding", "http://schemas.xmlsoap.org/soap/encoding/", NULL},
+        {"SOAP-ENV", "http://schemas.xmlsoap.org/soap/envelope/", "http://schemas.xmlsoap.org/soap/envelope/", NULL},
+        {"SOAP-ENC", "http://schemas.xmlsoap.org/soap/encoding/", "http://schemas.xmlsoap.org/soap/encoding/", NULL},
         {"xsi", "http://www.w3.org/2001/XMLSchema-instance", "http://www.w3.org/*/XMLSchema-instance", NULL},
         {"xsd", "http://www.w3.org/2001/XMLSchema", "http://www.w3.org/*/XMLSchema", NULL},
         {"z1", "localhost/zapisy.wsdl", NULL, NULL},
@@ -163,6 +163,7 @@ int zapisyProxy::zapiszProjekt(const char *endpoint, const char *soap_action, st
 	soap_tmp_z1__zapiszProjekt.projektID = projektID;
 	soap_tmp_z1__zapiszProjekt.zapisywanyID = zapisywanyID;
 	soap_begin(soap);
+	soap_set_version(soap, 1); /* SOAP1.1 */
 	soap->encodingStyle = "http://schemas.xmlsoap.org/soap/encoding/";
 	soap_serializeheader(soap);
 	soap_serialize_z1__zapiszProjekt(soap, &soap_tmp_z1__zapiszProjekt);
@@ -220,6 +221,7 @@ int zapisyProxy::dodajProjekt(const char *endpoint, const char *soap_action, std
 	soap_tmp_z1__dodajProjekt.przedmiotID = przedmiotID;
 	soap_tmp_z1__dodajProjekt.projekt = projekt;
 	soap_begin(soap);
+	soap_set_version(soap, 1); /* SOAP1.1 */
 	soap->encodingStyle = "http://schemas.xmlsoap.org/soap/encoding/";
 	soap_serializeheader(soap);
 	soap_serialize_z1__dodajProjekt(soap, &soap_tmp_z1__dodajProjekt);
@@ -277,6 +279,7 @@ int zapisyProxy::zapiszTermin(const char *endpoint, const char *soap_action, std
 	soap_tmp_z1__zapiszTermin.projektID = projektID;
 	soap_tmp_z1__zapiszTermin.zapisywanyID = zapisywanyID;
 	soap_begin(soap);
+	soap_set_version(soap, 1); /* SOAP1.1 */
 	soap->encodingStyle = "http://schemas.xmlsoap.org/soap/encoding/";
 	soap_serializeheader(soap);
 	soap_serialize_z1__zapiszTermin(soap, &soap_tmp_z1__zapiszTermin);
@@ -335,6 +338,7 @@ int zapisyProxy::dodajTermin(const char *endpoint, const char *soap_action, std:
 	soap_tmp_z1__dodajTermin.salaID = salaID;
 	soap_tmp_z1__dodajTermin.termin = termin;
 	soap_begin(soap);
+	soap_set_version(soap, 1); /* SOAP1.1 */
 	soap->encodingStyle = "http://schemas.xmlsoap.org/soap/encoding/";
 	soap_serializeheader(soap);
 	soap_serialize_z1__dodajTermin(soap, &soap_tmp_z1__dodajTermin);
@@ -391,6 +395,7 @@ int zapisyProxy::eksportujProjekt(const char *endpoint, const char *soap_action,
 		soap_action = "";
 	soap_tmp_z1__eksportujProjekt.ID = ID;
 	soap_begin(soap);
+	soap_set_version(soap, 1); /* SOAP1.1 */
 	soap->encodingStyle = "http://schemas.xmlsoap.org/soap/encoding/";
 	soap_serializeheader(soap);
 	soap_serialize_z1__eksportujProjekt(soap, &soap_tmp_z1__eksportujProjekt);
@@ -447,6 +452,7 @@ int zapisyProxy::eksportujTermin(const char *endpoint, const char *soap_action, 
 		soap_action = "";
 	soap_tmp_z1__eksportujTermin.ID = ID;
 	soap_begin(soap);
+	soap_set_version(soap, 1); /* SOAP1.1 */
 	soap->encodingStyle = "http://schemas.xmlsoap.org/soap/encoding/";
 	soap_serializeheader(soap);
 	soap_serialize_z1__eksportujTermin(soap, &soap_tmp_z1__eksportujTermin);
@@ -503,6 +509,7 @@ int zapisyProxy::eksportujPrzedmiot(const char *endpoint, const char *soap_actio
 		soap_action = "";
 	soap_tmp_z1__eksportujPrzedmiot.ID = ID;
 	soap_begin(soap);
+	soap_set_version(soap, 1); /* SOAP1.1 */
 	soap->encodingStyle = "http://schemas.xmlsoap.org/soap/encoding/";
 	soap_serializeheader(soap);
 	soap_serialize_z1__eksportujPrzedmiot(soap, &soap_tmp_z1__eksportujPrzedmiot);
@@ -560,6 +567,7 @@ int zapisyProxy::dodajPrzedmiot(const char *endpoint, const char *soap_action, s
 	soap_tmp_z1__dodajPrzedmiot.importowanyPrzedmiot = importowanyPrzedmiot;
 	soap_tmp_z1__dodajPrzedmiot.projekt = projekt;
 	soap_begin(soap);
+	soap_set_version(soap, 1); /* SOAP1.1 */
 	soap->encodingStyle = "http://schemas.xmlsoap.org/soap/encoding/";
 	soap_serializeheader(soap);
 	soap_serialize_z1__dodajPrzedmiot(soap, &soap_tmp_z1__dodajPrzedmiot);
@@ -616,6 +624,7 @@ int zapisyProxy::dodajProwadzacego(const char *endpoint, const char *soap_action
 		soap_action = "";
 	soap_tmp_z1__dodajProwadzacego.daneProwadzacego = daneProwadzacego;
 	soap_begin(soap);
+	soap_set_version(soap, 1); /* SOAP1.1 */
 	soap->encodingStyle = "http://schemas.xmlsoap.org/soap/encoding/";
 	soap_serializeheader(soap);
 	soap_serialize_z1__dodajProwadzacego(soap, &soap_tmp_z1__dodajProwadzacego);
@@ -672,6 +681,7 @@ int zapisyProxy::zmienDaneProwadzacego(const char *endpoint, const char *soap_ac
 		soap_action = "";
 	soap_tmp_z1__zmienDaneProwadzacego.daneProwadzacego = daneProwadzacego;
 	soap_begin(soap);
+	soap_set_version(soap, 1); /* SOAP1.1 */
 	soap->encodingStyle = "http://schemas.xmlsoap.org/soap/encoding/";
 	soap_serializeheader(soap);
 	soap_serialize_z1__zmienDaneProwadzacego(soap, &soap_tmp_z1__zmienDaneProwadzacego);
@@ -728,6 +738,7 @@ int zapisyProxy::usunProwadzacego(const char *endpoint, const char *soap_action,
 		soap_action = "";
 	soap_tmp_z1__usunProwadzacego.ID = ID;
 	soap_begin(soap);
+	soap_set_version(soap, 1); /* SOAP1.1 */
 	soap->encodingStyle = "http://schemas.xmlsoap.org/soap/encoding/";
 	soap_serializeheader(soap);
 	soap_serialize_z1__usunProwadzacego(soap, &soap_tmp_z1__usunProwadzacego);
@@ -785,6 +796,7 @@ int zapisyProxy::dodajStudenta(const char *endpoint, const char *soap_action, st
 	soap_tmp_z1__dodajStudenta.przedmiotID = przedmiotID;
 	soap_tmp_z1__dodajStudenta.student = student;
 	soap_begin(soap);
+	soap_set_version(soap, 1); /* SOAP1.1 */
 	soap->encodingStyle = "http://schemas.xmlsoap.org/soap/encoding/";
 	soap_serializeheader(soap);
 	soap_serialize_z1__dodajStudenta(soap, &soap_tmp_z1__dodajStudenta);
@@ -842,6 +854,7 @@ int zapisyProxy::usunStudentaZPrzedmiotu(const char *endpoint, const char *soap_
 	soap_tmp_z1__usunStudentaZPrzedmiotu.przedmiotID = przedmiotID;
 	soap_tmp_z1__usunStudentaZPrzedmiotu.student = student;
 	soap_begin(soap);
+	soap_set_version(soap, 1); /* SOAP1.1 */
 	soap->encodingStyle = "http://schemas.xmlsoap.org/soap/encoding/";
 	soap_serializeheader(soap);
 	soap_serialize_z1__usunStudentaZPrzedmiotu(soap, &soap_tmp_z1__usunStudentaZPrzedmiotu);
@@ -898,6 +911,7 @@ int zapisyProxy::usunWszystkichZPrzedmiotu(const char *endpoint, const char *soa
 		soap_action = "";
 	soap_tmp_z1__usunWszystkichZPrzedmiotu.ID = ID;
 	soap_begin(soap);
+	soap_set_version(soap, 1); /* SOAP1.1 */
 	soap->encodingStyle = "http://schemas.xmlsoap.org/soap/encoding/";
 	soap_serializeheader(soap);
 	soap_serialize_z1__usunWszystkichZPrzedmiotu(soap, &soap_tmp_z1__usunWszystkichZPrzedmiotu);
@@ -954,6 +968,7 @@ int zapisyProxy::usunPrzedmiot(const char *endpoint, const char *soap_action, st
 		soap_action = "";
 	soap_tmp_z1__usunPrzedmiot.ID = ID;
 	soap_begin(soap);
+	soap_set_version(soap, 1); /* SOAP1.1 */
 	soap->encodingStyle = "http://schemas.xmlsoap.org/soap/encoding/";
 	soap_serializeheader(soap);
 	soap_serialize_z1__usunPrzedmiot(soap, &soap_tmp_z1__usunPrzedmiot);
@@ -1012,6 +1027,7 @@ int zapisyProxy::edytujProjekt(const char *endpoint, const char *soap_action, st
 	soap_tmp_z1__edytujProjekt.projektID = projektID;
 	soap_tmp_z1__edytujProjekt.projekt = projekt;
 	soap_begin(soap);
+	soap_set_version(soap, 1); /* SOAP1.1 */
 	soap->encodingStyle = "http://schemas.xmlsoap.org/soap/encoding/";
 	soap_serializeheader(soap);
 	soap_serialize_z1__edytujProjekt(soap, &soap_tmp_z1__edytujProjekt);
@@ -1071,6 +1087,7 @@ int zapisyProxy::edytujTermin(const char *endpoint, const char *soap_action, std
 	soap_tmp_z1__edytujTermin.salaID = salaID;
 	soap_tmp_z1__edytujTermin.termin = termin;
 	soap_begin(soap);
+	soap_set_version(soap, 1); /* SOAP1.1 */
 	soap->encodingStyle = "http://schemas.xmlsoap.org/soap/encoding/";
 	soap_serializeheader(soap);
 	soap_serialize_z1__edytujTermin(soap, &soap_tmp_z1__edytujTermin);

@@ -4,6 +4,7 @@
 #include "tabela.h"
 
 int zapisyService::zapiszProjekt(std::string projektID, std::string zapisywanyID, struct z1__zapiszProjektResponse &_param_1){
+    cerr<< "zapisyService::zapiszProjekt" << endl;
 	BazaDanych* baza=BazaDanych::instancja();
     string przedmiotId=Tabela("temat").select("przedmiot_id").whereEqual("id",projektID);
     if(przedmiotId.empty()){
@@ -65,7 +66,10 @@ int zapisyService::zapiszTermin(std::string projektID, std::string zapisywanyID,
  }
 
  int zapisyService::dodajProwadzacego(z1__prowadzacy *daneProwadzacego, struct z1__dodajProwadzacegoResponse &_param_9) {
+     cerr << "zapisyService::dodajProwadzacego" << endl;
+     cout << "zapisyService::dodajProwadzacego" << endl;
      BazaDanych* baza=BazaDanych::instancja();
+     cerr << "2" << endl;
      if( baza->dodajProwadzacego(daneProwadzacego) ){
          _param_9.rezultat="ok";
      }else{

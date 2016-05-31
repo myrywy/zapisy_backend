@@ -107,14 +107,32 @@ bool BazaDanych::zapiszNaTermin(Id studentId, Id terminId)
 
 bool BazaDanych::dodajProwadzacego(z1__prowadzacy *p)
 {
+    cerr << "DODAJ PROWADZACEGO " << endl;
     try{
         procedura("dodajProwadzacego",p->email, p->haslo,p->imie,p->nazwisko);
     }catch(sql::SQLException err){
-        std::cerr << "Przechwycono wyjatek SQL\n";
-        std::cerr << err.what() << endl;
+        std::cout << "Przechwycono wyjatek SQL\n";
+        std::cout << err.what() << endl;
         return false;
-    }catch(...){
-        cerr << "Nierozpoznany wyjatek. " << endl;
+    }
+
+    try{
+        string pid=Tabela("prowadzacy").select("id").whereEqual("email","\""+p->email+"\"");
+        cout << "pid: " << pid << endl;
+        string rid;
+        if(p->admin){
+            rid=Tabela("rola").select("id").where("opis='ROLE_ADMIN'");
+            cout << "rid: " << rid << endl;
+            procedura("dodajRoleProwadzacego",pid,rid);
+        }
+/*
+        rid=Tabela("rola").select("id").where("opis='ROLE_USER'");
+        cout << "ridu: " << rid << endl;
+        procedura("dodajRoleProwadzacego",pid,rid);*/
+    }catch(sql::SQLException err){
+        std::cout << "Przechwycono wyjatek SQL\n";
+        std::cout << err.what() << endl;
+        return false;
     }
 
     return true;
