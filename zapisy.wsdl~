@@ -108,6 +108,10 @@
 	<wsdl:part name="zapisywanyID" type="tns:id"/>
 </wsdl:message>
 
+<wsdl:message name="nowyProwadzacy">
+	<wsdl:part name="daneProwadzacego" type="tns:prowadzacy"/>
+</wsdl:message>
+
 <wsdl:message name="aktualizacjaProwadzacego">
 	<wsdl:part name="idProwadzacego" type="tns:id"/>
 	<wsdl:part name="daneProwadzacego" type="tns:prowadzacy"/>
@@ -152,8 +156,7 @@
 </wsdl:message>
 
 <wsdl:message name="nowyPrzedmiot">
-	<wsdl:part name="importowanyPrzedmiot" type="tns:id"/>
-	<wsdl:part name="projekt" type="tns:temat"/>
+	<wsdl:part name="przedmiot" type="tns:id"/>
 </wsdl:message>
 
 <wsdl:message name="plikCsv">
@@ -207,7 +210,7 @@
 		<wsdl:output message="tns:plikCsv"/>
 	</wsdl:operation>
 	<wsdl:operation name="dodajProwadzacego">
-		<wsdl:input message="tns:aktualizacjaProwadzacego"/>
+		<wsdl:input message="tns:nowyProwadzacy"/>
 		<wsdl:output message="tns:infoZwrotne"/>
 	</wsdl:operation>
 	<wsdl:operation name="zmienDaneProwadzacego">

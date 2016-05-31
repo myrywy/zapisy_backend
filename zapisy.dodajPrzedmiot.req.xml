@@ -7,13 +7,10 @@
   xmlns:z1="localhost/zapisy.wsdl">
  <SOAP-ENV:Body>
   <z1:dodajPrzedmiot>
-   <importowanyPrzedmiot></importowanyPrzedmiot>
-   <projekt>
-    <temat></temat>
-    <opis></opis>
-    <miejsca></miejsca>
-    <wolneMiejsca></wolneMiejsca>
-   </projekt>
+   <przedmiot>
+    <nazwa></nazwa>
+    <typ></typ>
+   </przedmiot>
   </z1:dodajPrzedmiot>
  </SOAP-ENV:Body>
 </SOAP-ENV:Envelope>

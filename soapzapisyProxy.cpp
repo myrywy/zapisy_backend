@@ -541,7 +541,7 @@ int zapisyProxy::eksportujPrzedmiot(const char *endpoint, const char *soap_actio
 	return soap_closesock(soap);
 }
 
-int zapisyProxy::dodajPrzedmiot(const char *endpoint, const char *soap_action, std::string importowanyPrzedmiot, z1__temat *projekt, struct z1__dodajPrzedmiotResponse &_param_8)
+int zapisyProxy::dodajPrzedmiot(const char *endpoint, const char *soap_action, z1__przedmiot *przedmiot, struct z1__dodajPrzedmiotResponse &_param_8)
 {	struct soap *soap = this->soap;
 	struct z1__dodajPrzedmiot soap_tmp_z1__dodajPrzedmiot;
 	if (endpoint)
@@ -550,8 +550,7 @@ int zapisyProxy::dodajPrzedmiot(const char *endpoint, const char *soap_action, s
 		soap_endpoint = "http://192.168.0.13:8090/";
 	if (soap_action == NULL)
 		soap_action = "";
-	soap_tmp_z1__dodajPrzedmiot.importowanyPrzedmiot = importowanyPrzedmiot;
-	soap_tmp_z1__dodajPrzedmiot.projekt = projekt;
+	soap_tmp_z1__dodajPrzedmiot.przedmiot = przedmiot;
 	soap_begin(soap);
 	soap_set_version(soap, 1); /* SOAP1.1 */
 	soap->encodingStyle = NULL;

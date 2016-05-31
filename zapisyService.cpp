@@ -60,9 +60,15 @@ int zapisyService::zapiszTermin(std::string projektID, std::string zapisywanyID,
  
  int zapisyService::eksportujPrzedmiot(std::string ID, struct z1__eksportujPrzedmiotResponse &_param_7) {return 0;}
 
- int zapisyService::dodajPrzedmiot(std::string importowanyPrzedmiot, z1__temat *projekt, struct z1__dodajPrzedmiotResponse &_param_8) {
+ int zapisyService::dodajPrzedmiot(z1__przedmiot *przedmiot, struct z1__dodajPrzedmiotResponse &_param_8) {
 
-     return 0;
+     BazaDanych* baza=BazaDanych::instancja();
+     if( baza->dodajPrzedmiot(przedmiot) ){
+         _param_9.rezultat="ok";
+     }else{
+         _param_9.rezultat="error";
+     }
+     return SOAP_OK;
  }
 
  int zapisyService::dodajProwadzacego(z1__prowadzacy *daneProwadzacego, struct z1__dodajProwadzacegoResponse &_param_9) {

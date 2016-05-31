@@ -156,8 +156,7 @@
 </wsdl:message>
 
 <wsdl:message name="nowyPrzedmiot">
-	<wsdl:part name="importowanyPrzedmiot" type="tns:id"/>
-	<wsdl:part name="projekt" type="tns:temat"/>
+	<wsdl:part name="przedmiot" type="tns:przedmiot"/>
 </wsdl:message>
 
 <wsdl:message name="plikCsv">

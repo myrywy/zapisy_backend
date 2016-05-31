@@ -102,9 +102,9 @@ A commercial use license is available from Genivia Inc., contact@genivia.com
         { return this->eksportujPrzedmiot(NULL, NULL, ID, _param_7); }
         virtual int eksportujPrzedmiot(const char *soap_endpoint, const char *soap_action, std::string ID, struct z1__eksportujPrzedmiotResponse &_param_7);
         /// Web service operation 'dodajPrzedmiot' (returns SOAP_OK or error code)
-        virtual int dodajPrzedmiot(std::string importowanyPrzedmiot, z1__temat *projekt, struct z1__dodajPrzedmiotResponse &_param_8)
-        { return this->dodajPrzedmiot(NULL, NULL, importowanyPrzedmiot, projekt, _param_8); }
-        virtual int dodajPrzedmiot(const char *soap_endpoint, const char *soap_action, std::string importowanyPrzedmiot, z1__temat *projekt, struct z1__dodajPrzedmiotResponse &_param_8);
+        virtual int dodajPrzedmiot(z1__przedmiot *przedmiot, struct z1__dodajPrzedmiotResponse &_param_8)
+        { return this->dodajPrzedmiot(NULL, NULL, przedmiot, _param_8); }
+        virtual int dodajPrzedmiot(const char *soap_endpoint, const char *soap_action, z1__przedmiot *przedmiot, struct z1__dodajPrzedmiotResponse &_param_8);
         /// Web service operation 'dodajProwadzacego' (returns SOAP_OK or error code)
         virtual int dodajProwadzacego(z1__prowadzacy *daneProwadzacego, struct z1__dodajProwadzacegoResponse &_param_9)
         { return this->dodajProwadzacego(NULL, NULL, daneProwadzacego, _param_9); }

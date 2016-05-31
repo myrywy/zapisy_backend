@@ -585,7 +585,7 @@ static int serve_z1__dodajPrzedmiot(struct soap *soap, zapisyService *service)
 	 || soap_envelope_end_in(soap)
 	 || soap_end_recv(soap))
 		return soap->error;
-	soap->error = service->dodajPrzedmiot(soap_tmp_z1__dodajPrzedmiot.importowanyPrzedmiot, soap_tmp_z1__dodajPrzedmiot.projekt, _param_8);
+	soap->error = service->dodajPrzedmiot(soap_tmp_z1__dodajPrzedmiot.przedmiot, _param_8);
 	if (soap->error)
 		return soap->error;
 	soap->encodingStyle = NULL;

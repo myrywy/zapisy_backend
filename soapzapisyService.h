@@ -107,7 +107,7 @@ A commercial use license is available from Genivia Inc., contact@genivia.com
         /// Web service operation 'eksportujPrzedmiot' (returns SOAP_OK or error code)
         virtual int eksportujPrzedmiot(std::string ID, struct z1__eksportujPrzedmiotResponse &_param_7) SOAP_PURE_VIRTUAL;
         /// Web service operation 'dodajPrzedmiot' (returns SOAP_OK or error code)
-        virtual int dodajPrzedmiot(std::string importowanyPrzedmiot, z1__temat *projekt, struct z1__dodajPrzedmiotResponse &_param_8) SOAP_PURE_VIRTUAL;
+        virtual int dodajPrzedmiot(z1__przedmiot *przedmiot, struct z1__dodajPrzedmiotResponse &_param_8) SOAP_PURE_VIRTUAL;
         /// Web service operation 'dodajProwadzacego' (returns SOAP_OK or error code)
         virtual int dodajProwadzacego(z1__prowadzacy *daneProwadzacego, struct z1__dodajProwadzacegoResponse &_param_9) SOAP_PURE_VIRTUAL;
         /// Web service operation 'zmienDaneProwadzacego' (returns SOAP_OK or error code)

@@ -61,25 +61,25 @@ struct z1__eksportujTermin;	/* zapisy.h:956 */
 struct z1__eksportujPrzedmiotResponse;	/* zapisy.h:967 */
 struct z1__eksportujPrzedmiot;	/* zapisy.h:1026 */
 struct z1__dodajPrzedmiotResponse;	/* zapisy.h:1037 */
-struct z1__dodajPrzedmiot;	/* zapisy.h:1098 */
-struct z1__dodajProwadzacegoResponse;	/* zapisy.h:1109 */
-struct z1__dodajProwadzacego;	/* zapisy.h:1167 */
-struct z1__zmienDaneProwadzacegoResponse;	/* zapisy.h:1178 */
-struct z1__zmienDaneProwadzacego;	/* zapisy.h:1239 */
-struct z1__usunProwadzacegoResponse;	/* zapisy.h:1250 */
-struct z1__usunProwadzacego;	/* zapisy.h:1308 */
-struct z1__dodajStudentaResponse;	/* zapisy.h:1319 */
-struct z1__dodajStudenta;	/* zapisy.h:1380 */
-struct z1__usunStudentaZPrzedmiotuResponse;	/* zapisy.h:1391 */
-struct z1__usunStudentaZPrzedmiotu;	/* zapisy.h:1452 */
-struct z1__usunWszystkichZPrzedmiotuResponse;	/* zapisy.h:1463 */
-struct z1__usunWszystkichZPrzedmiotu;	/* zapisy.h:1521 */
-struct z1__usunPrzedmiotResponse;	/* zapisy.h:1532 */
-struct z1__usunPrzedmiot;	/* zapisy.h:1590 */
-struct z1__edytujProjektResponse;	/* zapisy.h:1601 */
-struct z1__edytujProjekt;	/* zapisy.h:1665 */
-struct z1__edytujTerminResponse;	/* zapisy.h:1676 */
-struct z1__edytujTermin;	/* zapisy.h:1743 */
+struct z1__dodajPrzedmiot;	/* zapisy.h:1095 */
+struct z1__dodajProwadzacegoResponse;	/* zapisy.h:1106 */
+struct z1__dodajProwadzacego;	/* zapisy.h:1164 */
+struct z1__zmienDaneProwadzacegoResponse;	/* zapisy.h:1175 */
+struct z1__zmienDaneProwadzacego;	/* zapisy.h:1236 */
+struct z1__usunProwadzacegoResponse;	/* zapisy.h:1247 */
+struct z1__usunProwadzacego;	/* zapisy.h:1305 */
+struct z1__dodajStudentaResponse;	/* zapisy.h:1316 */
+struct z1__dodajStudenta;	/* zapisy.h:1377 */
+struct z1__usunStudentaZPrzedmiotuResponse;	/* zapisy.h:1388 */
+struct z1__usunStudentaZPrzedmiotu;	/* zapisy.h:1449 */
+struct z1__usunWszystkichZPrzedmiotuResponse;	/* zapisy.h:1460 */
+struct z1__usunWszystkichZPrzedmiotu;	/* zapisy.h:1518 */
+struct z1__usunPrzedmiotResponse;	/* zapisy.h:1529 */
+struct z1__usunPrzedmiot;	/* zapisy.h:1587 */
+struct z1__edytujProjektResponse;	/* zapisy.h:1598 */
+struct z1__edytujProjekt;	/* zapisy.h:1662 */
+struct z1__edytujTerminResponse;	/* zapisy.h:1673 */
+struct z1__edytujTermin;	/* zapisy.h:1740 */
 
 /* zapisy.h:154 */
 #ifndef SOAP_TYPE_z1__student
@@ -752,32 +752,30 @@ struct z1__dodajPrzedmiotResponse {
 };
 #endif
 
-/* zapisy.h:1098 */
+/* zapisy.h:1095 */
 #ifndef SOAP_TYPE_z1__dodajPrzedmiot
-#define SOAP_TYPE_z1__dodajPrzedmiot (64)
+#define SOAP_TYPE_z1__dodajPrzedmiot (65)
 /* complex XSD type 'z1:dodajPrzedmiot': */
 struct z1__dodajPrzedmiot {
       public:
-        /** Required element 'importowanyPrzedmiot' of XSD type 'z1:id' */
-        std::string importowanyPrzedmiot;
-        /** Optional element 'projekt' of XSD type 'z1:temat' */
-        z1__temat *projekt;
+        /** Optional element 'przedmiot' of XSD type 'z1:przedmiot' */
+        z1__przedmiot *przedmiot;
       public:
         /** Return unique type id SOAP_TYPE_z1__dodajPrzedmiot */
         int soap_type() const { return SOAP_TYPE_z1__dodajPrzedmiot; }
         /** Constructor with member initializations */
         z1__dodajPrzedmiot()
         {
-          projekt = (z1__temat *)0;
+          przedmiot = (z1__przedmiot *)0;
         }
         /** Friend allocator used by soap_new_z1__dodajPrzedmiot(struct soap*, int) */
         friend SOAP_FMAC1 z1__dodajPrzedmiot * SOAP_FMAC2 soap_instantiate_z1__dodajPrzedmiot(struct soap*, int, const char*, const char*, size_t*);
 };
 #endif
 
-/* zapisy.h:1109 */
+/* zapisy.h:1106 */
 #ifndef SOAP_TYPE_z1__dodajProwadzacegoResponse
-#define SOAP_TYPE_z1__dodajProwadzacegoResponse (65)
+#define SOAP_TYPE_z1__dodajProwadzacegoResponse (66)
 /* complex XSD type 'z1:dodajProwadzacegoResponse': */
 struct z1__dodajProwadzacegoResponse {
       public:
@@ -795,9 +793,9 @@ struct z1__dodajProwadzacegoResponse {
 };
 #endif
 
-/* zapisy.h:1167 */
+/* zapisy.h:1164 */
 #ifndef SOAP_TYPE_z1__dodajProwadzacego
-#define SOAP_TYPE_z1__dodajProwadzacego (69)
+#define SOAP_TYPE_z1__dodajProwadzacego (70)
 /* complex XSD type 'z1:dodajProwadzacego': */
 struct z1__dodajProwadzacego {
       public:
@@ -816,9 +814,9 @@ struct z1__dodajProwadzacego {
 };
 #endif
 
-/* zapisy.h:1178 */
+/* zapisy.h:1175 */
 #ifndef SOAP_TYPE_z1__zmienDaneProwadzacegoResponse
-#define SOAP_TYPE_z1__zmienDaneProwadzacegoResponse (70)
+#define SOAP_TYPE_z1__zmienDaneProwadzacegoResponse (71)
 /* complex XSD type 'z1:zmienDaneProwadzacegoResponse': */
 struct z1__zmienDaneProwadzacegoResponse {
       public:
@@ -836,9 +834,9 @@ struct z1__zmienDaneProwadzacegoResponse {
 };
 #endif
 
-/* zapisy.h:1239 */
+/* zapisy.h:1236 */
 #ifndef SOAP_TYPE_z1__zmienDaneProwadzacego
-#define SOAP_TYPE_z1__zmienDaneProwadzacego (73)
+#define SOAP_TYPE_z1__zmienDaneProwadzacego (74)
 /* complex XSD type 'z1:zmienDaneProwadzacego': */
 struct z1__zmienDaneProwadzacego {
       public:
@@ -859,9 +857,9 @@ struct z1__zmienDaneProwadzacego {
 };
 #endif
 
-/* zapisy.h:1250 */
+/* zapisy.h:1247 */
 #ifndef SOAP_TYPE_z1__usunProwadzacegoResponse
-#define SOAP_TYPE_z1__usunProwadzacegoResponse (74)
+#define SOAP_TYPE_z1__usunProwadzacegoResponse (75)
 /* complex XSD type 'z1:usunProwadzacegoResponse': */
 struct z1__usunProwadzacegoResponse {
       public:
@@ -879,9 +877,9 @@ struct z1__usunProwadzacegoResponse {
 };
 #endif
 
-/* zapisy.h:1308 */
+/* zapisy.h:1305 */
 #ifndef SOAP_TYPE_z1__usunProwadzacego
-#define SOAP_TYPE_z1__usunProwadzacego (77)
+#define SOAP_TYPE_z1__usunProwadzacego (78)
 /* complex XSD type 'z1:usunProwadzacego': */
 struct z1__usunProwadzacego {
       public:
@@ -899,9 +897,9 @@ struct z1__usunProwadzacego {
 };
 #endif
 
-/* zapisy.h:1319 */
+/* zapisy.h:1316 */
 #ifndef SOAP_TYPE_z1__dodajStudentaResponse
-#define SOAP_TYPE_z1__dodajStudentaResponse (78)
+#define SOAP_TYPE_z1__dodajStudentaResponse (79)
 /* complex XSD type 'z1:dodajStudentaResponse': */
 struct z1__dodajStudentaResponse {
       public:
@@ -919,9 +917,9 @@ struct z1__dodajStudentaResponse {
 };
 #endif
 
-/* zapisy.h:1380 */
+/* zapisy.h:1377 */
 #ifndef SOAP_TYPE_z1__dodajStudenta
-#define SOAP_TYPE_z1__dodajStudenta (82)
+#define SOAP_TYPE_z1__dodajStudenta (83)
 /* complex XSD type 'z1:dodajStudenta': */
 struct z1__dodajStudenta {
       public:
@@ -942,9 +940,9 @@ struct z1__dodajStudenta {
 };
 #endif
 
-/* zapisy.h:1391 */
+/* zapisy.h:1388 */
 #ifndef SOAP_TYPE_z1__usunStudentaZPrzedmiotuResponse
-#define SOAP_TYPE_z1__usunStudentaZPrzedmiotuResponse (83)
+#define SOAP_TYPE_z1__usunStudentaZPrzedmiotuResponse (84)
 /* complex XSD type 'z1:usunStudentaZPrzedmiotuResponse': */
 struct z1__usunStudentaZPrzedmiotuResponse {
       public:
@@ -962,9 +960,9 @@ struct z1__usunStudentaZPrzedmiotuResponse {
 };
 #endif
 
-/* zapisy.h:1452 */
+/* zapisy.h:1449 */
 #ifndef SOAP_TYPE_z1__usunStudentaZPrzedmiotu
-#define SOAP_TYPE_z1__usunStudentaZPrzedmiotu (86)
+#define SOAP_TYPE_z1__usunStudentaZPrzedmiotu (87)
 /* complex XSD type 'z1:usunStudentaZPrzedmiotu': */
 struct z1__usunStudentaZPrzedmiotu {
       public:
@@ -985,9 +983,9 @@ struct z1__usunStudentaZPrzedmiotu {
 };
 #endif
 
-/* zapisy.h:1463 */
+/* zapisy.h:1460 */
 #ifndef SOAP_TYPE_z1__usunWszystkichZPrzedmiotuResponse
-#define SOAP_TYPE_z1__usunWszystkichZPrzedmiotuResponse (87)
+#define SOAP_TYPE_z1__usunWszystkichZPrzedmiotuResponse (88)
 /* complex XSD type 'z1:usunWszystkichZPrzedmiotuResponse': */
 struct z1__usunWszystkichZPrzedmiotuResponse {
       public:
@@ -1005,9 +1003,9 @@ struct z1__usunWszystkichZPrzedmiotuResponse {
 };
 #endif
 
-/* zapisy.h:1521 */
+/* zapisy.h:1518 */
 #ifndef SOAP_TYPE_z1__usunWszystkichZPrzedmiotu
-#define SOAP_TYPE_z1__usunWszystkichZPrzedmiotu (90)
+#define SOAP_TYPE_z1__usunWszystkichZPrzedmiotu (91)
 /* complex XSD type 'z1:usunWszystkichZPrzedmiotu': */
 struct z1__usunWszystkichZPrzedmiotu {
       public:
@@ -1025,9 +1023,9 @@ struct z1__usunWszystkichZPrzedmiotu {
 };
 #endif
 
-/* zapisy.h:1532 */
+/* zapisy.h:1529 */
 #ifndef SOAP_TYPE_z1__usunPrzedmiotResponse
-#define SOAP_TYPE_z1__usunPrzedmiotResponse (91)
+#define SOAP_TYPE_z1__usunPrzedmiotResponse (92)
 /* complex XSD type 'z1:usunPrzedmiotResponse': */
 struct z1__usunPrzedmiotResponse {
       public:
@@ -1045,9 +1043,9 @@ struct z1__usunPrzedmiotResponse {
 };
 #endif
 
-/* zapisy.h:1590 */
+/* zapisy.h:1587 */
 #ifndef SOAP_TYPE_z1__usunPrzedmiot
-#define SOAP_TYPE_z1__usunPrzedmiot (94)
+#define SOAP_TYPE_z1__usunPrzedmiot (95)
 /* complex XSD type 'z1:usunPrzedmiot': */
 struct z1__usunPrzedmiot {
       public:
@@ -1065,9 +1063,9 @@ struct z1__usunPrzedmiot {
 };
 #endif
 
-/* zapisy.h:1601 */
+/* zapisy.h:1598 */
 #ifndef SOAP_TYPE_z1__edytujProjektResponse
-#define SOAP_TYPE_z1__edytujProjektResponse (95)
+#define SOAP_TYPE_z1__edytujProjektResponse (96)
 /* complex XSD type 'z1:edytujProjektResponse': */
 struct z1__edytujProjektResponse {
       public:
@@ -1085,9 +1083,9 @@ struct z1__edytujProjektResponse {
 };
 #endif
 
-/* zapisy.h:1665 */
+/* zapisy.h:1662 */
 #ifndef SOAP_TYPE_z1__edytujProjekt
-#define SOAP_TYPE_z1__edytujProjekt (98)
+#define SOAP_TYPE_z1__edytujProjekt (99)
 /* complex XSD type 'z1:edytujProjekt': */
 struct z1__edytujProjekt {
       public:
@@ -1110,9 +1108,9 @@ struct z1__edytujProjekt {
 };
 #endif
 
-/* zapisy.h:1676 */
+/* zapisy.h:1673 */
 #ifndef SOAP_TYPE_z1__edytujTerminResponse
-#define SOAP_TYPE_z1__edytujTerminResponse (99)
+#define SOAP_TYPE_z1__edytujTerminResponse (100)
 /* complex XSD type 'z1:edytujTerminResponse': */
 struct z1__edytujTerminResponse {
       public:
@@ -1130,9 +1128,9 @@ struct z1__edytujTerminResponse {
 };
 #endif
 
-/* zapisy.h:1743 */
+/* zapisy.h:1740 */
 #ifndef SOAP_TYPE_z1__edytujTermin
-#define SOAP_TYPE_z1__edytujTermin (102)
+#define SOAP_TYPE_z1__edytujTermin (103)
 /* complex XSD type 'z1:edytujTermin': */
 struct z1__edytujTermin {
       public:
@@ -1157,10 +1155,10 @@ struct z1__edytujTermin {
 };
 #endif
 
-/* zapisy.h:1804 */
+/* zapisy.h:1801 */
 #ifndef WITH_NOGLOBAL
 #ifndef SOAP_TYPE_SOAP_ENV__Header
-#define SOAP_TYPE_SOAP_ENV__Header (103)
+#define SOAP_TYPE_SOAP_ENV__Header (104)
 /* SOAP_ENV__Header: */
 struct SOAP_ENV__Header {
       public:
@@ -1176,10 +1174,10 @@ struct SOAP_ENV__Header {
 #endif
 #endif
 
-/* zapisy.h:1804 */
+/* zapisy.h:1801 */
 #ifndef WITH_NOGLOBAL
 #ifndef SOAP_TYPE_SOAP_ENV__Code
-#define SOAP_TYPE_SOAP_ENV__Code (104)
+#define SOAP_TYPE_SOAP_ENV__Code (105)
 /* Type SOAP_ENV__Code is a recursive data type, (in)directly referencing itself through its (base or derived class) members */
 /* SOAP_ENV__Code: */
 struct SOAP_ENV__Code {
@@ -1203,10 +1201,10 @@ struct SOAP_ENV__Code {
 #endif
 #endif
 
-/* zapisy.h:1804 */
+/* zapisy.h:1801 */
 #ifndef WITH_NOGLOBAL
 #ifndef SOAP_TYPE_SOAP_ENV__Detail
-#define SOAP_TYPE_SOAP_ENV__Detail (106)
+#define SOAP_TYPE_SOAP_ENV__Detail (107)
 /* SOAP_ENV__Detail: */
 struct SOAP_ENV__Detail {
       public:
@@ -1231,10 +1229,10 @@ struct SOAP_ENV__Detail {
 #endif
 #endif
 
-/* zapisy.h:1804 */
+/* zapisy.h:1801 */
 #ifndef WITH_NOGLOBAL
 #ifndef SOAP_TYPE_SOAP_ENV__Reason
-#define SOAP_TYPE_SOAP_ENV__Reason (109)
+#define SOAP_TYPE_SOAP_ENV__Reason (110)
 /* SOAP_ENV__Reason: */
 struct SOAP_ENV__Reason {
       public:
@@ -1254,10 +1252,10 @@ struct SOAP_ENV__Reason {
 #endif
 #endif
 
-/* zapisy.h:1804 */
+/* zapisy.h:1801 */
 #ifndef WITH_NOGLOBAL
 #ifndef SOAP_TYPE_SOAP_ENV__Fault
-#define SOAP_TYPE_SOAP_ENV__Fault (110)
+#define SOAP_TYPE_SOAP_ENV__Fault (111)
 /* SOAP_ENV__Fault: */
 struct SOAP_ENV__Fault {
       public:
@@ -1477,122 +1475,122 @@ typedef std::string z1__wynik;
 
 /* struct SOAP_ENV__Fault has binding name 'SOAP_ENV__Fault' for type '' */
 #ifndef SOAP_TYPE_SOAP_ENV__Fault
-#define SOAP_TYPE_SOAP_ENV__Fault (110)
+#define SOAP_TYPE_SOAP_ENV__Fault (111)
 #endif
 
 /* struct SOAP_ENV__Reason has binding name 'SOAP_ENV__Reason' for type '' */
 #ifndef SOAP_TYPE_SOAP_ENV__Reason
-#define SOAP_TYPE_SOAP_ENV__Reason (109)
+#define SOAP_TYPE_SOAP_ENV__Reason (110)
 #endif
 
 /* struct SOAP_ENV__Detail has binding name 'SOAP_ENV__Detail' for type '' */
 #ifndef SOAP_TYPE_SOAP_ENV__Detail
-#define SOAP_TYPE_SOAP_ENV__Detail (106)
+#define SOAP_TYPE_SOAP_ENV__Detail (107)
 #endif
 
 /* struct SOAP_ENV__Code has binding name 'SOAP_ENV__Code' for type '' */
 #ifndef SOAP_TYPE_SOAP_ENV__Code
-#define SOAP_TYPE_SOAP_ENV__Code (104)
+#define SOAP_TYPE_SOAP_ENV__Code (105)
 #endif
 
 /* struct SOAP_ENV__Header has binding name 'SOAP_ENV__Header' for type '' */
 #ifndef SOAP_TYPE_SOAP_ENV__Header
-#define SOAP_TYPE_SOAP_ENV__Header (103)
+#define SOAP_TYPE_SOAP_ENV__Header (104)
 #endif
 
 /* struct z1__edytujTermin has binding name 'z1__edytujTermin' for type 'z1:edytujTermin' */
 #ifndef SOAP_TYPE_z1__edytujTermin
-#define SOAP_TYPE_z1__edytujTermin (102)
+#define SOAP_TYPE_z1__edytujTermin (103)
 #endif
 
 /* struct z1__edytujTerminResponse has binding name 'z1__edytujTerminResponse' for type 'z1:edytujTerminResponse' */
 #ifndef SOAP_TYPE_z1__edytujTerminResponse
-#define SOAP_TYPE_z1__edytujTerminResponse (99)
+#define SOAP_TYPE_z1__edytujTerminResponse (100)
 #endif
 
 /* struct z1__edytujProjekt has binding name 'z1__edytujProjekt' for type 'z1:edytujProjekt' */
 #ifndef SOAP_TYPE_z1__edytujProjekt
-#define SOAP_TYPE_z1__edytujProjekt (98)
+#define SOAP_TYPE_z1__edytujProjekt (99)
 #endif
 
 /* struct z1__edytujProjektResponse has binding name 'z1__edytujProjektResponse' for type 'z1:edytujProjektResponse' */
 #ifndef SOAP_TYPE_z1__edytujProjektResponse
-#define SOAP_TYPE_z1__edytujProjektResponse (95)
+#define SOAP_TYPE_z1__edytujProjektResponse (96)
 #endif
 
 /* struct z1__usunPrzedmiot has binding name 'z1__usunPrzedmiot' for type 'z1:usunPrzedmiot' */
 #ifndef SOAP_TYPE_z1__usunPrzedmiot
-#define SOAP_TYPE_z1__usunPrzedmiot (94)
+#define SOAP_TYPE_z1__usunPrzedmiot (95)
 #endif
 
 /* struct z1__usunPrzedmiotResponse has binding name 'z1__usunPrzedmiotResponse' for type 'z1:usunPrzedmiotResponse' */
 #ifndef SOAP_TYPE_z1__usunPrzedmiotResponse
-#define SOAP_TYPE_z1__usunPrzedmiotResponse (91)
+#define SOAP_TYPE_z1__usunPrzedmiotResponse (92)
 #endif
 
 /* struct z1__usunWszystkichZPrzedmiotu has binding name 'z1__usunWszystkichZPrzedmiotu' for type 'z1:usunWszystkichZPrzedmiotu' */
 #ifndef SOAP_TYPE_z1__usunWszystkichZPrzedmiotu
-#define SOAP_TYPE_z1__usunWszystkichZPrzedmiotu (90)
+#define SOAP_TYPE_z1__usunWszystkichZPrzedmiotu (91)
 #endif
 
 /* struct z1__usunWszystkichZPrzedmiotuResponse has binding name 'z1__usunWszystkichZPrzedmiotuResponse' for type 'z1:usunWszystkichZPrzedmiotuResponse' */
 #ifndef SOAP_TYPE_z1__usunWszystkichZPrzedmiotuResponse
-#define SOAP_TYPE_z1__usunWszystkichZPrzedmiotuResponse (87)
+#define SOAP_TYPE_z1__usunWszystkichZPrzedmiotuResponse (88)
 #endif
 
 /* struct z1__usunStudentaZPrzedmiotu has binding name 'z1__usunStudentaZPrzedmiotu' for type 'z1:usunStudentaZPrzedmiotu' */
 #ifndef SOAP_TYPE_z1__usunStudentaZPrzedmiotu
-#define SOAP_TYPE_z1__usunStudentaZPrzedmiotu (86)
+#define SOAP_TYPE_z1__usunStudentaZPrzedmiotu (87)
 #endif
 
 /* struct z1__usunStudentaZPrzedmiotuResponse has binding name 'z1__usunStudentaZPrzedmiotuResponse' for type 'z1:usunStudentaZPrzedmiotuResponse' */
 #ifndef SOAP_TYPE_z1__usunStudentaZPrzedmiotuResponse
-#define SOAP_TYPE_z1__usunStudentaZPrzedmiotuResponse (83)
+#define SOAP_TYPE_z1__usunStudentaZPrzedmiotuResponse (84)
 #endif
 
 /* struct z1__dodajStudenta has binding name 'z1__dodajStudenta' for type 'z1:dodajStudenta' */
 #ifndef SOAP_TYPE_z1__dodajStudenta
-#define SOAP_TYPE_z1__dodajStudenta (82)
+#define SOAP_TYPE_z1__dodajStudenta (83)
 #endif
 
 /* struct z1__dodajStudentaResponse has binding name 'z1__dodajStudentaResponse' for type 'z1:dodajStudentaResponse' */
 #ifndef SOAP_TYPE_z1__dodajStudentaResponse
-#define SOAP_TYPE_z1__dodajStudentaResponse (78)
+#define SOAP_TYPE_z1__dodajStudentaResponse (79)
 #endif
 
 /* struct z1__usunProwadzacego has binding name 'z1__usunProwadzacego' for type 'z1:usunProwadzacego' */
 #ifndef SOAP_TYPE_z1__usunProwadzacego
-#define SOAP_TYPE_z1__usunProwadzacego (77)
+#define SOAP_TYPE_z1__usunProwadzacego (78)
 #endif
 
 /* struct z1__usunProwadzacegoResponse has binding name 'z1__usunProwadzacegoResponse' for type 'z1:usunProwadzacegoResponse' */
 #ifndef SOAP_TYPE_z1__usunProwadzacegoResponse
-#define SOAP_TYPE_z1__usunProwadzacegoResponse (74)
+#define SOAP_TYPE_z1__usunProwadzacegoResponse (75)
 #endif
 
 /* struct z1__zmienDaneProwadzacego has binding name 'z1__zmienDaneProwadzacego' for type 'z1:zmienDaneProwadzacego' */
 #ifndef SOAP_TYPE_z1__zmienDaneProwadzacego
-#define SOAP_TYPE_z1__zmienDaneProwadzacego (73)
+#define SOAP_TYPE_z1__zmienDaneProwadzacego (74)
 #endif
 
 /* struct z1__zmienDaneProwadzacegoResponse has binding name 'z1__zmienDaneProwadzacegoResponse' for type 'z1:zmienDaneProwadzacegoResponse' */
 #ifndef SOAP_TYPE_z1__zmienDaneProwadzacegoResponse
-#define SOAP_TYPE_z1__zmienDaneProwadzacegoResponse (70)
+#define SOAP_TYPE_z1__zmienDaneProwadzacegoResponse (71)
 #endif
 
 /* struct z1__dodajProwadzacego has binding name 'z1__dodajProwadzacego' for type 'z1:dodajProwadzacego' */
 #ifndef SOAP_TYPE_z1__dodajProwadzacego
-#define SOAP_TYPE_z1__dodajProwadzacego (69)
+#define SOAP_TYPE_z1__dodajProwadzacego (70)
 #endif
 
 /* struct z1__dodajProwadzacegoResponse has binding name 'z1__dodajProwadzacegoResponse' for type 'z1:dodajProwadzacegoResponse' */
 #ifndef SOAP_TYPE_z1__dodajProwadzacegoResponse
-#define SOAP_TYPE_z1__dodajProwadzacegoResponse (65)
+#define SOAP_TYPE_z1__dodajProwadzacegoResponse (66)
 #endif
 
 /* struct z1__dodajPrzedmiot has binding name 'z1__dodajPrzedmiot' for type 'z1:dodajPrzedmiot' */
 #ifndef SOAP_TYPE_z1__dodajPrzedmiot
-#define SOAP_TYPE_z1__dodajPrzedmiot (64)
+#define SOAP_TYPE_z1__dodajPrzedmiot (65)
 #endif
 
 /* struct z1__dodajPrzedmiotResponse has binding name 'z1__dodajPrzedmiotResponse' for type 'z1:dodajPrzedmiotResponse' */
@@ -1672,27 +1670,32 @@ typedef std::string z1__wynik;
 
 /* struct SOAP_ENV__Reason * has binding name 'PointerToSOAP_ENV__Reason' for type '' */
 #ifndef SOAP_TYPE_PointerToSOAP_ENV__Reason
-#define SOAP_TYPE_PointerToSOAP_ENV__Reason (112)
+#define SOAP_TYPE_PointerToSOAP_ENV__Reason (113)
 #endif
 
 /* struct SOAP_ENV__Detail * has binding name 'PointerToSOAP_ENV__Detail' for type '' */
 #ifndef SOAP_TYPE_PointerToSOAP_ENV__Detail
-#define SOAP_TYPE_PointerToSOAP_ENV__Detail (111)
+#define SOAP_TYPE_PointerToSOAP_ENV__Detail (112)
 #endif
 
 /* struct SOAP_ENV__Code * has binding name 'PointerToSOAP_ENV__Code' for type '' */
 #ifndef SOAP_TYPE_PointerToSOAP_ENV__Code
-#define SOAP_TYPE_PointerToSOAP_ENV__Code (105)
+#define SOAP_TYPE_PointerToSOAP_ENV__Code (106)
 #endif
 
 /* z1__student * has binding name 'PointerToz1__student' for type 'z1:student' */
 #ifndef SOAP_TYPE_PointerToz1__student
-#define SOAP_TYPE_PointerToz1__student (79)
+#define SOAP_TYPE_PointerToz1__student (80)
 #endif
 
 /* z1__prowadzacy * has binding name 'PointerToz1__prowadzacy' for type 'z1:prowadzacy' */
 #ifndef SOAP_TYPE_PointerToz1__prowadzacy
-#define SOAP_TYPE_PointerToz1__prowadzacy (66)
+#define SOAP_TYPE_PointerToz1__prowadzacy (67)
+#endif
+
+/* z1__przedmiot * has binding name 'PointerToz1__przedmiot' for type 'z1:przedmiot' */
+#ifndef SOAP_TYPE_PointerToz1__przedmiot
+#define SOAP_TYPE_PointerToz1__przedmiot (62)
 #endif
 
 /* z1__termin * has binding name 'PointerToz1__termin' for type 'z1:termin' */

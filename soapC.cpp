@@ -18,7 +18,7 @@ A commercial use license is available from Genivia Inc., contact@genivia.com
 
 #include "soapH.h"
 
-SOAP_SOURCE_STAMP("@(#) soapC.cpp ver 2.8.30 2016-05-31 18:32:20 GMT")
+SOAP_SOURCE_STAMP("@(#) soapC.cpp ver 2.8.30 2016-05-31 19:41:23 GMT")
 
 
 #ifndef WITH_NOGLOBAL
@@ -303,6 +303,8 @@ SOAP_FMAC3 void * SOAP_FMAC4 soap_getelement(struct soap *soap, int *type)
 		return soap_in_PointerToz1__student(soap, NULL, NULL, "z1:student");
 	case SOAP_TYPE_PointerToz1__prowadzacy:
 		return soap_in_PointerToz1__prowadzacy(soap, NULL, NULL, "z1:prowadzacy");
+	case SOAP_TYPE_PointerToz1__przedmiot:
+		return soap_in_PointerToz1__przedmiot(soap, NULL, NULL, "z1:przedmiot");
 	case SOAP_TYPE_PointerToz1__termin:
 		return soap_in_PointerToz1__termin(soap, NULL, NULL, "z1:termin");
 	case SOAP_TYPE_PointerToz1__temat:
@@ -729,6 +731,8 @@ SOAP_FMAC3 int SOAP_FMAC4 soap_putelement(struct soap *soap, const void *ptr, co
 		return soap_out_PointerToz1__student(soap, tag, id, (z1__student *const*)ptr, "z1:student");
 	case SOAP_TYPE_PointerToz1__prowadzacy:
 		return soap_out_PointerToz1__prowadzacy(soap, tag, id, (z1__prowadzacy *const*)ptr, "z1:prowadzacy");
+	case SOAP_TYPE_PointerToz1__przedmiot:
+		return soap_out_PointerToz1__przedmiot(soap, tag, id, (z1__przedmiot *const*)ptr, "z1:przedmiot");
 	case SOAP_TYPE_PointerToz1__termin:
 		return soap_out_PointerToz1__termin(soap, tag, id, (z1__termin *const*)ptr, "z1:termin");
 	case SOAP_TYPE_PointerToz1__temat:
@@ -914,6 +918,9 @@ SOAP_FMAC3 void SOAP_FMAC4 soap_markelement(struct soap *soap, const void *ptr, 
 		break;
 	case SOAP_TYPE_PointerToz1__prowadzacy:
 		soap_serialize_PointerToz1__prowadzacy(soap, (z1__prowadzacy *const*)ptr);
+		break;
+	case SOAP_TYPE_PointerToz1__przedmiot:
+		soap_serialize_PointerToz1__przedmiot(soap, (z1__przedmiot *const*)ptr);
 		break;
 	case SOAP_TYPE_PointerToz1__termin:
 		soap_serialize_PointerToz1__termin(soap, (z1__termin *const*)ptr);
@@ -5926,16 +5933,14 @@ SOAP_FMAC3 struct z1__dodajProwadzacegoResponse * SOAP_FMAC4 soap_get_z1__dodajP
 SOAP_FMAC3 void SOAP_FMAC4 soap_default_z1__dodajPrzedmiot(struct soap *soap, struct z1__dodajPrzedmiot *a)
 {
 	(void)soap; (void)a; /* appease -Wall -Werror */
-	soap_default_z1__id(soap, &a->importowanyPrzedmiot);
-	a->projekt = NULL;
+	a->przedmiot = NULL;
 }
 
 SOAP_FMAC3 void SOAP_FMAC4 soap_serialize_z1__dodajPrzedmiot(struct soap *soap, const struct z1__dodajPrzedmiot *a)
 {
 	(void)soap; (void)a; /* appease -Wall -Werror */
 #ifndef WITH_NOIDREF
-	soap_serialize_z1__id(soap, &a->importowanyPrzedmiot);
-	soap_serialize_PointerToz1__temat(soap, &a->projekt);
+	soap_serialize_PointerToz1__przedmiot(soap, &a->przedmiot);
 #endif
 }
 
@@ -5944,20 +5949,17 @@ SOAP_FMAC3 int SOAP_FMAC4 soap_out_z1__dodajPrzedmiot(struct soap *soap, const c
 	(void)soap; (void)tag; (void)id; (void)a; (void)type; /* appease -Wall -Werror */
 	if (soap_element_begin_out(soap, tag, soap_embedded_id(soap, id, a, SOAP_TYPE_z1__dodajPrzedmiot), type))
 		return soap->error;
-	if (soap_out_z1__id(soap, "importowanyPrzedmiot", -1, &a->importowanyPrzedmiot, ""))
-		return soap->error;
-	if (soap_out_PointerToz1__temat(soap, "projekt", -1, &a->projekt, ""))
+	if (soap_out_PointerToz1__przedmiot(soap, "przedmiot", -1, &a->przedmiot, ""))
 		return soap->error;
 	return soap_element_end_out(soap, tag);
 }
 
 SOAP_FMAC3 struct z1__dodajPrzedmiot * SOAP_FMAC4 soap_in_z1__dodajPrzedmiot(struct soap *soap, const char *tag, struct z1__dodajPrzedmiot *a, const char *type)
 {
-	size_t soap_flag_importowanyPrzedmiot = 1;
-	size_t soap_flag_projekt = 1;
+	size_t soap_flag_przedmiot = 1;
 	if (soap_element_begin_in(soap, tag, 0, type))
 		return NULL;
-	a = (struct z1__dodajPrzedmiot *)soap_id_enter(soap, soap->id, a, SOAP_TYPE_z1__dodajPrzedmiot, sizeof(struct z1__dodajPrzedmiot), soap->type, soap->arrayType, soap_instantiate, soap_fbase);
+	a = (struct z1__dodajPrzedmiot *)soap_id_enter(soap, soap->id, a, SOAP_TYPE_z1__dodajPrzedmiot, sizeof(struct z1__dodajPrzedmiot), NULL, NULL, NULL, NULL);
 	if (!a)
 		return NULL;
 	soap_default_z1__dodajPrzedmiot(soap, a);
@@ -5965,14 +5967,9 @@ SOAP_FMAC3 struct z1__dodajPrzedmiot * SOAP_FMAC4 soap_in_z1__dodajPrzedmiot(str
 	{
 		for (;;)
 		{	soap->error = SOAP_TAG_MISMATCH;
-			if (soap_flag_importowanyPrzedmiot && (soap->error == SOAP_TAG_MISMATCH || soap->error == SOAP_NO_TAG))
-				if (soap_in_z1__id(soap, "importowanyPrzedmiot", &a->importowanyPrzedmiot, "z1:id"))
-				{	soap_flag_importowanyPrzedmiot--;
-					continue;
-				}
-			if (soap_flag_projekt && soap->error == SOAP_TAG_MISMATCH)
-				if (soap_in_PointerToz1__temat(soap, "projekt", &a->projekt, "z1:temat"))
-				{	soap_flag_projekt--;
+			if (soap_flag_przedmiot && soap->error == SOAP_TAG_MISMATCH)
+				if (soap_in_PointerToz1__przedmiot(soap, "przedmiot", &a->przedmiot, "z1:przedmiot"))
+				{	soap_flag_przedmiot--;
 					continue;
 				}
 			if (soap->error == SOAP_TAG_MISMATCH)
@@ -5984,14 +5981,6 @@ SOAP_FMAC3 struct z1__dodajPrzedmiot * SOAP_FMAC4 soap_in_z1__dodajPrzedmiot(str
 		}
 		if (soap_element_end_in(soap, tag))
 			return NULL;
-		if ((soap->mode & SOAP_XML_STRICT) && (soap_flag_importowanyPrzedmiot > 0))
-		{	soap->error = SOAP_OCCURS;
-			return NULL;
-		}
-	}
-	else if ((soap->mode & SOAP_XML_STRICT) && !*soap->href)
-	{	soap->error = SOAP_OCCURS;
-		return NULL;
 	}
 	else
 	{	a = (struct z1__dodajPrzedmiot *)soap_id_forward(soap, soap->href, (void*)a, 0, SOAP_TYPE_z1__dodajPrzedmiot, SOAP_TYPE_z1__dodajPrzedmiot, sizeof(struct z1__dodajPrzedmiot), 0, soap_finsert, NULL);
@@ -7954,6 +7943,65 @@ SOAP_FMAC3 int SOAP_FMAC4 soap_put_PointerToz1__prowadzacy(struct soap *soap, z1
 SOAP_FMAC3 z1__prowadzacy ** SOAP_FMAC4 soap_get_PointerToz1__prowadzacy(struct soap *soap, z1__prowadzacy **p, const char *tag, const char *type)
 {
 	if ((p = soap_in_PointerToz1__prowadzacy(soap, tag, p, type)))
+		if (soap_getindependent(soap))
+			return NULL;
+	return p;
+}
+
+SOAP_FMAC3 void SOAP_FMAC4 soap_serialize_PointerToz1__przedmiot(struct soap *soap, z1__przedmiot *const*a)
+{
+	(void)soap; (void)a; /* appease -Wall -Werror */
+#ifndef WITH_NOIDREF
+	if (!soap_reference(soap, *a, SOAP_TYPE_z1__przedmiot))
+		(*a)->soap_serialize(soap);
+#endif
+}
+
+SOAP_FMAC3 int SOAP_FMAC4 soap_out_PointerToz1__przedmiot(struct soap *soap, const char *tag, int id, z1__przedmiot *const*a, const char *type)
+{
+	id = soap_element_id(soap, tag, id, *a, NULL, 0, type, SOAP_TYPE_z1__przedmiot, NULL);
+	if (id < 0)
+		return soap->error;
+	return (*a)->soap_out(soap, tag, id, type);
+}
+
+SOAP_FMAC3 z1__przedmiot ** SOAP_FMAC4 soap_in_PointerToz1__przedmiot(struct soap *soap, const char *tag, z1__przedmiot **a, const char *type)
+{
+	(void)type; /* appease -Wall -Werror */
+	if (soap_element_begin_in(soap, tag, 1, NULL))
+		return NULL;
+	if (!a)
+		if (!(a = (z1__przedmiot **)soap_malloc(soap, sizeof(z1__przedmiot *))))
+			return NULL;
+	*a = NULL;
+	if (!soap->null && *soap->href != '#')
+	{	soap_revert(soap);
+		if (!(*a = (z1__przedmiot *)soap_instantiate_z1__przedmiot(soap, -1, soap->type, soap->arrayType, NULL)))
+			return NULL;
+		(*a)->soap_default(soap);
+		if (!(*a)->soap_in(soap, tag, NULL))
+		{	*a = NULL;
+			return NULL;
+		}
+	}
+	else
+	{	a = (z1__przedmiot **)soap_id_lookup(soap, soap->href, (void**)a, SOAP_TYPE_z1__przedmiot, sizeof(z1__przedmiot), 0, soap_fbase);
+		if (soap->body && soap_element_end_in(soap, tag))
+			return NULL;
+	}
+	return a;
+}
+
+SOAP_FMAC3 int SOAP_FMAC4 soap_put_PointerToz1__przedmiot(struct soap *soap, z1__przedmiot *const*a, const char *tag, const char *type)
+{
+	if (soap_out_PointerToz1__przedmiot(soap, tag?tag:"z1:przedmiot", -2, a, type))
+		return soap->error;
+	return soap_putindependent(soap);
+}
+
+SOAP_FMAC3 z1__przedmiot ** SOAP_FMAC4 soap_get_PointerToz1__przedmiot(struct soap *soap, z1__przedmiot **p, const char *tag, const char *type)
+{
+	if ((p = soap_in_PointerToz1__przedmiot(soap, tag, p, type)))
 		if (soap_getindependent(soap))
 			return NULL;
 	return p;

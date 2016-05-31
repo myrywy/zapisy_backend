@@ -2311,25 +2311,21 @@ inline struct z1__dodajPrzedmiot * soap_new_z1__dodajPrzedmiot(struct soap *soap
 }
 
 inline struct z1__dodajPrzedmiot * soap_new_req_z1__dodajPrzedmiot(
-	struct soap *soap,
-	const std::string& importowanyPrzedmiot)
+	struct soap *soap)
 {	struct z1__dodajPrzedmiot *_p = soap_new_z1__dodajPrzedmiot(soap);
 	if (_p)
 	{	soap_default_z1__dodajPrzedmiot(soap, _p);
-		_p->importowanyPrzedmiot = importowanyPrzedmiot;
 	}
 	return _p;
 }
 
 inline struct z1__dodajPrzedmiot * soap_new_set_z1__dodajPrzedmiot(
 	struct soap *soap,
-	const std::string& importowanyPrzedmiot,
-	z1__temat *projekt)
+	z1__przedmiot *przedmiot)
 {	struct z1__dodajPrzedmiot *_p = soap_new_z1__dodajPrzedmiot(soap);
 	if (_p)
 	{	soap_default_z1__dodajPrzedmiot(soap, _p);
-		_p->importowanyPrzedmiot = importowanyPrzedmiot;
-		_p->projekt = projekt;
+		_p->przedmiot = przedmiot;
 	}
 	return _p;
 }
@@ -3263,6 +3259,15 @@ SOAP_FMAC3 int SOAP_FMAC4 soap_out_PointerToz1__prowadzacy(struct soap*, const c
 SOAP_FMAC3 z1__prowadzacy ** SOAP_FMAC4 soap_in_PointerToz1__prowadzacy(struct soap*, const char*, z1__prowadzacy **, const char*);
 SOAP_FMAC3 int SOAP_FMAC4 soap_put_PointerToz1__prowadzacy(struct soap*, z1__prowadzacy *const*, const char*, const char*);
 SOAP_FMAC3 z1__prowadzacy ** SOAP_FMAC4 soap_get_PointerToz1__prowadzacy(struct soap*, z1__prowadzacy **, const char*, const char*);
+#endif
+
+#ifndef SOAP_TYPE_PointerToz1__przedmiot_DEFINED
+#define SOAP_TYPE_PointerToz1__przedmiot_DEFINED
+SOAP_FMAC3 void SOAP_FMAC4 soap_serialize_PointerToz1__przedmiot(struct soap*, z1__przedmiot *const*);
+SOAP_FMAC3 int SOAP_FMAC4 soap_out_PointerToz1__przedmiot(struct soap*, const char *, int, z1__przedmiot *const*, const char *);
+SOAP_FMAC3 z1__przedmiot ** SOAP_FMAC4 soap_in_PointerToz1__przedmiot(struct soap*, const char*, z1__przedmiot **, const char*);
+SOAP_FMAC3 int SOAP_FMAC4 soap_put_PointerToz1__przedmiot(struct soap*, z1__przedmiot *const*, const char*, const char*);
+SOAP_FMAC3 z1__przedmiot ** SOAP_FMAC4 soap_get_PointerToz1__przedmiot(struct soap*, z1__przedmiot **, const char*, const char*);
 #endif
 
 #ifndef SOAP_TYPE_PointerToz1__termin_DEFINED
