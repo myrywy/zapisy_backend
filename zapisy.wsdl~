@@ -62,6 +62,7 @@
 				<xs:element name="godzinaOd" type="tns:godzina"/>
 				<xs:element name="godzinaDo" type="tns:godzina"/>
 				<xs:element name="miejsca" type="xs:int"/>
+				<xs:element name="nrSali" type="xs:string"/>
 			</xs:all>
 		</xs:complexType>
 		<xs:complexType name="sala">

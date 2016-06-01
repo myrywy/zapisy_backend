@@ -177,3 +177,64 @@ BEGIN
 DELETE FROM student_termin WHERE `id_student`=StudentId AND `id_termin`=TerminId;
 UPDATE termin SET miejsca = miejsca + 1 WHERE `id`=TerminId; 
 END
+
+DELIMITER $$
+
+CREATE PROCEDURE `usunTemat` (
+	IN tematId INT(11)
+)
+BEGIN
+DELETE FROM student_temat WHERE id_temat=tematId;
+DELETE FROM temat where id=tematId;
+END
+
+
+USE `zapisy`;
+DROP procedure IF EXISTS `zapisy`.`usunTemat`;
+
+DELIMITER $$
+USE `zapisy`$$
+CREATE DEFINER=`root`@`127.0.0.1` PROCEDURE `usunTermin`(
+	IN terminId INT(11)
+)
+BEGIN
+DELETE FROM student_termin WHERE id_termin=terminId;
+DELETE FROM termin where id=terminId;
+END$$
+
+DELIMITER ;
+;
+
+
+-- --------------------------------------------------------------------------------
+-- Routine DDL
+-- Note: comments before and after the routine body will not be stored by the server
+-- --------------------------------------------------------------------------------
+DELIMITER $$
+
+CREATE PROCEDURE `usunWszystkieTematyPrzedmiotu` (
+	IN przedmiotId INT(11)
+)
+BEGIN
+	DELETE FROM student_temat WHERE id_temat IN (
+		SELECT id FROM temat where przedmiot_id=przedmiotId
+	);
+	DELETE FROM temat WHERE przedmiot_id=przedmiotId;
+END
+
+
+-- --------------------------------------------------------------------------------
+-- Routine DDL
+-- Note: comments before and after the routine body will not be stored by the server
+-- --------------------------------------------------------------------------------
+DELIMITER $$
+
+CREATE PROCEDURE `usunWszystkieTerminyPrzedmiotu` (
+	IN terminId INT(11)
+)
+BEGIN
+	DELETE FROM student_termin WHERE id_termin IN (
+		SELECT id FROM termin where przedmiot_id=przedmiotId
+	);
+	DELETE FROM termin WHERE przedmiot_id=przedmiotId;
+END
