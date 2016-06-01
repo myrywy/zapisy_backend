@@ -189,7 +189,13 @@ int zapisyService::zapiszTermin(std::string projektID, std::string zapisywanyID,
  }
 
  int zapisyService::edytujTermin(std::string przedmiotID, std::string terminID, std::string salaID, z1__termin *termin, struct z1__edytujTerminResponse &_param_17) {
-     return 0;
+     BazaDanych* baza=BazaDanych::instancja();
+     if( baza->edytujTermin(terminID, *termin) ){
+         _param_17.rezultat="ok";
+     }else{
+         _param_17.rezultat="error";
+     }
+     return SOAP_OK;
  }
 
  int zapisyService::wypiszZProjektu(std::string projektID, std::string zapisywanyID, struct z1__wypiszZProjektuResponse &_param_18){

@@ -674,7 +674,8 @@ inline z1__termin * soap_new_req_z1__termin(
 	const std::string& dzien,
 	const std::string& godzinaOd,
 	const std::string& godzinaDo,
-	int miejsca)
+	int miejsca,
+	const std::string& nrSali)
 {	z1__termin *_p = soap_new_z1__termin(soap);
 	if (_p)
 	{	_p->soap_default(soap);
@@ -682,6 +683,7 @@ inline z1__termin * soap_new_req_z1__termin(
 		_p->z1__termin::godzinaOd = godzinaOd;
 		_p->z1__termin::godzinaDo = godzinaDo;
 		_p->z1__termin::miejsca = miejsca;
+		_p->z1__termin::nrSali = nrSali;
 	}
 	return _p;
 }
@@ -691,7 +693,8 @@ inline z1__termin * soap_new_set_z1__termin(
 	const std::string& dzien,
 	const std::string& godzinaOd,
 	const std::string& godzinaDo,
-	int miejsca)
+	int miejsca,
+	const std::string& nrSali)
 {	z1__termin *_p = soap_new_z1__termin(soap);
 	if (_p)
 	{	_p->soap_default(soap);
@@ -699,6 +702,7 @@ inline z1__termin * soap_new_set_z1__termin(
 		_p->z1__termin::godzinaOd = godzinaOd;
 		_p->z1__termin::godzinaDo = godzinaDo;
 		_p->z1__termin::miejsca = miejsca;
+		_p->z1__termin::nrSali = nrSali;
 	}
 	return _p;
 }

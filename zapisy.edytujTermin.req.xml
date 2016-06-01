@@ -15,6 +15,7 @@
     <godzinaOd></godzinaOd>
     <godzinaDo></godzinaDo>
     <miejsca>0</miejsca>
+    <nrSali></nrSali>
    </termin>
   </z1:edytujTermin>
  </SOAP-ENV:Body>

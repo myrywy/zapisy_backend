@@ -58,12 +58,6 @@ void Zapytanie::wykonaj()
     }
     ResultsPtr res(stmt->getResultSet());
     if(kolumny.size()>0){
-        if(res->getRow()>=0){
-            std::cout << "Brak wynikow! " << endl;
-            wyniki.clear();
-            aktualne=true;
-            return;
-        }
         while(res->next()){
             /*for(int i=1; true; i++){
                 std::cout << "Kolumny:" << endl;
@@ -96,8 +90,9 @@ void Zapytanie::wykonaj()
             }
             wyniki.push_back(w);
         }
+    }else{
+        wyniki.clear();
     }
-    wyniki.clear();
     aktualne=true;
 }
 

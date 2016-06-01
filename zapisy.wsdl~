@@ -168,11 +168,6 @@
 	<wsdl:part name="rezultat" type="tns:wynik"/>
 </wsdl:message>
 
-<wsdl:message name="zapisTermin">
-	<wsdl:part name="projektID" type="tns:id"/>
-	<wsdl:part name="zapisywanyID" type="tns:id"/>
-</wsdl:message>
-
 <wsdl:portType name="zapisy">
 	<wsdl:operation name="zapiszProjekt">
 		<wsdl:input message="tns:zapisProjekt"/>

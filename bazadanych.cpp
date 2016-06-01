@@ -115,7 +115,29 @@ bool BazaDanych::edytujProjekt(string projektId, z1__temat t)
 
 bool BazaDanych::edytujTermin(string terminId, z1__termin t)
 {
-    return false;
+    try{
+        string salaId=Tabela("sala").select("id").whereEqual("numer",t.nrSali);
+        if(salaId.empty()){
+            dodaj("sala",{"numer"},{t.nrSali});
+            salaId=Tabela("sala").select("id").whereEqual("numer",t.nrSali);
+            if(salaId.empty()){
+                return false;
+            }
+        }
+        aktualizuj("termin",terminId,{"dzien","godzina_od","godzina_do","miejsca","sala_id"},{t.dzien, t.godzinaDo, t.godzinaOd, std::to_string(t.miejsca), salaId});
+     }catch(sql::SQLException err){
+        std::cerr << "Przechwycono wyjatek SQL \n";
+        std::cerr << err.what() << endl;
+        return false;
+    }catch(std::exception err){
+        std::cerr << "Nieznany blad. Zignorowano \n";
+        std::cerr << err.what() << endl;
+        return false;
+    }catch(...){
+        cout << "Nieznany blad. Zignorowano."<<endl;
+        return false;
+    }
+    return true;
 }
 
 bool BazaDanych::zapiszNaProjekt(Id studentId, Id projektId)

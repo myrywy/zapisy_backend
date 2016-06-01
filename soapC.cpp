@@ -18,7 +18,7 @@ A commercial use license is available from Genivia Inc., contact@genivia.com
 
 #include "soapH.h"
 
-SOAP_SOURCE_STAMP("@(#) soapC.cpp ver 2.8.30 2016-05-31 20:56:16 GMT")
+SOAP_SOURCE_STAMP("@(#) soapC.cpp ver 2.8.30 2016-06-01 18:28:55 GMT")
 
 
 #ifndef WITH_NOGLOBAL
@@ -2981,6 +2981,7 @@ void z1__termin::soap_default(struct soap *soap)
 	soap_default_z1__godzina(soap, &this->z1__termin::godzinaOd);
 	soap_default_z1__godzina(soap, &this->z1__termin::godzinaDo);
 	soap_default_int(soap, &this->z1__termin::miejsca);
+	soap_default_std__string(soap, &this->z1__termin::nrSali);
 	/* transient soap skipped */
 }
 
@@ -2991,6 +2992,7 @@ void z1__termin::soap_serialize(struct soap *soap) const
 	soap_serialize_std__string(soap, &this->z1__termin::dzien);
 	soap_serialize_z1__godzina(soap, &this->z1__termin::godzinaOd);
 	soap_serialize_z1__godzina(soap, &this->z1__termin::godzinaDo);
+	soap_serialize_std__string(soap, &this->z1__termin::nrSali);
 #endif
 }
 
@@ -3011,6 +3013,8 @@ SOAP_FMAC3 int SOAP_FMAC4 soap_out_z1__termin(struct soap *soap, const char *tag
 	if (soap_out_z1__godzina(soap, "godzinaDo", -1, &a->z1__termin::godzinaDo, ""))
 		return soap->error;
 	if (soap_out_int(soap, "miejsca", -1, &a->z1__termin::miejsca, ""))
+		return soap->error;
+	if (soap_out_std__string(soap, "nrSali", -1, &a->z1__termin::nrSali, ""))
 		return soap->error;
 	return soap_element_end_out(soap, tag);
 }
@@ -3033,6 +3037,7 @@ SOAP_FMAC3 z1__termin * SOAP_FMAC4 soap_in_z1__termin(struct soap *soap, const c
 	size_t soap_flag_godzinaOd1 = 1;
 	size_t soap_flag_godzinaDo1 = 1;
 	size_t soap_flag_miejsca1 = 1;
+	size_t soap_flag_nrSali1 = 1;
 	if (soap->body && !*soap->href)
 	{
 		for (;;)
@@ -3057,6 +3062,11 @@ SOAP_FMAC3 z1__termin * SOAP_FMAC4 soap_in_z1__termin(struct soap *soap, const c
 				{	soap_flag_miejsca1--;
 					continue;
 				}
+			if (soap_flag_nrSali1 && (soap->error == SOAP_TAG_MISMATCH || soap->error == SOAP_NO_TAG))
+				if (soap_in_std__string(soap, "nrSali", &a->z1__termin::nrSali, "xsd:string"))
+				{	soap_flag_nrSali1--;
+					continue;
+				}
 			if (soap->error == SOAP_TAG_MISMATCH)
 				soap->error = soap_ignore_element(soap);
 			if (soap->error == SOAP_NO_TAG)
@@ -3066,7 +3076,7 @@ SOAP_FMAC3 z1__termin * SOAP_FMAC4 soap_in_z1__termin(struct soap *soap, const c
 		}
 		if (soap_element_end_in(soap, tag))
 			return NULL;
-		if ((soap->mode & SOAP_XML_STRICT) && (soap_flag_dzien1 > 0 || soap_flag_godzinaOd1 > 0 || soap_flag_godzinaDo1 > 0 || soap_flag_miejsca1 > 0))
+		if ((soap->mode & SOAP_XML_STRICT) && (soap_flag_dzien1 > 0 || soap_flag_godzinaOd1 > 0 || soap_flag_godzinaDo1 > 0 || soap_flag_miejsca1 > 0 || soap_flag_nrSali1 > 0))
 		{	soap->error = SOAP_OCCURS;
 			return NULL;
 		}
