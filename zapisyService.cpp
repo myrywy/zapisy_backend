@@ -203,7 +203,7 @@ int zapisyService::zapiszTermin(std::string projektID, std::string zapisywanyID,
      if(BazaDanych::instancja()->wypiszZProjektu(zapisywanyID,projektID)){
          _param_18.rezultat="ok";
      }else{
-         _param_18.rezultat="blad";
+         _param_18.rezultat="error";
      }
      return SOAP_OK;
  }
@@ -212,7 +212,49 @@ int zapisyService::zapiszTermin(std::string projektID, std::string zapisywanyID,
      if(BazaDanych::instancja()->wypiszZTerminu(zapisywanyID,terminID)){
          _param_19.rezultat="ok";
      }else{
-         _param_19.rezultat="blad";
+         _param_19.rezultat="error";
      }
+     return SOAP_OK;
+ }
+
+ int zapisyService::usunWszystkieTematy(std::string ID, struct z1__usunWszystkieTematyResponse &_param_20){
+     try{
+         BazaDanych::instancja()->procedura("usunWszystkieTematyPrzedmiotu",ID);
+     }catch(...){
+         _param_20.rezultat="error";
+         return SOAP_OK;
+     }
+    _param_20.rezultat="ok";
+     return SOAP_OK;
+ }
+
+ int zapisyService::usunWszystkieTerminy(std::string ID, struct z1__usunWszystkieTerminyResponse &_param_21){
+     try{
+         BazaDanych::instancja()->procedura("usunWszystkieTerminyPrzedmiotu",ID);
+     }catch(...){
+         _param_21.rezultat="error";
+         return SOAP_OK;
+     }
+    _param_21.rezultat="ok";
+     return SOAP_OK;
+ }
+ int zapisyService::usunTemat(std::string ID, struct z1__usunTematResponse &_param_22){
+     try{
+         BazaDanych::instancja()->procedura("usunTemat",ID);
+     }catch(...){
+         _param_22.rezultat="error";
+         return SOAP_OK;
+     }
+    _param_22.rezultat="ok";
+     return SOAP_OK;
+ }
+ int zapisyService::usunTermin(std::string ID, struct z1__usunTerminResponse &_param_23){
+     try{
+         BazaDanych::instancja()->procedura("usunTermin",ID);
+     }catch(...){
+         _param_23.rezultat="error";
+         return SOAP_OK;
+     }
+    _param_23.rezultat="ok";
      return SOAP_OK;
  }

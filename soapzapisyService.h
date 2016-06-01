@@ -130,5 +130,13 @@ A commercial use license is available from Genivia Inc., contact@genivia.com
         virtual int wypiszZProjektu(std::string projektID, std::string zapisywanyID, struct z1__wypiszZProjektuResponse &_param_18) SOAP_PURE_VIRTUAL;
         /// Web service operation 'wypiszZTerminu' (returns SOAP_OK or error code)
         virtual int wypiszZTerminu(std::string terminID, std::string zapisywanyID, struct z1__wypiszZTerminuResponse &_param_19) SOAP_PURE_VIRTUAL;
+        /// Web service operation 'usunWszystkieTematy' (returns SOAP_OK or error code)
+        virtual int usunWszystkieTematy(std::string ID, struct z1__usunWszystkieTematyResponse &_param_20) SOAP_PURE_VIRTUAL;
+        /// Web service operation 'usunWszystkieTerminy' (returns SOAP_OK or error code)
+        virtual int usunWszystkieTerminy(std::string ID, struct z1__usunWszystkieTerminyResponse &_param_21) SOAP_PURE_VIRTUAL;
+        /// Web service operation 'usunTemat' (returns SOAP_OK or error code)
+        virtual int usunTemat(std::string ID, struct z1__usunTematResponse &_param_22) SOAP_PURE_VIRTUAL;
+        /// Web service operation 'usunTermin' (returns SOAP_OK or error code)
+        virtual int usunTermin(std::string ID, struct z1__usunTerminResponse &_param_23) SOAP_PURE_VIRTUAL;
     };
 #endif

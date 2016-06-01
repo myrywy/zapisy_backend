@@ -1210,4 +1210,224 @@ int zapisyProxy::wypiszZTerminu(const char *endpoint, const char *soap_action, s
 		return soap_closesock(soap);
 	return soap_closesock(soap);
 }
+
+int zapisyProxy::usunWszystkieTematy(const char *endpoint, const char *soap_action, std::string ID, struct z1__usunWszystkieTematyResponse &_param_20)
+{	struct soap *soap = this->soap;
+	struct z1__usunWszystkieTematy soap_tmp_z1__usunWszystkieTematy;
+	if (endpoint)
+		soap_endpoint = endpoint;
+	if (soap_endpoint == NULL)
+		soap_endpoint = "http://192.168.0.13:8090/";
+	if (soap_action == NULL)
+		soap_action = "";
+	soap_tmp_z1__usunWszystkieTematy.ID = ID;
+	soap_begin(soap);
+	soap_set_version(soap, 1); /* SOAP1.1 */
+	soap->encodingStyle = NULL;
+	soap_serializeheader(soap);
+	soap_serialize_z1__usunWszystkieTematy(soap, &soap_tmp_z1__usunWszystkieTematy);
+	if (soap_begin_count(soap))
+		return soap->error;
+	if (soap->mode & SOAP_IO_LENGTH)
+	{	if (soap_envelope_begin_out(soap)
+		 || soap_putheader(soap)
+		 || soap_body_begin_out(soap)
+		 || soap_put_z1__usunWszystkieTematy(soap, &soap_tmp_z1__usunWszystkieTematy, "z1:usunWszystkieTematy", NULL)
+		 || soap_body_end_out(soap)
+		 || soap_envelope_end_out(soap))
+			 return soap->error;
+	}
+	if (soap_end_count(soap))
+		return soap->error;
+	if (soap_connect(soap, soap_endpoint, soap_action)
+	 || soap_envelope_begin_out(soap)
+	 || soap_putheader(soap)
+	 || soap_body_begin_out(soap)
+	 || soap_put_z1__usunWszystkieTematy(soap, &soap_tmp_z1__usunWszystkieTematy, "z1:usunWszystkieTematy", NULL)
+	 || soap_body_end_out(soap)
+	 || soap_envelope_end_out(soap)
+	 || soap_end_send(soap))
+		return soap_closesock(soap);
+	if (!&_param_20)
+		return soap_closesock(soap);
+	soap_default_z1__usunWszystkieTematyResponse(soap, &_param_20);
+	if (soap_begin_recv(soap)
+	 || soap_envelope_begin_in(soap)
+	 || soap_recv_header(soap)
+	 || soap_body_begin_in(soap))
+		return soap_closesock(soap);
+	soap_get_z1__usunWszystkieTematyResponse(soap, &_param_20, "z1:usunWszystkieTematyResponse", NULL);
+	if (soap->error)
+		return soap_recv_fault(soap, 0);
+	if (soap_body_end_in(soap)
+	 || soap_envelope_end_in(soap)
+	 || soap_end_recv(soap))
+		return soap_closesock(soap);
+	return soap_closesock(soap);
+}
+
+int zapisyProxy::usunWszystkieTerminy(const char *endpoint, const char *soap_action, std::string ID, struct z1__usunWszystkieTerminyResponse &_param_21)
+{	struct soap *soap = this->soap;
+	struct z1__usunWszystkieTerminy soap_tmp_z1__usunWszystkieTerminy;
+	if (endpoint)
+		soap_endpoint = endpoint;
+	if (soap_endpoint == NULL)
+		soap_endpoint = "http://192.168.0.13:8090/";
+	if (soap_action == NULL)
+		soap_action = "";
+	soap_tmp_z1__usunWszystkieTerminy.ID = ID;
+	soap_begin(soap);
+	soap_set_version(soap, 1); /* SOAP1.1 */
+	soap->encodingStyle = NULL;
+	soap_serializeheader(soap);
+	soap_serialize_z1__usunWszystkieTerminy(soap, &soap_tmp_z1__usunWszystkieTerminy);
+	if (soap_begin_count(soap))
+		return soap->error;
+	if (soap->mode & SOAP_IO_LENGTH)
+	{	if (soap_envelope_begin_out(soap)
+		 || soap_putheader(soap)
+		 || soap_body_begin_out(soap)
+		 || soap_put_z1__usunWszystkieTerminy(soap, &soap_tmp_z1__usunWszystkieTerminy, "z1:usunWszystkieTerminy", NULL)
+		 || soap_body_end_out(soap)
+		 || soap_envelope_end_out(soap))
+			 return soap->error;
+	}
+	if (soap_end_count(soap))
+		return soap->error;
+	if (soap_connect(soap, soap_endpoint, soap_action)
+	 || soap_envelope_begin_out(soap)
+	 || soap_putheader(soap)
+	 || soap_body_begin_out(soap)
+	 || soap_put_z1__usunWszystkieTerminy(soap, &soap_tmp_z1__usunWszystkieTerminy, "z1:usunWszystkieTerminy", NULL)
+	 || soap_body_end_out(soap)
+	 || soap_envelope_end_out(soap)
+	 || soap_end_send(soap))
+		return soap_closesock(soap);
+	if (!&_param_21)
+		return soap_closesock(soap);
+	soap_default_z1__usunWszystkieTerminyResponse(soap, &_param_21);
+	if (soap_begin_recv(soap)
+	 || soap_envelope_begin_in(soap)
+	 || soap_recv_header(soap)
+	 || soap_body_begin_in(soap))
+		return soap_closesock(soap);
+	soap_get_z1__usunWszystkieTerminyResponse(soap, &_param_21, "z1:usunWszystkieTerminyResponse", NULL);
+	if (soap->error)
+		return soap_recv_fault(soap, 0);
+	if (soap_body_end_in(soap)
+	 || soap_envelope_end_in(soap)
+	 || soap_end_recv(soap))
+		return soap_closesock(soap);
+	return soap_closesock(soap);
+}
+
+int zapisyProxy::usunTemat(const char *endpoint, const char *soap_action, std::string ID, struct z1__usunTematResponse &_param_22)
+{	struct soap *soap = this->soap;
+	struct z1__usunTemat soap_tmp_z1__usunTemat;
+	if (endpoint)
+		soap_endpoint = endpoint;
+	if (soap_endpoint == NULL)
+		soap_endpoint = "http://192.168.0.13:8090/";
+	if (soap_action == NULL)
+		soap_action = "";
+	soap_tmp_z1__usunTemat.ID = ID;
+	soap_begin(soap);
+	soap_set_version(soap, 1); /* SOAP1.1 */
+	soap->encodingStyle = NULL;
+	soap_serializeheader(soap);
+	soap_serialize_z1__usunTemat(soap, &soap_tmp_z1__usunTemat);
+	if (soap_begin_count(soap))
+		return soap->error;
+	if (soap->mode & SOAP_IO_LENGTH)
+	{	if (soap_envelope_begin_out(soap)
+		 || soap_putheader(soap)
+		 || soap_body_begin_out(soap)
+		 || soap_put_z1__usunTemat(soap, &soap_tmp_z1__usunTemat, "z1:usunTemat", NULL)
+		 || soap_body_end_out(soap)
+		 || soap_envelope_end_out(soap))
+			 return soap->error;
+	}
+	if (soap_end_count(soap))
+		return soap->error;
+	if (soap_connect(soap, soap_endpoint, soap_action)
+	 || soap_envelope_begin_out(soap)
+	 || soap_putheader(soap)
+	 || soap_body_begin_out(soap)
+	 || soap_put_z1__usunTemat(soap, &soap_tmp_z1__usunTemat, "z1:usunTemat", NULL)
+	 || soap_body_end_out(soap)
+	 || soap_envelope_end_out(soap)
+	 || soap_end_send(soap))
+		return soap_closesock(soap);
+	if (!&_param_22)
+		return soap_closesock(soap);
+	soap_default_z1__usunTematResponse(soap, &_param_22);
+	if (soap_begin_recv(soap)
+	 || soap_envelope_begin_in(soap)
+	 || soap_recv_header(soap)
+	 || soap_body_begin_in(soap))
+		return soap_closesock(soap);
+	soap_get_z1__usunTematResponse(soap, &_param_22, "z1:usunTematResponse", NULL);
+	if (soap->error)
+		return soap_recv_fault(soap, 0);
+	if (soap_body_end_in(soap)
+	 || soap_envelope_end_in(soap)
+	 || soap_end_recv(soap))
+		return soap_closesock(soap);
+	return soap_closesock(soap);
+}
+
+int zapisyProxy::usunTermin(const char *endpoint, const char *soap_action, std::string ID, struct z1__usunTerminResponse &_param_23)
+{	struct soap *soap = this->soap;
+	struct z1__usunTermin soap_tmp_z1__usunTermin;
+	if (endpoint)
+		soap_endpoint = endpoint;
+	if (soap_endpoint == NULL)
+		soap_endpoint = "http://192.168.0.13:8090/";
+	if (soap_action == NULL)
+		soap_action = "";
+	soap_tmp_z1__usunTermin.ID = ID;
+	soap_begin(soap);
+	soap_set_version(soap, 1); /* SOAP1.1 */
+	soap->encodingStyle = NULL;
+	soap_serializeheader(soap);
+	soap_serialize_z1__usunTermin(soap, &soap_tmp_z1__usunTermin);
+	if (soap_begin_count(soap))
+		return soap->error;
+	if (soap->mode & SOAP_IO_LENGTH)
+	{	if (soap_envelope_begin_out(soap)
+		 || soap_putheader(soap)
+		 || soap_body_begin_out(soap)
+		 || soap_put_z1__usunTermin(soap, &soap_tmp_z1__usunTermin, "z1:usunTermin", NULL)
+		 || soap_body_end_out(soap)
+		 || soap_envelope_end_out(soap))
+			 return soap->error;
+	}
+	if (soap_end_count(soap))
+		return soap->error;
+	if (soap_connect(soap, soap_endpoint, soap_action)
+	 || soap_envelope_begin_out(soap)
+	 || soap_putheader(soap)
+	 || soap_body_begin_out(soap)
+	 || soap_put_z1__usunTermin(soap, &soap_tmp_z1__usunTermin, "z1:usunTermin", NULL)
+	 || soap_body_end_out(soap)
+	 || soap_envelope_end_out(soap)
+	 || soap_end_send(soap))
+		return soap_closesock(soap);
+	if (!&_param_23)
+		return soap_closesock(soap);
+	soap_default_z1__usunTerminResponse(soap, &_param_23);
+	if (soap_begin_recv(soap)
+	 || soap_envelope_begin_in(soap)
+	 || soap_recv_header(soap)
+	 || soap_body_begin_in(soap))
+		return soap_closesock(soap);
+	soap_get_z1__usunTerminResponse(soap, &_param_23, "z1:usunTerminResponse", NULL);
+	if (soap->error)
+		return soap_recv_fault(soap, 0);
+	if (soap_body_end_in(soap)
+	 || soap_envelope_end_in(soap)
+	 || soap_end_recv(soap))
+		return soap_closesock(soap);
+	return soap_closesock(soap);
+}
 /* End of client proxy code */

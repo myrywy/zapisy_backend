@@ -223,4 +223,18 @@ BEGIN
 END
 
 
+-- --------------------------------------------------------------------------------
+-- Routine DDL
+-- Note: comments before and after the routine body will not be stored by the server
+-- --------------------------------------------------------------------------------
+DELIMITER $$
 
+CREATE PROCEDURE `usunWszystkieTerminyPrzedmiotu` (
+	IN terminId INT(11)
+)
+BEGIN
+	DELETE FROM student_termin WHERE id_termin IN (
+		SELECT id FROM termin where przedmiot_id=przedmiotId
+	);
+	DELETE FROM termin WHERE przedmiot_id=przedmiotId;
+END

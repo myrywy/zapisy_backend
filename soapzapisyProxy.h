@@ -149,5 +149,21 @@ A commercial use license is available from Genivia Inc., contact@genivia.com
         virtual int wypiszZTerminu(std::string terminID, std::string zapisywanyID, struct z1__wypiszZTerminuResponse &_param_19)
         { return this->wypiszZTerminu(NULL, NULL, terminID, zapisywanyID, _param_19); }
         virtual int wypiszZTerminu(const char *soap_endpoint, const char *soap_action, std::string terminID, std::string zapisywanyID, struct z1__wypiszZTerminuResponse &_param_19);
+        /// Web service operation 'usunWszystkieTematy' (returns SOAP_OK or error code)
+        virtual int usunWszystkieTematy(std::string ID, struct z1__usunWszystkieTematyResponse &_param_20)
+        { return this->usunWszystkieTematy(NULL, NULL, ID, _param_20); }
+        virtual int usunWszystkieTematy(const char *soap_endpoint, const char *soap_action, std::string ID, struct z1__usunWszystkieTematyResponse &_param_20);
+        /// Web service operation 'usunWszystkieTerminy' (returns SOAP_OK or error code)
+        virtual int usunWszystkieTerminy(std::string ID, struct z1__usunWszystkieTerminyResponse &_param_21)
+        { return this->usunWszystkieTerminy(NULL, NULL, ID, _param_21); }
+        virtual int usunWszystkieTerminy(const char *soap_endpoint, const char *soap_action, std::string ID, struct z1__usunWszystkieTerminyResponse &_param_21);
+        /// Web service operation 'usunTemat' (returns SOAP_OK or error code)
+        virtual int usunTemat(std::string ID, struct z1__usunTematResponse &_param_22)
+        { return this->usunTemat(NULL, NULL, ID, _param_22); }
+        virtual int usunTemat(const char *soap_endpoint, const char *soap_action, std::string ID, struct z1__usunTematResponse &_param_22);
+        /// Web service operation 'usunTermin' (returns SOAP_OK or error code)
+        virtual int usunTermin(std::string ID, struct z1__usunTerminResponse &_param_23)
+        { return this->usunTermin(NULL, NULL, ID, _param_23); }
+        virtual int usunTermin(const char *soap_endpoint, const char *soap_action, std::string ID, struct z1__usunTerminResponse &_param_23);
     };
 #endif

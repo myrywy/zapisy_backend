@@ -242,6 +242,10 @@ static int serve_z1__edytujProjekt(struct soap*, zapisyService*);
 static int serve_z1__edytujTermin(struct soap*, zapisyService*);
 static int serve_z1__wypiszZProjektu(struct soap*, zapisyService*);
 static int serve_z1__wypiszZTerminu(struct soap*, zapisyService*);
+static int serve_z1__usunWszystkieTematy(struct soap*, zapisyService*);
+static int serve_z1__usunWszystkieTerminy(struct soap*, zapisyService*);
+static int serve_z1__usunTemat(struct soap*, zapisyService*);
+static int serve_z1__usunTermin(struct soap*, zapisyService*);
 
 int zapisyService::dispatch()
 {	return dispatch(this->soap);
@@ -290,6 +294,14 @@ int zapisyService::dispatch(struct soap* soap)
 		return serve_z1__wypiszZProjektu(soap, this);
 	if (!soap_match_tag(soap, soap->tag, "z1:wypiszZTerminu"))
 		return serve_z1__wypiszZTerminu(soap, this);
+	if (!soap_match_tag(soap, soap->tag, "z1:usunWszystkieTematy"))
+		return serve_z1__usunWszystkieTematy(soap, this);
+	if (!soap_match_tag(soap, soap->tag, "z1:usunWszystkieTerminy"))
+		return serve_z1__usunWszystkieTerminy(soap, this);
+	if (!soap_match_tag(soap, soap->tag, "z1:usunTemat"))
+		return serve_z1__usunTemat(soap, this);
+	if (!soap_match_tag(soap, soap->tag, "z1:usunTermin"))
+		return serve_z1__usunTermin(soap, this);
 	return soap->error = SOAP_NO_METHOD;
 }
 
@@ -1065,6 +1077,170 @@ static int serve_z1__wypiszZTerminu(struct soap *soap, zapisyService *service)
 	 || soap_putheader(soap)
 	 || soap_body_begin_out(soap)
 	 || soap_put_z1__wypiszZTerminuResponse(soap, &_param_19, "z1:wypiszZTerminuResponse", NULL)
+	 || soap_body_end_out(soap)
+	 || soap_envelope_end_out(soap)
+	 || soap_end_send(soap))
+		return soap->error;
+	return soap_closesock(soap);
+}
+
+static int serve_z1__usunWszystkieTematy(struct soap *soap, zapisyService *service)
+{	struct z1__usunWszystkieTematy soap_tmp_z1__usunWszystkieTematy;
+	struct z1__usunWszystkieTematyResponse _param_20;
+	soap_default_z1__usunWszystkieTematyResponse(soap, &_param_20);
+	soap_default_z1__usunWszystkieTematy(soap, &soap_tmp_z1__usunWszystkieTematy);
+	if (!soap_get_z1__usunWszystkieTematy(soap, &soap_tmp_z1__usunWszystkieTematy, "z1:usunWszystkieTematy", NULL))
+		return soap->error;
+	if (soap_body_end_in(soap)
+	 || soap_envelope_end_in(soap)
+	 || soap_end_recv(soap))
+		return soap->error;
+	soap->error = service->usunWszystkieTematy(soap_tmp_z1__usunWszystkieTematy.ID, _param_20);
+	if (soap->error)
+		return soap->error;
+	soap->encodingStyle = NULL;
+	soap_serializeheader(soap);
+	soap_serialize_z1__usunWszystkieTematyResponse(soap, &_param_20);
+	if (soap_begin_count(soap))
+		return soap->error;
+	if (soap->mode & SOAP_IO_LENGTH)
+	{	if (soap_envelope_begin_out(soap)
+		 || soap_putheader(soap)
+		 || soap_body_begin_out(soap)
+		 || soap_put_z1__usunWszystkieTematyResponse(soap, &_param_20, "z1:usunWszystkieTematyResponse", NULL)
+		 || soap_body_end_out(soap)
+		 || soap_envelope_end_out(soap))
+			 return soap->error;
+	};
+	if (soap_end_count(soap)
+	 || soap_response(soap, SOAP_OK)
+	 || soap_envelope_begin_out(soap)
+	 || soap_putheader(soap)
+	 || soap_body_begin_out(soap)
+	 || soap_put_z1__usunWszystkieTematyResponse(soap, &_param_20, "z1:usunWszystkieTematyResponse", NULL)
+	 || soap_body_end_out(soap)
+	 || soap_envelope_end_out(soap)
+	 || soap_end_send(soap))
+		return soap->error;
+	return soap_closesock(soap);
+}
+
+static int serve_z1__usunWszystkieTerminy(struct soap *soap, zapisyService *service)
+{	struct z1__usunWszystkieTerminy soap_tmp_z1__usunWszystkieTerminy;
+	struct z1__usunWszystkieTerminyResponse _param_21;
+	soap_default_z1__usunWszystkieTerminyResponse(soap, &_param_21);
+	soap_default_z1__usunWszystkieTerminy(soap, &soap_tmp_z1__usunWszystkieTerminy);
+	if (!soap_get_z1__usunWszystkieTerminy(soap, &soap_tmp_z1__usunWszystkieTerminy, "z1:usunWszystkieTerminy", NULL))
+		return soap->error;
+	if (soap_body_end_in(soap)
+	 || soap_envelope_end_in(soap)
+	 || soap_end_recv(soap))
+		return soap->error;
+	soap->error = service->usunWszystkieTerminy(soap_tmp_z1__usunWszystkieTerminy.ID, _param_21);
+	if (soap->error)
+		return soap->error;
+	soap->encodingStyle = NULL;
+	soap_serializeheader(soap);
+	soap_serialize_z1__usunWszystkieTerminyResponse(soap, &_param_21);
+	if (soap_begin_count(soap))
+		return soap->error;
+	if (soap->mode & SOAP_IO_LENGTH)
+	{	if (soap_envelope_begin_out(soap)
+		 || soap_putheader(soap)
+		 || soap_body_begin_out(soap)
+		 || soap_put_z1__usunWszystkieTerminyResponse(soap, &_param_21, "z1:usunWszystkieTerminyResponse", NULL)
+		 || soap_body_end_out(soap)
+		 || soap_envelope_end_out(soap))
+			 return soap->error;
+	};
+	if (soap_end_count(soap)
+	 || soap_response(soap, SOAP_OK)
+	 || soap_envelope_begin_out(soap)
+	 || soap_putheader(soap)
+	 || soap_body_begin_out(soap)
+	 || soap_put_z1__usunWszystkieTerminyResponse(soap, &_param_21, "z1:usunWszystkieTerminyResponse", NULL)
+	 || soap_body_end_out(soap)
+	 || soap_envelope_end_out(soap)
+	 || soap_end_send(soap))
+		return soap->error;
+	return soap_closesock(soap);
+}
+
+static int serve_z1__usunTemat(struct soap *soap, zapisyService *service)
+{	struct z1__usunTemat soap_tmp_z1__usunTemat;
+	struct z1__usunTematResponse _param_22;
+	soap_default_z1__usunTematResponse(soap, &_param_22);
+	soap_default_z1__usunTemat(soap, &soap_tmp_z1__usunTemat);
+	if (!soap_get_z1__usunTemat(soap, &soap_tmp_z1__usunTemat, "z1:usunTemat", NULL))
+		return soap->error;
+	if (soap_body_end_in(soap)
+	 || soap_envelope_end_in(soap)
+	 || soap_end_recv(soap))
+		return soap->error;
+	soap->error = service->usunTemat(soap_tmp_z1__usunTemat.ID, _param_22);
+	if (soap->error)
+		return soap->error;
+	soap->encodingStyle = NULL;
+	soap_serializeheader(soap);
+	soap_serialize_z1__usunTematResponse(soap, &_param_22);
+	if (soap_begin_count(soap))
+		return soap->error;
+	if (soap->mode & SOAP_IO_LENGTH)
+	{	if (soap_envelope_begin_out(soap)
+		 || soap_putheader(soap)
+		 || soap_body_begin_out(soap)
+		 || soap_put_z1__usunTematResponse(soap, &_param_22, "z1:usunTematResponse", NULL)
+		 || soap_body_end_out(soap)
+		 || soap_envelope_end_out(soap))
+			 return soap->error;
+	};
+	if (soap_end_count(soap)
+	 || soap_response(soap, SOAP_OK)
+	 || soap_envelope_begin_out(soap)
+	 || soap_putheader(soap)
+	 || soap_body_begin_out(soap)
+	 || soap_put_z1__usunTematResponse(soap, &_param_22, "z1:usunTematResponse", NULL)
+	 || soap_body_end_out(soap)
+	 || soap_envelope_end_out(soap)
+	 || soap_end_send(soap))
+		return soap->error;
+	return soap_closesock(soap);
+}
+
+static int serve_z1__usunTermin(struct soap *soap, zapisyService *service)
+{	struct z1__usunTermin soap_tmp_z1__usunTermin;
+	struct z1__usunTerminResponse _param_23;
+	soap_default_z1__usunTerminResponse(soap, &_param_23);
+	soap_default_z1__usunTermin(soap, &soap_tmp_z1__usunTermin);
+	if (!soap_get_z1__usunTermin(soap, &soap_tmp_z1__usunTermin, "z1:usunTermin", NULL))
+		return soap->error;
+	if (soap_body_end_in(soap)
+	 || soap_envelope_end_in(soap)
+	 || soap_end_recv(soap))
+		return soap->error;
+	soap->error = service->usunTermin(soap_tmp_z1__usunTermin.ID, _param_23);
+	if (soap->error)
+		return soap->error;
+	soap->encodingStyle = NULL;
+	soap_serializeheader(soap);
+	soap_serialize_z1__usunTerminResponse(soap, &_param_23);
+	if (soap_begin_count(soap))
+		return soap->error;
+	if (soap->mode & SOAP_IO_LENGTH)
+	{	if (soap_envelope_begin_out(soap)
+		 || soap_putheader(soap)
+		 || soap_body_begin_out(soap)
+		 || soap_put_z1__usunTerminResponse(soap, &_param_23, "z1:usunTerminResponse", NULL)
+		 || soap_body_end_out(soap)
+		 || soap_envelope_end_out(soap))
+			 return soap->error;
+	};
+	if (soap_end_count(soap)
+	 || soap_response(soap, SOAP_OK)
+	 || soap_envelope_begin_out(soap)
+	 || soap_putheader(soap)
+	 || soap_body_begin_out(soap)
+	 || soap_put_z1__usunTerminResponse(soap, &_param_23, "z1:usunTerminResponse", NULL)
 	 || soap_body_end_out(soap)
 	 || soap_envelope_end_out(soap)
 	 || soap_end_send(soap))

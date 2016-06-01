@@ -18,7 +18,7 @@ A commercial use license is available from Genivia Inc., contact@genivia.com
 
 #include "soapH.h"
 
-SOAP_SOURCE_STAMP("@(#) soapC.cpp ver 2.8.30 2016-06-01 18:28:55 GMT")
+SOAP_SOURCE_STAMP("@(#) soapC.cpp ver 2.8.30 2016-06-01 20:31:12 GMT")
 
 
 #ifndef WITH_NOGLOBAL
@@ -231,6 +231,22 @@ SOAP_FMAC3 void * SOAP_FMAC4 soap_getelement(struct soap *soap, int *type)
 		return soap_in_xsd__integer(soap, NULL, NULL, "xsd:integer");
 	case SOAP_TYPE_std__string:
 		return soap_in_std__string(soap, NULL, NULL, "xsd:string");
+	case SOAP_TYPE_z1__usunTermin:
+		return soap_in_z1__usunTermin(soap, NULL, NULL, "z1:usunTermin");
+	case SOAP_TYPE_z1__usunTerminResponse:
+		return soap_in_z1__usunTerminResponse(soap, NULL, NULL, "z1:usunTerminResponse");
+	case SOAP_TYPE_z1__usunTemat:
+		return soap_in_z1__usunTemat(soap, NULL, NULL, "z1:usunTemat");
+	case SOAP_TYPE_z1__usunTematResponse:
+		return soap_in_z1__usunTematResponse(soap, NULL, NULL, "z1:usunTematResponse");
+	case SOAP_TYPE_z1__usunWszystkieTerminy:
+		return soap_in_z1__usunWszystkieTerminy(soap, NULL, NULL, "z1:usunWszystkieTerminy");
+	case SOAP_TYPE_z1__usunWszystkieTerminyResponse:
+		return soap_in_z1__usunWszystkieTerminyResponse(soap, NULL, NULL, "z1:usunWszystkieTerminyResponse");
+	case SOAP_TYPE_z1__usunWszystkieTematy:
+		return soap_in_z1__usunWszystkieTematy(soap, NULL, NULL, "z1:usunWszystkieTematy");
+	case SOAP_TYPE_z1__usunWszystkieTematyResponse:
+		return soap_in_z1__usunWszystkieTematyResponse(soap, NULL, NULL, "z1:usunWszystkieTematyResponse");
 	case SOAP_TYPE_z1__wypiszZTerminu:
 		return soap_in_z1__wypiszZTerminu(soap, NULL, NULL, "z1:wypiszZTerminu");
 	case SOAP_TYPE_z1__wypiszZTerminuResponse:
@@ -415,6 +431,38 @@ SOAP_FMAC3 void * SOAP_FMAC4 soap_getelement(struct soap *soap, int *type)
 		if (!soap_match_tag(soap, t, "xsd:boolean"))
 		{	*type = SOAP_TYPE_bool;
 			return soap_in_bool(soap, NULL, NULL, NULL);
+		}
+		if (!soap_match_tag(soap, t, "z1:usunTermin"))
+		{	*type = SOAP_TYPE_z1__usunTermin;
+			return soap_in_z1__usunTermin(soap, NULL, NULL, NULL);
+		}
+		if (!soap_match_tag(soap, t, "z1:usunTerminResponse"))
+		{	*type = SOAP_TYPE_z1__usunTerminResponse;
+			return soap_in_z1__usunTerminResponse(soap, NULL, NULL, NULL);
+		}
+		if (!soap_match_tag(soap, t, "z1:usunTemat"))
+		{	*type = SOAP_TYPE_z1__usunTemat;
+			return soap_in_z1__usunTemat(soap, NULL, NULL, NULL);
+		}
+		if (!soap_match_tag(soap, t, "z1:usunTematResponse"))
+		{	*type = SOAP_TYPE_z1__usunTematResponse;
+			return soap_in_z1__usunTematResponse(soap, NULL, NULL, NULL);
+		}
+		if (!soap_match_tag(soap, t, "z1:usunWszystkieTerminy"))
+		{	*type = SOAP_TYPE_z1__usunWszystkieTerminy;
+			return soap_in_z1__usunWszystkieTerminy(soap, NULL, NULL, NULL);
+		}
+		if (!soap_match_tag(soap, t, "z1:usunWszystkieTerminyResponse"))
+		{	*type = SOAP_TYPE_z1__usunWszystkieTerminyResponse;
+			return soap_in_z1__usunWszystkieTerminyResponse(soap, NULL, NULL, NULL);
+		}
+		if (!soap_match_tag(soap, t, "z1:usunWszystkieTematy"))
+		{	*type = SOAP_TYPE_z1__usunWszystkieTematy;
+			return soap_in_z1__usunWszystkieTematy(soap, NULL, NULL, NULL);
+		}
+		if (!soap_match_tag(soap, t, "z1:usunWszystkieTematyResponse"))
+		{	*type = SOAP_TYPE_z1__usunWszystkieTematyResponse;
+			return soap_in_z1__usunWszystkieTematyResponse(soap, NULL, NULL, NULL);
 		}
 		if (!soap_match_tag(soap, t, "z1:wypiszZTerminu"))
 		{	*type = SOAP_TYPE_z1__wypiszZTerminu;
@@ -683,6 +731,22 @@ SOAP_FMAC3 int SOAP_FMAC4 soap_putelement(struct soap *soap, const void *ptr, co
 		return soap_out_xsd__integer(soap, tag, id, (const std::string *)ptr, "xsd:integer");
 	case SOAP_TYPE_std__string:
 		return soap_out_std__string(soap, tag, id, (const std::string *)ptr, "xsd:string");
+	case SOAP_TYPE_z1__usunTermin:
+		return soap_out_z1__usunTermin(soap, tag, id, (const struct z1__usunTermin *)ptr, "z1:usunTermin");
+	case SOAP_TYPE_z1__usunTerminResponse:
+		return soap_out_z1__usunTerminResponse(soap, tag, id, (const struct z1__usunTerminResponse *)ptr, "z1:usunTerminResponse");
+	case SOAP_TYPE_z1__usunTemat:
+		return soap_out_z1__usunTemat(soap, tag, id, (const struct z1__usunTemat *)ptr, "z1:usunTemat");
+	case SOAP_TYPE_z1__usunTematResponse:
+		return soap_out_z1__usunTematResponse(soap, tag, id, (const struct z1__usunTematResponse *)ptr, "z1:usunTematResponse");
+	case SOAP_TYPE_z1__usunWszystkieTerminy:
+		return soap_out_z1__usunWszystkieTerminy(soap, tag, id, (const struct z1__usunWszystkieTerminy *)ptr, "z1:usunWszystkieTerminy");
+	case SOAP_TYPE_z1__usunWszystkieTerminyResponse:
+		return soap_out_z1__usunWszystkieTerminyResponse(soap, tag, id, (const struct z1__usunWszystkieTerminyResponse *)ptr, "z1:usunWszystkieTerminyResponse");
+	case SOAP_TYPE_z1__usunWszystkieTematy:
+		return soap_out_z1__usunWszystkieTematy(soap, tag, id, (const struct z1__usunWszystkieTematy *)ptr, "z1:usunWszystkieTematy");
+	case SOAP_TYPE_z1__usunWszystkieTematyResponse:
+		return soap_out_z1__usunWszystkieTematyResponse(soap, tag, id, (const struct z1__usunWszystkieTematyResponse *)ptr, "z1:usunWszystkieTematyResponse");
 	case SOAP_TYPE_z1__wypiszZTerminu:
 		return soap_out_z1__wypiszZTerminu(soap, tag, id, (const struct z1__wypiszZTerminu *)ptr, "z1:wypiszZTerminu");
 	case SOAP_TYPE_z1__wypiszZTerminuResponse:
@@ -842,6 +906,30 @@ SOAP_FMAC3 void SOAP_FMAC4 soap_markelement(struct soap *soap, const void *ptr, 
 		break;
 	case SOAP_TYPE_std__string:
 		soap_serialize_std__string(soap, (const std::string *)ptr);
+		break;
+	case SOAP_TYPE_z1__usunTermin:
+		soap_serialize_z1__usunTermin(soap, (const struct z1__usunTermin *)ptr);
+		break;
+	case SOAP_TYPE_z1__usunTerminResponse:
+		soap_serialize_z1__usunTerminResponse(soap, (const struct z1__usunTerminResponse *)ptr);
+		break;
+	case SOAP_TYPE_z1__usunTemat:
+		soap_serialize_z1__usunTemat(soap, (const struct z1__usunTemat *)ptr);
+		break;
+	case SOAP_TYPE_z1__usunTematResponse:
+		soap_serialize_z1__usunTematResponse(soap, (const struct z1__usunTematResponse *)ptr);
+		break;
+	case SOAP_TYPE_z1__usunWszystkieTerminy:
+		soap_serialize_z1__usunWszystkieTerminy(soap, (const struct z1__usunWszystkieTerminy *)ptr);
+		break;
+	case SOAP_TYPE_z1__usunWszystkieTerminyResponse:
+		soap_serialize_z1__usunWszystkieTerminyResponse(soap, (const struct z1__usunWszystkieTerminyResponse *)ptr);
+		break;
+	case SOAP_TYPE_z1__usunWszystkieTematy:
+		soap_serialize_z1__usunWszystkieTematy(soap, (const struct z1__usunWszystkieTematy *)ptr);
+		break;
+	case SOAP_TYPE_z1__usunWszystkieTematyResponse:
+		soap_serialize_z1__usunWszystkieTematyResponse(soap, (const struct z1__usunWszystkieTematyResponse *)ptr);
 		break;
 	case SOAP_TYPE_z1__wypiszZTerminu:
 		soap_serialize_z1__wypiszZTerminu(soap, (const struct z1__wypiszZTerminu *)ptr);
@@ -1086,6 +1174,22 @@ SOAP_FMAC3 void * SOAP_FMAC4 soap_instantiate(struct soap *soap, int t, const ch
 		return (void*)soap_instantiate_z1__wypiszZTerminuResponse(soap, -1, type, arrayType, n);
 	case SOAP_TYPE_z1__wypiszZTerminu:
 		return (void*)soap_instantiate_z1__wypiszZTerminu(soap, -1, type, arrayType, n);
+	case SOAP_TYPE_z1__usunWszystkieTematyResponse:
+		return (void*)soap_instantiate_z1__usunWszystkieTematyResponse(soap, -1, type, arrayType, n);
+	case SOAP_TYPE_z1__usunWszystkieTematy:
+		return (void*)soap_instantiate_z1__usunWszystkieTematy(soap, -1, type, arrayType, n);
+	case SOAP_TYPE_z1__usunWszystkieTerminyResponse:
+		return (void*)soap_instantiate_z1__usunWszystkieTerminyResponse(soap, -1, type, arrayType, n);
+	case SOAP_TYPE_z1__usunWszystkieTerminy:
+		return (void*)soap_instantiate_z1__usunWszystkieTerminy(soap, -1, type, arrayType, n);
+	case SOAP_TYPE_z1__usunTematResponse:
+		return (void*)soap_instantiate_z1__usunTematResponse(soap, -1, type, arrayType, n);
+	case SOAP_TYPE_z1__usunTemat:
+		return (void*)soap_instantiate_z1__usunTemat(soap, -1, type, arrayType, n);
+	case SOAP_TYPE_z1__usunTerminResponse:
+		return (void*)soap_instantiate_z1__usunTerminResponse(soap, -1, type, arrayType, n);
+	case SOAP_TYPE_z1__usunTermin:
+		return (void*)soap_instantiate_z1__usunTermin(soap, -1, type, arrayType, n);
 #ifndef WITH_NOGLOBAL
 	case SOAP_TYPE_SOAP_ENV__Header:
 		return (void*)soap_instantiate_SOAP_ENV__Header(soap, -1, type, arrayType, n);
@@ -1411,6 +1515,54 @@ SOAP_FMAC3 int SOAP_FMAC4 soap_fdelete(struct soap_clist *p)
 		else
 			SOAP_DELETE_ARRAY(static_cast<struct z1__wypiszZTerminu*>(p->ptr));
 		break;
+	case SOAP_TYPE_z1__usunWszystkieTematyResponse:
+		if (p->size < 0)
+			SOAP_DELETE(static_cast<struct z1__usunWszystkieTematyResponse*>(p->ptr));
+		else
+			SOAP_DELETE_ARRAY(static_cast<struct z1__usunWszystkieTematyResponse*>(p->ptr));
+		break;
+	case SOAP_TYPE_z1__usunWszystkieTematy:
+		if (p->size < 0)
+			SOAP_DELETE(static_cast<struct z1__usunWszystkieTematy*>(p->ptr));
+		else
+			SOAP_DELETE_ARRAY(static_cast<struct z1__usunWszystkieTematy*>(p->ptr));
+		break;
+	case SOAP_TYPE_z1__usunWszystkieTerminyResponse:
+		if (p->size < 0)
+			SOAP_DELETE(static_cast<struct z1__usunWszystkieTerminyResponse*>(p->ptr));
+		else
+			SOAP_DELETE_ARRAY(static_cast<struct z1__usunWszystkieTerminyResponse*>(p->ptr));
+		break;
+	case SOAP_TYPE_z1__usunWszystkieTerminy:
+		if (p->size < 0)
+			SOAP_DELETE(static_cast<struct z1__usunWszystkieTerminy*>(p->ptr));
+		else
+			SOAP_DELETE_ARRAY(static_cast<struct z1__usunWszystkieTerminy*>(p->ptr));
+		break;
+	case SOAP_TYPE_z1__usunTematResponse:
+		if (p->size < 0)
+			SOAP_DELETE(static_cast<struct z1__usunTematResponse*>(p->ptr));
+		else
+			SOAP_DELETE_ARRAY(static_cast<struct z1__usunTematResponse*>(p->ptr));
+		break;
+	case SOAP_TYPE_z1__usunTemat:
+		if (p->size < 0)
+			SOAP_DELETE(static_cast<struct z1__usunTemat*>(p->ptr));
+		else
+			SOAP_DELETE_ARRAY(static_cast<struct z1__usunTemat*>(p->ptr));
+		break;
+	case SOAP_TYPE_z1__usunTerminResponse:
+		if (p->size < 0)
+			SOAP_DELETE(static_cast<struct z1__usunTerminResponse*>(p->ptr));
+		else
+			SOAP_DELETE_ARRAY(static_cast<struct z1__usunTerminResponse*>(p->ptr));
+		break;
+	case SOAP_TYPE_z1__usunTermin:
+		if (p->size < 0)
+			SOAP_DELETE(static_cast<struct z1__usunTermin*>(p->ptr));
+		else
+			SOAP_DELETE_ARRAY(static_cast<struct z1__usunTermin*>(p->ptr));
+		break;
 #ifndef WITH_NOGLOBAL
 	case SOAP_TYPE_SOAP_ENV__Header:
 		if (p->size < 0)
@@ -1723,6 +1875,38 @@ SOAP_FMAC3 void SOAP_FMAC4 soap_finsert(struct soap *soap, int t, int tt, void *
 	case SOAP_TYPE_z1__wypiszZTerminu:
 		DBGLOG(TEST, SOAP_MESSAGE(fdebug, "Copy struct z1__wypiszZTerminu type=%d location=%p object=%p\n", t, p, q));
 		*(struct z1__wypiszZTerminu*)p = *(struct z1__wypiszZTerminu*)q;
+		break;
+	case SOAP_TYPE_z1__usunWszystkieTematyResponse:
+		DBGLOG(TEST, SOAP_MESSAGE(fdebug, "Copy struct z1__usunWszystkieTematyResponse type=%d location=%p object=%p\n", t, p, q));
+		*(struct z1__usunWszystkieTematyResponse*)p = *(struct z1__usunWszystkieTematyResponse*)q;
+		break;
+	case SOAP_TYPE_z1__usunWszystkieTematy:
+		DBGLOG(TEST, SOAP_MESSAGE(fdebug, "Copy struct z1__usunWszystkieTematy type=%d location=%p object=%p\n", t, p, q));
+		*(struct z1__usunWszystkieTematy*)p = *(struct z1__usunWszystkieTematy*)q;
+		break;
+	case SOAP_TYPE_z1__usunWszystkieTerminyResponse:
+		DBGLOG(TEST, SOAP_MESSAGE(fdebug, "Copy struct z1__usunWszystkieTerminyResponse type=%d location=%p object=%p\n", t, p, q));
+		*(struct z1__usunWszystkieTerminyResponse*)p = *(struct z1__usunWszystkieTerminyResponse*)q;
+		break;
+	case SOAP_TYPE_z1__usunWszystkieTerminy:
+		DBGLOG(TEST, SOAP_MESSAGE(fdebug, "Copy struct z1__usunWszystkieTerminy type=%d location=%p object=%p\n", t, p, q));
+		*(struct z1__usunWszystkieTerminy*)p = *(struct z1__usunWszystkieTerminy*)q;
+		break;
+	case SOAP_TYPE_z1__usunTematResponse:
+		DBGLOG(TEST, SOAP_MESSAGE(fdebug, "Copy struct z1__usunTematResponse type=%d location=%p object=%p\n", t, p, q));
+		*(struct z1__usunTematResponse*)p = *(struct z1__usunTematResponse*)q;
+		break;
+	case SOAP_TYPE_z1__usunTemat:
+		DBGLOG(TEST, SOAP_MESSAGE(fdebug, "Copy struct z1__usunTemat type=%d location=%p object=%p\n", t, p, q));
+		*(struct z1__usunTemat*)p = *(struct z1__usunTemat*)q;
+		break;
+	case SOAP_TYPE_z1__usunTerminResponse:
+		DBGLOG(TEST, SOAP_MESSAGE(fdebug, "Copy struct z1__usunTerminResponse type=%d location=%p object=%p\n", t, p, q));
+		*(struct z1__usunTerminResponse*)p = *(struct z1__usunTerminResponse*)q;
+		break;
+	case SOAP_TYPE_z1__usunTermin:
+		DBGLOG(TEST, SOAP_MESSAGE(fdebug, "Copy struct z1__usunTermin type=%d location=%p object=%p\n", t, p, q));
+		*(struct z1__usunTermin*)p = *(struct z1__usunTermin*)q;
 		break;
 #ifndef WITH_NOGLOBAL
 	case SOAP_TYPE_SOAP_ENV__Header:
@@ -4225,6 +4409,830 @@ SOAP_FMAC3 struct SOAP_ENV__Header * SOAP_FMAC4 soap_get_SOAP_ENV__Header(struct
 }
 
 #endif
+
+SOAP_FMAC3 void SOAP_FMAC4 soap_default_z1__usunTermin(struct soap *soap, struct z1__usunTermin *a)
+{
+	(void)soap; (void)a; /* appease -Wall -Werror */
+	soap_default_z1__id(soap, &a->ID);
+}
+
+SOAP_FMAC3 void SOAP_FMAC4 soap_serialize_z1__usunTermin(struct soap *soap, const struct z1__usunTermin *a)
+{
+	(void)soap; (void)a; /* appease -Wall -Werror */
+#ifndef WITH_NOIDREF
+	soap_serialize_z1__id(soap, &a->ID);
+#endif
+}
+
+SOAP_FMAC3 int SOAP_FMAC4 soap_out_z1__usunTermin(struct soap *soap, const char *tag, int id, const struct z1__usunTermin *a, const char *type)
+{
+	(void)soap; (void)tag; (void)id; (void)a; (void)type; /* appease -Wall -Werror */
+	if (soap_element_begin_out(soap, tag, soap_embedded_id(soap, id, a, SOAP_TYPE_z1__usunTermin), type))
+		return soap->error;
+	if (soap_out_z1__id(soap, "ID", -1, &a->ID, ""))
+		return soap->error;
+	return soap_element_end_out(soap, tag);
+}
+
+SOAP_FMAC3 struct z1__usunTermin * SOAP_FMAC4 soap_in_z1__usunTermin(struct soap *soap, const char *tag, struct z1__usunTermin *a, const char *type)
+{
+	size_t soap_flag_ID = 1;
+	if (soap_element_begin_in(soap, tag, 0, type))
+		return NULL;
+	a = (struct z1__usunTermin *)soap_id_enter(soap, soap->id, a, SOAP_TYPE_z1__usunTermin, sizeof(struct z1__usunTermin), soap->type, soap->arrayType, soap_instantiate, soap_fbase);
+	if (!a)
+		return NULL;
+	soap_default_z1__usunTermin(soap, a);
+	if (soap->body && !*soap->href)
+	{
+		for (;;)
+		{	soap->error = SOAP_TAG_MISMATCH;
+			if (soap_flag_ID && (soap->error == SOAP_TAG_MISMATCH || soap->error == SOAP_NO_TAG))
+				if (soap_in_z1__id(soap, "ID", &a->ID, "z1:id"))
+				{	soap_flag_ID--;
+					continue;
+				}
+			if (soap->error == SOAP_TAG_MISMATCH)
+				soap->error = soap_ignore_element(soap);
+			if (soap->error == SOAP_NO_TAG)
+				break;
+			if (soap->error)
+				return NULL;
+		}
+		if (soap_element_end_in(soap, tag))
+			return NULL;
+		if ((soap->mode & SOAP_XML_STRICT) && (soap_flag_ID > 0))
+		{	soap->error = SOAP_OCCURS;
+			return NULL;
+		}
+	}
+	else if ((soap->mode & SOAP_XML_STRICT) && !*soap->href)
+	{	soap->error = SOAP_OCCURS;
+		return NULL;
+	}
+	else
+	{	a = (struct z1__usunTermin *)soap_id_forward(soap, soap->href, (void*)a, 0, SOAP_TYPE_z1__usunTermin, SOAP_TYPE_z1__usunTermin, sizeof(struct z1__usunTermin), 0, soap_finsert, NULL);
+		if (soap->body && soap_element_end_in(soap, tag))
+			return NULL;
+	}
+	return a;
+}
+
+SOAP_FMAC1 struct z1__usunTermin * SOAP_FMAC2 soap_instantiate_z1__usunTermin(struct soap *soap, int n, const char *type, const char *arrayType, size_t *size)
+{
+	DBGLOG(TEST, SOAP_MESSAGE(fdebug, "soap_instantiate_z1__usunTermin(%p, %d, %s, %s)\n", soap, n, type?type:"", arrayType?arrayType:""));
+	(void)type; (void)arrayType; /* appease -Wall -Werror */
+	struct z1__usunTermin *p;
+	size_t k = sizeof(struct z1__usunTermin);
+	if (n < 0)
+	{	p = SOAP_NEW(struct z1__usunTermin);
+	}
+	else
+	{	p = SOAP_NEW_ARRAY(struct z1__usunTermin, n);
+		k *= n;
+	}
+	DBGLOG(TEST, SOAP_MESSAGE(fdebug, "Instantiated struct z1__usunTermin location=%p n=%d\n", p, n));
+	soap_link(soap, p, SOAP_TYPE_z1__usunTermin, n, soap_fdelete);
+	if (size)
+		*size = k;
+	return p;
+}
+
+SOAP_FMAC3 int SOAP_FMAC4 soap_put_z1__usunTermin(struct soap *soap, const struct z1__usunTermin *a, const char *tag, const char *type)
+{
+	if (soap_out_z1__usunTermin(soap, tag?tag:"z1:usunTermin", -2, a, type))
+		return soap->error;
+	return soap_putindependent(soap);
+}
+
+SOAP_FMAC3 struct z1__usunTermin * SOAP_FMAC4 soap_get_z1__usunTermin(struct soap *soap, struct z1__usunTermin *p, const char *tag, const char *type)
+{
+	if ((p = soap_in_z1__usunTermin(soap, tag, p, type)))
+		if (soap_getindependent(soap))
+			return NULL;
+	return p;
+}
+
+SOAP_FMAC3 void SOAP_FMAC4 soap_default_z1__usunTerminResponse(struct soap *soap, struct z1__usunTerminResponse *a)
+{
+	(void)soap; (void)a; /* appease -Wall -Werror */
+	soap_default_z1__wynik(soap, &a->rezultat);
+}
+
+SOAP_FMAC3 void SOAP_FMAC4 soap_serialize_z1__usunTerminResponse(struct soap *soap, const struct z1__usunTerminResponse *a)
+{
+	(void)soap; (void)a; /* appease -Wall -Werror */
+#ifndef WITH_NOIDREF
+	soap_serialize_z1__wynik(soap, &a->rezultat);
+#endif
+}
+
+SOAP_FMAC3 int SOAP_FMAC4 soap_out_z1__usunTerminResponse(struct soap *soap, const char *tag, int id, const struct z1__usunTerminResponse *a, const char *type)
+{
+	(void)soap; (void)tag; (void)id; (void)a; (void)type; /* appease -Wall -Werror */
+	if (soap_element_begin_out(soap, tag, soap_embedded_id(soap, id, a, SOAP_TYPE_z1__usunTerminResponse), type))
+		return soap->error;
+	if (soap_out_z1__wynik(soap, "rezultat", -1, &a->rezultat, ""))
+		return soap->error;
+	return soap_element_end_out(soap, tag);
+}
+
+SOAP_FMAC3 struct z1__usunTerminResponse * SOAP_FMAC4 soap_in_z1__usunTerminResponse(struct soap *soap, const char *tag, struct z1__usunTerminResponse *a, const char *type)
+{
+	size_t soap_flag_rezultat = 1;
+	if (soap_element_begin_in(soap, tag, 0, type))
+		return NULL;
+	a = (struct z1__usunTerminResponse *)soap_id_enter(soap, soap->id, a, SOAP_TYPE_z1__usunTerminResponse, sizeof(struct z1__usunTerminResponse), soap->type, soap->arrayType, soap_instantiate, soap_fbase);
+	if (!a)
+		return NULL;
+	soap_default_z1__usunTerminResponse(soap, a);
+	if (soap->body && !*soap->href)
+	{
+		for (;;)
+		{	soap->error = SOAP_TAG_MISMATCH;
+			if (soap_flag_rezultat && (soap->error == SOAP_TAG_MISMATCH || soap->error == SOAP_NO_TAG))
+				if (soap_in_z1__wynik(soap, "rezultat", &a->rezultat, "z1:wynik"))
+				{	soap_flag_rezultat--;
+					continue;
+				}
+			if (soap->error == SOAP_TAG_MISMATCH)
+				soap->error = soap_ignore_element(soap);
+			if (soap->error == SOAP_NO_TAG)
+				break;
+			if (soap->error)
+				return NULL;
+		}
+		if (soap_element_end_in(soap, tag))
+			return NULL;
+		if ((soap->mode & SOAP_XML_STRICT) && (soap_flag_rezultat > 0))
+		{	soap->error = SOAP_OCCURS;
+			return NULL;
+		}
+	}
+	else if ((soap->mode & SOAP_XML_STRICT) && !*soap->href)
+	{	soap->error = SOAP_OCCURS;
+		return NULL;
+	}
+	else
+	{	a = (struct z1__usunTerminResponse *)soap_id_forward(soap, soap->href, (void*)a, 0, SOAP_TYPE_z1__usunTerminResponse, SOAP_TYPE_z1__usunTerminResponse, sizeof(struct z1__usunTerminResponse), 0, soap_finsert, NULL);
+		if (soap->body && soap_element_end_in(soap, tag))
+			return NULL;
+	}
+	return a;
+}
+
+SOAP_FMAC1 struct z1__usunTerminResponse * SOAP_FMAC2 soap_instantiate_z1__usunTerminResponse(struct soap *soap, int n, const char *type, const char *arrayType, size_t *size)
+{
+	DBGLOG(TEST, SOAP_MESSAGE(fdebug, "soap_instantiate_z1__usunTerminResponse(%p, %d, %s, %s)\n", soap, n, type?type:"", arrayType?arrayType:""));
+	(void)type; (void)arrayType; /* appease -Wall -Werror */
+	struct z1__usunTerminResponse *p;
+	size_t k = sizeof(struct z1__usunTerminResponse);
+	if (n < 0)
+	{	p = SOAP_NEW(struct z1__usunTerminResponse);
+	}
+	else
+	{	p = SOAP_NEW_ARRAY(struct z1__usunTerminResponse, n);
+		k *= n;
+	}
+	DBGLOG(TEST, SOAP_MESSAGE(fdebug, "Instantiated struct z1__usunTerminResponse location=%p n=%d\n", p, n));
+	soap_link(soap, p, SOAP_TYPE_z1__usunTerminResponse, n, soap_fdelete);
+	if (size)
+		*size = k;
+	return p;
+}
+
+SOAP_FMAC3 int SOAP_FMAC4 soap_put_z1__usunTerminResponse(struct soap *soap, const struct z1__usunTerminResponse *a, const char *tag, const char *type)
+{
+	if (soap_out_z1__usunTerminResponse(soap, tag?tag:"z1:usunTerminResponse", -2, a, type))
+		return soap->error;
+	return soap_putindependent(soap);
+}
+
+SOAP_FMAC3 struct z1__usunTerminResponse * SOAP_FMAC4 soap_get_z1__usunTerminResponse(struct soap *soap, struct z1__usunTerminResponse *p, const char *tag, const char *type)
+{
+	if ((p = soap_in_z1__usunTerminResponse(soap, tag, p, type)))
+		if (soap_getindependent(soap))
+			return NULL;
+	return p;
+}
+
+SOAP_FMAC3 void SOAP_FMAC4 soap_default_z1__usunTemat(struct soap *soap, struct z1__usunTemat *a)
+{
+	(void)soap; (void)a; /* appease -Wall -Werror */
+	soap_default_z1__id(soap, &a->ID);
+}
+
+SOAP_FMAC3 void SOAP_FMAC4 soap_serialize_z1__usunTemat(struct soap *soap, const struct z1__usunTemat *a)
+{
+	(void)soap; (void)a; /* appease -Wall -Werror */
+#ifndef WITH_NOIDREF
+	soap_serialize_z1__id(soap, &a->ID);
+#endif
+}
+
+SOAP_FMAC3 int SOAP_FMAC4 soap_out_z1__usunTemat(struct soap *soap, const char *tag, int id, const struct z1__usunTemat *a, const char *type)
+{
+	(void)soap; (void)tag; (void)id; (void)a; (void)type; /* appease -Wall -Werror */
+	if (soap_element_begin_out(soap, tag, soap_embedded_id(soap, id, a, SOAP_TYPE_z1__usunTemat), type))
+		return soap->error;
+	if (soap_out_z1__id(soap, "ID", -1, &a->ID, ""))
+		return soap->error;
+	return soap_element_end_out(soap, tag);
+}
+
+SOAP_FMAC3 struct z1__usunTemat * SOAP_FMAC4 soap_in_z1__usunTemat(struct soap *soap, const char *tag, struct z1__usunTemat *a, const char *type)
+{
+	size_t soap_flag_ID = 1;
+	if (soap_element_begin_in(soap, tag, 0, type))
+		return NULL;
+	a = (struct z1__usunTemat *)soap_id_enter(soap, soap->id, a, SOAP_TYPE_z1__usunTemat, sizeof(struct z1__usunTemat), soap->type, soap->arrayType, soap_instantiate, soap_fbase);
+	if (!a)
+		return NULL;
+	soap_default_z1__usunTemat(soap, a);
+	if (soap->body && !*soap->href)
+	{
+		for (;;)
+		{	soap->error = SOAP_TAG_MISMATCH;
+			if (soap_flag_ID && (soap->error == SOAP_TAG_MISMATCH || soap->error == SOAP_NO_TAG))
+				if (soap_in_z1__id(soap, "ID", &a->ID, "z1:id"))
+				{	soap_flag_ID--;
+					continue;
+				}
+			if (soap->error == SOAP_TAG_MISMATCH)
+				soap->error = soap_ignore_element(soap);
+			if (soap->error == SOAP_NO_TAG)
+				break;
+			if (soap->error)
+				return NULL;
+		}
+		if (soap_element_end_in(soap, tag))
+			return NULL;
+		if ((soap->mode & SOAP_XML_STRICT) && (soap_flag_ID > 0))
+		{	soap->error = SOAP_OCCURS;
+			return NULL;
+		}
+	}
+	else if ((soap->mode & SOAP_XML_STRICT) && !*soap->href)
+	{	soap->error = SOAP_OCCURS;
+		return NULL;
+	}
+	else
+	{	a = (struct z1__usunTemat *)soap_id_forward(soap, soap->href, (void*)a, 0, SOAP_TYPE_z1__usunTemat, SOAP_TYPE_z1__usunTemat, sizeof(struct z1__usunTemat), 0, soap_finsert, NULL);
+		if (soap->body && soap_element_end_in(soap, tag))
+			return NULL;
+	}
+	return a;
+}
+
+SOAP_FMAC1 struct z1__usunTemat * SOAP_FMAC2 soap_instantiate_z1__usunTemat(struct soap *soap, int n, const char *type, const char *arrayType, size_t *size)
+{
+	DBGLOG(TEST, SOAP_MESSAGE(fdebug, "soap_instantiate_z1__usunTemat(%p, %d, %s, %s)\n", soap, n, type?type:"", arrayType?arrayType:""));
+	(void)type; (void)arrayType; /* appease -Wall -Werror */
+	struct z1__usunTemat *p;
+	size_t k = sizeof(struct z1__usunTemat);
+	if (n < 0)
+	{	p = SOAP_NEW(struct z1__usunTemat);
+	}
+	else
+	{	p = SOAP_NEW_ARRAY(struct z1__usunTemat, n);
+		k *= n;
+	}
+	DBGLOG(TEST, SOAP_MESSAGE(fdebug, "Instantiated struct z1__usunTemat location=%p n=%d\n", p, n));
+	soap_link(soap, p, SOAP_TYPE_z1__usunTemat, n, soap_fdelete);
+	if (size)
+		*size = k;
+	return p;
+}
+
+SOAP_FMAC3 int SOAP_FMAC4 soap_put_z1__usunTemat(struct soap *soap, const struct z1__usunTemat *a, const char *tag, const char *type)
+{
+	if (soap_out_z1__usunTemat(soap, tag?tag:"z1:usunTemat", -2, a, type))
+		return soap->error;
+	return soap_putindependent(soap);
+}
+
+SOAP_FMAC3 struct z1__usunTemat * SOAP_FMAC4 soap_get_z1__usunTemat(struct soap *soap, struct z1__usunTemat *p, const char *tag, const char *type)
+{
+	if ((p = soap_in_z1__usunTemat(soap, tag, p, type)))
+		if (soap_getindependent(soap))
+			return NULL;
+	return p;
+}
+
+SOAP_FMAC3 void SOAP_FMAC4 soap_default_z1__usunTematResponse(struct soap *soap, struct z1__usunTematResponse *a)
+{
+	(void)soap; (void)a; /* appease -Wall -Werror */
+	soap_default_z1__wynik(soap, &a->rezultat);
+}
+
+SOAP_FMAC3 void SOAP_FMAC4 soap_serialize_z1__usunTematResponse(struct soap *soap, const struct z1__usunTematResponse *a)
+{
+	(void)soap; (void)a; /* appease -Wall -Werror */
+#ifndef WITH_NOIDREF
+	soap_serialize_z1__wynik(soap, &a->rezultat);
+#endif
+}
+
+SOAP_FMAC3 int SOAP_FMAC4 soap_out_z1__usunTematResponse(struct soap *soap, const char *tag, int id, const struct z1__usunTematResponse *a, const char *type)
+{
+	(void)soap; (void)tag; (void)id; (void)a; (void)type; /* appease -Wall -Werror */
+	if (soap_element_begin_out(soap, tag, soap_embedded_id(soap, id, a, SOAP_TYPE_z1__usunTematResponse), type))
+		return soap->error;
+	if (soap_out_z1__wynik(soap, "rezultat", -1, &a->rezultat, ""))
+		return soap->error;
+	return soap_element_end_out(soap, tag);
+}
+
+SOAP_FMAC3 struct z1__usunTematResponse * SOAP_FMAC4 soap_in_z1__usunTematResponse(struct soap *soap, const char *tag, struct z1__usunTematResponse *a, const char *type)
+{
+	size_t soap_flag_rezultat = 1;
+	if (soap_element_begin_in(soap, tag, 0, type))
+		return NULL;
+	a = (struct z1__usunTematResponse *)soap_id_enter(soap, soap->id, a, SOAP_TYPE_z1__usunTematResponse, sizeof(struct z1__usunTematResponse), soap->type, soap->arrayType, soap_instantiate, soap_fbase);
+	if (!a)
+		return NULL;
+	soap_default_z1__usunTematResponse(soap, a);
+	if (soap->body && !*soap->href)
+	{
+		for (;;)
+		{	soap->error = SOAP_TAG_MISMATCH;
+			if (soap_flag_rezultat && (soap->error == SOAP_TAG_MISMATCH || soap->error == SOAP_NO_TAG))
+				if (soap_in_z1__wynik(soap, "rezultat", &a->rezultat, "z1:wynik"))
+				{	soap_flag_rezultat--;
+					continue;
+				}
+			if (soap->error == SOAP_TAG_MISMATCH)
+				soap->error = soap_ignore_element(soap);
+			if (soap->error == SOAP_NO_TAG)
+				break;
+			if (soap->error)
+				return NULL;
+		}
+		if (soap_element_end_in(soap, tag))
+			return NULL;
+		if ((soap->mode & SOAP_XML_STRICT) && (soap_flag_rezultat > 0))
+		{	soap->error = SOAP_OCCURS;
+			return NULL;
+		}
+	}
+	else if ((soap->mode & SOAP_XML_STRICT) && !*soap->href)
+	{	soap->error = SOAP_OCCURS;
+		return NULL;
+	}
+	else
+	{	a = (struct z1__usunTematResponse *)soap_id_forward(soap, soap->href, (void*)a, 0, SOAP_TYPE_z1__usunTematResponse, SOAP_TYPE_z1__usunTematResponse, sizeof(struct z1__usunTematResponse), 0, soap_finsert, NULL);
+		if (soap->body && soap_element_end_in(soap, tag))
+			return NULL;
+	}
+	return a;
+}
+
+SOAP_FMAC1 struct z1__usunTematResponse * SOAP_FMAC2 soap_instantiate_z1__usunTematResponse(struct soap *soap, int n, const char *type, const char *arrayType, size_t *size)
+{
+	DBGLOG(TEST, SOAP_MESSAGE(fdebug, "soap_instantiate_z1__usunTematResponse(%p, %d, %s, %s)\n", soap, n, type?type:"", arrayType?arrayType:""));
+	(void)type; (void)arrayType; /* appease -Wall -Werror */
+	struct z1__usunTematResponse *p;
+	size_t k = sizeof(struct z1__usunTematResponse);
+	if (n < 0)
+	{	p = SOAP_NEW(struct z1__usunTematResponse);
+	}
+	else
+	{	p = SOAP_NEW_ARRAY(struct z1__usunTematResponse, n);
+		k *= n;
+	}
+	DBGLOG(TEST, SOAP_MESSAGE(fdebug, "Instantiated struct z1__usunTematResponse location=%p n=%d\n", p, n));
+	soap_link(soap, p, SOAP_TYPE_z1__usunTematResponse, n, soap_fdelete);
+	if (size)
+		*size = k;
+	return p;
+}
+
+SOAP_FMAC3 int SOAP_FMAC4 soap_put_z1__usunTematResponse(struct soap *soap, const struct z1__usunTematResponse *a, const char *tag, const char *type)
+{
+	if (soap_out_z1__usunTematResponse(soap, tag?tag:"z1:usunTematResponse", -2, a, type))
+		return soap->error;
+	return soap_putindependent(soap);
+}
+
+SOAP_FMAC3 struct z1__usunTematResponse * SOAP_FMAC4 soap_get_z1__usunTematResponse(struct soap *soap, struct z1__usunTematResponse *p, const char *tag, const char *type)
+{
+	if ((p = soap_in_z1__usunTematResponse(soap, tag, p, type)))
+		if (soap_getindependent(soap))
+			return NULL;
+	return p;
+}
+
+SOAP_FMAC3 void SOAP_FMAC4 soap_default_z1__usunWszystkieTerminy(struct soap *soap, struct z1__usunWszystkieTerminy *a)
+{
+	(void)soap; (void)a; /* appease -Wall -Werror */
+	soap_default_z1__id(soap, &a->ID);
+}
+
+SOAP_FMAC3 void SOAP_FMAC4 soap_serialize_z1__usunWszystkieTerminy(struct soap *soap, const struct z1__usunWszystkieTerminy *a)
+{
+	(void)soap; (void)a; /* appease -Wall -Werror */
+#ifndef WITH_NOIDREF
+	soap_serialize_z1__id(soap, &a->ID);
+#endif
+}
+
+SOAP_FMAC3 int SOAP_FMAC4 soap_out_z1__usunWszystkieTerminy(struct soap *soap, const char *tag, int id, const struct z1__usunWszystkieTerminy *a, const char *type)
+{
+	(void)soap; (void)tag; (void)id; (void)a; (void)type; /* appease -Wall -Werror */
+	if (soap_element_begin_out(soap, tag, soap_embedded_id(soap, id, a, SOAP_TYPE_z1__usunWszystkieTerminy), type))
+		return soap->error;
+	if (soap_out_z1__id(soap, "ID", -1, &a->ID, ""))
+		return soap->error;
+	return soap_element_end_out(soap, tag);
+}
+
+SOAP_FMAC3 struct z1__usunWszystkieTerminy * SOAP_FMAC4 soap_in_z1__usunWszystkieTerminy(struct soap *soap, const char *tag, struct z1__usunWszystkieTerminy *a, const char *type)
+{
+	size_t soap_flag_ID = 1;
+	if (soap_element_begin_in(soap, tag, 0, type))
+		return NULL;
+	a = (struct z1__usunWszystkieTerminy *)soap_id_enter(soap, soap->id, a, SOAP_TYPE_z1__usunWszystkieTerminy, sizeof(struct z1__usunWszystkieTerminy), soap->type, soap->arrayType, soap_instantiate, soap_fbase);
+	if (!a)
+		return NULL;
+	soap_default_z1__usunWszystkieTerminy(soap, a);
+	if (soap->body && !*soap->href)
+	{
+		for (;;)
+		{	soap->error = SOAP_TAG_MISMATCH;
+			if (soap_flag_ID && (soap->error == SOAP_TAG_MISMATCH || soap->error == SOAP_NO_TAG))
+				if (soap_in_z1__id(soap, "ID", &a->ID, "z1:id"))
+				{	soap_flag_ID--;
+					continue;
+				}
+			if (soap->error == SOAP_TAG_MISMATCH)
+				soap->error = soap_ignore_element(soap);
+			if (soap->error == SOAP_NO_TAG)
+				break;
+			if (soap->error)
+				return NULL;
+		}
+		if (soap_element_end_in(soap, tag))
+			return NULL;
+		if ((soap->mode & SOAP_XML_STRICT) && (soap_flag_ID > 0))
+		{	soap->error = SOAP_OCCURS;
+			return NULL;
+		}
+	}
+	else if ((soap->mode & SOAP_XML_STRICT) && !*soap->href)
+	{	soap->error = SOAP_OCCURS;
+		return NULL;
+	}
+	else
+	{	a = (struct z1__usunWszystkieTerminy *)soap_id_forward(soap, soap->href, (void*)a, 0, SOAP_TYPE_z1__usunWszystkieTerminy, SOAP_TYPE_z1__usunWszystkieTerminy, sizeof(struct z1__usunWszystkieTerminy), 0, soap_finsert, NULL);
+		if (soap->body && soap_element_end_in(soap, tag))
+			return NULL;
+	}
+	return a;
+}
+
+SOAP_FMAC1 struct z1__usunWszystkieTerminy * SOAP_FMAC2 soap_instantiate_z1__usunWszystkieTerminy(struct soap *soap, int n, const char *type, const char *arrayType, size_t *size)
+{
+	DBGLOG(TEST, SOAP_MESSAGE(fdebug, "soap_instantiate_z1__usunWszystkieTerminy(%p, %d, %s, %s)\n", soap, n, type?type:"", arrayType?arrayType:""));
+	(void)type; (void)arrayType; /* appease -Wall -Werror */
+	struct z1__usunWszystkieTerminy *p;
+	size_t k = sizeof(struct z1__usunWszystkieTerminy);
+	if (n < 0)
+	{	p = SOAP_NEW(struct z1__usunWszystkieTerminy);
+	}
+	else
+	{	p = SOAP_NEW_ARRAY(struct z1__usunWszystkieTerminy, n);
+		k *= n;
+	}
+	DBGLOG(TEST, SOAP_MESSAGE(fdebug, "Instantiated struct z1__usunWszystkieTerminy location=%p n=%d\n", p, n));
+	soap_link(soap, p, SOAP_TYPE_z1__usunWszystkieTerminy, n, soap_fdelete);
+	if (size)
+		*size = k;
+	return p;
+}
+
+SOAP_FMAC3 int SOAP_FMAC4 soap_put_z1__usunWszystkieTerminy(struct soap *soap, const struct z1__usunWszystkieTerminy *a, const char *tag, const char *type)
+{
+	if (soap_out_z1__usunWszystkieTerminy(soap, tag?tag:"z1:usunWszystkieTerminy", -2, a, type))
+		return soap->error;
+	return soap_putindependent(soap);
+}
+
+SOAP_FMAC3 struct z1__usunWszystkieTerminy * SOAP_FMAC4 soap_get_z1__usunWszystkieTerminy(struct soap *soap, struct z1__usunWszystkieTerminy *p, const char *tag, const char *type)
+{
+	if ((p = soap_in_z1__usunWszystkieTerminy(soap, tag, p, type)))
+		if (soap_getindependent(soap))
+			return NULL;
+	return p;
+}
+
+SOAP_FMAC3 void SOAP_FMAC4 soap_default_z1__usunWszystkieTerminyResponse(struct soap *soap, struct z1__usunWszystkieTerminyResponse *a)
+{
+	(void)soap; (void)a; /* appease -Wall -Werror */
+	soap_default_z1__wynik(soap, &a->rezultat);
+}
+
+SOAP_FMAC3 void SOAP_FMAC4 soap_serialize_z1__usunWszystkieTerminyResponse(struct soap *soap, const struct z1__usunWszystkieTerminyResponse *a)
+{
+	(void)soap; (void)a; /* appease -Wall -Werror */
+#ifndef WITH_NOIDREF
+	soap_serialize_z1__wynik(soap, &a->rezultat);
+#endif
+}
+
+SOAP_FMAC3 int SOAP_FMAC4 soap_out_z1__usunWszystkieTerminyResponse(struct soap *soap, const char *tag, int id, const struct z1__usunWszystkieTerminyResponse *a, const char *type)
+{
+	(void)soap; (void)tag; (void)id; (void)a; (void)type; /* appease -Wall -Werror */
+	if (soap_element_begin_out(soap, tag, soap_embedded_id(soap, id, a, SOAP_TYPE_z1__usunWszystkieTerminyResponse), type))
+		return soap->error;
+	if (soap_out_z1__wynik(soap, "rezultat", -1, &a->rezultat, ""))
+		return soap->error;
+	return soap_element_end_out(soap, tag);
+}
+
+SOAP_FMAC3 struct z1__usunWszystkieTerminyResponse * SOAP_FMAC4 soap_in_z1__usunWszystkieTerminyResponse(struct soap *soap, const char *tag, struct z1__usunWszystkieTerminyResponse *a, const char *type)
+{
+	size_t soap_flag_rezultat = 1;
+	if (soap_element_begin_in(soap, tag, 0, type))
+		return NULL;
+	a = (struct z1__usunWszystkieTerminyResponse *)soap_id_enter(soap, soap->id, a, SOAP_TYPE_z1__usunWszystkieTerminyResponse, sizeof(struct z1__usunWszystkieTerminyResponse), soap->type, soap->arrayType, soap_instantiate, soap_fbase);
+	if (!a)
+		return NULL;
+	soap_default_z1__usunWszystkieTerminyResponse(soap, a);
+	if (soap->body && !*soap->href)
+	{
+		for (;;)
+		{	soap->error = SOAP_TAG_MISMATCH;
+			if (soap_flag_rezultat && (soap->error == SOAP_TAG_MISMATCH || soap->error == SOAP_NO_TAG))
+				if (soap_in_z1__wynik(soap, "rezultat", &a->rezultat, "z1:wynik"))
+				{	soap_flag_rezultat--;
+					continue;
+				}
+			if (soap->error == SOAP_TAG_MISMATCH)
+				soap->error = soap_ignore_element(soap);
+			if (soap->error == SOAP_NO_TAG)
+				break;
+			if (soap->error)
+				return NULL;
+		}
+		if (soap_element_end_in(soap, tag))
+			return NULL;
+		if ((soap->mode & SOAP_XML_STRICT) && (soap_flag_rezultat > 0))
+		{	soap->error = SOAP_OCCURS;
+			return NULL;
+		}
+	}
+	else if ((soap->mode & SOAP_XML_STRICT) && !*soap->href)
+	{	soap->error = SOAP_OCCURS;
+		return NULL;
+	}
+	else
+	{	a = (struct z1__usunWszystkieTerminyResponse *)soap_id_forward(soap, soap->href, (void*)a, 0, SOAP_TYPE_z1__usunWszystkieTerminyResponse, SOAP_TYPE_z1__usunWszystkieTerminyResponse, sizeof(struct z1__usunWszystkieTerminyResponse), 0, soap_finsert, NULL);
+		if (soap->body && soap_element_end_in(soap, tag))
+			return NULL;
+	}
+	return a;
+}
+
+SOAP_FMAC1 struct z1__usunWszystkieTerminyResponse * SOAP_FMAC2 soap_instantiate_z1__usunWszystkieTerminyResponse(struct soap *soap, int n, const char *type, const char *arrayType, size_t *size)
+{
+	DBGLOG(TEST, SOAP_MESSAGE(fdebug, "soap_instantiate_z1__usunWszystkieTerminyResponse(%p, %d, %s, %s)\n", soap, n, type?type:"", arrayType?arrayType:""));
+	(void)type; (void)arrayType; /* appease -Wall -Werror */
+	struct z1__usunWszystkieTerminyResponse *p;
+	size_t k = sizeof(struct z1__usunWszystkieTerminyResponse);
+	if (n < 0)
+	{	p = SOAP_NEW(struct z1__usunWszystkieTerminyResponse);
+	}
+	else
+	{	p = SOAP_NEW_ARRAY(struct z1__usunWszystkieTerminyResponse, n);
+		k *= n;
+	}
+	DBGLOG(TEST, SOAP_MESSAGE(fdebug, "Instantiated struct z1__usunWszystkieTerminyResponse location=%p n=%d\n", p, n));
+	soap_link(soap, p, SOAP_TYPE_z1__usunWszystkieTerminyResponse, n, soap_fdelete);
+	if (size)
+		*size = k;
+	return p;
+}
+
+SOAP_FMAC3 int SOAP_FMAC4 soap_put_z1__usunWszystkieTerminyResponse(struct soap *soap, const struct z1__usunWszystkieTerminyResponse *a, const char *tag, const char *type)
+{
+	if (soap_out_z1__usunWszystkieTerminyResponse(soap, tag?tag:"z1:usunWszystkieTerminyResponse", -2, a, type))
+		return soap->error;
+	return soap_putindependent(soap);
+}
+
+SOAP_FMAC3 struct z1__usunWszystkieTerminyResponse * SOAP_FMAC4 soap_get_z1__usunWszystkieTerminyResponse(struct soap *soap, struct z1__usunWszystkieTerminyResponse *p, const char *tag, const char *type)
+{
+	if ((p = soap_in_z1__usunWszystkieTerminyResponse(soap, tag, p, type)))
+		if (soap_getindependent(soap))
+			return NULL;
+	return p;
+}
+
+SOAP_FMAC3 void SOAP_FMAC4 soap_default_z1__usunWszystkieTematy(struct soap *soap, struct z1__usunWszystkieTematy *a)
+{
+	(void)soap; (void)a; /* appease -Wall -Werror */
+	soap_default_z1__id(soap, &a->ID);
+}
+
+SOAP_FMAC3 void SOAP_FMAC4 soap_serialize_z1__usunWszystkieTematy(struct soap *soap, const struct z1__usunWszystkieTematy *a)
+{
+	(void)soap; (void)a; /* appease -Wall -Werror */
+#ifndef WITH_NOIDREF
+	soap_serialize_z1__id(soap, &a->ID);
+#endif
+}
+
+SOAP_FMAC3 int SOAP_FMAC4 soap_out_z1__usunWszystkieTematy(struct soap *soap, const char *tag, int id, const struct z1__usunWszystkieTematy *a, const char *type)
+{
+	(void)soap; (void)tag; (void)id; (void)a; (void)type; /* appease -Wall -Werror */
+	if (soap_element_begin_out(soap, tag, soap_embedded_id(soap, id, a, SOAP_TYPE_z1__usunWszystkieTematy), type))
+		return soap->error;
+	if (soap_out_z1__id(soap, "ID", -1, &a->ID, ""))
+		return soap->error;
+	return soap_element_end_out(soap, tag);
+}
+
+SOAP_FMAC3 struct z1__usunWszystkieTematy * SOAP_FMAC4 soap_in_z1__usunWszystkieTematy(struct soap *soap, const char *tag, struct z1__usunWszystkieTematy *a, const char *type)
+{
+	size_t soap_flag_ID = 1;
+	if (soap_element_begin_in(soap, tag, 0, type))
+		return NULL;
+	a = (struct z1__usunWszystkieTematy *)soap_id_enter(soap, soap->id, a, SOAP_TYPE_z1__usunWszystkieTematy, sizeof(struct z1__usunWszystkieTematy), soap->type, soap->arrayType, soap_instantiate, soap_fbase);
+	if (!a)
+		return NULL;
+	soap_default_z1__usunWszystkieTematy(soap, a);
+	if (soap->body && !*soap->href)
+	{
+		for (;;)
+		{	soap->error = SOAP_TAG_MISMATCH;
+			if (soap_flag_ID && (soap->error == SOAP_TAG_MISMATCH || soap->error == SOAP_NO_TAG))
+				if (soap_in_z1__id(soap, "ID", &a->ID, "z1:id"))
+				{	soap_flag_ID--;
+					continue;
+				}
+			if (soap->error == SOAP_TAG_MISMATCH)
+				soap->error = soap_ignore_element(soap);
+			if (soap->error == SOAP_NO_TAG)
+				break;
+			if (soap->error)
+				return NULL;
+		}
+		if (soap_element_end_in(soap, tag))
+			return NULL;
+		if ((soap->mode & SOAP_XML_STRICT) && (soap_flag_ID > 0))
+		{	soap->error = SOAP_OCCURS;
+			return NULL;
+		}
+	}
+	else if ((soap->mode & SOAP_XML_STRICT) && !*soap->href)
+	{	soap->error = SOAP_OCCURS;
+		return NULL;
+	}
+	else
+	{	a = (struct z1__usunWszystkieTematy *)soap_id_forward(soap, soap->href, (void*)a, 0, SOAP_TYPE_z1__usunWszystkieTematy, SOAP_TYPE_z1__usunWszystkieTematy, sizeof(struct z1__usunWszystkieTematy), 0, soap_finsert, NULL);
+		if (soap->body && soap_element_end_in(soap, tag))
+			return NULL;
+	}
+	return a;
+}
+
+SOAP_FMAC1 struct z1__usunWszystkieTematy * SOAP_FMAC2 soap_instantiate_z1__usunWszystkieTematy(struct soap *soap, int n, const char *type, const char *arrayType, size_t *size)
+{
+	DBGLOG(TEST, SOAP_MESSAGE(fdebug, "soap_instantiate_z1__usunWszystkieTematy(%p, %d, %s, %s)\n", soap, n, type?type:"", arrayType?arrayType:""));
+	(void)type; (void)arrayType; /* appease -Wall -Werror */
+	struct z1__usunWszystkieTematy *p;
+	size_t k = sizeof(struct z1__usunWszystkieTematy);
+	if (n < 0)
+	{	p = SOAP_NEW(struct z1__usunWszystkieTematy);
+	}
+	else
+	{	p = SOAP_NEW_ARRAY(struct z1__usunWszystkieTematy, n);
+		k *= n;
+	}
+	DBGLOG(TEST, SOAP_MESSAGE(fdebug, "Instantiated struct z1__usunWszystkieTematy location=%p n=%d\n", p, n));
+	soap_link(soap, p, SOAP_TYPE_z1__usunWszystkieTematy, n, soap_fdelete);
+	if (size)
+		*size = k;
+	return p;
+}
+
+SOAP_FMAC3 int SOAP_FMAC4 soap_put_z1__usunWszystkieTematy(struct soap *soap, const struct z1__usunWszystkieTematy *a, const char *tag, const char *type)
+{
+	if (soap_out_z1__usunWszystkieTematy(soap, tag?tag:"z1:usunWszystkieTematy", -2, a, type))
+		return soap->error;
+	return soap_putindependent(soap);
+}
+
+SOAP_FMAC3 struct z1__usunWszystkieTematy * SOAP_FMAC4 soap_get_z1__usunWszystkieTematy(struct soap *soap, struct z1__usunWszystkieTematy *p, const char *tag, const char *type)
+{
+	if ((p = soap_in_z1__usunWszystkieTematy(soap, tag, p, type)))
+		if (soap_getindependent(soap))
+			return NULL;
+	return p;
+}
+
+SOAP_FMAC3 void SOAP_FMAC4 soap_default_z1__usunWszystkieTematyResponse(struct soap *soap, struct z1__usunWszystkieTematyResponse *a)
+{
+	(void)soap; (void)a; /* appease -Wall -Werror */
+	soap_default_z1__wynik(soap, &a->rezultat);
+}
+
+SOAP_FMAC3 void SOAP_FMAC4 soap_serialize_z1__usunWszystkieTematyResponse(struct soap *soap, const struct z1__usunWszystkieTematyResponse *a)
+{
+	(void)soap; (void)a; /* appease -Wall -Werror */
+#ifndef WITH_NOIDREF
+	soap_serialize_z1__wynik(soap, &a->rezultat);
+#endif
+}
+
+SOAP_FMAC3 int SOAP_FMAC4 soap_out_z1__usunWszystkieTematyResponse(struct soap *soap, const char *tag, int id, const struct z1__usunWszystkieTematyResponse *a, const char *type)
+{
+	(void)soap; (void)tag; (void)id; (void)a; (void)type; /* appease -Wall -Werror */
+	if (soap_element_begin_out(soap, tag, soap_embedded_id(soap, id, a, SOAP_TYPE_z1__usunWszystkieTematyResponse), type))
+		return soap->error;
+	if (soap_out_z1__wynik(soap, "rezultat", -1, &a->rezultat, ""))
+		return soap->error;
+	return soap_element_end_out(soap, tag);
+}
+
+SOAP_FMAC3 struct z1__usunWszystkieTematyResponse * SOAP_FMAC4 soap_in_z1__usunWszystkieTematyResponse(struct soap *soap, const char *tag, struct z1__usunWszystkieTematyResponse *a, const char *type)
+{
+	size_t soap_flag_rezultat = 1;
+	if (soap_element_begin_in(soap, tag, 0, type))
+		return NULL;
+	a = (struct z1__usunWszystkieTematyResponse *)soap_id_enter(soap, soap->id, a, SOAP_TYPE_z1__usunWszystkieTematyResponse, sizeof(struct z1__usunWszystkieTematyResponse), soap->type, soap->arrayType, soap_instantiate, soap_fbase);
+	if (!a)
+		return NULL;
+	soap_default_z1__usunWszystkieTematyResponse(soap, a);
+	if (soap->body && !*soap->href)
+	{
+		for (;;)
+		{	soap->error = SOAP_TAG_MISMATCH;
+			if (soap_flag_rezultat && (soap->error == SOAP_TAG_MISMATCH || soap->error == SOAP_NO_TAG))
+				if (soap_in_z1__wynik(soap, "rezultat", &a->rezultat, "z1:wynik"))
+				{	soap_flag_rezultat--;
+					continue;
+				}
+			if (soap->error == SOAP_TAG_MISMATCH)
+				soap->error = soap_ignore_element(soap);
+			if (soap->error == SOAP_NO_TAG)
+				break;
+			if (soap->error)
+				return NULL;
+		}
+		if (soap_element_end_in(soap, tag))
+			return NULL;
+		if ((soap->mode & SOAP_XML_STRICT) && (soap_flag_rezultat > 0))
+		{	soap->error = SOAP_OCCURS;
+			return NULL;
+		}
+	}
+	else if ((soap->mode & SOAP_XML_STRICT) && !*soap->href)
+	{	soap->error = SOAP_OCCURS;
+		return NULL;
+	}
+	else
+	{	a = (struct z1__usunWszystkieTematyResponse *)soap_id_forward(soap, soap->href, (void*)a, 0, SOAP_TYPE_z1__usunWszystkieTematyResponse, SOAP_TYPE_z1__usunWszystkieTematyResponse, sizeof(struct z1__usunWszystkieTematyResponse), 0, soap_finsert, NULL);
+		if (soap->body && soap_element_end_in(soap, tag))
+			return NULL;
+	}
+	return a;
+}
+
+SOAP_FMAC1 struct z1__usunWszystkieTematyResponse * SOAP_FMAC2 soap_instantiate_z1__usunWszystkieTematyResponse(struct soap *soap, int n, const char *type, const char *arrayType, size_t *size)
+{
+	DBGLOG(TEST, SOAP_MESSAGE(fdebug, "soap_instantiate_z1__usunWszystkieTematyResponse(%p, %d, %s, %s)\n", soap, n, type?type:"", arrayType?arrayType:""));
+	(void)type; (void)arrayType; /* appease -Wall -Werror */
+	struct z1__usunWszystkieTematyResponse *p;
+	size_t k = sizeof(struct z1__usunWszystkieTematyResponse);
+	if (n < 0)
+	{	p = SOAP_NEW(struct z1__usunWszystkieTematyResponse);
+	}
+	else
+	{	p = SOAP_NEW_ARRAY(struct z1__usunWszystkieTematyResponse, n);
+		k *= n;
+	}
+	DBGLOG(TEST, SOAP_MESSAGE(fdebug, "Instantiated struct z1__usunWszystkieTematyResponse location=%p n=%d\n", p, n));
+	soap_link(soap, p, SOAP_TYPE_z1__usunWszystkieTematyResponse, n, soap_fdelete);
+	if (size)
+		*size = k;
+	return p;
+}
+
+SOAP_FMAC3 int SOAP_FMAC4 soap_put_z1__usunWszystkieTematyResponse(struct soap *soap, const struct z1__usunWszystkieTematyResponse *a, const char *tag, const char *type)
+{
+	if (soap_out_z1__usunWszystkieTematyResponse(soap, tag?tag:"z1:usunWszystkieTematyResponse", -2, a, type))
+		return soap->error;
+	return soap_putindependent(soap);
+}
+
+SOAP_FMAC3 struct z1__usunWszystkieTematyResponse * SOAP_FMAC4 soap_get_z1__usunWszystkieTematyResponse(struct soap *soap, struct z1__usunWszystkieTematyResponse *p, const char *tag, const char *type)
+{
+	if ((p = soap_in_z1__usunWszystkieTematyResponse(soap, tag, p, type)))
+		if (soap_getindependent(soap))
+			return NULL;
+	return p;
+}
 
 SOAP_FMAC3 void SOAP_FMAC4 soap_default_z1__wypiszZTerminu(struct soap *soap, struct z1__wypiszZTerminu *a)
 {
