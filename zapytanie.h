@@ -19,6 +19,7 @@ public:
     string stworzSql() const;
     void wykonaj();
     operator string();
+    unsigned liczbaWynikow(){return wyniki.size();}
 private:
     const Tabela* tabela;
     vector<string> warunki;

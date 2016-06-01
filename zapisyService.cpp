@@ -103,10 +103,7 @@ int zapisyService::zapiszTermin(std::string projektID, std::string zapisywanyID,
  }
 
  int zapisyService::dodajProwadzacego(z1__prowadzacy *daneProwadzacego, struct z1__dodajProwadzacegoResponse &_param_9) {
-     cerr << "zapisyService::dodajProwadzacego" << endl;
-     cout << "zapisyService::dodajProwadzacego" << endl;
      BazaDanych* baza=BazaDanych::instancja();
-     cerr << "2" << endl;
      if( baza->dodajProwadzacego(daneProwadzacego) ){
          _param_9.rezultat="ok";
      }else{
@@ -116,7 +113,13 @@ int zapisyService::zapiszTermin(std::string projektID, std::string zapisywanyID,
  }
 
  int zapisyService::zmienDaneProwadzacego(std::string idProwadzacego, z1__prowadzacy *daneProwadzacego, struct z1__zmienDaneProwadzacegoResponse &_param_10) {
-     return 0;
+     BazaDanych* baza=BazaDanych::instancja();
+     if( baza->zmienProwadzacego(idProwadzacego, daneProwadzacego) ){
+         _param_10.rezultat="ok";
+     }else{
+         _param_10.rezultat="error";
+     }
+     return SOAP_OK;
  }
 
  int zapisyService::usunProwadzacego(std::string ID, struct z1__usunProwadzacegoResponse &_param_11) {
@@ -175,14 +178,35 @@ int zapisyService::zapiszTermin(std::string projektID, std::string zapisywanyID,
      _param_15.rezultat="ok";
     return SOAP_OK;}
 
- int zapisyService::edytujProjekt(std::string przedmiotID, std::string projektID, z1__temat *projekt, struct z1__edytujProjektResponse &_param_16) {return 0;}
+ int zapisyService::edytujProjekt(std::string przedmiotID, std::string projektID, z1__temat *projekt, struct z1__edytujProjektResponse &_param_16) {
+     BazaDanych* baza=BazaDanych::instancja();
+     if( baza->edytujProjekt(projektID, *projekt) ){
+         _param_16.rezultat="ok";
+     }else{
+         _param_16.rezultat="error";
+     }
+     return SOAP_OK;
+ }
 
- int zapisyService::edytujTermin(std::string przedmiotID, std::string terminID, std::string salaID, z1__termin *termin, struct z1__edytujTerminResponse &_param_17) {return 0;}
-
- int zapisyService::wypiszZProjektu(std::string projektID, std::string zapisywanyID, struct z1__wypiszZProjektuResponse &_param_18){
+ int zapisyService::edytujTermin(std::string przedmiotID, std::string terminID, std::string salaID, z1__termin *termin, struct z1__edytujTerminResponse &_param_17) {
      return 0;
  }
 
+ int zapisyService::wypiszZProjektu(std::string projektID, std::string zapisywanyID, struct z1__wypiszZProjektuResponse &_param_18){
+
+     if(BazaDanych::instancja()->wypiszZProjektu(zapisywanyID,projektID)){
+         _param_18.rezultat="ok";
+     }else{
+         _param_18.rezultat="blad";
+     }
+     return SOAP_OK;
+ }
+
  int zapisyService::wypiszZTerminu(std::string terminID, std::string zapisywanyID, struct z1__wypiszZTerminuResponse &_param_19){
-     return 0;
+     if(BazaDanych::instancja()->wypiszZTerminu(zapisywanyID,terminID)){
+         _param_19.rezultat="ok";
+     }else{
+         _param_19.rezultat="blad";
+     }
+     return SOAP_OK;
  }

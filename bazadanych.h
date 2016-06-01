@@ -20,6 +20,8 @@ using StatementPtr = std::unique_ptr<sql::Statement>;
 using ResultsPtr = std::unique_ptr<sql::ResultSet>;
 using Id = std::string;
 
+class ZlaLiczbaKolumn : public std::exception {const char* what() const noexcept{return "Zla liczba kolumn\n";}};
+
 class BazaDanych
 {
 public:
@@ -27,9 +29,14 @@ public:
     static BazaDanych* instancja();
     bool dodajProjekt(std::string przedmiotID, z1__temat t);
     bool dodajTermin(std::string przedmiotID, std::string salaID, z1__termin t);
+    bool edytujProjekt(string projektId, z1__temat t);
+    bool edytujTermin(string terminId, z1__termin t);
     bool zapiszNaProjekt(Id studentId, Id projektId);
     bool zapiszNaTermin(Id studentId, Id terminId);
+    bool wypiszZProjektu(Id studentId, Id projektId);
+    bool wypiszZTerminu(Id studentId, Id terminId);
     bool dodajProwadzacego(z1__prowadzacy *p);
+    bool zmienProwadzacego(string idProwadzacego, z1__prowadzacy *daneProwadzacego);
     bool dodajStudenta(string przedmiotId, z1__student *s);
     //Pobiera z bazy informacje o zapisanych na projekt studentach i zwraca ich listę w formacie csv
     string pobierzProjekt(string id);
@@ -63,6 +70,8 @@ public:
     }
     //usuwa z "tabela" wiersz, w ktorym "kolumna" ma "wartowsc"
     StatementPtr usun(string tabela, string kolumna, string wartosc);
+    StatementPtr dodaj(string tabela, initializer_list<string> kolumny, initializer_list<string> wartosci);
+    StatementPtr aktualizuj(string tabela, string id, initializer_list<string> kolumny, initializer_list<string> wartosci);
     StatementPtr wykonaj(string polecenieSql);
 private:
     sql::Driver *driver;

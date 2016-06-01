@@ -138,3 +138,13 @@ BEGIN
 INSERT INTO `zapisy`.`student` (`student_id`,`przedmiot_id`) VALUES (StudentId, PrzedmiotId);
 END
 
+DELIMITER $$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `dodajPrzedmiot`(
+	IN Nazwa varchar(45),
+	IN Typ int(11)
+	)
+BEGIN
+INSERT INTO `zapisy`.`przedmiot` (`nazwa`,`typ`) VALUES (Nazwa, Typ);
+END$$
+DELIMITER ;
+

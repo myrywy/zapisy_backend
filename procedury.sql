@@ -148,3 +148,32 @@ INSERT INTO `zapisy`.`przedmiot` (`nazwa`,`typ`) VALUES (Nazwa, Typ);
 END$$
 DELIMITER ;
 
+-- --------------------------------------------------------------------------------
+-- Routine DDL
+-- Note: comments before and after the routine body will not be stored by the server
+-- --------------------------------------------------------------------------------
+DELIMITER $$
+
+CREATE PROCEDURE `wypiszZProjektu` (
+	IN StudentId INT(11),
+	IN ProjektId INT(11)
+)
+BEGIN
+DELETE FROM student_temat WHERE `id_student`=StudentId AND `id_temat`=ProjektId;
+UPDATE temat SET wolne_miejsca = wolne_miejsca + 1 WHERE `id`=ProjektId; 
+END
+
+-- --------------------------------------------------------------------------------
+-- Routine DDL
+-- Note: comments before and after the routine body will not be stored by the server
+-- --------------------------------------------------------------------------------
+DELIMITER $$
+
+CREATE DEFINER=`root`@`127.0.0.1` PROCEDURE `wypiszZTerminu`(
+	IN StudentId INT(11),
+	IN TerminId INT(11)
+)
+BEGIN
+DELETE FROM student_termin WHERE `id_student`=StudentId AND `id_termin`=TerminId;
+UPDATE termin SET miejsca = miejsca + 1 WHERE `id`=TerminId; 
+END

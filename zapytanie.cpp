@@ -51,21 +51,42 @@ void Zapytanie::wykonaj()
     try{
         stmt=BazaDanych::instancja()->wykonaj(tmpSql);
     }catch(sql::SQLException err){
-        std::cerr << "Przechwycono wyjatek SQL przy przetwarzaniu zapytania\n";
-        std::cerr << tmpSql << endl;
-        std::cerr << err.what() << endl;
+        std::cout << "Przechwycono wyjatek SQL przy przetwarzaniu zapytania\n";
+        std::cout << tmpSql << endl;
+        std::cout << err.what() << endl;
         throw;
     }
     ResultsPtr res(stmt->getResultSet());
     if(kolumny.size()>0){
+        if(res->getRow()>=0){
+            std::cout << "Brak wynikow! " << endl;
+            wyniki.clear();
+            aktualne=true;
+            return;
+        }
         while(res->next()){
+            /*for(int i=1; true; i++){
+                std::cout << "Kolumny:" << endl;
+                try{
+                    std::cout << res->getMetaData()->getColumnName(i) << endl;
+                }catch(...){
+                    std::cout << "~kolumny" << endl;
+                    break;
+                }
+            }*/
             vector<string> w(kolumny.size());
             for(unsigned i=0; i<kolumny.size(); i++){
                 try{
                     string s=kolumny[i];
+                    // Oczyszczanie nazwy tabeli ze znakow "`". Bez nich, w niektorych przypadkach baza danych nie odpowie na zapytanie. Z nimi ResultSet nie rozpozna nazwy kolumny
                     size_t pos;
                     while( (pos=s.find_first_of('`'))!=string::npos){
                         s.erase(pos,1);
+                    }
+                    // Wyciąganie substringa po ostatniej kropce. Bez częsci przed kropką zapytanie może być niejednoznaczne. W ResultSet jest bez kropki.
+                    size_t dotPos{};
+                    while( (dotPos=s.find_first_of('.'))!=string::npos ){
+                        s=s.substr(++dotPos);
                     }
                     w[i]=res->getString(s);
                     std::cout << "wynik " << kolumny[i] << "=" << w[i] << endl;
@@ -76,6 +97,7 @@ void Zapytanie::wykonaj()
             wyniki.push_back(w);
         }
     }
+    wyniki.clear();
     aktualne=true;
 }
 
