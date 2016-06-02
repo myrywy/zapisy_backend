@@ -165,5 +165,17 @@ A commercial use license is available from Genivia Inc., contact@genivia.com
         virtual int usunTermin(std::string ID, struct z1__usunTerminResponse &_param_23)
         { return this->usunTermin(NULL, NULL, ID, _param_23); }
         virtual int usunTermin(const char *soap_endpoint, const char *soap_action, std::string ID, struct z1__usunTerminResponse &_param_23);
+        /// Web service operation 'importujProjekty' (returns SOAP_OK or error code)
+        virtual int importujProjekty(std::string przedmiotId, std::string dane, struct z1__importujProjektyResponse &_param_24)
+        { return this->importujProjekty(NULL, NULL, przedmiotId, dane, _param_24); }
+        virtual int importujProjekty(const char *soap_endpoint, const char *soap_action, std::string przedmiotId, std::string dane, struct z1__importujProjektyResponse &_param_24);
+        /// Web service operation 'importujTerminy' (returns SOAP_OK or error code)
+        virtual int importujTerminy(std::string przedmiotId, std::string dane, struct z1__importujTerminyResponse &_param_25)
+        { return this->importujTerminy(NULL, NULL, przedmiotId, dane, _param_25); }
+        virtual int importujTerminy(const char *soap_endpoint, const char *soap_action, std::string przedmiotId, std::string dane, struct z1__importujTerminyResponse &_param_25);
+        /// Web service operation 'importujStudentow' (returns SOAP_OK or error code)
+        virtual int importujStudentow(std::string przedmiotId, std::string dane, struct z1__importujStudentowResponse &_param_26)
+        { return this->importujStudentow(NULL, NULL, przedmiotId, dane, _param_26); }
+        virtual int importujStudentow(const char *soap_endpoint, const char *soap_action, std::string przedmiotId, std::string dane, struct z1__importujStudentowResponse &_param_26);
     };
 #endif

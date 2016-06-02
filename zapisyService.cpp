@@ -258,3 +258,33 @@ int zapisyService::zapiszTermin(std::string projektID, std::string zapisywanyID,
     _param_23.rezultat="ok";
      return SOAP_OK;
  }
+
+ int zapisyService::importujProjekty(std::string przedmiotId, std::string dane, struct z1__importujProjektyResponse &_param_24){
+     BazaDanych* baza=BazaDanych::instancja();
+     if( baza->importujProjekty(przedmiotId, dane) ){
+         _param_24.rezultat="ok";
+     }else{
+         _param_24.rezultat="error";
+     }
+     return SOAP_OK;
+ }
+
+ int zapisyService::importujTerminy(std::string przedmiotId, std::string dane, struct z1__importujTerminyResponse &_param_25){
+     BazaDanych* baza=BazaDanych::instancja();
+     if( baza->importujTerminy(przedmiotId, dane) ){
+         _param_25.rezultat="ok";
+     }else{
+         _param_25.rezultat="error";
+     }
+     return SOAP_OK;
+ }
+
+ int zapisyService::importujStudentow(std::string przedmiotId, std::string dane, struct z1__importujStudentowResponse &_param_26){
+     BazaDanych* baza=BazaDanych::instancja();
+     if( baza->importujStudentow(przedmiotId, dane) ){
+         _param_26.rezultat="ok";
+     }else{
+         _param_26.rezultat="error";
+     }
+     return SOAP_OK;
+ }

@@ -1,5 +1,5 @@
 sources= ../bazadanych.cpp ../tabela.cpp ../zapytanie.cpp
-test_sources=zapytanie_test.cpp test_utils.cpp
+test_sources=zapytanie_test.cpp test_utils.cpp bazadanych_test.cpp
 objects=$(sources:.cpp=.o)
 pathMysqlHeaders=../libs/mysql/include
 pathMysqlLibs=../libs/mysql
@@ -8,15 +8,19 @@ headers=-I$(pathMysqlHeaders) -I$(pathGsoapHeaders) -I$(pathMysqlHeaders)/cppcon
 
 LDFLAGS="-Wl,--no-as-needed"
 
-all: zapytanie_test
+all: zapytanie_test bazadanych_test
 
 #zapisy: $(objects)
 #	g++ -lm $^ -o $@ -L$(pathGsoapLibs) -L$(pathMysqlLibs) -L$(pathMysqlCientLib) -static -lgsoap++ -lmysqlclient -lmysqlcppconn-static -lpthread -ldl
 
-zapytanie_test: $(test_sources)
-	g++ --std=c++11 -lm $(test_sources) -o $@ $(objects) -L$(pathMysqlLibs) -L$(pathMysqlCientLib) -static -lmysqlclient -lmysqlcppconn-static -lpthread -ldl -lboost_unit_test_framework
+zapytanie_test: zapytanie_test.cpp test_utils.cpp
+	g++ --std=c++11 -lm $^ -o $@ $(objects) -L$(pathMysqlLibs) -L$(pathMysqlCientLib) $(headers) -static -lmysqlclient -lmysqlcppconn-static -lpthread -ldl -lboost_unit_test_framework
+
+bazadanych_test: bazadanych_test.cpp test_utils.cpp
+	g++ --std=c++11 -lm $^ -o $@ $(objects) -L$(pathMysqlLibs) -L$(pathMysqlCientLib) $(headers) -static -lmysqlclient -lmysqlcppconn-static -lpthread -ldl -lboost_unit_test_framework
+
 
 .PHONY: clean
 
 clean:
-	rm -f zapisy_test
+	rm -f zapisy_test bazadanych_test

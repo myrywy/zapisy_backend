@@ -1288,6 +1288,348 @@ inline int soap_read_SOAP_ENV__Header(struct soap *soap, struct SOAP_ENV__Header
 
 #endif
 
+#ifndef SOAP_TYPE_z1__importujStudentow_DEFINED
+#define SOAP_TYPE_z1__importujStudentow_DEFINED
+SOAP_FMAC3 void SOAP_FMAC4 soap_default_z1__importujStudentow(struct soap*, struct z1__importujStudentow *);
+SOAP_FMAC3 void SOAP_FMAC4 soap_serialize_z1__importujStudentow(struct soap*, const struct z1__importujStudentow *);
+SOAP_FMAC3 int SOAP_FMAC4 soap_out_z1__importujStudentow(struct soap*, const char*, int, const struct z1__importujStudentow *, const char*);
+SOAP_FMAC3 struct z1__importujStudentow * SOAP_FMAC4 soap_in_z1__importujStudentow(struct soap*, const char*, struct z1__importujStudentow *, const char*);
+SOAP_FMAC1 struct z1__importujStudentow * SOAP_FMAC2 soap_instantiate_z1__importujStudentow(struct soap*, int, const char*, const char*, size_t*);
+
+inline struct z1__importujStudentow * soap_new_z1__importujStudentow(struct soap *soap, int n = -1)
+{	return soap_instantiate_z1__importujStudentow(soap, n, NULL, NULL, NULL);
+}
+
+inline struct z1__importujStudentow * soap_new_req_z1__importujStudentow(
+	struct soap *soap,
+	const std::string& przedmiotId,
+	const std::string& dane)
+{	struct z1__importujStudentow *_p = soap_new_z1__importujStudentow(soap);
+	if (_p)
+	{	soap_default_z1__importujStudentow(soap, _p);
+		_p->przedmiotId = przedmiotId;
+		_p->dane = dane;
+	}
+	return _p;
+}
+
+inline struct z1__importujStudentow * soap_new_set_z1__importujStudentow(
+	struct soap *soap,
+	const std::string& przedmiotId,
+	const std::string& dane)
+{	struct z1__importujStudentow *_p = soap_new_z1__importujStudentow(soap);
+	if (_p)
+	{	soap_default_z1__importujStudentow(soap, _p);
+		_p->przedmiotId = przedmiotId;
+		_p->dane = dane;
+	}
+	return _p;
+}
+SOAP_FMAC3 int SOAP_FMAC4 soap_put_z1__importujStudentow(struct soap*, const struct z1__importujStudentow *, const char*, const char*);
+
+inline int soap_write_z1__importujStudentow(struct soap *soap, struct z1__importujStudentow const *p)
+{	soap_free_temp(soap);
+	if (p)
+	{	if (soap_begin_send(soap) || (soap_serialize_z1__importujStudentow(soap, p), 0) || soap_put_z1__importujStudentow(soap, p, "z1:importujStudentow", NULL) || soap_end_send(soap))
+			return soap->error;
+	}
+	return SOAP_OK;
+}
+SOAP_FMAC3 struct z1__importujStudentow * SOAP_FMAC4 soap_get_z1__importujStudentow(struct soap*, struct z1__importujStudentow *, const char*, const char*);
+
+inline int soap_read_z1__importujStudentow(struct soap *soap, struct z1__importujStudentow *p)
+{	if (p)
+	{	soap_default_z1__importujStudentow(soap, p);
+		if (soap_begin_recv(soap) || soap_get_z1__importujStudentow(soap, p, NULL, NULL) == NULL || soap_end_recv(soap))
+			return soap->error;
+	}
+	return SOAP_OK;
+}
+#endif
+
+#ifndef SOAP_TYPE_z1__importujStudentowResponse_DEFINED
+#define SOAP_TYPE_z1__importujStudentowResponse_DEFINED
+SOAP_FMAC3 void SOAP_FMAC4 soap_default_z1__importujStudentowResponse(struct soap*, struct z1__importujStudentowResponse *);
+SOAP_FMAC3 void SOAP_FMAC4 soap_serialize_z1__importujStudentowResponse(struct soap*, const struct z1__importujStudentowResponse *);
+SOAP_FMAC3 int SOAP_FMAC4 soap_out_z1__importujStudentowResponse(struct soap*, const char*, int, const struct z1__importujStudentowResponse *, const char*);
+SOAP_FMAC3 struct z1__importujStudentowResponse * SOAP_FMAC4 soap_in_z1__importujStudentowResponse(struct soap*, const char*, struct z1__importujStudentowResponse *, const char*);
+SOAP_FMAC1 struct z1__importujStudentowResponse * SOAP_FMAC2 soap_instantiate_z1__importujStudentowResponse(struct soap*, int, const char*, const char*, size_t*);
+
+inline struct z1__importujStudentowResponse * soap_new_z1__importujStudentowResponse(struct soap *soap, int n = -1)
+{	return soap_instantiate_z1__importujStudentowResponse(soap, n, NULL, NULL, NULL);
+}
+
+inline struct z1__importujStudentowResponse * soap_new_req_z1__importujStudentowResponse(
+	struct soap *soap,
+	const std::string& rezultat)
+{	struct z1__importujStudentowResponse *_p = soap_new_z1__importujStudentowResponse(soap);
+	if (_p)
+	{	soap_default_z1__importujStudentowResponse(soap, _p);
+		_p->rezultat = rezultat;
+	}
+	return _p;
+}
+
+inline struct z1__importujStudentowResponse * soap_new_set_z1__importujStudentowResponse(
+	struct soap *soap,
+	const std::string& rezultat)
+{	struct z1__importujStudentowResponse *_p = soap_new_z1__importujStudentowResponse(soap);
+	if (_p)
+	{	soap_default_z1__importujStudentowResponse(soap, _p);
+		_p->rezultat = rezultat;
+	}
+	return _p;
+}
+SOAP_FMAC3 int SOAP_FMAC4 soap_put_z1__importujStudentowResponse(struct soap*, const struct z1__importujStudentowResponse *, const char*, const char*);
+
+inline int soap_write_z1__importujStudentowResponse(struct soap *soap, struct z1__importujStudentowResponse const *p)
+{	soap_free_temp(soap);
+	if (p)
+	{	if (soap_begin_send(soap) || (soap_serialize_z1__importujStudentowResponse(soap, p), 0) || soap_put_z1__importujStudentowResponse(soap, p, "z1:importujStudentowResponse", NULL) || soap_end_send(soap))
+			return soap->error;
+	}
+	return SOAP_OK;
+}
+SOAP_FMAC3 struct z1__importujStudentowResponse * SOAP_FMAC4 soap_get_z1__importujStudentowResponse(struct soap*, struct z1__importujStudentowResponse *, const char*, const char*);
+
+inline int soap_read_z1__importujStudentowResponse(struct soap *soap, struct z1__importujStudentowResponse *p)
+{	if (p)
+	{	soap_default_z1__importujStudentowResponse(soap, p);
+		if (soap_begin_recv(soap) || soap_get_z1__importujStudentowResponse(soap, p, NULL, NULL) == NULL || soap_end_recv(soap))
+			return soap->error;
+	}
+	return SOAP_OK;
+}
+#endif
+
+#ifndef SOAP_TYPE_z1__importujTerminy_DEFINED
+#define SOAP_TYPE_z1__importujTerminy_DEFINED
+SOAP_FMAC3 void SOAP_FMAC4 soap_default_z1__importujTerminy(struct soap*, struct z1__importujTerminy *);
+SOAP_FMAC3 void SOAP_FMAC4 soap_serialize_z1__importujTerminy(struct soap*, const struct z1__importujTerminy *);
+SOAP_FMAC3 int SOAP_FMAC4 soap_out_z1__importujTerminy(struct soap*, const char*, int, const struct z1__importujTerminy *, const char*);
+SOAP_FMAC3 struct z1__importujTerminy * SOAP_FMAC4 soap_in_z1__importujTerminy(struct soap*, const char*, struct z1__importujTerminy *, const char*);
+SOAP_FMAC1 struct z1__importujTerminy * SOAP_FMAC2 soap_instantiate_z1__importujTerminy(struct soap*, int, const char*, const char*, size_t*);
+
+inline struct z1__importujTerminy * soap_new_z1__importujTerminy(struct soap *soap, int n = -1)
+{	return soap_instantiate_z1__importujTerminy(soap, n, NULL, NULL, NULL);
+}
+
+inline struct z1__importujTerminy * soap_new_req_z1__importujTerminy(
+	struct soap *soap,
+	const std::string& przedmiotId,
+	const std::string& dane)
+{	struct z1__importujTerminy *_p = soap_new_z1__importujTerminy(soap);
+	if (_p)
+	{	soap_default_z1__importujTerminy(soap, _p);
+		_p->przedmiotId = przedmiotId;
+		_p->dane = dane;
+	}
+	return _p;
+}
+
+inline struct z1__importujTerminy * soap_new_set_z1__importujTerminy(
+	struct soap *soap,
+	const std::string& przedmiotId,
+	const std::string& dane)
+{	struct z1__importujTerminy *_p = soap_new_z1__importujTerminy(soap);
+	if (_p)
+	{	soap_default_z1__importujTerminy(soap, _p);
+		_p->przedmiotId = przedmiotId;
+		_p->dane = dane;
+	}
+	return _p;
+}
+SOAP_FMAC3 int SOAP_FMAC4 soap_put_z1__importujTerminy(struct soap*, const struct z1__importujTerminy *, const char*, const char*);
+
+inline int soap_write_z1__importujTerminy(struct soap *soap, struct z1__importujTerminy const *p)
+{	soap_free_temp(soap);
+	if (p)
+	{	if (soap_begin_send(soap) || (soap_serialize_z1__importujTerminy(soap, p), 0) || soap_put_z1__importujTerminy(soap, p, "z1:importujTerminy", NULL) || soap_end_send(soap))
+			return soap->error;
+	}
+	return SOAP_OK;
+}
+SOAP_FMAC3 struct z1__importujTerminy * SOAP_FMAC4 soap_get_z1__importujTerminy(struct soap*, struct z1__importujTerminy *, const char*, const char*);
+
+inline int soap_read_z1__importujTerminy(struct soap *soap, struct z1__importujTerminy *p)
+{	if (p)
+	{	soap_default_z1__importujTerminy(soap, p);
+		if (soap_begin_recv(soap) || soap_get_z1__importujTerminy(soap, p, NULL, NULL) == NULL || soap_end_recv(soap))
+			return soap->error;
+	}
+	return SOAP_OK;
+}
+#endif
+
+#ifndef SOAP_TYPE_z1__importujTerminyResponse_DEFINED
+#define SOAP_TYPE_z1__importujTerminyResponse_DEFINED
+SOAP_FMAC3 void SOAP_FMAC4 soap_default_z1__importujTerminyResponse(struct soap*, struct z1__importujTerminyResponse *);
+SOAP_FMAC3 void SOAP_FMAC4 soap_serialize_z1__importujTerminyResponse(struct soap*, const struct z1__importujTerminyResponse *);
+SOAP_FMAC3 int SOAP_FMAC4 soap_out_z1__importujTerminyResponse(struct soap*, const char*, int, const struct z1__importujTerminyResponse *, const char*);
+SOAP_FMAC3 struct z1__importujTerminyResponse * SOAP_FMAC4 soap_in_z1__importujTerminyResponse(struct soap*, const char*, struct z1__importujTerminyResponse *, const char*);
+SOAP_FMAC1 struct z1__importujTerminyResponse * SOAP_FMAC2 soap_instantiate_z1__importujTerminyResponse(struct soap*, int, const char*, const char*, size_t*);
+
+inline struct z1__importujTerminyResponse * soap_new_z1__importujTerminyResponse(struct soap *soap, int n = -1)
+{	return soap_instantiate_z1__importujTerminyResponse(soap, n, NULL, NULL, NULL);
+}
+
+inline struct z1__importujTerminyResponse * soap_new_req_z1__importujTerminyResponse(
+	struct soap *soap,
+	const std::string& rezultat)
+{	struct z1__importujTerminyResponse *_p = soap_new_z1__importujTerminyResponse(soap);
+	if (_p)
+	{	soap_default_z1__importujTerminyResponse(soap, _p);
+		_p->rezultat = rezultat;
+	}
+	return _p;
+}
+
+inline struct z1__importujTerminyResponse * soap_new_set_z1__importujTerminyResponse(
+	struct soap *soap,
+	const std::string& rezultat)
+{	struct z1__importujTerminyResponse *_p = soap_new_z1__importujTerminyResponse(soap);
+	if (_p)
+	{	soap_default_z1__importujTerminyResponse(soap, _p);
+		_p->rezultat = rezultat;
+	}
+	return _p;
+}
+SOAP_FMAC3 int SOAP_FMAC4 soap_put_z1__importujTerminyResponse(struct soap*, const struct z1__importujTerminyResponse *, const char*, const char*);
+
+inline int soap_write_z1__importujTerminyResponse(struct soap *soap, struct z1__importujTerminyResponse const *p)
+{	soap_free_temp(soap);
+	if (p)
+	{	if (soap_begin_send(soap) || (soap_serialize_z1__importujTerminyResponse(soap, p), 0) || soap_put_z1__importujTerminyResponse(soap, p, "z1:importujTerminyResponse", NULL) || soap_end_send(soap))
+			return soap->error;
+	}
+	return SOAP_OK;
+}
+SOAP_FMAC3 struct z1__importujTerminyResponse * SOAP_FMAC4 soap_get_z1__importujTerminyResponse(struct soap*, struct z1__importujTerminyResponse *, const char*, const char*);
+
+inline int soap_read_z1__importujTerminyResponse(struct soap *soap, struct z1__importujTerminyResponse *p)
+{	if (p)
+	{	soap_default_z1__importujTerminyResponse(soap, p);
+		if (soap_begin_recv(soap) || soap_get_z1__importujTerminyResponse(soap, p, NULL, NULL) == NULL || soap_end_recv(soap))
+			return soap->error;
+	}
+	return SOAP_OK;
+}
+#endif
+
+#ifndef SOAP_TYPE_z1__importujProjekty_DEFINED
+#define SOAP_TYPE_z1__importujProjekty_DEFINED
+SOAP_FMAC3 void SOAP_FMAC4 soap_default_z1__importujProjekty(struct soap*, struct z1__importujProjekty *);
+SOAP_FMAC3 void SOAP_FMAC4 soap_serialize_z1__importujProjekty(struct soap*, const struct z1__importujProjekty *);
+SOAP_FMAC3 int SOAP_FMAC4 soap_out_z1__importujProjekty(struct soap*, const char*, int, const struct z1__importujProjekty *, const char*);
+SOAP_FMAC3 struct z1__importujProjekty * SOAP_FMAC4 soap_in_z1__importujProjekty(struct soap*, const char*, struct z1__importujProjekty *, const char*);
+SOAP_FMAC1 struct z1__importujProjekty * SOAP_FMAC2 soap_instantiate_z1__importujProjekty(struct soap*, int, const char*, const char*, size_t*);
+
+inline struct z1__importujProjekty * soap_new_z1__importujProjekty(struct soap *soap, int n = -1)
+{	return soap_instantiate_z1__importujProjekty(soap, n, NULL, NULL, NULL);
+}
+
+inline struct z1__importujProjekty * soap_new_req_z1__importujProjekty(
+	struct soap *soap,
+	const std::string& przedmiotId,
+	const std::string& dane)
+{	struct z1__importujProjekty *_p = soap_new_z1__importujProjekty(soap);
+	if (_p)
+	{	soap_default_z1__importujProjekty(soap, _p);
+		_p->przedmiotId = przedmiotId;
+		_p->dane = dane;
+	}
+	return _p;
+}
+
+inline struct z1__importujProjekty * soap_new_set_z1__importujProjekty(
+	struct soap *soap,
+	const std::string& przedmiotId,
+	const std::string& dane)
+{	struct z1__importujProjekty *_p = soap_new_z1__importujProjekty(soap);
+	if (_p)
+	{	soap_default_z1__importujProjekty(soap, _p);
+		_p->przedmiotId = przedmiotId;
+		_p->dane = dane;
+	}
+	return _p;
+}
+SOAP_FMAC3 int SOAP_FMAC4 soap_put_z1__importujProjekty(struct soap*, const struct z1__importujProjekty *, const char*, const char*);
+
+inline int soap_write_z1__importujProjekty(struct soap *soap, struct z1__importujProjekty const *p)
+{	soap_free_temp(soap);
+	if (p)
+	{	if (soap_begin_send(soap) || (soap_serialize_z1__importujProjekty(soap, p), 0) || soap_put_z1__importujProjekty(soap, p, "z1:importujProjekty", NULL) || soap_end_send(soap))
+			return soap->error;
+	}
+	return SOAP_OK;
+}
+SOAP_FMAC3 struct z1__importujProjekty * SOAP_FMAC4 soap_get_z1__importujProjekty(struct soap*, struct z1__importujProjekty *, const char*, const char*);
+
+inline int soap_read_z1__importujProjekty(struct soap *soap, struct z1__importujProjekty *p)
+{	if (p)
+	{	soap_default_z1__importujProjekty(soap, p);
+		if (soap_begin_recv(soap) || soap_get_z1__importujProjekty(soap, p, NULL, NULL) == NULL || soap_end_recv(soap))
+			return soap->error;
+	}
+	return SOAP_OK;
+}
+#endif
+
+#ifndef SOAP_TYPE_z1__importujProjektyResponse_DEFINED
+#define SOAP_TYPE_z1__importujProjektyResponse_DEFINED
+SOAP_FMAC3 void SOAP_FMAC4 soap_default_z1__importujProjektyResponse(struct soap*, struct z1__importujProjektyResponse *);
+SOAP_FMAC3 void SOAP_FMAC4 soap_serialize_z1__importujProjektyResponse(struct soap*, const struct z1__importujProjektyResponse *);
+SOAP_FMAC3 int SOAP_FMAC4 soap_out_z1__importujProjektyResponse(struct soap*, const char*, int, const struct z1__importujProjektyResponse *, const char*);
+SOAP_FMAC3 struct z1__importujProjektyResponse * SOAP_FMAC4 soap_in_z1__importujProjektyResponse(struct soap*, const char*, struct z1__importujProjektyResponse *, const char*);
+SOAP_FMAC1 struct z1__importujProjektyResponse * SOAP_FMAC2 soap_instantiate_z1__importujProjektyResponse(struct soap*, int, const char*, const char*, size_t*);
+
+inline struct z1__importujProjektyResponse * soap_new_z1__importujProjektyResponse(struct soap *soap, int n = -1)
+{	return soap_instantiate_z1__importujProjektyResponse(soap, n, NULL, NULL, NULL);
+}
+
+inline struct z1__importujProjektyResponse * soap_new_req_z1__importujProjektyResponse(
+	struct soap *soap,
+	const std::string& rezultat)
+{	struct z1__importujProjektyResponse *_p = soap_new_z1__importujProjektyResponse(soap);
+	if (_p)
+	{	soap_default_z1__importujProjektyResponse(soap, _p);
+		_p->rezultat = rezultat;
+	}
+	return _p;
+}
+
+inline struct z1__importujProjektyResponse * soap_new_set_z1__importujProjektyResponse(
+	struct soap *soap,
+	const std::string& rezultat)
+{	struct z1__importujProjektyResponse *_p = soap_new_z1__importujProjektyResponse(soap);
+	if (_p)
+	{	soap_default_z1__importujProjektyResponse(soap, _p);
+		_p->rezultat = rezultat;
+	}
+	return _p;
+}
+SOAP_FMAC3 int SOAP_FMAC4 soap_put_z1__importujProjektyResponse(struct soap*, const struct z1__importujProjektyResponse *, const char*, const char*);
+
+inline int soap_write_z1__importujProjektyResponse(struct soap *soap, struct z1__importujProjektyResponse const *p)
+{	soap_free_temp(soap);
+	if (p)
+	{	if (soap_begin_send(soap) || (soap_serialize_z1__importujProjektyResponse(soap, p), 0) || soap_put_z1__importujProjektyResponse(soap, p, "z1:importujProjektyResponse", NULL) || soap_end_send(soap))
+			return soap->error;
+	}
+	return SOAP_OK;
+}
+SOAP_FMAC3 struct z1__importujProjektyResponse * SOAP_FMAC4 soap_get_z1__importujProjektyResponse(struct soap*, struct z1__importujProjektyResponse *, const char*, const char*);
+
+inline int soap_read_z1__importujProjektyResponse(struct soap *soap, struct z1__importujProjektyResponse *p)
+{	if (p)
+	{	soap_default_z1__importujProjektyResponse(soap, p);
+		if (soap_begin_recv(soap) || soap_get_z1__importujProjektyResponse(soap, p, NULL, NULL) == NULL || soap_end_recv(soap))
+			return soap->error;
+	}
+	return SOAP_OK;
+}
+#endif
+
 #ifndef SOAP_TYPE_z1__usunTermin_DEFINED
 #define SOAP_TYPE_z1__usunTermin_DEFINED
 SOAP_FMAC3 void SOAP_FMAC4 soap_default_z1__usunTermin(struct soap*, struct z1__usunTermin *);

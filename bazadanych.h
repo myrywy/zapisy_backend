@@ -35,6 +35,9 @@ public:
     bool zapiszNaTermin(Id studentId, Id terminId);
     bool wypiszZProjektu(Id studentId, Id projektId);
     bool wypiszZTerminu(Id studentId, Id terminId);
+    bool importujProjekty(Id przedmiotId, string dane);
+    bool importujTerminy(Id przedmiotId, string dane);
+    bool importujStudentow(Id przedmiotId, string dane);
     bool dodajProwadzacego(z1__prowadzacy *p);
     bool zmienProwadzacego(string idProwadzacego, z1__prowadzacy *daneProwadzacego);
     bool dodajStudenta(string przedmiotId, z1__student *s);
@@ -73,6 +76,8 @@ public:
     StatementPtr dodaj(string tabela, initializer_list<string> kolumny, initializer_list<string> wartosci);
     StatementPtr aktualizuj(string tabela, string id, initializer_list<string> kolumny, initializer_list<string> wartosci);
     StatementPtr wykonaj(string polecenieSql);
+    static vector<string> splitString(const string& str, char c);
+    static vector< vector< string > > parseCsv(const string& str, char col, char row);
 private:
     sql::Driver *driver;
     sql::Connection *con;

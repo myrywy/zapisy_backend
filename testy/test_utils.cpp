@@ -1,6 +1,5 @@
 #include "test_utils.hpp"
 
-
 bool sqlCmp(string s1, string s2){
     string tmp_s1;
     string tmp_s2;

@@ -246,6 +246,9 @@ static int serve_z1__usunWszystkieTematy(struct soap*, zapisyService*);
 static int serve_z1__usunWszystkieTerminy(struct soap*, zapisyService*);
 static int serve_z1__usunTemat(struct soap*, zapisyService*);
 static int serve_z1__usunTermin(struct soap*, zapisyService*);
+static int serve_z1__importujProjekty(struct soap*, zapisyService*);
+static int serve_z1__importujTerminy(struct soap*, zapisyService*);
+static int serve_z1__importujStudentow(struct soap*, zapisyService*);
 
 int zapisyService::dispatch()
 {	return dispatch(this->soap);
@@ -302,6 +305,12 @@ int zapisyService::dispatch(struct soap* soap)
 		return serve_z1__usunTemat(soap, this);
 	if (!soap_match_tag(soap, soap->tag, "z1:usunTermin"))
 		return serve_z1__usunTermin(soap, this);
+	if (!soap_match_tag(soap, soap->tag, "z1:importujProjekty"))
+		return serve_z1__importujProjekty(soap, this);
+	if (!soap_match_tag(soap, soap->tag, "z1:importujTerminy"))
+		return serve_z1__importujTerminy(soap, this);
+	if (!soap_match_tag(soap, soap->tag, "z1:importujStudentow"))
+		return serve_z1__importujStudentow(soap, this);
 	return soap->error = SOAP_NO_METHOD;
 }
 
@@ -1241,6 +1250,129 @@ static int serve_z1__usunTermin(struct soap *soap, zapisyService *service)
 	 || soap_putheader(soap)
 	 || soap_body_begin_out(soap)
 	 || soap_put_z1__usunTerminResponse(soap, &_param_23, "z1:usunTerminResponse", NULL)
+	 || soap_body_end_out(soap)
+	 || soap_envelope_end_out(soap)
+	 || soap_end_send(soap))
+		return soap->error;
+	return soap_closesock(soap);
+}
+
+static int serve_z1__importujProjekty(struct soap *soap, zapisyService *service)
+{	struct z1__importujProjekty soap_tmp_z1__importujProjekty;
+	struct z1__importujProjektyResponse _param_24;
+	soap_default_z1__importujProjektyResponse(soap, &_param_24);
+	soap_default_z1__importujProjekty(soap, &soap_tmp_z1__importujProjekty);
+	if (!soap_get_z1__importujProjekty(soap, &soap_tmp_z1__importujProjekty, "z1:importujProjekty", NULL))
+		return soap->error;
+	if (soap_body_end_in(soap)
+	 || soap_envelope_end_in(soap)
+	 || soap_end_recv(soap))
+		return soap->error;
+	soap->error = service->importujProjekty(soap_tmp_z1__importujProjekty.przedmiotId, soap_tmp_z1__importujProjekty.dane, _param_24);
+	if (soap->error)
+		return soap->error;
+	soap->encodingStyle = NULL;
+	soap_serializeheader(soap);
+	soap_serialize_z1__importujProjektyResponse(soap, &_param_24);
+	if (soap_begin_count(soap))
+		return soap->error;
+	if (soap->mode & SOAP_IO_LENGTH)
+	{	if (soap_envelope_begin_out(soap)
+		 || soap_putheader(soap)
+		 || soap_body_begin_out(soap)
+		 || soap_put_z1__importujProjektyResponse(soap, &_param_24, "z1:importujProjektyResponse", NULL)
+		 || soap_body_end_out(soap)
+		 || soap_envelope_end_out(soap))
+			 return soap->error;
+	};
+	if (soap_end_count(soap)
+	 || soap_response(soap, SOAP_OK)
+	 || soap_envelope_begin_out(soap)
+	 || soap_putheader(soap)
+	 || soap_body_begin_out(soap)
+	 || soap_put_z1__importujProjektyResponse(soap, &_param_24, "z1:importujProjektyResponse", NULL)
+	 || soap_body_end_out(soap)
+	 || soap_envelope_end_out(soap)
+	 || soap_end_send(soap))
+		return soap->error;
+	return soap_closesock(soap);
+}
+
+static int serve_z1__importujTerminy(struct soap *soap, zapisyService *service)
+{	struct z1__importujTerminy soap_tmp_z1__importujTerminy;
+	struct z1__importujTerminyResponse _param_25;
+	soap_default_z1__importujTerminyResponse(soap, &_param_25);
+	soap_default_z1__importujTerminy(soap, &soap_tmp_z1__importujTerminy);
+	if (!soap_get_z1__importujTerminy(soap, &soap_tmp_z1__importujTerminy, "z1:importujTerminy", NULL))
+		return soap->error;
+	if (soap_body_end_in(soap)
+	 || soap_envelope_end_in(soap)
+	 || soap_end_recv(soap))
+		return soap->error;
+	soap->error = service->importujTerminy(soap_tmp_z1__importujTerminy.przedmiotId, soap_tmp_z1__importujTerminy.dane, _param_25);
+	if (soap->error)
+		return soap->error;
+	soap->encodingStyle = NULL;
+	soap_serializeheader(soap);
+	soap_serialize_z1__importujTerminyResponse(soap, &_param_25);
+	if (soap_begin_count(soap))
+		return soap->error;
+	if (soap->mode & SOAP_IO_LENGTH)
+	{	if (soap_envelope_begin_out(soap)
+		 || soap_putheader(soap)
+		 || soap_body_begin_out(soap)
+		 || soap_put_z1__importujTerminyResponse(soap, &_param_25, "z1:importujTerminyResponse", NULL)
+		 || soap_body_end_out(soap)
+		 || soap_envelope_end_out(soap))
+			 return soap->error;
+	};
+	if (soap_end_count(soap)
+	 || soap_response(soap, SOAP_OK)
+	 || soap_envelope_begin_out(soap)
+	 || soap_putheader(soap)
+	 || soap_body_begin_out(soap)
+	 || soap_put_z1__importujTerminyResponse(soap, &_param_25, "z1:importujTerminyResponse", NULL)
+	 || soap_body_end_out(soap)
+	 || soap_envelope_end_out(soap)
+	 || soap_end_send(soap))
+		return soap->error;
+	return soap_closesock(soap);
+}
+
+static int serve_z1__importujStudentow(struct soap *soap, zapisyService *service)
+{	struct z1__importujStudentow soap_tmp_z1__importujStudentow;
+	struct z1__importujStudentowResponse _param_26;
+	soap_default_z1__importujStudentowResponse(soap, &_param_26);
+	soap_default_z1__importujStudentow(soap, &soap_tmp_z1__importujStudentow);
+	if (!soap_get_z1__importujStudentow(soap, &soap_tmp_z1__importujStudentow, "z1:importujStudentow", NULL))
+		return soap->error;
+	if (soap_body_end_in(soap)
+	 || soap_envelope_end_in(soap)
+	 || soap_end_recv(soap))
+		return soap->error;
+	soap->error = service->importujStudentow(soap_tmp_z1__importujStudentow.przedmiotId, soap_tmp_z1__importujStudentow.dane, _param_26);
+	if (soap->error)
+		return soap->error;
+	soap->encodingStyle = NULL;
+	soap_serializeheader(soap);
+	soap_serialize_z1__importujStudentowResponse(soap, &_param_26);
+	if (soap_begin_count(soap))
+		return soap->error;
+	if (soap->mode & SOAP_IO_LENGTH)
+	{	if (soap_envelope_begin_out(soap)
+		 || soap_putheader(soap)
+		 || soap_body_begin_out(soap)
+		 || soap_put_z1__importujStudentowResponse(soap, &_param_26, "z1:importujStudentowResponse", NULL)
+		 || soap_body_end_out(soap)
+		 || soap_envelope_end_out(soap))
+			 return soap->error;
+	};
+	if (soap_end_count(soap)
+	 || soap_response(soap, SOAP_OK)
+	 || soap_envelope_begin_out(soap)
+	 || soap_putheader(soap)
+	 || soap_body_begin_out(soap)
+	 || soap_put_z1__importujStudentowResponse(soap, &_param_26, "z1:importujStudentowResponse", NULL)
 	 || soap_body_end_out(soap)
 	 || soap_envelope_end_out(soap)
 	 || soap_end_send(soap))

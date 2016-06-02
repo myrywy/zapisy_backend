@@ -368,9 +368,36 @@ StatementPtr BazaDanych::aktualizuj(string tabela, string id, initializer_list<s
 StatementPtr BazaDanych::wykonaj(string polecenieSql)
 {
     StatementPtr stmt=StatementPtr(con->createStatement());
-    cerr << " Wykonywanie polecenia \n" << polecenieSql << endl;
+    std::cout << " Wykonywanie polecenia \n" << polecenieSql << endl;
     stmt->execute(polecenieSql);
     return stmt;
+}
+
+vector<string> BazaDanych::splitString(const string &str, char c)
+{
+    vector<string> res;
+    string::const_iterator p=str.cbegin();
+    string::const_iterator k=str.cbegin();
+    string::const_iterator begin=str.cbegin();
+    string::const_iterator end=str.cend();
+    for( ; k!=end; k++){
+        if(*k==c ){
+            res.push_back(str.substr(p-begin,k-p));
+            p=k+1;
+        }
+    }
+    res.push_back(str.substr(p-begin,k-p));
+    return res;
+}
+
+vector<vector<string> > BazaDanych::parseCsv(const string &str, char col, char row)
+{
+    vector<vector<string> > res;
+    vector<string> tmp=splitString(str,row);
+    for(string& s : tmp){
+        res.push_back(splitString(s,col));
+    }
+    return res;
 }
 
 
@@ -416,6 +443,92 @@ bool BazaDanych::zmienProwadzacego(string idProwadzacego, z1__prowadzacy *danePr
     }catch(...){
         cout << "Nieznany blad. Zignorowano."<<endl;
         return false;
+    }
+    return true;
+}
+
+
+bool BazaDanych::importujProjekty(Id przedmiotId, string dane)
+{
+    try{
+        auto wiersze=parseCsv(dane,';','\n');
+        for(vector<string>& w : wiersze){
+            if(w.size()<3){
+                continue;
+            }
+            string& temat=w[0];
+            string& opis=w[1];
+            string& miejsca=w[2];
+            dodaj("temat",{"przedmiot_id","temat","opis","miejsca","wolne_miejsca"},{przedmiotId,temat,opis,miejsca,miejsca});
+        }
+    }catch(sql::SQLException err){
+        std::cout << "Przechwycono wyjatek SQL\n";
+        std::cout << err.what() << endl;
+        return false;
+    }catch(...){
+        return false;
+    }
+
+    return true;
+}
+
+bool BazaDanych::importujTerminy(Id przedmiotId, string dane)
+{
+    try{
+        auto wiersze=parseCsv(dane,';','\n');
+        std::cout << dane << endl;
+        for(vector<string>& w : wiersze){
+            if(w.size()<5){
+                continue;
+            }
+            string& dzien=w[0];
+            string& godzinaOd=w[1];
+            string& godzinaDo=w[2];
+            string& miejsca=w[3];
+            string& nrSali=w[4];
+            std::cout << dzien << " " << godzinaOd << " " << godzinaDo << " " << miejsca << " " << nrSali << " " << endl;
+            Zapytanie z=Tabela("sala").select("id").whereEqual("numer",nrSali);
+            string salaId=parseCsv(z,',',';')[0][0];
+            std::cout << salaId << endl;
+            if(salaId.empty()){
+                dodaj("sala",{"numer"},{nrSali});
+                salaId=parseCsv(z,',',';')[0][0];
+                std::cout << salaId << endl;
+            }
+            dodaj("termin",{"przedmiot_id","dzien","godzina_od","godzina_do","miejsca","sala_id"},{przedmiotId,dzien,godzinaOd,godzinaDo,miejsca,salaId});
+        }
+    }catch(sql::SQLException err){
+        std::cout << "Przechwycono wyjatek SQL\n";
+        std::cout << err.what() << endl;
+        return false;
+    }catch(...){
+        return false;
+    }
+    return true;
+}
+
+
+bool BazaDanych::importujStudentow(Id przedmiotId, string dane)
+{
+    auto wiersze = parseCsv(dane, ';', '\n');
+    for(vector<string> w : wiersze){
+        if(w.size()<3){
+            continue;
+        }
+        string& imie=w[0];
+        string& nazwisko=w[1];
+        string& indeks=w[2];
+        try{
+            dodaj("student",{"imie","nazwisko","index"},{imie,nazwisko,indeks});
+            string id=Tabela("student").select("id").whereEqual("`index`",indeks);
+            dodaj("student_przedmiot",{"student_id","przedmiot_id"},{id,przedmiotId});
+        }catch(sql::SQLException err){
+            std::cout << "Przechwycono wyjatek SQL\n";
+            std::cout << err.what() << endl;
+            return false;
+        }catch(...){
+            return false;
+        }
     }
     return true;
 }

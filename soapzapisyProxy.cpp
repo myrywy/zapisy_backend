@@ -1430,4 +1430,172 @@ int zapisyProxy::usunTermin(const char *endpoint, const char *soap_action, std::
 		return soap_closesock(soap);
 	return soap_closesock(soap);
 }
+
+int zapisyProxy::importujProjekty(const char *endpoint, const char *soap_action, std::string przedmiotId, std::string dane, struct z1__importujProjektyResponse &_param_24)
+{	struct soap *soap = this->soap;
+	struct z1__importujProjekty soap_tmp_z1__importujProjekty;
+	if (endpoint)
+		soap_endpoint = endpoint;
+	if (soap_endpoint == NULL)
+		soap_endpoint = "http://192.168.0.13:8090/";
+	if (soap_action == NULL)
+		soap_action = "";
+	soap_tmp_z1__importujProjekty.przedmiotId = przedmiotId;
+	soap_tmp_z1__importujProjekty.dane = dane;
+	soap_begin(soap);
+	soap_set_version(soap, 1); /* SOAP1.1 */
+	soap->encodingStyle = NULL;
+	soap_serializeheader(soap);
+	soap_serialize_z1__importujProjekty(soap, &soap_tmp_z1__importujProjekty);
+	if (soap_begin_count(soap))
+		return soap->error;
+	if (soap->mode & SOAP_IO_LENGTH)
+	{	if (soap_envelope_begin_out(soap)
+		 || soap_putheader(soap)
+		 || soap_body_begin_out(soap)
+		 || soap_put_z1__importujProjekty(soap, &soap_tmp_z1__importujProjekty, "z1:importujProjekty", NULL)
+		 || soap_body_end_out(soap)
+		 || soap_envelope_end_out(soap))
+			 return soap->error;
+	}
+	if (soap_end_count(soap))
+		return soap->error;
+	if (soap_connect(soap, soap_endpoint, soap_action)
+	 || soap_envelope_begin_out(soap)
+	 || soap_putheader(soap)
+	 || soap_body_begin_out(soap)
+	 || soap_put_z1__importujProjekty(soap, &soap_tmp_z1__importujProjekty, "z1:importujProjekty", NULL)
+	 || soap_body_end_out(soap)
+	 || soap_envelope_end_out(soap)
+	 || soap_end_send(soap))
+		return soap_closesock(soap);
+	if (!&_param_24)
+		return soap_closesock(soap);
+	soap_default_z1__importujProjektyResponse(soap, &_param_24);
+	if (soap_begin_recv(soap)
+	 || soap_envelope_begin_in(soap)
+	 || soap_recv_header(soap)
+	 || soap_body_begin_in(soap))
+		return soap_closesock(soap);
+	soap_get_z1__importujProjektyResponse(soap, &_param_24, "z1:importujProjektyResponse", NULL);
+	if (soap->error)
+		return soap_recv_fault(soap, 0);
+	if (soap_body_end_in(soap)
+	 || soap_envelope_end_in(soap)
+	 || soap_end_recv(soap))
+		return soap_closesock(soap);
+	return soap_closesock(soap);
+}
+
+int zapisyProxy::importujTerminy(const char *endpoint, const char *soap_action, std::string przedmiotId, std::string dane, struct z1__importujTerminyResponse &_param_25)
+{	struct soap *soap = this->soap;
+	struct z1__importujTerminy soap_tmp_z1__importujTerminy;
+	if (endpoint)
+		soap_endpoint = endpoint;
+	if (soap_endpoint == NULL)
+		soap_endpoint = "http://192.168.0.13:8090/";
+	if (soap_action == NULL)
+		soap_action = "";
+	soap_tmp_z1__importujTerminy.przedmiotId = przedmiotId;
+	soap_tmp_z1__importujTerminy.dane = dane;
+	soap_begin(soap);
+	soap_set_version(soap, 1); /* SOAP1.1 */
+	soap->encodingStyle = NULL;
+	soap_serializeheader(soap);
+	soap_serialize_z1__importujTerminy(soap, &soap_tmp_z1__importujTerminy);
+	if (soap_begin_count(soap))
+		return soap->error;
+	if (soap->mode & SOAP_IO_LENGTH)
+	{	if (soap_envelope_begin_out(soap)
+		 || soap_putheader(soap)
+		 || soap_body_begin_out(soap)
+		 || soap_put_z1__importujTerminy(soap, &soap_tmp_z1__importujTerminy, "z1:importujTerminy", NULL)
+		 || soap_body_end_out(soap)
+		 || soap_envelope_end_out(soap))
+			 return soap->error;
+	}
+	if (soap_end_count(soap))
+		return soap->error;
+	if (soap_connect(soap, soap_endpoint, soap_action)
+	 || soap_envelope_begin_out(soap)
+	 || soap_putheader(soap)
+	 || soap_body_begin_out(soap)
+	 || soap_put_z1__importujTerminy(soap, &soap_tmp_z1__importujTerminy, "z1:importujTerminy", NULL)
+	 || soap_body_end_out(soap)
+	 || soap_envelope_end_out(soap)
+	 || soap_end_send(soap))
+		return soap_closesock(soap);
+	if (!&_param_25)
+		return soap_closesock(soap);
+	soap_default_z1__importujTerminyResponse(soap, &_param_25);
+	if (soap_begin_recv(soap)
+	 || soap_envelope_begin_in(soap)
+	 || soap_recv_header(soap)
+	 || soap_body_begin_in(soap))
+		return soap_closesock(soap);
+	soap_get_z1__importujTerminyResponse(soap, &_param_25, "z1:importujTerminyResponse", NULL);
+	if (soap->error)
+		return soap_recv_fault(soap, 0);
+	if (soap_body_end_in(soap)
+	 || soap_envelope_end_in(soap)
+	 || soap_end_recv(soap))
+		return soap_closesock(soap);
+	return soap_closesock(soap);
+}
+
+int zapisyProxy::importujStudentow(const char *endpoint, const char *soap_action, std::string przedmiotId, std::string dane, struct z1__importujStudentowResponse &_param_26)
+{	struct soap *soap = this->soap;
+	struct z1__importujStudentow soap_tmp_z1__importujStudentow;
+	if (endpoint)
+		soap_endpoint = endpoint;
+	if (soap_endpoint == NULL)
+		soap_endpoint = "http://192.168.0.13:8090/";
+	if (soap_action == NULL)
+		soap_action = "";
+	soap_tmp_z1__importujStudentow.przedmiotId = przedmiotId;
+	soap_tmp_z1__importujStudentow.dane = dane;
+	soap_begin(soap);
+	soap_set_version(soap, 1); /* SOAP1.1 */
+	soap->encodingStyle = NULL;
+	soap_serializeheader(soap);
+	soap_serialize_z1__importujStudentow(soap, &soap_tmp_z1__importujStudentow);
+	if (soap_begin_count(soap))
+		return soap->error;
+	if (soap->mode & SOAP_IO_LENGTH)
+	{	if (soap_envelope_begin_out(soap)
+		 || soap_putheader(soap)
+		 || soap_body_begin_out(soap)
+		 || soap_put_z1__importujStudentow(soap, &soap_tmp_z1__importujStudentow, "z1:importujStudentow", NULL)
+		 || soap_body_end_out(soap)
+		 || soap_envelope_end_out(soap))
+			 return soap->error;
+	}
+	if (soap_end_count(soap))
+		return soap->error;
+	if (soap_connect(soap, soap_endpoint, soap_action)
+	 || soap_envelope_begin_out(soap)
+	 || soap_putheader(soap)
+	 || soap_body_begin_out(soap)
+	 || soap_put_z1__importujStudentow(soap, &soap_tmp_z1__importujStudentow, "z1:importujStudentow", NULL)
+	 || soap_body_end_out(soap)
+	 || soap_envelope_end_out(soap)
+	 || soap_end_send(soap))
+		return soap_closesock(soap);
+	if (!&_param_26)
+		return soap_closesock(soap);
+	soap_default_z1__importujStudentowResponse(soap, &_param_26);
+	if (soap_begin_recv(soap)
+	 || soap_envelope_begin_in(soap)
+	 || soap_recv_header(soap)
+	 || soap_body_begin_in(soap))
+		return soap_closesock(soap);
+	soap_get_z1__importujStudentowResponse(soap, &_param_26, "z1:importujStudentowResponse", NULL);
+	if (soap->error)
+		return soap_recv_fault(soap, 0);
+	if (soap_body_end_in(soap)
+	 || soap_envelope_end_in(soap)
+	 || soap_end_recv(soap))
+		return soap_closesock(soap);
+	return soap_closesock(soap);
+}
 /* End of client proxy code */

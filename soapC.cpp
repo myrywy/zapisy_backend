@@ -18,7 +18,7 @@ A commercial use license is available from Genivia Inc., contact@genivia.com
 
 #include "soapH.h"
 
-SOAP_SOURCE_STAMP("@(#) soapC.cpp ver 2.8.30 2016-06-01 20:31:12 GMT")
+SOAP_SOURCE_STAMP("@(#) soapC.cpp ver 2.8.30 2016-06-01 21:54:57 GMT")
 
 
 #ifndef WITH_NOGLOBAL
@@ -231,6 +231,18 @@ SOAP_FMAC3 void * SOAP_FMAC4 soap_getelement(struct soap *soap, int *type)
 		return soap_in_xsd__integer(soap, NULL, NULL, "xsd:integer");
 	case SOAP_TYPE_std__string:
 		return soap_in_std__string(soap, NULL, NULL, "xsd:string");
+	case SOAP_TYPE_z1__importujStudentow:
+		return soap_in_z1__importujStudentow(soap, NULL, NULL, "z1:importujStudentow");
+	case SOAP_TYPE_z1__importujStudentowResponse:
+		return soap_in_z1__importujStudentowResponse(soap, NULL, NULL, "z1:importujStudentowResponse");
+	case SOAP_TYPE_z1__importujTerminy:
+		return soap_in_z1__importujTerminy(soap, NULL, NULL, "z1:importujTerminy");
+	case SOAP_TYPE_z1__importujTerminyResponse:
+		return soap_in_z1__importujTerminyResponse(soap, NULL, NULL, "z1:importujTerminyResponse");
+	case SOAP_TYPE_z1__importujProjekty:
+		return soap_in_z1__importujProjekty(soap, NULL, NULL, "z1:importujProjekty");
+	case SOAP_TYPE_z1__importujProjektyResponse:
+		return soap_in_z1__importujProjektyResponse(soap, NULL, NULL, "z1:importujProjektyResponse");
 	case SOAP_TYPE_z1__usunTermin:
 		return soap_in_z1__usunTermin(soap, NULL, NULL, "z1:usunTermin");
 	case SOAP_TYPE_z1__usunTerminResponse:
@@ -431,6 +443,30 @@ SOAP_FMAC3 void * SOAP_FMAC4 soap_getelement(struct soap *soap, int *type)
 		if (!soap_match_tag(soap, t, "xsd:boolean"))
 		{	*type = SOAP_TYPE_bool;
 			return soap_in_bool(soap, NULL, NULL, NULL);
+		}
+		if (!soap_match_tag(soap, t, "z1:importujStudentow"))
+		{	*type = SOAP_TYPE_z1__importujStudentow;
+			return soap_in_z1__importujStudentow(soap, NULL, NULL, NULL);
+		}
+		if (!soap_match_tag(soap, t, "z1:importujStudentowResponse"))
+		{	*type = SOAP_TYPE_z1__importujStudentowResponse;
+			return soap_in_z1__importujStudentowResponse(soap, NULL, NULL, NULL);
+		}
+		if (!soap_match_tag(soap, t, "z1:importujTerminy"))
+		{	*type = SOAP_TYPE_z1__importujTerminy;
+			return soap_in_z1__importujTerminy(soap, NULL, NULL, NULL);
+		}
+		if (!soap_match_tag(soap, t, "z1:importujTerminyResponse"))
+		{	*type = SOAP_TYPE_z1__importujTerminyResponse;
+			return soap_in_z1__importujTerminyResponse(soap, NULL, NULL, NULL);
+		}
+		if (!soap_match_tag(soap, t, "z1:importujProjekty"))
+		{	*type = SOAP_TYPE_z1__importujProjekty;
+			return soap_in_z1__importujProjekty(soap, NULL, NULL, NULL);
+		}
+		if (!soap_match_tag(soap, t, "z1:importujProjektyResponse"))
+		{	*type = SOAP_TYPE_z1__importujProjektyResponse;
+			return soap_in_z1__importujProjektyResponse(soap, NULL, NULL, NULL);
 		}
 		if (!soap_match_tag(soap, t, "z1:usunTermin"))
 		{	*type = SOAP_TYPE_z1__usunTermin;
@@ -731,6 +767,18 @@ SOAP_FMAC3 int SOAP_FMAC4 soap_putelement(struct soap *soap, const void *ptr, co
 		return soap_out_xsd__integer(soap, tag, id, (const std::string *)ptr, "xsd:integer");
 	case SOAP_TYPE_std__string:
 		return soap_out_std__string(soap, tag, id, (const std::string *)ptr, "xsd:string");
+	case SOAP_TYPE_z1__importujStudentow:
+		return soap_out_z1__importujStudentow(soap, tag, id, (const struct z1__importujStudentow *)ptr, "z1:importujStudentow");
+	case SOAP_TYPE_z1__importujStudentowResponse:
+		return soap_out_z1__importujStudentowResponse(soap, tag, id, (const struct z1__importujStudentowResponse *)ptr, "z1:importujStudentowResponse");
+	case SOAP_TYPE_z1__importujTerminy:
+		return soap_out_z1__importujTerminy(soap, tag, id, (const struct z1__importujTerminy *)ptr, "z1:importujTerminy");
+	case SOAP_TYPE_z1__importujTerminyResponse:
+		return soap_out_z1__importujTerminyResponse(soap, tag, id, (const struct z1__importujTerminyResponse *)ptr, "z1:importujTerminyResponse");
+	case SOAP_TYPE_z1__importujProjekty:
+		return soap_out_z1__importujProjekty(soap, tag, id, (const struct z1__importujProjekty *)ptr, "z1:importujProjekty");
+	case SOAP_TYPE_z1__importujProjektyResponse:
+		return soap_out_z1__importujProjektyResponse(soap, tag, id, (const struct z1__importujProjektyResponse *)ptr, "z1:importujProjektyResponse");
 	case SOAP_TYPE_z1__usunTermin:
 		return soap_out_z1__usunTermin(soap, tag, id, (const struct z1__usunTermin *)ptr, "z1:usunTermin");
 	case SOAP_TYPE_z1__usunTerminResponse:
@@ -906,6 +954,24 @@ SOAP_FMAC3 void SOAP_FMAC4 soap_markelement(struct soap *soap, const void *ptr, 
 		break;
 	case SOAP_TYPE_std__string:
 		soap_serialize_std__string(soap, (const std::string *)ptr);
+		break;
+	case SOAP_TYPE_z1__importujStudentow:
+		soap_serialize_z1__importujStudentow(soap, (const struct z1__importujStudentow *)ptr);
+		break;
+	case SOAP_TYPE_z1__importujStudentowResponse:
+		soap_serialize_z1__importujStudentowResponse(soap, (const struct z1__importujStudentowResponse *)ptr);
+		break;
+	case SOAP_TYPE_z1__importujTerminy:
+		soap_serialize_z1__importujTerminy(soap, (const struct z1__importujTerminy *)ptr);
+		break;
+	case SOAP_TYPE_z1__importujTerminyResponse:
+		soap_serialize_z1__importujTerminyResponse(soap, (const struct z1__importujTerminyResponse *)ptr);
+		break;
+	case SOAP_TYPE_z1__importujProjekty:
+		soap_serialize_z1__importujProjekty(soap, (const struct z1__importujProjekty *)ptr);
+		break;
+	case SOAP_TYPE_z1__importujProjektyResponse:
+		soap_serialize_z1__importujProjektyResponse(soap, (const struct z1__importujProjektyResponse *)ptr);
 		break;
 	case SOAP_TYPE_z1__usunTermin:
 		soap_serialize_z1__usunTermin(soap, (const struct z1__usunTermin *)ptr);
@@ -1190,6 +1256,18 @@ SOAP_FMAC3 void * SOAP_FMAC4 soap_instantiate(struct soap *soap, int t, const ch
 		return (void*)soap_instantiate_z1__usunTerminResponse(soap, -1, type, arrayType, n);
 	case SOAP_TYPE_z1__usunTermin:
 		return (void*)soap_instantiate_z1__usunTermin(soap, -1, type, arrayType, n);
+	case SOAP_TYPE_z1__importujProjektyResponse:
+		return (void*)soap_instantiate_z1__importujProjektyResponse(soap, -1, type, arrayType, n);
+	case SOAP_TYPE_z1__importujProjekty:
+		return (void*)soap_instantiate_z1__importujProjekty(soap, -1, type, arrayType, n);
+	case SOAP_TYPE_z1__importujTerminyResponse:
+		return (void*)soap_instantiate_z1__importujTerminyResponse(soap, -1, type, arrayType, n);
+	case SOAP_TYPE_z1__importujTerminy:
+		return (void*)soap_instantiate_z1__importujTerminy(soap, -1, type, arrayType, n);
+	case SOAP_TYPE_z1__importujStudentowResponse:
+		return (void*)soap_instantiate_z1__importujStudentowResponse(soap, -1, type, arrayType, n);
+	case SOAP_TYPE_z1__importujStudentow:
+		return (void*)soap_instantiate_z1__importujStudentow(soap, -1, type, arrayType, n);
 #ifndef WITH_NOGLOBAL
 	case SOAP_TYPE_SOAP_ENV__Header:
 		return (void*)soap_instantiate_SOAP_ENV__Header(soap, -1, type, arrayType, n);
@@ -1563,6 +1641,42 @@ SOAP_FMAC3 int SOAP_FMAC4 soap_fdelete(struct soap_clist *p)
 		else
 			SOAP_DELETE_ARRAY(static_cast<struct z1__usunTermin*>(p->ptr));
 		break;
+	case SOAP_TYPE_z1__importujProjektyResponse:
+		if (p->size < 0)
+			SOAP_DELETE(static_cast<struct z1__importujProjektyResponse*>(p->ptr));
+		else
+			SOAP_DELETE_ARRAY(static_cast<struct z1__importujProjektyResponse*>(p->ptr));
+		break;
+	case SOAP_TYPE_z1__importujProjekty:
+		if (p->size < 0)
+			SOAP_DELETE(static_cast<struct z1__importujProjekty*>(p->ptr));
+		else
+			SOAP_DELETE_ARRAY(static_cast<struct z1__importujProjekty*>(p->ptr));
+		break;
+	case SOAP_TYPE_z1__importujTerminyResponse:
+		if (p->size < 0)
+			SOAP_DELETE(static_cast<struct z1__importujTerminyResponse*>(p->ptr));
+		else
+			SOAP_DELETE_ARRAY(static_cast<struct z1__importujTerminyResponse*>(p->ptr));
+		break;
+	case SOAP_TYPE_z1__importujTerminy:
+		if (p->size < 0)
+			SOAP_DELETE(static_cast<struct z1__importujTerminy*>(p->ptr));
+		else
+			SOAP_DELETE_ARRAY(static_cast<struct z1__importujTerminy*>(p->ptr));
+		break;
+	case SOAP_TYPE_z1__importujStudentowResponse:
+		if (p->size < 0)
+			SOAP_DELETE(static_cast<struct z1__importujStudentowResponse*>(p->ptr));
+		else
+			SOAP_DELETE_ARRAY(static_cast<struct z1__importujStudentowResponse*>(p->ptr));
+		break;
+	case SOAP_TYPE_z1__importujStudentow:
+		if (p->size < 0)
+			SOAP_DELETE(static_cast<struct z1__importujStudentow*>(p->ptr));
+		else
+			SOAP_DELETE_ARRAY(static_cast<struct z1__importujStudentow*>(p->ptr));
+		break;
 #ifndef WITH_NOGLOBAL
 	case SOAP_TYPE_SOAP_ENV__Header:
 		if (p->size < 0)
@@ -1907,6 +2021,30 @@ SOAP_FMAC3 void SOAP_FMAC4 soap_finsert(struct soap *soap, int t, int tt, void *
 	case SOAP_TYPE_z1__usunTermin:
 		DBGLOG(TEST, SOAP_MESSAGE(fdebug, "Copy struct z1__usunTermin type=%d location=%p object=%p\n", t, p, q));
 		*(struct z1__usunTermin*)p = *(struct z1__usunTermin*)q;
+		break;
+	case SOAP_TYPE_z1__importujProjektyResponse:
+		DBGLOG(TEST, SOAP_MESSAGE(fdebug, "Copy struct z1__importujProjektyResponse type=%d location=%p object=%p\n", t, p, q));
+		*(struct z1__importujProjektyResponse*)p = *(struct z1__importujProjektyResponse*)q;
+		break;
+	case SOAP_TYPE_z1__importujProjekty:
+		DBGLOG(TEST, SOAP_MESSAGE(fdebug, "Copy struct z1__importujProjekty type=%d location=%p object=%p\n", t, p, q));
+		*(struct z1__importujProjekty*)p = *(struct z1__importujProjekty*)q;
+		break;
+	case SOAP_TYPE_z1__importujTerminyResponse:
+		DBGLOG(TEST, SOAP_MESSAGE(fdebug, "Copy struct z1__importujTerminyResponse type=%d location=%p object=%p\n", t, p, q));
+		*(struct z1__importujTerminyResponse*)p = *(struct z1__importujTerminyResponse*)q;
+		break;
+	case SOAP_TYPE_z1__importujTerminy:
+		DBGLOG(TEST, SOAP_MESSAGE(fdebug, "Copy struct z1__importujTerminy type=%d location=%p object=%p\n", t, p, q));
+		*(struct z1__importujTerminy*)p = *(struct z1__importujTerminy*)q;
+		break;
+	case SOAP_TYPE_z1__importujStudentowResponse:
+		DBGLOG(TEST, SOAP_MESSAGE(fdebug, "Copy struct z1__importujStudentowResponse type=%d location=%p object=%p\n", t, p, q));
+		*(struct z1__importujStudentowResponse*)p = *(struct z1__importujStudentowResponse*)q;
+		break;
+	case SOAP_TYPE_z1__importujStudentow:
+		DBGLOG(TEST, SOAP_MESSAGE(fdebug, "Copy struct z1__importujStudentow type=%d location=%p object=%p\n", t, p, q));
+		*(struct z1__importujStudentow*)p = *(struct z1__importujStudentow*)q;
 		break;
 #ifndef WITH_NOGLOBAL
 	case SOAP_TYPE_SOAP_ENV__Header:
@@ -4409,6 +4547,657 @@ SOAP_FMAC3 struct SOAP_ENV__Header * SOAP_FMAC4 soap_get_SOAP_ENV__Header(struct
 }
 
 #endif
+
+SOAP_FMAC3 void SOAP_FMAC4 soap_default_z1__importujStudentow(struct soap *soap, struct z1__importujStudentow *a)
+{
+	(void)soap; (void)a; /* appease -Wall -Werror */
+	soap_default_z1__id(soap, &a->przedmiotId);
+	soap_default_z1__csv(soap, &a->dane);
+}
+
+SOAP_FMAC3 void SOAP_FMAC4 soap_serialize_z1__importujStudentow(struct soap *soap, const struct z1__importujStudentow *a)
+{
+	(void)soap; (void)a; /* appease -Wall -Werror */
+#ifndef WITH_NOIDREF
+	soap_serialize_z1__id(soap, &a->przedmiotId);
+	soap_embedded(soap, &a->dane, SOAP_TYPE_z1__csv);
+	soap_serialize_z1__csv(soap, &a->dane);
+#endif
+}
+
+SOAP_FMAC3 int SOAP_FMAC4 soap_out_z1__importujStudentow(struct soap *soap, const char *tag, int id, const struct z1__importujStudentow *a, const char *type)
+{
+	(void)soap; (void)tag; (void)id; (void)a; (void)type; /* appease -Wall -Werror */
+	if (soap_element_begin_out(soap, tag, soap_embedded_id(soap, id, a, SOAP_TYPE_z1__importujStudentow), type))
+		return soap->error;
+	if (soap_out_z1__id(soap, "przedmiotId", -1, &a->przedmiotId, ""))
+		return soap->error;
+	if (soap_out_z1__csv(soap, "dane", -1, &a->dane, ""))
+		return soap->error;
+	return soap_element_end_out(soap, tag);
+}
+
+SOAP_FMAC3 struct z1__importujStudentow * SOAP_FMAC4 soap_in_z1__importujStudentow(struct soap *soap, const char *tag, struct z1__importujStudentow *a, const char *type)
+{
+	size_t soap_flag_przedmiotId = 1;
+	size_t soap_flag_dane = 1;
+	if (soap_element_begin_in(soap, tag, 0, type))
+		return NULL;
+	a = (struct z1__importujStudentow *)soap_id_enter(soap, soap->id, a, SOAP_TYPE_z1__importujStudentow, sizeof(struct z1__importujStudentow), soap->type, soap->arrayType, soap_instantiate, soap_fbase);
+	if (!a)
+		return NULL;
+	soap_default_z1__importujStudentow(soap, a);
+	if (soap->body && !*soap->href)
+	{
+		for (;;)
+		{	soap->error = SOAP_TAG_MISMATCH;
+			if (soap_flag_przedmiotId && (soap->error == SOAP_TAG_MISMATCH || soap->error == SOAP_NO_TAG))
+				if (soap_in_z1__id(soap, "przedmiotId", &a->przedmiotId, "z1:id"))
+				{	soap_flag_przedmiotId--;
+					continue;
+				}
+			if (soap_flag_dane && (soap->error == SOAP_TAG_MISMATCH || soap->error == SOAP_NO_TAG))
+				if (soap_in_z1__csv(soap, "dane", &a->dane, "z1:csv"))
+				{	soap_flag_dane--;
+					continue;
+				}
+			if (soap->error == SOAP_TAG_MISMATCH)
+				soap->error = soap_ignore_element(soap);
+			if (soap->error == SOAP_NO_TAG)
+				break;
+			if (soap->error)
+				return NULL;
+		}
+		if (soap_element_end_in(soap, tag))
+			return NULL;
+		if ((soap->mode & SOAP_XML_STRICT) && (soap_flag_przedmiotId > 0 || soap_flag_dane > 0))
+		{	soap->error = SOAP_OCCURS;
+			return NULL;
+		}
+	}
+	else if ((soap->mode & SOAP_XML_STRICT) && !*soap->href)
+	{	soap->error = SOAP_OCCURS;
+		return NULL;
+	}
+	else
+	{	a = (struct z1__importujStudentow *)soap_id_forward(soap, soap->href, (void*)a, 0, SOAP_TYPE_z1__importujStudentow, SOAP_TYPE_z1__importujStudentow, sizeof(struct z1__importujStudentow), 0, soap_finsert, NULL);
+		if (soap->body && soap_element_end_in(soap, tag))
+			return NULL;
+	}
+	return a;
+}
+
+SOAP_FMAC1 struct z1__importujStudentow * SOAP_FMAC2 soap_instantiate_z1__importujStudentow(struct soap *soap, int n, const char *type, const char *arrayType, size_t *size)
+{
+	DBGLOG(TEST, SOAP_MESSAGE(fdebug, "soap_instantiate_z1__importujStudentow(%p, %d, %s, %s)\n", soap, n, type?type:"", arrayType?arrayType:""));
+	(void)type; (void)arrayType; /* appease -Wall -Werror */
+	struct z1__importujStudentow *p;
+	size_t k = sizeof(struct z1__importujStudentow);
+	if (n < 0)
+	{	p = SOAP_NEW(struct z1__importujStudentow);
+	}
+	else
+	{	p = SOAP_NEW_ARRAY(struct z1__importujStudentow, n);
+		k *= n;
+	}
+	DBGLOG(TEST, SOAP_MESSAGE(fdebug, "Instantiated struct z1__importujStudentow location=%p n=%d\n", p, n));
+	soap_link(soap, p, SOAP_TYPE_z1__importujStudentow, n, soap_fdelete);
+	if (size)
+		*size = k;
+	return p;
+}
+
+SOAP_FMAC3 int SOAP_FMAC4 soap_put_z1__importujStudentow(struct soap *soap, const struct z1__importujStudentow *a, const char *tag, const char *type)
+{
+	if (soap_out_z1__importujStudentow(soap, tag?tag:"z1:importujStudentow", -2, a, type))
+		return soap->error;
+	return soap_putindependent(soap);
+}
+
+SOAP_FMAC3 struct z1__importujStudentow * SOAP_FMAC4 soap_get_z1__importujStudentow(struct soap *soap, struct z1__importujStudentow *p, const char *tag, const char *type)
+{
+	if ((p = soap_in_z1__importujStudentow(soap, tag, p, type)))
+		if (soap_getindependent(soap))
+			return NULL;
+	return p;
+}
+
+SOAP_FMAC3 void SOAP_FMAC4 soap_default_z1__importujStudentowResponse(struct soap *soap, struct z1__importujStudentowResponse *a)
+{
+	(void)soap; (void)a; /* appease -Wall -Werror */
+	soap_default_z1__wynik(soap, &a->rezultat);
+}
+
+SOAP_FMAC3 void SOAP_FMAC4 soap_serialize_z1__importujStudentowResponse(struct soap *soap, const struct z1__importujStudentowResponse *a)
+{
+	(void)soap; (void)a; /* appease -Wall -Werror */
+#ifndef WITH_NOIDREF
+	soap_serialize_z1__wynik(soap, &a->rezultat);
+#endif
+}
+
+SOAP_FMAC3 int SOAP_FMAC4 soap_out_z1__importujStudentowResponse(struct soap *soap, const char *tag, int id, const struct z1__importujStudentowResponse *a, const char *type)
+{
+	(void)soap; (void)tag; (void)id; (void)a; (void)type; /* appease -Wall -Werror */
+	if (soap_element_begin_out(soap, tag, soap_embedded_id(soap, id, a, SOAP_TYPE_z1__importujStudentowResponse), type))
+		return soap->error;
+	if (soap_out_z1__wynik(soap, "rezultat", -1, &a->rezultat, ""))
+		return soap->error;
+	return soap_element_end_out(soap, tag);
+}
+
+SOAP_FMAC3 struct z1__importujStudentowResponse * SOAP_FMAC4 soap_in_z1__importujStudentowResponse(struct soap *soap, const char *tag, struct z1__importujStudentowResponse *a, const char *type)
+{
+	size_t soap_flag_rezultat = 1;
+	if (soap_element_begin_in(soap, tag, 0, type))
+		return NULL;
+	a = (struct z1__importujStudentowResponse *)soap_id_enter(soap, soap->id, a, SOAP_TYPE_z1__importujStudentowResponse, sizeof(struct z1__importujStudentowResponse), soap->type, soap->arrayType, soap_instantiate, soap_fbase);
+	if (!a)
+		return NULL;
+	soap_default_z1__importujStudentowResponse(soap, a);
+	if (soap->body && !*soap->href)
+	{
+		for (;;)
+		{	soap->error = SOAP_TAG_MISMATCH;
+			if (soap_flag_rezultat && (soap->error == SOAP_TAG_MISMATCH || soap->error == SOAP_NO_TAG))
+				if (soap_in_z1__wynik(soap, "rezultat", &a->rezultat, "z1:wynik"))
+				{	soap_flag_rezultat--;
+					continue;
+				}
+			if (soap->error == SOAP_TAG_MISMATCH)
+				soap->error = soap_ignore_element(soap);
+			if (soap->error == SOAP_NO_TAG)
+				break;
+			if (soap->error)
+				return NULL;
+		}
+		if (soap_element_end_in(soap, tag))
+			return NULL;
+		if ((soap->mode & SOAP_XML_STRICT) && (soap_flag_rezultat > 0))
+		{	soap->error = SOAP_OCCURS;
+			return NULL;
+		}
+	}
+	else if ((soap->mode & SOAP_XML_STRICT) && !*soap->href)
+	{	soap->error = SOAP_OCCURS;
+		return NULL;
+	}
+	else
+	{	a = (struct z1__importujStudentowResponse *)soap_id_forward(soap, soap->href, (void*)a, 0, SOAP_TYPE_z1__importujStudentowResponse, SOAP_TYPE_z1__importujStudentowResponse, sizeof(struct z1__importujStudentowResponse), 0, soap_finsert, NULL);
+		if (soap->body && soap_element_end_in(soap, tag))
+			return NULL;
+	}
+	return a;
+}
+
+SOAP_FMAC1 struct z1__importujStudentowResponse * SOAP_FMAC2 soap_instantiate_z1__importujStudentowResponse(struct soap *soap, int n, const char *type, const char *arrayType, size_t *size)
+{
+	DBGLOG(TEST, SOAP_MESSAGE(fdebug, "soap_instantiate_z1__importujStudentowResponse(%p, %d, %s, %s)\n", soap, n, type?type:"", arrayType?arrayType:""));
+	(void)type; (void)arrayType; /* appease -Wall -Werror */
+	struct z1__importujStudentowResponse *p;
+	size_t k = sizeof(struct z1__importujStudentowResponse);
+	if (n < 0)
+	{	p = SOAP_NEW(struct z1__importujStudentowResponse);
+	}
+	else
+	{	p = SOAP_NEW_ARRAY(struct z1__importujStudentowResponse, n);
+		k *= n;
+	}
+	DBGLOG(TEST, SOAP_MESSAGE(fdebug, "Instantiated struct z1__importujStudentowResponse location=%p n=%d\n", p, n));
+	soap_link(soap, p, SOAP_TYPE_z1__importujStudentowResponse, n, soap_fdelete);
+	if (size)
+		*size = k;
+	return p;
+}
+
+SOAP_FMAC3 int SOAP_FMAC4 soap_put_z1__importujStudentowResponse(struct soap *soap, const struct z1__importujStudentowResponse *a, const char *tag, const char *type)
+{
+	if (soap_out_z1__importujStudentowResponse(soap, tag?tag:"z1:importujStudentowResponse", -2, a, type))
+		return soap->error;
+	return soap_putindependent(soap);
+}
+
+SOAP_FMAC3 struct z1__importujStudentowResponse * SOAP_FMAC4 soap_get_z1__importujStudentowResponse(struct soap *soap, struct z1__importujStudentowResponse *p, const char *tag, const char *type)
+{
+	if ((p = soap_in_z1__importujStudentowResponse(soap, tag, p, type)))
+		if (soap_getindependent(soap))
+			return NULL;
+	return p;
+}
+
+SOAP_FMAC3 void SOAP_FMAC4 soap_default_z1__importujTerminy(struct soap *soap, struct z1__importujTerminy *a)
+{
+	(void)soap; (void)a; /* appease -Wall -Werror */
+	soap_default_z1__id(soap, &a->przedmiotId);
+	soap_default_z1__csv(soap, &a->dane);
+}
+
+SOAP_FMAC3 void SOAP_FMAC4 soap_serialize_z1__importujTerminy(struct soap *soap, const struct z1__importujTerminy *a)
+{
+	(void)soap; (void)a; /* appease -Wall -Werror */
+#ifndef WITH_NOIDREF
+	soap_serialize_z1__id(soap, &a->przedmiotId);
+	soap_embedded(soap, &a->dane, SOAP_TYPE_z1__csv);
+	soap_serialize_z1__csv(soap, &a->dane);
+#endif
+}
+
+SOAP_FMAC3 int SOAP_FMAC4 soap_out_z1__importujTerminy(struct soap *soap, const char *tag, int id, const struct z1__importujTerminy *a, const char *type)
+{
+	(void)soap; (void)tag; (void)id; (void)a; (void)type; /* appease -Wall -Werror */
+	if (soap_element_begin_out(soap, tag, soap_embedded_id(soap, id, a, SOAP_TYPE_z1__importujTerminy), type))
+		return soap->error;
+	if (soap_out_z1__id(soap, "przedmiotId", -1, &a->przedmiotId, ""))
+		return soap->error;
+	if (soap_out_z1__csv(soap, "dane", -1, &a->dane, ""))
+		return soap->error;
+	return soap_element_end_out(soap, tag);
+}
+
+SOAP_FMAC3 struct z1__importujTerminy * SOAP_FMAC4 soap_in_z1__importujTerminy(struct soap *soap, const char *tag, struct z1__importujTerminy *a, const char *type)
+{
+	size_t soap_flag_przedmiotId = 1;
+	size_t soap_flag_dane = 1;
+	if (soap_element_begin_in(soap, tag, 0, type))
+		return NULL;
+	a = (struct z1__importujTerminy *)soap_id_enter(soap, soap->id, a, SOAP_TYPE_z1__importujTerminy, sizeof(struct z1__importujTerminy), soap->type, soap->arrayType, soap_instantiate, soap_fbase);
+	if (!a)
+		return NULL;
+	soap_default_z1__importujTerminy(soap, a);
+	if (soap->body && !*soap->href)
+	{
+		for (;;)
+		{	soap->error = SOAP_TAG_MISMATCH;
+			if (soap_flag_przedmiotId && (soap->error == SOAP_TAG_MISMATCH || soap->error == SOAP_NO_TAG))
+				if (soap_in_z1__id(soap, "przedmiotId", &a->przedmiotId, "z1:id"))
+				{	soap_flag_przedmiotId--;
+					continue;
+				}
+			if (soap_flag_dane && (soap->error == SOAP_TAG_MISMATCH || soap->error == SOAP_NO_TAG))
+				if (soap_in_z1__csv(soap, "dane", &a->dane, "z1:csv"))
+				{	soap_flag_dane--;
+					continue;
+				}
+			if (soap->error == SOAP_TAG_MISMATCH)
+				soap->error = soap_ignore_element(soap);
+			if (soap->error == SOAP_NO_TAG)
+				break;
+			if (soap->error)
+				return NULL;
+		}
+		if (soap_element_end_in(soap, tag))
+			return NULL;
+		if ((soap->mode & SOAP_XML_STRICT) && (soap_flag_przedmiotId > 0 || soap_flag_dane > 0))
+		{	soap->error = SOAP_OCCURS;
+			return NULL;
+		}
+	}
+	else if ((soap->mode & SOAP_XML_STRICT) && !*soap->href)
+	{	soap->error = SOAP_OCCURS;
+		return NULL;
+	}
+	else
+	{	a = (struct z1__importujTerminy *)soap_id_forward(soap, soap->href, (void*)a, 0, SOAP_TYPE_z1__importujTerminy, SOAP_TYPE_z1__importujTerminy, sizeof(struct z1__importujTerminy), 0, soap_finsert, NULL);
+		if (soap->body && soap_element_end_in(soap, tag))
+			return NULL;
+	}
+	return a;
+}
+
+SOAP_FMAC1 struct z1__importujTerminy * SOAP_FMAC2 soap_instantiate_z1__importujTerminy(struct soap *soap, int n, const char *type, const char *arrayType, size_t *size)
+{
+	DBGLOG(TEST, SOAP_MESSAGE(fdebug, "soap_instantiate_z1__importujTerminy(%p, %d, %s, %s)\n", soap, n, type?type:"", arrayType?arrayType:""));
+	(void)type; (void)arrayType; /* appease -Wall -Werror */
+	struct z1__importujTerminy *p;
+	size_t k = sizeof(struct z1__importujTerminy);
+	if (n < 0)
+	{	p = SOAP_NEW(struct z1__importujTerminy);
+	}
+	else
+	{	p = SOAP_NEW_ARRAY(struct z1__importujTerminy, n);
+		k *= n;
+	}
+	DBGLOG(TEST, SOAP_MESSAGE(fdebug, "Instantiated struct z1__importujTerminy location=%p n=%d\n", p, n));
+	soap_link(soap, p, SOAP_TYPE_z1__importujTerminy, n, soap_fdelete);
+	if (size)
+		*size = k;
+	return p;
+}
+
+SOAP_FMAC3 int SOAP_FMAC4 soap_put_z1__importujTerminy(struct soap *soap, const struct z1__importujTerminy *a, const char *tag, const char *type)
+{
+	if (soap_out_z1__importujTerminy(soap, tag?tag:"z1:importujTerminy", -2, a, type))
+		return soap->error;
+	return soap_putindependent(soap);
+}
+
+SOAP_FMAC3 struct z1__importujTerminy * SOAP_FMAC4 soap_get_z1__importujTerminy(struct soap *soap, struct z1__importujTerminy *p, const char *tag, const char *type)
+{
+	if ((p = soap_in_z1__importujTerminy(soap, tag, p, type)))
+		if (soap_getindependent(soap))
+			return NULL;
+	return p;
+}
+
+SOAP_FMAC3 void SOAP_FMAC4 soap_default_z1__importujTerminyResponse(struct soap *soap, struct z1__importujTerminyResponse *a)
+{
+	(void)soap; (void)a; /* appease -Wall -Werror */
+	soap_default_z1__wynik(soap, &a->rezultat);
+}
+
+SOAP_FMAC3 void SOAP_FMAC4 soap_serialize_z1__importujTerminyResponse(struct soap *soap, const struct z1__importujTerminyResponse *a)
+{
+	(void)soap; (void)a; /* appease -Wall -Werror */
+#ifndef WITH_NOIDREF
+	soap_serialize_z1__wynik(soap, &a->rezultat);
+#endif
+}
+
+SOAP_FMAC3 int SOAP_FMAC4 soap_out_z1__importujTerminyResponse(struct soap *soap, const char *tag, int id, const struct z1__importujTerminyResponse *a, const char *type)
+{
+	(void)soap; (void)tag; (void)id; (void)a; (void)type; /* appease -Wall -Werror */
+	if (soap_element_begin_out(soap, tag, soap_embedded_id(soap, id, a, SOAP_TYPE_z1__importujTerminyResponse), type))
+		return soap->error;
+	if (soap_out_z1__wynik(soap, "rezultat", -1, &a->rezultat, ""))
+		return soap->error;
+	return soap_element_end_out(soap, tag);
+}
+
+SOAP_FMAC3 struct z1__importujTerminyResponse * SOAP_FMAC4 soap_in_z1__importujTerminyResponse(struct soap *soap, const char *tag, struct z1__importujTerminyResponse *a, const char *type)
+{
+	size_t soap_flag_rezultat = 1;
+	if (soap_element_begin_in(soap, tag, 0, type))
+		return NULL;
+	a = (struct z1__importujTerminyResponse *)soap_id_enter(soap, soap->id, a, SOAP_TYPE_z1__importujTerminyResponse, sizeof(struct z1__importujTerminyResponse), soap->type, soap->arrayType, soap_instantiate, soap_fbase);
+	if (!a)
+		return NULL;
+	soap_default_z1__importujTerminyResponse(soap, a);
+	if (soap->body && !*soap->href)
+	{
+		for (;;)
+		{	soap->error = SOAP_TAG_MISMATCH;
+			if (soap_flag_rezultat && (soap->error == SOAP_TAG_MISMATCH || soap->error == SOAP_NO_TAG))
+				if (soap_in_z1__wynik(soap, "rezultat", &a->rezultat, "z1:wynik"))
+				{	soap_flag_rezultat--;
+					continue;
+				}
+			if (soap->error == SOAP_TAG_MISMATCH)
+				soap->error = soap_ignore_element(soap);
+			if (soap->error == SOAP_NO_TAG)
+				break;
+			if (soap->error)
+				return NULL;
+		}
+		if (soap_element_end_in(soap, tag))
+			return NULL;
+		if ((soap->mode & SOAP_XML_STRICT) && (soap_flag_rezultat > 0))
+		{	soap->error = SOAP_OCCURS;
+			return NULL;
+		}
+	}
+	else if ((soap->mode & SOAP_XML_STRICT) && !*soap->href)
+	{	soap->error = SOAP_OCCURS;
+		return NULL;
+	}
+	else
+	{	a = (struct z1__importujTerminyResponse *)soap_id_forward(soap, soap->href, (void*)a, 0, SOAP_TYPE_z1__importujTerminyResponse, SOAP_TYPE_z1__importujTerminyResponse, sizeof(struct z1__importujTerminyResponse), 0, soap_finsert, NULL);
+		if (soap->body && soap_element_end_in(soap, tag))
+			return NULL;
+	}
+	return a;
+}
+
+SOAP_FMAC1 struct z1__importujTerminyResponse * SOAP_FMAC2 soap_instantiate_z1__importujTerminyResponse(struct soap *soap, int n, const char *type, const char *arrayType, size_t *size)
+{
+	DBGLOG(TEST, SOAP_MESSAGE(fdebug, "soap_instantiate_z1__importujTerminyResponse(%p, %d, %s, %s)\n", soap, n, type?type:"", arrayType?arrayType:""));
+	(void)type; (void)arrayType; /* appease -Wall -Werror */
+	struct z1__importujTerminyResponse *p;
+	size_t k = sizeof(struct z1__importujTerminyResponse);
+	if (n < 0)
+	{	p = SOAP_NEW(struct z1__importujTerminyResponse);
+	}
+	else
+	{	p = SOAP_NEW_ARRAY(struct z1__importujTerminyResponse, n);
+		k *= n;
+	}
+	DBGLOG(TEST, SOAP_MESSAGE(fdebug, "Instantiated struct z1__importujTerminyResponse location=%p n=%d\n", p, n));
+	soap_link(soap, p, SOAP_TYPE_z1__importujTerminyResponse, n, soap_fdelete);
+	if (size)
+		*size = k;
+	return p;
+}
+
+SOAP_FMAC3 int SOAP_FMAC4 soap_put_z1__importujTerminyResponse(struct soap *soap, const struct z1__importujTerminyResponse *a, const char *tag, const char *type)
+{
+	if (soap_out_z1__importujTerminyResponse(soap, tag?tag:"z1:importujTerminyResponse", -2, a, type))
+		return soap->error;
+	return soap_putindependent(soap);
+}
+
+SOAP_FMAC3 struct z1__importujTerminyResponse * SOAP_FMAC4 soap_get_z1__importujTerminyResponse(struct soap *soap, struct z1__importujTerminyResponse *p, const char *tag, const char *type)
+{
+	if ((p = soap_in_z1__importujTerminyResponse(soap, tag, p, type)))
+		if (soap_getindependent(soap))
+			return NULL;
+	return p;
+}
+
+SOAP_FMAC3 void SOAP_FMAC4 soap_default_z1__importujProjekty(struct soap *soap, struct z1__importujProjekty *a)
+{
+	(void)soap; (void)a; /* appease -Wall -Werror */
+	soap_default_z1__id(soap, &a->przedmiotId);
+	soap_default_z1__csv(soap, &a->dane);
+}
+
+SOAP_FMAC3 void SOAP_FMAC4 soap_serialize_z1__importujProjekty(struct soap *soap, const struct z1__importujProjekty *a)
+{
+	(void)soap; (void)a; /* appease -Wall -Werror */
+#ifndef WITH_NOIDREF
+	soap_serialize_z1__id(soap, &a->przedmiotId);
+	soap_embedded(soap, &a->dane, SOAP_TYPE_z1__csv);
+	soap_serialize_z1__csv(soap, &a->dane);
+#endif
+}
+
+SOAP_FMAC3 int SOAP_FMAC4 soap_out_z1__importujProjekty(struct soap *soap, const char *tag, int id, const struct z1__importujProjekty *a, const char *type)
+{
+	(void)soap; (void)tag; (void)id; (void)a; (void)type; /* appease -Wall -Werror */
+	if (soap_element_begin_out(soap, tag, soap_embedded_id(soap, id, a, SOAP_TYPE_z1__importujProjekty), type))
+		return soap->error;
+	if (soap_out_z1__id(soap, "przedmiotId", -1, &a->przedmiotId, ""))
+		return soap->error;
+	if (soap_out_z1__csv(soap, "dane", -1, &a->dane, ""))
+		return soap->error;
+	return soap_element_end_out(soap, tag);
+}
+
+SOAP_FMAC3 struct z1__importujProjekty * SOAP_FMAC4 soap_in_z1__importujProjekty(struct soap *soap, const char *tag, struct z1__importujProjekty *a, const char *type)
+{
+	size_t soap_flag_przedmiotId = 1;
+	size_t soap_flag_dane = 1;
+	if (soap_element_begin_in(soap, tag, 0, type))
+		return NULL;
+	a = (struct z1__importujProjekty *)soap_id_enter(soap, soap->id, a, SOAP_TYPE_z1__importujProjekty, sizeof(struct z1__importujProjekty), soap->type, soap->arrayType, soap_instantiate, soap_fbase);
+	if (!a)
+		return NULL;
+	soap_default_z1__importujProjekty(soap, a);
+	if (soap->body && !*soap->href)
+	{
+		for (;;)
+		{	soap->error = SOAP_TAG_MISMATCH;
+			if (soap_flag_przedmiotId && (soap->error == SOAP_TAG_MISMATCH || soap->error == SOAP_NO_TAG))
+				if (soap_in_z1__id(soap, "przedmiotId", &a->przedmiotId, "z1:id"))
+				{	soap_flag_przedmiotId--;
+					continue;
+				}
+			if (soap_flag_dane && (soap->error == SOAP_TAG_MISMATCH || soap->error == SOAP_NO_TAG))
+				if (soap_in_z1__csv(soap, "dane", &a->dane, "z1:csv"))
+				{	soap_flag_dane--;
+					continue;
+				}
+			if (soap->error == SOAP_TAG_MISMATCH)
+				soap->error = soap_ignore_element(soap);
+			if (soap->error == SOAP_NO_TAG)
+				break;
+			if (soap->error)
+				return NULL;
+		}
+		if (soap_element_end_in(soap, tag))
+			return NULL;
+		if ((soap->mode & SOAP_XML_STRICT) && (soap_flag_przedmiotId > 0 || soap_flag_dane > 0))
+		{	soap->error = SOAP_OCCURS;
+			return NULL;
+		}
+	}
+	else if ((soap->mode & SOAP_XML_STRICT) && !*soap->href)
+	{	soap->error = SOAP_OCCURS;
+		return NULL;
+	}
+	else
+	{	a = (struct z1__importujProjekty *)soap_id_forward(soap, soap->href, (void*)a, 0, SOAP_TYPE_z1__importujProjekty, SOAP_TYPE_z1__importujProjekty, sizeof(struct z1__importujProjekty), 0, soap_finsert, NULL);
+		if (soap->body && soap_element_end_in(soap, tag))
+			return NULL;
+	}
+	return a;
+}
+
+SOAP_FMAC1 struct z1__importujProjekty * SOAP_FMAC2 soap_instantiate_z1__importujProjekty(struct soap *soap, int n, const char *type, const char *arrayType, size_t *size)
+{
+	DBGLOG(TEST, SOAP_MESSAGE(fdebug, "soap_instantiate_z1__importujProjekty(%p, %d, %s, %s)\n", soap, n, type?type:"", arrayType?arrayType:""));
+	(void)type; (void)arrayType; /* appease -Wall -Werror */
+	struct z1__importujProjekty *p;
+	size_t k = sizeof(struct z1__importujProjekty);
+	if (n < 0)
+	{	p = SOAP_NEW(struct z1__importujProjekty);
+	}
+	else
+	{	p = SOAP_NEW_ARRAY(struct z1__importujProjekty, n);
+		k *= n;
+	}
+	DBGLOG(TEST, SOAP_MESSAGE(fdebug, "Instantiated struct z1__importujProjekty location=%p n=%d\n", p, n));
+	soap_link(soap, p, SOAP_TYPE_z1__importujProjekty, n, soap_fdelete);
+	if (size)
+		*size = k;
+	return p;
+}
+
+SOAP_FMAC3 int SOAP_FMAC4 soap_put_z1__importujProjekty(struct soap *soap, const struct z1__importujProjekty *a, const char *tag, const char *type)
+{
+	if (soap_out_z1__importujProjekty(soap, tag?tag:"z1:importujProjekty", -2, a, type))
+		return soap->error;
+	return soap_putindependent(soap);
+}
+
+SOAP_FMAC3 struct z1__importujProjekty * SOAP_FMAC4 soap_get_z1__importujProjekty(struct soap *soap, struct z1__importujProjekty *p, const char *tag, const char *type)
+{
+	if ((p = soap_in_z1__importujProjekty(soap, tag, p, type)))
+		if (soap_getindependent(soap))
+			return NULL;
+	return p;
+}
+
+SOAP_FMAC3 void SOAP_FMAC4 soap_default_z1__importujProjektyResponse(struct soap *soap, struct z1__importujProjektyResponse *a)
+{
+	(void)soap; (void)a; /* appease -Wall -Werror */
+	soap_default_z1__wynik(soap, &a->rezultat);
+}
+
+SOAP_FMAC3 void SOAP_FMAC4 soap_serialize_z1__importujProjektyResponse(struct soap *soap, const struct z1__importujProjektyResponse *a)
+{
+	(void)soap; (void)a; /* appease -Wall -Werror */
+#ifndef WITH_NOIDREF
+	soap_serialize_z1__wynik(soap, &a->rezultat);
+#endif
+}
+
+SOAP_FMAC3 int SOAP_FMAC4 soap_out_z1__importujProjektyResponse(struct soap *soap, const char *tag, int id, const struct z1__importujProjektyResponse *a, const char *type)
+{
+	(void)soap; (void)tag; (void)id; (void)a; (void)type; /* appease -Wall -Werror */
+	if (soap_element_begin_out(soap, tag, soap_embedded_id(soap, id, a, SOAP_TYPE_z1__importujProjektyResponse), type))
+		return soap->error;
+	if (soap_out_z1__wynik(soap, "rezultat", -1, &a->rezultat, ""))
+		return soap->error;
+	return soap_element_end_out(soap, tag);
+}
+
+SOAP_FMAC3 struct z1__importujProjektyResponse * SOAP_FMAC4 soap_in_z1__importujProjektyResponse(struct soap *soap, const char *tag, struct z1__importujProjektyResponse *a, const char *type)
+{
+	size_t soap_flag_rezultat = 1;
+	if (soap_element_begin_in(soap, tag, 0, type))
+		return NULL;
+	a = (struct z1__importujProjektyResponse *)soap_id_enter(soap, soap->id, a, SOAP_TYPE_z1__importujProjektyResponse, sizeof(struct z1__importujProjektyResponse), soap->type, soap->arrayType, soap_instantiate, soap_fbase);
+	if (!a)
+		return NULL;
+	soap_default_z1__importujProjektyResponse(soap, a);
+	if (soap->body && !*soap->href)
+	{
+		for (;;)
+		{	soap->error = SOAP_TAG_MISMATCH;
+			if (soap_flag_rezultat && (soap->error == SOAP_TAG_MISMATCH || soap->error == SOAP_NO_TAG))
+				if (soap_in_z1__wynik(soap, "rezultat", &a->rezultat, "z1:wynik"))
+				{	soap_flag_rezultat--;
+					continue;
+				}
+			if (soap->error == SOAP_TAG_MISMATCH)
+				soap->error = soap_ignore_element(soap);
+			if (soap->error == SOAP_NO_TAG)
+				break;
+			if (soap->error)
+				return NULL;
+		}
+		if (soap_element_end_in(soap, tag))
+			return NULL;
+		if ((soap->mode & SOAP_XML_STRICT) && (soap_flag_rezultat > 0))
+		{	soap->error = SOAP_OCCURS;
+			return NULL;
+		}
+	}
+	else if ((soap->mode & SOAP_XML_STRICT) && !*soap->href)
+	{	soap->error = SOAP_OCCURS;
+		return NULL;
+	}
+	else
+	{	a = (struct z1__importujProjektyResponse *)soap_id_forward(soap, soap->href, (void*)a, 0, SOAP_TYPE_z1__importujProjektyResponse, SOAP_TYPE_z1__importujProjektyResponse, sizeof(struct z1__importujProjektyResponse), 0, soap_finsert, NULL);
+		if (soap->body && soap_element_end_in(soap, tag))
+			return NULL;
+	}
+	return a;
+}
+
+SOAP_FMAC1 struct z1__importujProjektyResponse * SOAP_FMAC2 soap_instantiate_z1__importujProjektyResponse(struct soap *soap, int n, const char *type, const char *arrayType, size_t *size)
+{
+	DBGLOG(TEST, SOAP_MESSAGE(fdebug, "soap_instantiate_z1__importujProjektyResponse(%p, %d, %s, %s)\n", soap, n, type?type:"", arrayType?arrayType:""));
+	(void)type; (void)arrayType; /* appease -Wall -Werror */
+	struct z1__importujProjektyResponse *p;
+	size_t k = sizeof(struct z1__importujProjektyResponse);
+	if (n < 0)
+	{	p = SOAP_NEW(struct z1__importujProjektyResponse);
+	}
+	else
+	{	p = SOAP_NEW_ARRAY(struct z1__importujProjektyResponse, n);
+		k *= n;
+	}
+	DBGLOG(TEST, SOAP_MESSAGE(fdebug, "Instantiated struct z1__importujProjektyResponse location=%p n=%d\n", p, n));
+	soap_link(soap, p, SOAP_TYPE_z1__importujProjektyResponse, n, soap_fdelete);
+	if (size)
+		*size = k;
+	return p;
+}
+
+SOAP_FMAC3 int SOAP_FMAC4 soap_put_z1__importujProjektyResponse(struct soap *soap, const struct z1__importujProjektyResponse *a, const char *tag, const char *type)
+{
+	if (soap_out_z1__importujProjektyResponse(soap, tag?tag:"z1:importujProjektyResponse", -2, a, type))
+		return soap->error;
+	return soap_putindependent(soap);
+}
+
+SOAP_FMAC3 struct z1__importujProjektyResponse * SOAP_FMAC4 soap_get_z1__importujProjektyResponse(struct soap *soap, struct z1__importujProjektyResponse *p, const char *tag, const char *type)
+{
+	if ((p = soap_in_z1__importujProjektyResponse(soap, tag, p, type)))
+		if (soap_getindependent(soap))
+			return NULL;
+	return p;
+}
 
 SOAP_FMAC3 void SOAP_FMAC4 soap_default_z1__usunTermin(struct soap *soap, struct z1__usunTermin *a)
 {
