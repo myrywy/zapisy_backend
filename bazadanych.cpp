@@ -21,19 +21,6 @@ BazaDanych::BazaDanych()
 
     con->setSchema("zapisy");
     std::cout << "baza ok\n" << con << std::endl;
-    std::cout << "test";
-    Tabela t("dupa");
-    std::cout << "e1" << endl;
-    std::cout << "Autozapytanie: \n" << endl;
-    t.join("innatabela","id","inneid");
-    t.join("jeszczeinna", "dupa=cycki");
-    vector<string> kolsy{"hmpf"};
-    Zapytanie z{t.select(kolsy)};
-    z.where("cos=cos_innege");
-    z.whereEqual("cla","dla");
-    std::cout << "e2" <<endl;
-    std::cout << z.stworzSql() << endl;
-    //cerr<<Tabela("t1").join("t2","id_z_t2_w_t1","id").select("k1").whereEqual("k3","g4")<<endl;
 }
 
 BazaDanych* BazaDanych::instancja()
@@ -143,6 +130,13 @@ bool BazaDanych::edytujTermin(string terminId, z1__termin t)
 bool BazaDanych::zapiszNaProjekt(Id studentId, Id projektId)
 {
     try{
+        //Sprawdzenie czy student jest zapisany do przedmiotu, do którego przypisany jest projekt
+        string przedmiotId=Tabela("temat").select("przedmiot_id").whereEqual("id",projektId);
+        string spId=Tabela("student_przedmiot").select("id").whereEqual("student_id",studentId).whereEqual("przedmiot_id",przedmiotId);
+        if(spId.empty()){
+            return false;
+        }
+
         procedura("zapiszProjekt",studentId, projektId);
     }catch(sql::SQLException err){
         std::cerr << "Przechwycono wyjatek SQL\n";
@@ -155,6 +149,12 @@ bool BazaDanych::zapiszNaProjekt(Id studentId, Id projektId)
 bool BazaDanych::zapiszNaTermin(Id studentId, Id terminId)
 {
     try{
+        //Sprawdzenie czy student jest zapisany do przedmiotu, do którego przypisany jest termin
+        string przedmiotId=Tabela("termin").select("przedmiot_id").whereEqual("id",terminId);
+        string spId=Tabela("student_przedmiot").select("id").whereEqual("student_id",studentId).whereEqual("przedmiot_id",przedmiotId);
+        if(spId.empty()){
+            return false;
+        }
         procedura("zapiszTermin",studentId, terminId);
     }catch(sql::SQLException err){
         std::cerr << "Przechwycono wyjatek SQL\n";
@@ -224,17 +224,20 @@ bool BazaDanych::dodajProwadzacego(z1__prowadzacy *p)
 bool BazaDanych::dodajStudenta(string przedmiotId, z1__student *s)
 {
     try{
-        procedura("dodajStudenta",s->imie,s->nazwisko,s->index);
+        //procedura("dodajStudenta",s->imie,s->nazwisko,s->index);
+        dodaj("student",{"imie","nazwisko","index"},{s->imie,s->nazwisko,s->index});
     }catch(sql::SQLException err){
-        std::cerr << "Przechwycono wyjatek SQL\n";
-        std::cerr << err.what() << endl;
+        std::cout << "Przechwycono wyjatek SQL\n";
+        std::cout << err.what() << endl;
+        return false;
     }
     try{
         string studentId=Tabela("student").select("id").whereEqual("`index`",s->index);
         procedura("dodajStudentaDoPrzedmiotu",studentId,przedmiotId);
     }catch(sql::SQLException err){
-        std::cerr << "Przechwycono wyjatek SQL\n";
-        std::cerr << err.what() << endl;
+        std::cout << "Przechwycono wyjatek SQL\n";
+        std::cout << err.what() << endl;
+        return false;
     }
     return true;
 }
@@ -402,10 +405,13 @@ vector<vector<string> > BazaDanych::parseCsv(const string &str, char col, char r
 
 
 
-bool BazaDanych::dodajPrzedmiot(z1__przedmiot *przedmiot)
+bool BazaDanych::dodajPrzedmiot(z1__przedmiot *przedmiot, string emailProwadzacego)
 {
     try{
         procedura("dodajPrzedmiot",przedmiot->nazwa,przedmiot->typ);
+        string przedmiotId=Tabela("przedmiot").select("id").whereEqual("nazwa","\""+przedmiot->nazwa+"\"");
+        string prowadzacyId=Tabela("prowadzacy").select("id").whereEqual("email","\""+emailProwadzacego+"\"");
+        dodaj("prowadzacy_przedmioty",{"prowdzacy_id","przedmiot_id"},{prowadzacyId,przedmiotId});
     }catch(sql::SQLException err){
         std::cout << "Przechwycono wyjatek SQL\n";
         std::cout << err.what() << endl;
@@ -529,6 +535,31 @@ bool BazaDanych::importujStudentow(Id przedmiotId, string dane)
         }catch(...){
             return false;
         }
+    }
+    return true;
+}
+
+
+bool BazaDanych::edytujStudenta(Id studentId, z1__student s)
+{
+    try{
+        aktualizuj("student",studentId,{"imie","nazwisko","index"},{s.imie, s.nazwisko, s.index});
+    }catch(...){
+        cout << "Nieznany blad. Zignorowano."<<endl;
+        return false;
+    }
+    return true;
+}
+
+bool BazaDanych::zmienOpcje(z1__opcja opcja)
+{
+
+    try{
+        string opcjaId=Tabela("opcje").select("id").whereEqual("opcja","\""+opcja.nazwa+"\"");
+        aktualizuj("opcje",opcjaId,{"opcja","wartosc"},{opcja.nazwa, opcja.wartosc});
+    }catch(...){
+        cout << "Nieznany blad. Zignorowano."<<endl;
+        return false;
     }
     return true;
 }

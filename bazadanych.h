@@ -41,13 +41,15 @@ public:
     bool dodajProwadzacego(z1__prowadzacy *p);
     bool zmienProwadzacego(string idProwadzacego, z1__prowadzacy *daneProwadzacego);
     bool dodajStudenta(string przedmiotId, z1__student *s);
+    bool edytujStudenta(Id studentId, z1__student s);
+    bool zmienOpcje(z1__opcja opcja);
     //Pobiera z bazy informacje o zapisanych na projekt studentach i zwraca ich listę w formacie csv
     string pobierzProjekt(string id);
     //Pobiera z bazy informacje o zapisanych na termin studentach i zwraca ich listę w formacie csv
     string pobierzTermin(string id);
     //Pobiera z bazy informacje o zapisanych na przedmiot studentach i zwraca ich listę w formacie csv
     string pobierzPrzedmiot(string id);
-    bool dodajPrzedmiot(z1__przedmiot *przedmiot);
+    bool dodajPrzedmiot(z1__przedmiot *przedmiot, string emailProwadzacego);
     //z1__temat infoProjekt(int projektId);
     //z1__termin infoTermin(int terminId);
     int szukajProjekt(z1__temat projekt);

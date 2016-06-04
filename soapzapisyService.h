@@ -107,7 +107,7 @@ A commercial use license is available from Genivia Inc., contact@genivia.com
         /// Web service operation 'eksportujPrzedmiot' (returns SOAP_OK or error code)
         virtual int eksportujPrzedmiot(std::string ID, struct z1__eksportujPrzedmiotResponse &_param_7) SOAP_PURE_VIRTUAL;
         /// Web service operation 'dodajPrzedmiot' (returns SOAP_OK or error code)
-        virtual int dodajPrzedmiot(z1__przedmiot *przedmiot, struct z1__dodajPrzedmiotResponse &_param_8) SOAP_PURE_VIRTUAL;
+        virtual int dodajPrzedmiot(z1__importowanyPrzedmiot *przedmiot, struct z1__dodajPrzedmiotResponse &_param_8) SOAP_PURE_VIRTUAL;
         /// Web service operation 'dodajProwadzacego' (returns SOAP_OK or error code)
         virtual int dodajProwadzacego(z1__prowadzacy *daneProwadzacego, struct z1__dodajProwadzacegoResponse &_param_9) SOAP_PURE_VIRTUAL;
         /// Web service operation 'zmienDaneProwadzacego' (returns SOAP_OK or error code)
@@ -144,5 +144,9 @@ A commercial use license is available from Genivia Inc., contact@genivia.com
         virtual int importujTerminy(std::string przedmiotId, std::string dane, struct z1__importujTerminyResponse &_param_25) SOAP_PURE_VIRTUAL;
         /// Web service operation 'importujStudentow' (returns SOAP_OK or error code)
         virtual int importujStudentow(std::string przedmiotId, std::string dane, struct z1__importujStudentowResponse &_param_26) SOAP_PURE_VIRTUAL;
+        /// Web service operation 'edytujStudenta' (returns SOAP_OK or error code)
+        virtual int edytujStudenta(std::string studentId, z1__student *student, struct z1__edytujStudentaResponse &_param_27) SOAP_PURE_VIRTUAL;
+        /// Web service operation 'zmienOpcje' (returns SOAP_OK or error code)
+        virtual int zmienOpcje(z1__opcja *opcja, struct z1__zmienOpcjeResponse &_param_28) SOAP_PURE_VIRTUAL;
     };
 #endif

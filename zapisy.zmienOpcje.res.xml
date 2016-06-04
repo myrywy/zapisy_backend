@@ -6,17 +6,8 @@
   xmlns:xsd="http://www.w3.org/2001/XMLSchema"
   xmlns:z1="localhost/zapisy.wsdl">
  <SOAP-ENV:Body>
-  <z1:dodajPrzedmiot>
-   <przedmiot>
-    <emailProwadzacego></emailProwadzacego>
-    <szczegoly>
-     <nazwa></nazwa>
-     <typ></typ>
-    </szczegoly>
-    <listaStudentow></listaStudentow>
-    <terminyLaboratoriow></terminyLaboratoriow>
-    <tematyProjektow></tematyProjektow>
-   </przedmiot>
-  </z1:dodajPrzedmiot>
+  <z1:zmienOpcjeResponse>
+   <rezultat></rezultat>
+  </z1:zmienOpcjeResponse>
  </SOAP-ENV:Body>
 </SOAP-ENV:Envelope>

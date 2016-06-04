@@ -102,9 +102,9 @@ A commercial use license is available from Genivia Inc., contact@genivia.com
         { return this->eksportujPrzedmiot(NULL, NULL, ID, _param_7); }
         virtual int eksportujPrzedmiot(const char *soap_endpoint, const char *soap_action, std::string ID, struct z1__eksportujPrzedmiotResponse &_param_7);
         /// Web service operation 'dodajPrzedmiot' (returns SOAP_OK or error code)
-        virtual int dodajPrzedmiot(z1__przedmiot *przedmiot, struct z1__dodajPrzedmiotResponse &_param_8)
+        virtual int dodajPrzedmiot(z1__importowanyPrzedmiot *przedmiot, struct z1__dodajPrzedmiotResponse &_param_8)
         { return this->dodajPrzedmiot(NULL, NULL, przedmiot, _param_8); }
-        virtual int dodajPrzedmiot(const char *soap_endpoint, const char *soap_action, z1__przedmiot *przedmiot, struct z1__dodajPrzedmiotResponse &_param_8);
+        virtual int dodajPrzedmiot(const char *soap_endpoint, const char *soap_action, z1__importowanyPrzedmiot *przedmiot, struct z1__dodajPrzedmiotResponse &_param_8);
         /// Web service operation 'dodajProwadzacego' (returns SOAP_OK or error code)
         virtual int dodajProwadzacego(z1__prowadzacy *daneProwadzacego, struct z1__dodajProwadzacegoResponse &_param_9)
         { return this->dodajProwadzacego(NULL, NULL, daneProwadzacego, _param_9); }
@@ -177,5 +177,13 @@ A commercial use license is available from Genivia Inc., contact@genivia.com
         virtual int importujStudentow(std::string przedmiotId, std::string dane, struct z1__importujStudentowResponse &_param_26)
         { return this->importujStudentow(NULL, NULL, przedmiotId, dane, _param_26); }
         virtual int importujStudentow(const char *soap_endpoint, const char *soap_action, std::string przedmiotId, std::string dane, struct z1__importujStudentowResponse &_param_26);
+        /// Web service operation 'edytujStudenta' (returns SOAP_OK or error code)
+        virtual int edytujStudenta(std::string studentId, z1__student *student, struct z1__edytujStudentaResponse &_param_27)
+        { return this->edytujStudenta(NULL, NULL, studentId, student, _param_27); }
+        virtual int edytujStudenta(const char *soap_endpoint, const char *soap_action, std::string studentId, z1__student *student, struct z1__edytujStudentaResponse &_param_27);
+        /// Web service operation 'zmienOpcje' (returns SOAP_OK or error code)
+        virtual int zmienOpcje(z1__opcja *opcja, struct z1__zmienOpcjeResponse &_param_28)
+        { return this->zmienOpcje(NULL, NULL, opcja, _param_28); }
+        virtual int zmienOpcje(const char *soap_endpoint, const char *soap_action, z1__opcja *opcja, struct z1__zmienOpcjeResponse &_param_28);
     };
 #endif

@@ -96,10 +96,17 @@
 		<xs:complexType name="importowanyPrzedmiot">
 			<xs:sequence>
 				<xs:element name="emailProwadzacego" type="xs:string" minOccurs="1"/>
+				<xs:element name="szczegoly" type="tns:przedmiot" minOccurs="1"/>
 				<xs:element name="listaStudentow" type="tns:csv" minOccurs="0"/>
 				<xs:element name="terminyLaboratoriow" type="tns:csv" minOccurs="0"/>
 				<xs:element name="tematyProjektow" type="tns:csv" minOccurs="0"/>
 			</xs:sequence>
+		</xs:complexType>
+		<xs:complexType name="opcja">
+			<xs:all>
+				<xs:element name="nazwa" type="xs:string"/>
+				<xs:element name="wartosc" type="tns:string"/>
+			</xs:all>
 		</xs:complexType>
 	</xs:schema>
 </wsdl:types>
@@ -157,7 +164,7 @@
 </wsdl:message>
 
 <wsdl:message name="nowyPrzedmiot">
-	<wsdl:part name="przedmiot" type="tns:przedmiot"/>
+	<wsdl:part name="przedmiot" type="tns:importowanyPrzedmiot"/>
 </wsdl:message>
 
 <wsdl:message name="plikCsv">
@@ -172,6 +179,15 @@
 <wsdl:message name="importDoPrzedmiotu">
 	<wsdl:part name="przedmiotId" type="tns:id"/>
 	<wsdl:part name="dane" type="tns:csv"/>
+</wsdl:message>
+
+<wsdl:message name="aktualizacjaStudenta">
+	<wsdl:part name="studentId" type="tns:id"/>
+	<wsdl:part name="student" type="tns:student"/>
+</wsdl:message>
+
+<wsdl:message name="zmianaOpcji">
+	<wsdl:part name="opcja" type="tns:opcja"/>
 </wsdl:message>
 
 <wsdl:portType name="zapisy">
@@ -277,6 +293,14 @@
 	</wsdl:operation>
 	<wsdl:operation name="importujStudentow">
 		<wsdl:input message="tns:importDoPrzedmiotu"/>
+		<wsdl:output message="tns:infoZwrotne"/>
+	</wsdl:operation>
+	<wsdl:operation name="edytujStudenta">
+		<wsdl:input message="tns:aktualizacjaStudenta"/>
+		<wsdl:output message="tns:infoZwrotne"/>
+	</wsdl:operation>
+	<wsdl:operation name="zmienOpcje">
+		<wsdl:input message="tns:zmianaOpcji"/>
 		<wsdl:output message="tns:infoZwrotne"/>
 	</wsdl:operation>
 </wsdl:portType>
@@ -508,7 +532,25 @@
 			<soap:body namespace="localhost/zapisy.wsdl" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
 		</wsdl:output>
 	</wsdl:operation>
-	<wsdl:operation name="imporujStudentow">
+	<wsdl:operation name="importujStudentow">
+		<soap:operation style="rpc" soapAction=""/>
+		<wsdl:input>
+			<soap:body namespace="localhost/zapisy.wsdl" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+		</wsdl:input>
+		<wsdl:output>
+			<soap:body namespace="localhost/zapisy.wsdl" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+		</wsdl:output>
+	</wsdl:operation>
+	<wsdl:operation name="edytujStudenta">
+		<soap:operation style="rpc" soapAction=""/>
+		<wsdl:input>
+			<soap:body namespace="localhost/zapisy.wsdl" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+		</wsdl:input>
+		<wsdl:output>
+			<soap:body namespace="localhost/zapisy.wsdl" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+		</wsdl:output>
+	</wsdl:operation>
+	<wsdl:operation name="zmienOpcje">
 		<soap:operation style="rpc" soapAction=""/>
 		<wsdl:input>
 			<soap:body namespace="localhost/zapisy.wsdl" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>

@@ -249,6 +249,8 @@ static int serve_z1__usunTermin(struct soap*, zapisyService*);
 static int serve_z1__importujProjekty(struct soap*, zapisyService*);
 static int serve_z1__importujTerminy(struct soap*, zapisyService*);
 static int serve_z1__importujStudentow(struct soap*, zapisyService*);
+static int serve_z1__edytujStudenta(struct soap*, zapisyService*);
+static int serve_z1__zmienOpcje(struct soap*, zapisyService*);
 
 int zapisyService::dispatch()
 {	return dispatch(this->soap);
@@ -311,6 +313,10 @@ int zapisyService::dispatch(struct soap* soap)
 		return serve_z1__importujTerminy(soap, this);
 	if (!soap_match_tag(soap, soap->tag, "z1:importujStudentow"))
 		return serve_z1__importujStudentow(soap, this);
+	if (!soap_match_tag(soap, soap->tag, "z1:edytujStudenta"))
+		return serve_z1__edytujStudenta(soap, this);
+	if (!soap_match_tag(soap, soap->tag, "z1:zmienOpcje"))
+		return serve_z1__zmienOpcje(soap, this);
 	return soap->error = SOAP_NO_METHOD;
 }
 
@@ -1373,6 +1379,88 @@ static int serve_z1__importujStudentow(struct soap *soap, zapisyService *service
 	 || soap_putheader(soap)
 	 || soap_body_begin_out(soap)
 	 || soap_put_z1__importujStudentowResponse(soap, &_param_26, "z1:importujStudentowResponse", NULL)
+	 || soap_body_end_out(soap)
+	 || soap_envelope_end_out(soap)
+	 || soap_end_send(soap))
+		return soap->error;
+	return soap_closesock(soap);
+}
+
+static int serve_z1__edytujStudenta(struct soap *soap, zapisyService *service)
+{	struct z1__edytujStudenta soap_tmp_z1__edytujStudenta;
+	struct z1__edytujStudentaResponse _param_27;
+	soap_default_z1__edytujStudentaResponse(soap, &_param_27);
+	soap_default_z1__edytujStudenta(soap, &soap_tmp_z1__edytujStudenta);
+	if (!soap_get_z1__edytujStudenta(soap, &soap_tmp_z1__edytujStudenta, "z1:edytujStudenta", NULL))
+		return soap->error;
+	if (soap_body_end_in(soap)
+	 || soap_envelope_end_in(soap)
+	 || soap_end_recv(soap))
+		return soap->error;
+	soap->error = service->edytujStudenta(soap_tmp_z1__edytujStudenta.studentId, soap_tmp_z1__edytujStudenta.student, _param_27);
+	if (soap->error)
+		return soap->error;
+	soap->encodingStyle = NULL;
+	soap_serializeheader(soap);
+	soap_serialize_z1__edytujStudentaResponse(soap, &_param_27);
+	if (soap_begin_count(soap))
+		return soap->error;
+	if (soap->mode & SOAP_IO_LENGTH)
+	{	if (soap_envelope_begin_out(soap)
+		 || soap_putheader(soap)
+		 || soap_body_begin_out(soap)
+		 || soap_put_z1__edytujStudentaResponse(soap, &_param_27, "z1:edytujStudentaResponse", NULL)
+		 || soap_body_end_out(soap)
+		 || soap_envelope_end_out(soap))
+			 return soap->error;
+	};
+	if (soap_end_count(soap)
+	 || soap_response(soap, SOAP_OK)
+	 || soap_envelope_begin_out(soap)
+	 || soap_putheader(soap)
+	 || soap_body_begin_out(soap)
+	 || soap_put_z1__edytujStudentaResponse(soap, &_param_27, "z1:edytujStudentaResponse", NULL)
+	 || soap_body_end_out(soap)
+	 || soap_envelope_end_out(soap)
+	 || soap_end_send(soap))
+		return soap->error;
+	return soap_closesock(soap);
+}
+
+static int serve_z1__zmienOpcje(struct soap *soap, zapisyService *service)
+{	struct z1__zmienOpcje soap_tmp_z1__zmienOpcje;
+	struct z1__zmienOpcjeResponse _param_28;
+	soap_default_z1__zmienOpcjeResponse(soap, &_param_28);
+	soap_default_z1__zmienOpcje(soap, &soap_tmp_z1__zmienOpcje);
+	if (!soap_get_z1__zmienOpcje(soap, &soap_tmp_z1__zmienOpcje, "z1:zmienOpcje", NULL))
+		return soap->error;
+	if (soap_body_end_in(soap)
+	 || soap_envelope_end_in(soap)
+	 || soap_end_recv(soap))
+		return soap->error;
+	soap->error = service->zmienOpcje(soap_tmp_z1__zmienOpcje.opcja, _param_28);
+	if (soap->error)
+		return soap->error;
+	soap->encodingStyle = NULL;
+	soap_serializeheader(soap);
+	soap_serialize_z1__zmienOpcjeResponse(soap, &_param_28);
+	if (soap_begin_count(soap))
+		return soap->error;
+	if (soap->mode & SOAP_IO_LENGTH)
+	{	if (soap_envelope_begin_out(soap)
+		 || soap_putheader(soap)
+		 || soap_body_begin_out(soap)
+		 || soap_put_z1__zmienOpcjeResponse(soap, &_param_28, "z1:zmienOpcjeResponse", NULL)
+		 || soap_body_end_out(soap)
+		 || soap_envelope_end_out(soap))
+			 return soap->error;
+	};
+	if (soap_end_count(soap)
+	 || soap_response(soap, SOAP_OK)
+	 || soap_envelope_begin_out(soap)
+	 || soap_putheader(soap)
+	 || soap_body_begin_out(soap)
+	 || soap_put_z1__zmienOpcjeResponse(soap, &_param_28, "z1:zmienOpcjeResponse", NULL)
 	 || soap_body_end_out(soap)
 	 || soap_envelope_end_out(soap)
 	 || soap_end_send(soap))

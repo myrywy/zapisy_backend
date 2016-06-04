@@ -541,7 +541,7 @@ int zapisyProxy::eksportujPrzedmiot(const char *endpoint, const char *soap_actio
 	return soap_closesock(soap);
 }
 
-int zapisyProxy::dodajPrzedmiot(const char *endpoint, const char *soap_action, z1__przedmiot *przedmiot, struct z1__dodajPrzedmiotResponse &_param_8)
+int zapisyProxy::dodajPrzedmiot(const char *endpoint, const char *soap_action, z1__importowanyPrzedmiot *przedmiot, struct z1__dodajPrzedmiotResponse &_param_8)
 {	struct soap *soap = this->soap;
 	struct z1__dodajPrzedmiot soap_tmp_z1__dodajPrzedmiot;
 	if (endpoint)
@@ -1590,6 +1590,117 @@ int zapisyProxy::importujStudentow(const char *endpoint, const char *soap_action
 	 || soap_body_begin_in(soap))
 		return soap_closesock(soap);
 	soap_get_z1__importujStudentowResponse(soap, &_param_26, "z1:importujStudentowResponse", NULL);
+	if (soap->error)
+		return soap_recv_fault(soap, 0);
+	if (soap_body_end_in(soap)
+	 || soap_envelope_end_in(soap)
+	 || soap_end_recv(soap))
+		return soap_closesock(soap);
+	return soap_closesock(soap);
+}
+
+int zapisyProxy::edytujStudenta(const char *endpoint, const char *soap_action, std::string studentId, z1__student *student, struct z1__edytujStudentaResponse &_param_27)
+{	struct soap *soap = this->soap;
+	struct z1__edytujStudenta soap_tmp_z1__edytujStudenta;
+	if (endpoint)
+		soap_endpoint = endpoint;
+	if (soap_endpoint == NULL)
+		soap_endpoint = "http://192.168.0.13:8090/";
+	if (soap_action == NULL)
+		soap_action = "";
+	soap_tmp_z1__edytujStudenta.studentId = studentId;
+	soap_tmp_z1__edytujStudenta.student = student;
+	soap_begin(soap);
+	soap_set_version(soap, 1); /* SOAP1.1 */
+	soap->encodingStyle = NULL;
+	soap_serializeheader(soap);
+	soap_serialize_z1__edytujStudenta(soap, &soap_tmp_z1__edytujStudenta);
+	if (soap_begin_count(soap))
+		return soap->error;
+	if (soap->mode & SOAP_IO_LENGTH)
+	{	if (soap_envelope_begin_out(soap)
+		 || soap_putheader(soap)
+		 || soap_body_begin_out(soap)
+		 || soap_put_z1__edytujStudenta(soap, &soap_tmp_z1__edytujStudenta, "z1:edytujStudenta", NULL)
+		 || soap_body_end_out(soap)
+		 || soap_envelope_end_out(soap))
+			 return soap->error;
+	}
+	if (soap_end_count(soap))
+		return soap->error;
+	if (soap_connect(soap, soap_endpoint, soap_action)
+	 || soap_envelope_begin_out(soap)
+	 || soap_putheader(soap)
+	 || soap_body_begin_out(soap)
+	 || soap_put_z1__edytujStudenta(soap, &soap_tmp_z1__edytujStudenta, "z1:edytujStudenta", NULL)
+	 || soap_body_end_out(soap)
+	 || soap_envelope_end_out(soap)
+	 || soap_end_send(soap))
+		return soap_closesock(soap);
+	if (!&_param_27)
+		return soap_closesock(soap);
+	soap_default_z1__edytujStudentaResponse(soap, &_param_27);
+	if (soap_begin_recv(soap)
+	 || soap_envelope_begin_in(soap)
+	 || soap_recv_header(soap)
+	 || soap_body_begin_in(soap))
+		return soap_closesock(soap);
+	soap_get_z1__edytujStudentaResponse(soap, &_param_27, "z1:edytujStudentaResponse", NULL);
+	if (soap->error)
+		return soap_recv_fault(soap, 0);
+	if (soap_body_end_in(soap)
+	 || soap_envelope_end_in(soap)
+	 || soap_end_recv(soap))
+		return soap_closesock(soap);
+	return soap_closesock(soap);
+}
+
+int zapisyProxy::zmienOpcje(const char *endpoint, const char *soap_action, z1__opcja *opcja, struct z1__zmienOpcjeResponse &_param_28)
+{	struct soap *soap = this->soap;
+	struct z1__zmienOpcje soap_tmp_z1__zmienOpcje;
+	if (endpoint)
+		soap_endpoint = endpoint;
+	if (soap_endpoint == NULL)
+		soap_endpoint = "http://192.168.0.13:8090/";
+	if (soap_action == NULL)
+		soap_action = "";
+	soap_tmp_z1__zmienOpcje.opcja = opcja;
+	soap_begin(soap);
+	soap_set_version(soap, 1); /* SOAP1.1 */
+	soap->encodingStyle = NULL;
+	soap_serializeheader(soap);
+	soap_serialize_z1__zmienOpcje(soap, &soap_tmp_z1__zmienOpcje);
+	if (soap_begin_count(soap))
+		return soap->error;
+	if (soap->mode & SOAP_IO_LENGTH)
+	{	if (soap_envelope_begin_out(soap)
+		 || soap_putheader(soap)
+		 || soap_body_begin_out(soap)
+		 || soap_put_z1__zmienOpcje(soap, &soap_tmp_z1__zmienOpcje, "z1:zmienOpcje", NULL)
+		 || soap_body_end_out(soap)
+		 || soap_envelope_end_out(soap))
+			 return soap->error;
+	}
+	if (soap_end_count(soap))
+		return soap->error;
+	if (soap_connect(soap, soap_endpoint, soap_action)
+	 || soap_envelope_begin_out(soap)
+	 || soap_putheader(soap)
+	 || soap_body_begin_out(soap)
+	 || soap_put_z1__zmienOpcje(soap, &soap_tmp_z1__zmienOpcje, "z1:zmienOpcje", NULL)
+	 || soap_body_end_out(soap)
+	 || soap_envelope_end_out(soap)
+	 || soap_end_send(soap))
+		return soap_closesock(soap);
+	if (!&_param_28)
+		return soap_closesock(soap);
+	soap_default_z1__zmienOpcjeResponse(soap, &_param_28);
+	if (soap_begin_recv(soap)
+	 || soap_envelope_begin_in(soap)
+	 || soap_recv_header(soap)
+	 || soap_body_begin_in(soap))
+		return soap_closesock(soap);
+	soap_get_z1__zmienOpcjeResponse(soap, &_param_28, "z1:zmienOpcjeResponse", NULL);
 	if (soap->error)
 		return soap_recv_fault(soap, 0);
 	if (soap_body_end_in(soap)

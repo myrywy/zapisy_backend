@@ -129,24 +129,15 @@ END
 -- Note: comments before and after the routine body will not be stored by the server
 -- --------------------------------------------------------------------------------
 DELIMITER $$
-
-CREATE DEFINER=`root`@`localhost` PROCEDURE `dodajStudentaDoPrzedmiotu`(
+CREATE PROCEDURE `dodajStudentaDoPrzedmiotu`(
 	IN StudentId varchar(45),
 	IN PrzedmiotId varchar(45)
 	)
 BEGIN
-INSERT INTO `zapisy`.`student` (`student_id`,`przedmiot_id`) VALUES (StudentId, PrzedmiotId);
-END
-
-DELIMITER $$
-CREATE DEFINER=`root`@`localhost` PROCEDURE `dodajPrzedmiot`(
-	IN Nazwa varchar(45),
-	IN Typ int(11)
-	)
-BEGIN
-INSERT INTO `zapisy`.`przedmiot` (`nazwa`,`typ`) VALUES (Nazwa, Typ);
+INSERT INTO `zapisy`.`student_przedmiot` (`student_id`,`przedmiot_id`) VALUES (StudentId, PrzedmiotId);
 END$$
 DELIMITER ;
+
 
 -- --------------------------------------------------------------------------------
 -- Routine DDL

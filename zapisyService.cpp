@@ -91,13 +91,29 @@ int zapisyService::zapiszTermin(std::string projektID, std::string zapisywanyID,
      _param_7.plik=BazaDanych::instancja()->pobierzPrzedmiot(ID);
      return SOAP_OK;}
 
- int zapisyService::dodajPrzedmiot(z1__przedmiot *przedmiot, struct z1__dodajPrzedmiotResponse &_param_8) {
+ int zapisyService::dodajPrzedmiot(z1__importowanyPrzedmiot *przedmiot, struct z1__dodajPrzedmiotResponse &_param_8) {
 
      BazaDanych* baza=BazaDanych::instancja();
-     if( baza->dodajPrzedmiot(przedmiot) ){
+     if( baza->dodajPrzedmiot(przedmiot->szczegoly,przedmiot->emailProwadzacego) ){
          _param_8.rezultat="ok";
      }else{
          _param_8.rezultat="error";
+     }
+     string przedmiotId;
+     try{
+         przedmiotId = Tabela("przedmiot").select("id").whereEqual("nazwa","\'"+przedmiot->szczegoly->nazwa+"\'");
+     }catch(...){
+         _param_8.rezultat="error";
+         return SOAP_OK;
+     }
+     if(przedmiot->listaStudentow){
+         baza->importujStudentow(przedmiotId,*(przedmiot->listaStudentow));
+     }
+     if(przedmiot->tematyProjektow){
+         baza->importujStudentow(przedmiotId,*(przedmiot->tematyProjektow));
+     }
+     if(przedmiot->terminyLaboratoriow){
+         baza->importujStudentow(przedmiotId,*(przedmiot->terminyLaboratoriow));
      }
      return SOAP_OK;
  }
@@ -285,6 +301,26 @@ int zapisyService::zapiszTermin(std::string projektID, std::string zapisywanyID,
          _param_26.rezultat="ok";
      }else{
          _param_26.rezultat="error";
+     }
+     return SOAP_OK;
+ }
+
+ int zapisyService::edytujStudenta(std::string studentId, z1__student *student, struct z1__edytujStudentaResponse &_param_27){
+     BazaDanych* baza=BazaDanych::instancja();
+     if( baza->edytujStudenta(studentId, *student) ){
+         _param_27.rezultat="ok";
+     }else{
+         _param_27.rezultat="error";
+     }
+     return SOAP_OK;
+ }
+
+ int zapisyService::zmienOpcje(z1__opcja *opcja, struct z1__zmienOpcjeResponse &_param_28){
+     BazaDanych* baza=BazaDanych::instancja();
+     if( baza->zmienOpcje(*opcja) ){
+         _param_28.rezultat="ok";
+     }else{
+         _param_28.rezultat="error";
      }
      return SOAP_OK;
  }

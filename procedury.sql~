@@ -229,8 +229,8 @@ END
 -- --------------------------------------------------------------------------------
 DELIMITER $$
 
-CREATE PROCEDURE `usunWszystkieTerminyPrzedmiotu` (
-	IN terminId INT(11)
+CREATE DEFINER=`root`@`127.0.0.1` PROCEDURE `usunWszystkieTerminyPrzedmiotu`(
+	IN przedmiotId INT(11)
 )
 BEGIN
 	DELETE FROM student_termin WHERE id_termin IN (
