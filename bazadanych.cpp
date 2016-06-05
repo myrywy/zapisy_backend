@@ -102,10 +102,10 @@ bool BazaDanych::edytujProjekt(string projektId, z1__temat t)
 bool BazaDanych::edytujTermin(string terminId, z1__termin t)
 {
     try{
-        string salaId=Tabela("sala").select("id").whereEqual("numer",t.nrSali);
+        string salaId=Tabela("sala").select("id").whereEqual("numer",enq(t.nrSali));
         if(salaId.empty()){
             dodaj("sala",{"numer"},{t.nrSali});
-            salaId=Tabela("sala").select("id").whereEqual("numer",t.nrSali);
+            salaId=Tabela("sala").select("id").whereEqual("numer",enq(t.nrSali));
             if(salaId.empty()){
                 return false;
             }
@@ -535,14 +535,20 @@ bool BazaDanych::importujStudentow(Id przedmiotId, string dane)
         string& indeks=w[2];
         try{
             dodaj("student",{"imie","nazwisko","index"},{imie,nazwisko,indeks});
+        }catch(sql::SQLException err){
+            std::cout << "Przechwycono wyjatek SQL\n";
+            std::cout << err.what() << endl;
+        }catch(...){
+        }
+        try{
             string id=Tabela("student").select("id").whereEqual("`index`",indeks);
             dodaj("student_przedmiot",{"student_id","przedmiot_id"},{id,przedmiotId});
         }catch(sql::SQLException err){
             std::cout << "Przechwycono wyjatek SQL\n";
             std::cout << err.what() << endl;
-            return false;
+            continue;
         }catch(...){
-            return false;
+            continue;
         }
     }
     return true;

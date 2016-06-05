@@ -110,10 +110,10 @@ int zapisyService::zapiszTermin(std::string projektID, std::string zapisywanyID,
          baza->importujStudentow(przedmiotId,*(przedmiot->listaStudentow));
      }
      if(przedmiot->tematyProjektow){
-         baza->importujStudentow(przedmiotId,*(przedmiot->tematyProjektow));
+         baza->importujProjekty(przedmiotId,*(przedmiot->tematyProjektow));
      }
      if(przedmiot->terminyLaboratoriow){
-         baza->importujStudentow(przedmiotId,*(przedmiot->terminyLaboratoriow));
+         baza->importujTerminy(przedmiotId,*(przedmiot->terminyLaboratoriow));
      }
      return SOAP_OK;
  }
