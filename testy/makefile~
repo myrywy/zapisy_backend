@@ -1,4 +1,4 @@
-sources= ../bazadanych.cpp ../tabela.cpp ../zapytanie.cpp ../soapC.cpp ../soapzapisyProxy.cpp ../soapzapisyService.cpp ../zapisyService.cpp ../zapisyServer.cpp
+sources= ../bazadanych.cpp ../tabela.cpp ../zapytanie.cpp ../soapC.cpp ../soapzapisyProxy.cpp ../soapzapisyService.cpp ../zapisyService.cpp 
 test_sources=zapytanie_test.cpp test_utils.cpp bazadanych_test.cpp
 objects=$(sources:.cpp=.o)
 pathMysqlHeaders=../libs/mysql/include
@@ -10,7 +10,7 @@ headers=-I$(pathMysqlHeaders) -I$(pathGsoapHeaders) -I$(pathMysqlHeaders)/cppcon
 
 LDFLAGS="-Wl,--no-as-needed"
 
-all: zapytanie_test bazadanych_test
+all: zapytanie_test bazadanych_test ../bazadanych.cpp ../tabela.cpp ../zapytanie.cpp
 
 #zapisy: $(objects)
 #	g++ -lm $^ -o $@ -L$(pathGsoapLibs) -L$(pathMysqlLibs) -L$(pathMysqlCientLib) -static -lgsoap++ -lmysqlclient -lmysqlcppconn-static -lpthread -ldl

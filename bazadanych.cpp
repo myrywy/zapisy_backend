@@ -33,7 +33,6 @@ BazaDanych* BazaDanych::instancja()
 
 bool BazaDanych::dodajProjekt(std::string przedmiotID, z1__temat t)
 {
-    std::cerr << "dodawanie projektu do bazy" << std::endl;
     StatementPtr stmt(con->createStatement());
     try{
     	stmt->execute(string("call dodajProjekt("+przedmiotID+",'")+t.temat+string("','")+t.opis+string("',")+string(t.miejsca)+string(",")+t.wolneMiejsca+string(")"));
@@ -42,49 +41,48 @@ bool BazaDanych::dodajProjekt(std::string przedmiotID, z1__temat t)
         std::cerr << err.what() << endl;
         return false;
     }
-    std::cerr << "Dodano" << endl;
     return true;
 }
 
 bool BazaDanych::dodajTermin(std::string przedmiotID, std::string salaID, z1__termin t)
 {
-    std::cerr << "dodawanie terminu do bazy" << std::endl;
     StatementPtr stmt(con->createStatement());
     try{
-    	stmt->execute(
+        /*stmt->execute(
 				string("call dodajTermin("+przedmiotID+",'")
 				+t.dzien+string("','")
 				+t.godzinaOd+string("',")
 				+t.godzinaDo+string(",")
 				+std::to_string(t.miejsca)+string(",")
 				+salaID+string(")")
-			);
+            );*/
+        //procedura("dodajTermin",enq(przedmiotID),enq(t.dzien),enq(t.godzinaOd),enq(t.godzinaDo),std::to_string(t.miejsca),salaID);
+        salaID=Tabela("sala").select("id").whereEqual("numer",enq(t.nrSali));
+        if(salaID.empty()){
+            dodaj("sala",{"numer"},{t.nrSali});
+            salaID=Tabela("sala").select("id").whereEqual("numer",enq(t.nrSali));
+        }
+        dodaj("termin",{"przedmiot_id","dzien","godzina_od","godzina_do","miejsca","sala_id"},{przedmiotID,t.dzien,t.godzinaDo,t.godzinaOd,std::to_string(t.miejsca),salaID});
     }catch(sql::SQLException err){
         std::cerr << "Przechwycono wyjatek SQL\n";
         std::cerr << err.what() << endl;
         return false;
     }
-    std::cerr << "Dodano" << endl;
     return true;
 }
 
 bool BazaDanych::edytujProjekt(string projektId, z1__temat t)
 {
-    std::cout << "edutuj projetk: " << endl;
     try{
         Tabela st("student_temat");
         Zapytanie studentTemat = st.select("id");
         studentTemat.whereEqual("id_temat",projektId);
-        std::cout<< "sql: " << studentTemat.stworzSql() << endl;
         studentTemat.wykonaj();
         int wolne=std::stoi(t.miejsca)-studentTemat.liczbaWynikow();
-        std::cout << "wolne: " << wolne << endl;
         if(wolne<0){
             return false;
         }
-        std::cout << "edytowanie" << endl;
         aktualizuj("temat",projektId,{"temat","miejsca","opis","wolne_miejsca"},{t.temat, t.miejsca, t.opis, std::to_string(wolne)});
-        std::cout << "ok.";
     }catch(sql::SQLException err){
         std::cerr << "Przechwycono wyjatek SQL \n";
         std::cerr << err.what() << endl;
@@ -136,6 +134,11 @@ bool BazaDanych::zapiszNaProjekt(Id studentId, Id projektId)
         if(spId.empty()){
             return false;
         }
+        //Sprawdzanie czy student nie jest już zapisany na jakiś projekt z tego przedmiotu
+        string staryProjektId=Tabela("temat").join("student_temat","id","id_temat").select("przedmiot_id").whereEqual("id_student",studentId).whereEqual("przedmiot_id",przedmiotId);
+        if(!staryProjektId.empty()){
+            return false;
+        }
 
         procedura("zapiszProjekt",studentId, projektId);
     }catch(sql::SQLException err){
@@ -155,6 +158,12 @@ bool BazaDanych::zapiszNaTermin(Id studentId, Id terminId)
         if(spId.empty()){
             return false;
         }
+        //Sprawdzanie czy student nie jest już zapisany na jakiś termin z tego przedmiotu
+        string staryTerminId=Tabela("termin").join("student_termin","id","id_termin").select("przedmiot_id").whereEqual("id_student",studentId).whereEqual("przedmiot_id",przedmiotId);
+        if(!staryTerminId.empty()){
+            return false;
+        }
+
         procedura("zapiszTermin",studentId, terminId);
     }catch(sql::SQLException err){
         std::cerr << "Przechwycono wyjatek SQL\n";
@@ -190,7 +199,6 @@ bool BazaDanych::wypiszZTerminu(Id studentId, Id terminId)
 
 bool BazaDanych::dodajProwadzacego(z1__prowadzacy *p)
 {
-    cerr << "DODAJ PROWADZACEGO " << endl;
     try{
         procedura("dodajProwadzacego",p->email, p->haslo,p->imie,p->nazwisko);
     }catch(sql::SQLException err){
@@ -208,10 +216,6 @@ bool BazaDanych::dodajProwadzacego(z1__prowadzacy *p)
             cout << "rid: " << rid << endl;
             procedura("dodajRoleProwadzacego",pid,rid);
         }
-/*
-        rid=Tabela("rola").select("id").where("opis='ROLE_USER'");
-        cout << "ridu: " << rid << endl;
-        procedura("dodajRoleProwadzacego",pid,rid);*/
     }catch(sql::SQLException err){
         std::cout << "Przechwycono wyjatek SQL\n";
         std::cout << err.what() << endl;
@@ -291,9 +295,8 @@ int BazaDanych::szukajTermin(z1__termin termin)
 
 bool BazaDanych::szukajProjektStudenta(std::string idStudenta, std::string idPrzedmiotu, std::string *idProjektu)
 {
-    std::cerr << "Sprawdzanie czy student " << idStudenta << " nie ma tematu na przedmiocie " << idPrzedmiotu << ". " << std::endl;
+    //"Sprawdzanie czy student nie ma tematu na przedmiocie
     string tmpIdProjektu=Tabela("student_temat").join("temat","id_temat","id").select("id_temat").whereEqual("id_student",idStudenta).whereEqual("przedmiot_id",idPrzedmiotu);
-    std::cerr << "tmpIdProjektu: " << tmpIdProjektu << endl;
     if(tmpIdProjektu.size()==0 || tmpIdProjektu==" "){
         return false;
     }else{
@@ -364,7 +367,6 @@ StatementPtr BazaDanych::aktualizuj(string tabela, string id, initializer_list<s
                 +((i==(col.size()-1))?"'":"', ");
     }
     sqlUpdate+=" WHERE `id`='"+id+"';";
-    std::cout << sqlUpdate << endl;
     return wykonaj(sqlUpdate);
 }
 

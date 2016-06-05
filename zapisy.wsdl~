@@ -105,7 +105,7 @@
 		<xs:complexType name="opcja">
 			<xs:all>
 				<xs:element name="nazwa" type="xs:string"/>
-				<xs:element name="wartosc" type="tns:string"/>
+				<xs:element name="wartosc" type="xs:string"/>
 			</xs:all>
 		</xs:complexType>
 	</xs:schema>

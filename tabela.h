@@ -41,14 +41,4 @@ private:
     string nazwa;
     vector<Join> polaczenia;
 };
-/*
-template<typename... Arg> Zapytanie<Arg...> Tabela::select(Arg... arg)
-{
-    std::cout << "bu" << std::endl;
-}
-template<int... kolumny> Zapytanie<int> Tabela::select(int kolumny...)
-{
-    std::cout << "bu" << std::endl;
-}
-*/
 #endif // TABELA_HPP

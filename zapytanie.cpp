@@ -5,19 +5,10 @@
 using std::cerr;
 using std::endl;
 
-/*Zapytanie::Zapytanie(const Tabela& _tabela, initializer_list<string> _kolumny)
-    :tabela(_tabela),
-      kolumny{_kolumny}
-{
-
-}*/
-
 Zapytanie::Zapytanie(const Tabela* _tabela, vector<string> _kolumny)
     :tabela{_tabela},
       kolumny{_kolumny}
 {
-    cerr<<endl<<tabela->getNazwa() << endl;
-    cerr << "aktualne " << aktualne << endl;
 }
 
 string Zapytanie::stworzSql() const
@@ -59,15 +50,6 @@ void Zapytanie::wykonaj()
     ResultsPtr res(stmt->getResultSet());
     if(kolumny.size()>0){
         while(res->next()){
-            /*for(int i=1; true; i++){
-                std::cout << "Kolumny:" << endl;
-                try{
-                    std::cout << res->getMetaData()->getColumnName(i) << endl;
-                }catch(...){
-                    std::cout << "~kolumny" << endl;
-                    break;
-                }
-            }*/
             vector<string> w(kolumny.size());
             for(unsigned i=0; i<kolumny.size(); i++){
                 try{
@@ -101,13 +83,11 @@ Zapytanie::operator string()
     if(!aktualne){
         wykonaj();
     }
-    cout << "wyniki" << endl;
     for(vector<string> v : wyniki){
         for(string s : v){
             cout << s << endl;
         }
     }
-    cout << "~wyniki" << endl;
     string tmp;
     if(wyniki.empty()){
         return "";

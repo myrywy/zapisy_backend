@@ -3,6 +3,7 @@
 
 #include <string>
 #include <vector>
+#include <iostream>
 
 using std::string;
 using std::vector;
@@ -14,6 +15,8 @@ using std::vector;
  * @return
  */
 bool sqlCmp(string s1, string s2);
+bool isWhite(char c);
+bool isSpecial(char c);
 
 template<typename T> bool rcompare(vector<T> v1, vector<T> v2);
 

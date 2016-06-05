@@ -87,4 +87,6 @@ private:
     static BazaDanych* bd;
 };
 
+inline string enq(string s){return "\""+s+"\"";}
+
 #endif // BAZADANYCH_H

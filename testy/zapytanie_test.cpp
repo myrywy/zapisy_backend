@@ -3,6 +3,8 @@
 #include "../zapytanie.h"
 #include "../tabela.h"
 #include "test_utils.hpp"
+#include "../zapisy.nsmap"        // XML namespace mapping table (only needed once at the global level)
+
 
 BOOST_AUTO_TEST_SUITE (stringtest)
 

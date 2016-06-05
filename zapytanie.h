@@ -26,7 +26,6 @@ private:
     vector<string> kolumny;
     vector< vector< string > > wyniki;
     bool aktualne{false};
-    //string operator string();
 
 };
 
