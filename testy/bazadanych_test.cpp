@@ -42,10 +42,16 @@ struct StaleTestowe{
         stud.imie="test_imie_2";
         stud.nazwisko="test_nazwisko_2";
         stud.index="test_2_123456";
-        BOOST_CHECK(baza->dodajStudenta(przedmiotId,&stud));
+        BOOST_CHECK(baza->dodajStudenta(przedmiot2Id,&stud));
         stud2Id=Tabela("student").select("id").whereEqual("`index`",enq(stud.index));
     }
     ~StaleTestowe(){
+        baza->procedura("usunWszystkieTematyPrzedmiotu",przedmiotId);
+        baza->procedura("usunWszystkieTematyPrzedmiotu",przedmiot2Id);
+
+        baza->procedura("usunWszystkieTerminyPrzedmiotu",przedmiotId);
+        baza->procedura("usunWszystkieTerminyPrzedmiotu",przedmiot2Id);
+
         baza->usun("student","id",stud1Id);
         baza->usun("student","id",stud2Id);
         baza->usun("student_przedmiot","student_id",stud1Id);
@@ -111,7 +117,7 @@ BOOST_FIXTURE_TEST_CASE ( dodajProjekt, StaleTestowe )
     t.wolneMiejsca="1";
     t.temat="temat";
     BOOST_REQUIRE_MESSAGE(baza->dodajProjekt(przedmiotId,t),"Nie udało się dodać projektu");
-    string b_projektId=Tabela("temat").select("id").whereEqual("miejsca",t.miejsca).whereEqual("temat",t.temat).whereEqual("opis",t.opis);
+    string b_projektId=Tabela("temat").select("id").whereEqual("miejsca",t.miejsca).whereEqual("temat",enq(t.temat)).whereEqual("opis",enq(t.opis));
     BOOST_CHECK_MESSAGE(!b_projektId.empty(),"Projektu nie ma w bazie po dodaniu.");
     string b_przedmiotId=Tabela("temat").select("przedmiot_id").whereEqual("id",b_projektId);
     BOOST_CHECK_MESSAGE(!b_przedmiotId.empty(),"Nie odnaleziono przypisania przedmiotu do tematu");
@@ -165,6 +171,37 @@ BOOST_FIXTURE_TEST_CASE ( dodaj_usun_test , StaleTestowe )
 
 BOOST_FIXTURE_TEST_CASE ( zapiszNaProjekt_test, StaleTestowe)
 {
+    z1__temat t;
+    BOOST_CHECK_NO_THROW(baza->dodajProjekt("",t));
+    t.miejsca="2";
+    t.opis="opis";
+    t.wolneMiejsca="1";
+    t.temat="temat";
+    BOOST_REQUIRE_MESSAGE(baza->dodajProjekt(przedmiotId,t),"Nie udało się dodać projektu");
+    string b_projektId=Tabela("temat").select("id").whereEqual("miejsca",t.miejsca).whereEqual("temat",enq(t.temat)).whereEqual("opis",enq(t.opis));
+
+
+    BOOST_CHECK_MESSAGE(!baza->zapiszNaProjekt(stud2Id,b_projektId),"Studenta zapisano na projekt z przedmiotu, do którego nie jest zapisany.");
+    string b_studentProjektId=Tabela("student_temat").select("id").whereEqual("id_student",stud2Id);
+    BOOST_CHECK_MESSAGE(b_studentProjektId.empty(), "Student przypisany do projektu, na który nie mógł się zapisać.");
+
+    BOOST_CHECK_MESSAGE(baza->zapiszNaProjekt(stud1Id,b_projektId),"Nie udało się zapisać studenta na projekt.");
+    b_studentProjektId=Tabela("student_temat").select("id").whereEqual("id_student",stud1Id);
+    BOOST_CHECK_MESSAGE(!b_studentProjektId.empty(), "Nie znaleziono przypisania studenta do projektu.");
+    BOOST_CHECK_MESSAGE(!baza->zapiszNaProjekt(stud1Id,b_projektId),"Zapisano studenta drugia raz na projekt.");
+    string b_studentProjektId2=Tabela("student_temat").select("id").whereEqual("id_student",stud1Id);
+    BOOST_CHECK_MESSAGE(b_studentProjektId2==b_studentProjektId,"Nadmiarowe przypisanie studenta do tematu");
+
+    try{
+        std::cout << baza->stworzWywolanieProcedury("usunTemat", b_projektId) << std::endl;
+        baza->procedura("usunTemat",b_projektId);
+    }catch(sql::SQLException err){
+        std::cout << "Przechwycono wyjatek SQL\n";
+        std::cout << err.what() << endl;
+    }
+
+    string b_studentPojekt_wszystkie=Tabela("student_temat").select("id").whereEqual("id_temat",b_projektId);
+    BOOST_CHECK_MESSAGE(b_studentPojekt_wszystkie.empty(),"Nie usunięto pozostalości po temacie w student_temat");
 
 }
 
