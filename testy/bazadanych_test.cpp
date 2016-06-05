@@ -28,16 +28,40 @@ struct StaleTestowe{
         }
         przedmiotId=Tabela("prowadzacy_przedmioty").select("przedmiot_id").whereEqual("prowdzacy_id",prowadzacyId);
         BOOST_REQUIRE_MESSAGE(!przedmiotId.empty(),"Nie udało się utworzyć przedmiotu testowego");
+        przedmiot.nazwa="test_przedmiot_2";
+        przedmiot.typ="3";
+        baza->dodajPrzedmiot(&przedmiot,prowadzacy.email);
+        przedmiot2Id=Tabela("prowadzacy_przedmioty").join("przedmiot","przedmiot_id","id").select("przedmiot_id").whereEqual("prowdzacy_id",prowadzacyId).whereEqual("nazwa",enq(przedmiot.nazwa));
+        BOOST_REQUIRE_MESSAGE(!przedmiot2Id.empty(),"Nie udało się utworzyć przedmiotu testowego");
+        z1__student stud;
+        stud.imie="test_imie_1";
+        stud.nazwisko="test_nazwisko_1";
+        stud.index="test_123456";
+        BOOST_CHECK(baza->dodajStudenta(przedmiotId,&stud));
+        stud1Id=Tabela("student").select("id").whereEqual("`index`",enq(stud.index));
+        stud.imie="test_imie_2";
+        stud.nazwisko="test_nazwisko_2";
+        stud.index="test_2_123456";
+        BOOST_CHECK(baza->dodajStudenta(przedmiotId,&stud));
+        stud2Id=Tabela("student").select("id").whereEqual("`index`",enq(stud.index));
     }
     ~StaleTestowe(){
+        baza->usun("student","id",stud1Id);
+        baza->usun("student","id",stud2Id);
+        baza->usun("student_przedmiot","student_id",stud1Id);
+        baza->usun("student_przedmiot","student_id",stud2Id);
         baza->usun("prowadzacy_przedmioty","prowdzacy_id",prowadzacyId);
+        baza->usun("przedmiot","id",przedmiot2Id);
         baza->usun("przedmiot","id",przedmiotId);
         baza->usun("prowadzacy","id",prowadzacyId);
         baza->usun("prowadzacy_rola","prowadzacy_id",prowadzacyId);
     }
     BazaDanych* baza;
     string przedmiotId;
+    string przedmiot2Id;
     string prowadzacyId;
+    string stud1Id;
+    string stud2Id;
 };
 
 BOOST_AUTO_TEST_CASE (parseCsv_split_test)

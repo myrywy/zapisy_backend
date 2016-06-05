@@ -236,7 +236,7 @@ bool BazaDanych::dodajStudenta(string przedmiotId, z1__student *s)
         return false;
     }
     try{
-        string studentId=Tabela("student").select("id").whereEqual("`index`",s->index);
+        string studentId=Tabela("student").select("id").whereEqual("`index`",enq(s->index));
         procedura("dodajStudentaDoPrzedmiotu",studentId,przedmiotId);
     }catch(sql::SQLException err){
         std::cout << "Przechwycono wyjatek SQL\n";
