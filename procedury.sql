@@ -63,7 +63,6 @@ BEGIN
 		WHERE id_student = studentId and przedmiot_id = przedmiotId;
 END
 
-
 DELIMITER $$
 CREATE DEFINER=`root`@`localhost` PROCEDURE `zapiszProjekt`(
 	IN StudentId int(11),
@@ -71,23 +70,22 @@ CREATE DEFINER=`root`@`localhost` PROCEDURE `zapiszProjekt`(
 	)
 BEGIN
 INSERT INTO `zapisy`.`student_temat` (`id_student`, `id_temat`) VALUES (StudentId, TematId);
+UPDATE `zapisy`.`temat` SET `wolne_miejsca`=`wolne_miejsca`-1 WHERE `id`=TematId;
 END$$
 DELIMITER ;
-
 
 USE `zapisy`;
 DROP procedure IF EXISTS `zapiszTermin`;
 
 DELIMITER $$
-USE `zapisy`$$
-CREATE DEFINER=`root`@`localhost` PROCEDURE `zapiszTermin`(
+CREATE PROCEDURE `zapiszTermin`(
 	IN StudentId int(11),
 	IN TerminId int(11)
 	)
 BEGIN
 INSERT INTO `zapisy`.`student_termin` (`id_student`, `id_termin`) VALUES (StudentId, TerminId);
+UPDATE `zapisy`.`termin` SET `miejsca`=`miejsca`-1 WHERE `id`=TerminId;
 END$$
-
 DELIMITER ;
 
 

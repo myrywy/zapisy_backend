@@ -24,7 +24,7 @@ int zapisyService::zapiszProjekt(std::string projektID, std::string zapisywanyID
 
 int zapisyService::zapiszTermin(std::string projektID, std::string zapisywanyID, struct z1__zapiszTerminResponse &_param_3){
 	BazaDanych* baza=BazaDanych::instancja();
-     if( baza->zapiszNaTermin(projektID, zapisywanyID) ){
+     if( baza->zapiszNaTermin(zapisywanyID, projektID) ){
          _param_3.rezultat="ok";
      }else{
          _param_3.rezultat="error";
@@ -206,6 +206,13 @@ int zapisyService::zapiszTermin(std::string projektID, std::string zapisywanyID,
 
  int zapisyService::edytujTermin(std::string przedmiotID, std::string terminID, std::string salaID, z1__termin *termin, struct z1__edytujTerminResponse &_param_17) {
      BazaDanych* baza=BazaDanych::instancja();
+     std::cout << "termin: dzien: " << termin->dzien << " godzina do: "
+               << termin->godzinaDo << "godzina od: "
+                  << termin->godzinaOd << "miejsca: "
+                     << termin->miejsca << "nr salo: "
+                        << termin->nrSali
+                           << "salaID: " << salaID
+                              << "terminID: " << terminID << std::endl;
      if( baza->edytujTermin(terminID, *termin) ){
          _param_17.rezultat="ok";
      }else{

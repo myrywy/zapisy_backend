@@ -62,12 +62,13 @@ bool BazaDanych::dodajTermin(std::string przedmiotID, std::string salaID, z1__te
             dodaj("sala",{"numer"},{t.nrSali});
             salaID=Tabela("sala").select("id").whereEqual("numer",enq(t.nrSali));
         }
-        dodaj("termin",{"przedmiot_id","dzien","godzina_od","godzina_do","miejsca","sala_id"},{przedmiotID,t.dzien,t.godzinaDo,t.godzinaOd,std::to_string(t.miejsca),salaID});
+        dodaj("termin",{"przedmiot_id","dzien","godzina_od","godzina_do","miejsca","sala_id"},{przedmiotID,t.dzien,t.godzinaOd,t.godzinaDo,std::to_string(t.miejsca),salaID});
     }catch(sql::SQLException err){
-        std::cerr << "Przechwycono wyjatek SQL\n";
-        std::cerr << err.what() << endl;
+        std::cout << "Przechwycono wyjatek SQL\n";
+        std::cout << err.what() << endl;
         return false;
     }
+    std::cout << "Dodano termin\n";
     return true;
 }
 
@@ -159,15 +160,20 @@ bool BazaDanych::zapiszNaTermin(Id studentId, Id terminId)
             return false;
         }
         //Sprawdzanie czy student nie jest już zapisany na jakiś termin z tego przedmiotu
-        string staryTerminId=Tabela("termin").join("student_termin","id","id_termin").select("przedmiot_id").whereEqual("id_student",studentId).whereEqual("przedmiot_id",przedmiotId);
+        string staryTerminId=Tabela("termin").join("student_termin","id","id_termin").select("id_termin").whereEqual("id_student",studentId).whereEqual("przedmiot_id",przedmiotId);
         if(!staryTerminId.empty()){
-            return false;
+            string opcjaChange=Tabela("opcje").select("wartosc").whereEqual("opcja",enq("change_choose"));
+            if(opcjaChange=="true"){
+                wypiszZTerminu(studentId,staryTerminId);
+            }else{
+                return false;
+            }
         }
 
         procedura("zapiszTermin",studentId, terminId);
     }catch(sql::SQLException err){
-        std::cerr << "Przechwycono wyjatek SQL\n";
-        std::cerr << err.what() << endl;
+        std::cout << "Przechwycono wyjatek SQL\n";
+        std::cout << err.what() << endl;
         return false;
     }
     return true;
@@ -495,12 +501,13 @@ bool BazaDanych::importujTerminy(Id przedmiotId, string dane)
             string& miejsca=w[3];
             string& nrSali=w[4];
             std::cout << dzien << " " << godzinaOd << " " << godzinaDo << " " << miejsca << " " << nrSali << " " << endl;
-            Zapytanie z=Tabela("sala").select("id").whereEqual("numer",nrSali);
-            string salaId=parseCsv(z,',',';')[0][0];
+            string tmpSalaId=Tabela("sala").select("id").whereEqual("numer",nrSali);
+            std::cout << tmpSalaId << endl;
+            string salaId=parseCsv(tmpSalaId,',',';')[0][0];
             std::cout << salaId << endl;
             if(salaId.empty()){
                 dodaj("sala",{"numer"},{nrSali});
-                salaId=parseCsv(z,',',';')[0][0];
+                salaId=Tabela("sala").select("id").whereEqual("numer",nrSali);
                 std::cout << salaId << endl;
             }
             dodaj("termin",{"przedmiot_id","dzien","godzina_od","godzina_do","miejsca","sala_id"},{przedmiotId,dzien,godzinaOd,godzinaDo,miejsca,salaId});

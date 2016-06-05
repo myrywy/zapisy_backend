@@ -193,7 +193,6 @@ BOOST_FIXTURE_TEST_CASE ( zapiszNaProjekt_test, StaleTestowe)
     BOOST_CHECK_MESSAGE(b_studentProjektId2==b_studentProjektId,"Nadmiarowe przypisanie studenta do tematu");
 
     try{
-        std::cout << baza->stworzWywolanieProcedury("usunTemat", b_projektId) << std::endl;
         baza->procedura("usunTemat",b_projektId);
     }catch(sql::SQLException err){
         std::cout << "Przechwycono wyjatek SQL\n";
@@ -203,6 +202,55 @@ BOOST_FIXTURE_TEST_CASE ( zapiszNaProjekt_test, StaleTestowe)
     string b_studentPojekt_wszystkie=Tabela("student_temat").select("id").whereEqual("id_temat",b_projektId);
     BOOST_CHECK_MESSAGE(b_studentPojekt_wszystkie.empty(),"Nie usunięto pozostalości po temacie w student_temat");
 
+}
+
+BOOST_FIXTURE_TEST_CASE ( zapiszNaTermin_test, StaleTestowe)
+{
+    z1__termin t;
+    t.dzien="poniedzialek";
+    t.godzinaDo="00:00";
+    t.godzinaOd="00:00";
+    t.miejsca=1;
+    t.nrSali="000.TEST";
+    BOOST_REQUIRE_MESSAGE(baza->dodajTermin(przedmiotId,"", t),"Nie udało się dodać terminu");
+    string b_terminId=Tabela("termin").select("id").whereEqual("godzina_od",enq(t.godzinaOd))
+            .whereEqual("godzina_do",enq(t.godzinaDo))
+            .whereEqual("miejsca",to_string(t.miejsca))
+            .whereEqual("dzien",enq(t.dzien));
+    BOOST_REQUIRE_MESSAGE(!b_terminId.empty(),"Terminu nie ma w bazie po dodaniu");
+    t.dzien="wtorek";
+    t.godzinaDo="01:00";
+    t.godzinaOd="02:00";
+    t.miejsca=2;
+    //t.nrSali="001.TEST";
+    BOOST_REQUIRE_MESSAGE(baza->dodajTermin(przedmiotId,"", t),"Nie udało się dodać terminu");
+    string b_termin2Id=Tabela("termin").select("id").whereEqual("godzina_od",enq(t.godzinaOd))
+            .whereEqual("godzina_do",enq(t.godzinaDo))
+            .whereEqual("miejsca",to_string(t.miejsca))
+            .whereEqual("dzien",enq(t.dzien));
+    BOOST_REQUIRE_MESSAGE(!b_termin2Id.empty(),"Terminu nie ma w bazie po dodaniu");
+
+    BOOST_CHECK_MESSAGE(baza->zapiszNaTermin(stud1Id,b_terminId),"Nie udało się zapisać studenta na termin");
+    BOOST_CHECK_MESSAGE(!baza->zapiszNaTermin(stud2Id,b_terminId),"Zapisano studenta na termin z przedmiotu, na który nie jest zapisany");
+    z1__opcja o;
+    o.nazwa="change_choose";
+    o.wartosc="false";
+    BOOST_REQUIRE(baza->zmienOpcje(o));
+    BOOST_CHECK_MESSAGE(!baza->zapiszNaTermin(stud1Id,b_termin2Id),"Zmiana terminu przy change_chose=false");
+    o.wartosc="true";
+    BOOST_REQUIRE(baza->zmienOpcje(o));
+    BOOST_CHECK_MESSAGE(baza->zapiszNaTermin(stud1Id,b_termin2Id),"Nie udało się zmienić terminu przy change_chose=true");
+    o.wartosc="false";
+    BOOST_REQUIRE(baza->zmienOpcje(o));
+
+
+    try{
+        BOOST_CHECK_NO_THROW(baza->procedura("usunTermin",b_termin2Id));
+        BOOST_CHECK_NO_THROW(baza->procedura("usunTermin",b_terminId));
+    }catch(sql::SQLException err){
+        std::cout << "Przechwycono wyjatek SQL\n";
+        std::cout << err.what() << endl;
+    }
 }
 
 BOOST_AUTO_TEST_SUITE_END( )
