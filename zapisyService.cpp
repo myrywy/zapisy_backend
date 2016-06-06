@@ -162,7 +162,12 @@ int zapisyService::zapiszTermin(std::string projektID, std::string zapisywanyID,
      BazaDanych* baza=BazaDanych::instancja();
      try{
          string id=Tabela("student").select("id").whereEqual("`index`",student->index);
-         baza->usun("student_przedmiot","student_id",id);
+         string studentPrzedmiotId=Tabela("student_przedmiot").select("id").whereEqual("student_id",id).whereEqual("przedmiot_id",przedmiotID);
+         baza->usun("student_przedmiot","id",studentPrzedmiotId);
+         studentPrzedmiotId=Tabela("student_przedmiot").select("id").whereEqual("student_id",id);
+         if(studentPrzedmiotId.empty()){
+             baza->usun("student","id",id);
+         }
      }catch(...){
          _param_13.rezultat="error";
          return SOAP_OK;
@@ -284,6 +289,7 @@ int zapisyService::zapiszTermin(std::string projektID, std::string zapisywanyID,
 
  int zapisyService::importujProjekty(std::string przedmiotId, std::string dane, struct z1__importujProjektyResponse &_param_24){
      BazaDanych* baza=BazaDanych::instancja();
+     std::cout << "import projektow " << endl;
      if( baza->importujProjekty(przedmiotId, dane) ){
          _param_24.rezultat="ok";
      }else{
@@ -294,6 +300,7 @@ int zapisyService::zapiszTermin(std::string projektID, std::string zapisywanyID,
 
  int zapisyService::importujTerminy(std::string przedmiotId, std::string dane, struct z1__importujTerminyResponse &_param_25){
      BazaDanych* baza=BazaDanych::instancja();
+     std::cout << "import terminow " << endl;
      if( baza->importujTerminy(przedmiotId, dane) ){
          _param_25.rezultat="ok";
      }else{
@@ -304,6 +311,7 @@ int zapisyService::zapiszTermin(std::string projektID, std::string zapisywanyID,
 
  int zapisyService::importujStudentow(std::string przedmiotId, std::string dane, struct z1__importujStudentowResponse &_param_26){
      BazaDanych* baza=BazaDanych::instancja();
+     std::cout << "import studentów " << endl;
      if( baza->importujStudentow(przedmiotId, dane) ){
          _param_26.rezultat="ok";
      }else{
