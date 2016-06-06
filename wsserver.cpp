@@ -71,6 +71,7 @@ int WSServer::run()
     service->destroy();
     delete service;
     service=nullptr;
+    return 0;
 }
 string WSServer::getAddress() const
 {

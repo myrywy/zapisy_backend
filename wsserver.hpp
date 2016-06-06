@@ -8,11 +8,25 @@
 #include <string>
 using std::string;
 
+/**
+ * @brief Klasa WSServer zawiera podstawowe parametry serwera (adres, port), uruchamia serwer usług sieciowych systemu zapisów.
+ */
 class WSServer
 {
 public:
+    /**
+     * @brief WSServer konstruktor domyślny; nie uruchamia serwera
+     */
     WSServer();
+    /**
+     * @brief WSServer konstruktor pobierający ustawienia (adres i port) oraz uruchamiający serwer
+     * @param properties_file_name nazwa pliku z opcjami serwera
+     */
     WSServer(string properties_file_name);
+    /**
+     * @brief Funkcja z główną pętlą odbierającą zapytania i tworzącą nowe wątki do ich obsługi
+     * @return
+     */
     int run();
 
     string getAddress() const;
