@@ -51,6 +51,9 @@ public:
     bool dodajStudenta(string przedmiotId, z1__student *s);
     bool edytujStudenta(Id studentId, z1__student s);
     bool zmienOpcje(z1__opcja opcja);
+    bool usunStudentaZPrzedmiotu(Id studentId, Id przedmiotId);
+    bool usunWszystkichZPrzedmiotu(Id przedmiotId);
+    bool usunPrzedmiot(Id przedmiotId);
     //Pobiera z bazy informacje o zapisanych na projekt studentach i zwraca ich listę w formacie csv
     string pobierzProjekt(string id);
     //Pobiera z bazy informacje o zapisanych na termin studentach i zwraca ich listę w formacie csv
@@ -58,14 +61,7 @@ public:
     //Pobiera z bazy informacje o zapisanych na przedmiot studentach i zwraca ich listę w formacie csv
     string pobierzPrzedmiot(string id);
     bool dodajPrzedmiot(z1__przedmiot *przedmiot, string emailProwadzacego);
-    //z1__temat infoProjekt(int projektId);
-    //z1__termin infoTermin(int terminId);
-    int szukajProjekt(z1__temat projekt);
-    int szukajTermin(z1__termin termin);
     bool szukajProjektStudenta(std::string idStudenta, std::string idPrzedmiotu, std::string *idProjektu=nullptr);
-    bool szukajTerminStudenta(std::string idStudenta, std::string idPrzedmiotu, std::string *idProjektu=nullptr);
-    int wolneMiejscaProjekt(int projektId);
-    int wolneMiejscaTermin(int terminId);
     /**
      * Funckja wywołująca procedurę o zdefiniowaną w bazie danych.
      * \param nazwaProcedury nazwa procedury taka jaką zdefiniowano w bazie

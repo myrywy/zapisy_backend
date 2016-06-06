@@ -161,18 +161,16 @@ int zapisyService::zapiszTermin(std::string projektID, std::string zapisywanyID,
  int zapisyService::usunStudentaZPrzedmiotu(std::string przedmiotID, z1__student *student, struct z1__usunStudentaZPrzedmiotuResponse &_param_13) {
      BazaDanych* baza=BazaDanych::instancja();
      try{
-         string id=Tabela("student").select("id").whereEqual("`index`",student->index);
-         string studentPrzedmiotId=Tabela("student_przedmiot").select("id").whereEqual("student_id",id).whereEqual("przedmiot_id",przedmiotID);
-         baza->usun("student_przedmiot","id",studentPrzedmiotId);
-         studentPrzedmiotId=Tabela("student_przedmiot").select("id").whereEqual("student_id",id);
-         if(studentPrzedmiotId.empty()){
-             baza->usun("student","id",id);
+         string id=Tabela("student").select("id").whereEqual("`index`",enq(student->index));
+         if(baza->usunStudentaZPrzedmiotu(id,przedmiotID)){
+             _param_13.rezultat="ok";
+         }else{
+             _param_13.rezultat="error";
          }
      }catch(...){
          _param_13.rezultat="error";
          return SOAP_OK;
      }
-     _param_13.rezultat="ok";
     return SOAP_OK;
  }
 
@@ -191,7 +189,7 @@ int zapisyService::zapiszTermin(std::string projektID, std::string zapisywanyID,
  int zapisyService::usunPrzedmiot(std::string ID, struct z1__usunPrzedmiotResponse &_param_15) {
      BazaDanych* baza=BazaDanych::instancja();
      try{
-         baza->usun("przedmiot","id",ID);
+         baza->usunPrzedmiot(ID);
      }catch(...){
          _param_15.rezultat="error";
          return SOAP_OK;

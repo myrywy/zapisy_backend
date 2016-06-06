@@ -289,15 +289,6 @@ string BazaDanych::pobierzPrzedmiot(string id)
         return "";
     }
 }
-int BazaDanych::szukajProjekt(z1__temat projekt)
-{
-    return 0;
-}
-
-int BazaDanych::szukajTermin(z1__termin termin)
-{
-    return 0;
-}
 
 bool BazaDanych::szukajProjektStudenta(std::string idStudenta, std::string idPrzedmiotu, std::string *idProjektu)
 {
@@ -311,16 +302,6 @@ bool BazaDanych::szukajProjektStudenta(std::string idStudenta, std::string idPrz
         }
         return true;
     }
-}
-
-int BazaDanych::wolneMiejscaProjekt(int projektId)
-{
-    return 0;
-}
-
-int BazaDanych::wolneMiejscaTermin(int terminId)
-{
-    return 0;
 }
 
 StatementPtr BazaDanych::usun(string tabela, string kolumna, string wartosc)
@@ -574,6 +555,75 @@ bool BazaDanych::zmienOpcje(z1__opcja opcja)
         aktualizuj("opcje",opcjaId,{"opcja","wartosc"},{opcja.nazwa, opcja.wartosc});
     }catch(...){
         cout << "Nieznany blad. Zignorowano."<<endl;
+        return false;
+    }
+    return true;
+}
+
+bool BazaDanych::usunStudentaZPrzedmiotu(Id studentId, Id przedmiotId)
+{
+    string studentPrzedmiotId=Tabela("student_przedmiot").select("id")
+            .whereEqual("student_id",studentId)
+            .whereEqual("przedmiot_id",przedmiotId);
+    bool ok=true;
+    try{
+        usun("student_przedmiot","id",studentPrzedmiotId);
+    }catch(sql::SQLException err){
+        std::cout << "Przechwycono wyjatek SQL\n";
+        std::cout << err.what() << endl;
+        ok=false;
+    }catch(...){
+        ok=false;
+    }
+    studentPrzedmiotId=Tabela("student_przedmiot").select("id").whereEqual("student_id",studentId);
+    if(studentPrzedmiotId.empty()){
+        try{
+            usun("student","id",studentId);
+        }catch(sql::SQLException err){
+            std::cout << "Przechwycono wyjatek SQL\n";
+            std::cout << err.what() << endl;
+            ok=false;
+        }catch(...){
+            ok=false;
+        }
+    }
+    return ok;
+}
+
+bool BazaDanych::usunWszystkichZPrzedmiotu(Id przedmiotId)
+{
+    string tmpStudenci=Tabela("student_przedmiot").select("student_id").whereEqual("przedmiot_id",przedmiotId);
+    bool ok=true;
+    auto studenciId=splitString(tmpStudenci,';');
+    for(string studentId : studenciId){
+        try{
+            usunStudentaZPrzedmiotu(studentId,przedmiotId);
+        }catch(sql::SQLException err){
+            std::cout << "Przechwycono wyjatek SQL\n";
+            std::cout << err.what() << endl;
+            ok=false;
+            continue;
+        }catch(...){
+            ok=false;
+            continue;
+        }
+    }
+    return ok;
+}
+
+bool BazaDanych::usunPrzedmiot(Id przedmiotId)
+{
+    try{
+        procedura("usunWszystkieTerminyPrzedmiotu",przedmiotId);
+        procedura("usunWszystkieTematyPrzedmiotu",przedmiotId);
+        usunWszystkichZPrzedmiotu(przedmiotId);
+        usun("prowadzacy_przedmioty","przedmiot_id",przedmiotId);
+        usun("przedmiot","id",przedmiotId);
+    }catch(sql::SQLException err){
+        std::cout << "Przechwycono wyjatek SQL\n";
+        std::cout << err.what() << endl;
+        return false;
+    }catch(...){
         return false;
     }
     return true;
