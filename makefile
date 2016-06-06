@@ -1,4 +1,4 @@
-sources=zapisyServer.cpp soapC.cpp zapisyService.cpp soapzapisyService.cpp soapzapisyProxy.cpp bazadanych.cpp tabela.cpp zapytanie.cpp
+sources=zapisyServer.cpp soapC.cpp zapisyService.cpp soapzapisyService.cpp soapzapisyProxy.cpp bazadanych.cpp tabela.cpp zapytanie.cpp wsserver.cpp
 objects=$(sources:.cpp=.o)
 pathGsoapHeaders=libs/gsoap/import
 pathGsoapLibs=libs/gsoap
@@ -13,6 +13,9 @@ all: zapisy
 
 zapisy: $(objects)
 	g++ -lm $^ -o $@ -L$(pathGsoapLibs) -L$(pathMysqlLibs) -L$(pathMysqlCientLib) -static -lgsoap++ -lmysqlclient -lmysqlcppconn-static -lpthread -ldl
+
+wsserver.o: wsserver.cpp wsserver.hpp
+	g++ -Wall -std=c++11 -c $< -o $@ $(headers)
 
 zapisyServer.o: zapisyServer.cpp soapzapisyService.h
 	g++ -Wall -std=c++11 -c $< -o $@ $(headers)
