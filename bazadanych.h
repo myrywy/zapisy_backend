@@ -54,6 +54,7 @@ public:
     bool usunStudentaZPrzedmiotu(Id studentId, Id przedmiotId);
     bool usunWszystkichZPrzedmiotu(Id przedmiotId);
     bool usunPrzedmiot(Id przedmiotId);
+    bool usunProwadzacego(Id prowadzacyId);
     //Pobiera z bazy informacje o zapisanych na projekt studentach i zwraca ich listę w formacie csv
     string pobierzProjekt(string id);
     //Pobiera z bazy informacje o zapisanych na termin studentach i zwraca ich listę w formacie csv

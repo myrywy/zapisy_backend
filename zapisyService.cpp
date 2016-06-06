@@ -139,12 +139,12 @@ int zapisyService::zapiszTermin(std::string projektID, std::string zapisywanyID,
  }
 
  int zapisyService::usunProwadzacego(std::string ID, struct z1__usunProwadzacegoResponse &_param_11) {
-     try{
-         BazaDanych::instancja()->usun("prowadzacy","id",ID);
-     }catch(...){
+     if(BazaDanych::instancja()->usunProwadzacego(ID)){
+         _param_11.rezultat="ok";
+     }else{
          _param_11.rezultat="error";
      }
-     _param_11.rezultat="ok";
+
     return SOAP_OK;
  }
 

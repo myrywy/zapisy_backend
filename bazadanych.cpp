@@ -1,5 +1,6 @@
 #include "bazadanych.h"
 #include <iostream>
+#include <fstream>
 #include "zapytanie.h"
 
 BazaDanych* BazaDanych::bd=0;
@@ -10,11 +11,30 @@ using std::endl;
 
 BazaDanych::BazaDanych()
 {
-
+    string sport, sadres, login, haslo;
+    ifstream props("server.properties");
+    if(props.is_open()){
+        string o;
+        while(props >> o){
+            auto option=splitString(o,'=');
+            if(option.size()<2){
+                continue;
+            }
+            if(option[0]=="db.address"){
+                sadres=option[1];
+            }else if(option[0]=="db.port"){
+                sport=option[1];
+            }else if(option[0]=="db.login"){
+                login=option[1];
+            }else if(option[0]=="db.password"){
+                haslo=option[1];
+            }
+        }
+    }
+    props.close();
     try{
     driver = get_driver_instance();
-    //con = driver->connect("tcp://127.0.0.1:3306", "root", "admin");
-    con = driver->connect("tcp://192.168.0.13:3306", "root", "admin");
+    con = driver->connect("tcp://"+sadres+":"+sport, login, haslo);
     }catch(...){
         std::cout << "Blad\n" << con << std::endl;
     }
@@ -619,6 +639,39 @@ bool BazaDanych::usunPrzedmiot(Id przedmiotId)
         usunWszystkichZPrzedmiotu(przedmiotId);
         usun("prowadzacy_przedmioty","przedmiot_id",przedmiotId);
         usun("przedmiot","id",przedmiotId);
+    }catch(sql::SQLException err){
+        std::cout << "Przechwycono wyjatek SQL\n";
+        std::cout << err.what() << endl;
+        return false;
+    }catch(...){
+        return false;
+    }
+    return true;
+}
+
+bool BazaDanych::usunProwadzacego(Id prowadzacyId)
+{
+    string przedmioty;
+    try{
+        przedmioty=Tabela("prowadzacy_przedmioty").select("przedmiot_id").whereEqual("prowdzacy_id",prowadzacyId);
+    }catch(...){
+        return false;
+    }
+
+    for(auto przedmiotId : splitString(przedmioty,';')){
+        std::cout << "usuwanie przedmiotu " << przedmiotId << endl;
+        try{
+            usunPrzedmiot(przedmiotId);
+        }catch(sql::SQLException err){
+            std::cout << "Przechwycono wyjatek SQL\n";
+            std::cout << err.what() << endl;
+            continue;
+        }catch(...){
+            continue;
+        }
+    }
+    try{
+        usun("prowadzacy","id",prowadzacyId);
     }catch(sql::SQLException err){
         std::cout << "Przechwycono wyjatek SQL\n";
         std::cout << err.what() << endl;
